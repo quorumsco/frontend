@@ -1,0 +1,50 @@
+@import "app/layout/grid";
+
+@include exports("header") {
+    app-status {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: $nav-width;
+        height: $header-height;
+        line-height: $header-height;
+        text-align: right;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+
+        a {
+            margin: 0 1em;
+            position: relative;
+            display: inline-block;
+
+            span.name {
+                margin-right: 1em;
+            }
+
+            img {
+                margin-left: 1em;
+            }
+
+            span.number {
+                display: block;
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                top: 17px;
+                right: -6px;
+                color: #fff;
+                background-color: #75A8C4;
+                border-radius: 50%;
+                @include adjust-font-size-to(11px);
+                line-height: 15px;
+                text-align: center;
+                font-weight: bold;
+                overflow: hidden;
+            }
+        }
+    }
+}

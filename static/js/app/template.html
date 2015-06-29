@@ -1,0 +1,30 @@
+<app-nav>
+    <header>
+        <img src="images/quorums.co.png"/>
+    </header>
+    <ul>
+        <li><a href="#">Cartographie</a></li>
+        <li class="selected"><a href="#">Gestion de contact</a></li>
+        <li><a href="#">Rapports d'analyse</a></li>
+        <li><a href="#">Espace personnel</a></li>
+    </ul>
+</app-nav>
+
+<app-status>
+    <a href="#">
+        <i class="fa fa-envelope-o"></i>
+        <span class="number">5</span>
+    </a>
+    <a href="#"><i class="fa fa-calendar-o"></i></a>
+    <a href="#"><i class="fa fa-bar-chart"></i></a>
+    <a href="#">
+        <span class="name">Jean-Pierre</span>
+        <i class="fa fa-chevron-down"></i>
+        <img src="images/perso.png"/>
+    </a>
+</app-status>
+
+<app-main>
+    <component is="{{view}}">
+    </component>
+</app-main>

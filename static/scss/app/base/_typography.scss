@@ -1,0 +1,166 @@
+@import "compass/typography/vertical_rhythm";
+@import 'modular-scale';
+
+@import "app/settings";
+@import "app/helpers/mixins";
+
+// The default font-size is set to 100% of the browser style sheet (usually 16px)
+// for compatibility with browser-based text zoom or user-set defaults.
+
+// Since the typical default browser font-size is 16px, that makes the calculation for grid size.
+// If you want your base font-size to be different and not have it affect the grid breakpoints,
+// set $rem-base to $base-font-size and make sure $base-font-size is a px value.
+$base-font-size: 100% !default;
+
+// $base-line-height is 24px while $base-font-size is 16px
+$base-line-height: 1.5 !default;
+
+// Modular Scale
+$ms-base: 1em !default;
+$ms-ratio: $major-second !default;
+
+// Default colors
+$base-font-color: #ccc !default;
+
+// Colors
+$white         : #FFFFFF !default;
+$ghost         : #FAFAFA !default;
+$snow          : #F9F9F9 !default;
+$vapor         : #F6F6F6 !default;
+$white-smoke   : #F5F5F5 !default;
+$silver        : #EFEFEF !default;
+$smoke         : #EEEEEE !default;
+$gainsboro     : #DDDDDD !default;
+$iron          : #CCCCCC !default;
+$base          : #AAAAAA !default;
+$aluminum      : #999999 !default;
+$jumbo         : #888888 !default;
+$monsoon       : #777777 !default;
+$steel         : #666666 !default;
+$charcoal      : #555555 !default;
+$tuatara       : #444444 !default;
+$oil           : #333333 !default;
+$jet           : #222222 !default;
+$black         : #000000 !default;
+
+// We use these as default colors throughout
+$primary-color: #008CBA !default;   // bondi-blue
+$secondary-color: #e7e7e7 !default; // white-lilac
+$alert-color: #f04124 !default;     // cinnabar
+$success-color: #43AC6A !default;   // sea-green
+$warning-color: #f08a24 !default;   // carrot
+$info-color: #a0d3e8 !default;      // cornflower
+
+// We use these to define default font stacks
+$font-family-sans-serif: Raleway, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif !default;
+$font-family-serif: Lora, Georgia, Cambria, "Times New Roman", Times, serif !default;
+$font-family-monospace: Consolas, "Liberation Mono", Courier, monospace !default;
+
+// We use these to control various global styles
+$body-bg: #fff !default;
+$default-font-color: #444 !default;
+$default-link-color: inherit !default;
+$default-link-hover-color: #45bbe6 !default;
+$body-font-family: $font-family-sans-serif !default;
+
+// We use this to control font-smoothing
+$font-smoothing: antialiased !default;
+
+@include exports("typography") {
+    html,
+    body {
+        font-size: $base-font-size;
+    }
+
+    // Default body styles
+    body {
+        background: $body-bg;
+        // @include debug-vertical-alignment;
+        color: $default-font-color;
+        font-family: $body-font-family;
+        // Set to $base-line-height to take on browser default of 150%
+        line-height: $base-line-height;
+    }
+
+    @include establish-baseline($base-font-size);
+
+    @for $i from 1 through 6 {
+        h#{$i} {
+            @include adjust-font-size-to(ms(6-$i));
+        }
+    }
+
+    a {
+        color: $default-link-color;
+        text-decoration: none;
+        &:hover {
+            color: $default-link-hover-color;
+        }
+    }
+
+    #map_canvas,
+    .map_canvas {
+        img,
+        embed,
+        object {
+            max-width: none !important;
+        }
+    }
+
+    // Miscellaneous useful HTML classes
+    .left {
+        float: left !important;
+    }
+    .right {
+        float: right !important;
+    }
+    .clearfix {
+       @include clearfix;
+    }
+
+    // Hide visually and from screen readers
+    .hide {
+        display: none !important;
+        visibility: hidden;
+    }
+
+    // Hide visually and from screen readers, but maintain layout
+    .invisible {
+        visibility: hidden;
+    }
+
+    // Font smoothing
+    // Antialiased font smoothing works best for light text on a dark background.
+    // Apply to single elements instead of globally to body.
+    // Note this only applies to webkit-based desktop browsers and Firefox 25 (and later) on the Mac.
+    .antialiased {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    // Get rid of gap under images by making them display: inline-block; by default
+    img {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    // Mac OS Style scrollbar
+    ::-webkit-scrollbar {
+        width: 8px; /* 1px wider than Lion. */
+        background-color: rgba(0, 0, 0, 0);
+        -webkit-border-radius: 100px;
+    }
+
+    ::-webkit-scrollbar:hover {
+        background-color: rgba(0, 0, 0, 0.09);
+    }
+
+    ::-webkit-scrollbar-thumb:vertical {
+        background: rgba(0, 0, 0, 0.5);
+        -webkit-border-radius: 100px;
+    }
+    ::-webkit-scrollbar-thumb:vertical:active {
+        background: rgba(0, 0, 0, 0.61); /* Some darker color when you click it */
+        -webkit-border-radius: 100px;
+    }
+}

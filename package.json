@@ -40,9 +40,7 @@
         "vue": "latest",
         "page": "latest",
         "superagent": "latest",
-        "socket.io": "latest",
-
-        "circles": "git://github.com/lugolabs/circles.git"
+        "socket.io": "latest"
     },
     "dependencies": {}
 }

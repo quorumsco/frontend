@@ -29,13 +29,13 @@
                 margin-left: 1em;
             }
 
-            span.number {
-                display: block;
+            div.label {
+                position: absolute;
                 width: 15px;
                 height: 15px;
-                position: absolute;
                 top: 17px;
                 right: -6px;
+
                 color: #fff;
                 background-color: #75A8C4;
                 border-radius: 50%;

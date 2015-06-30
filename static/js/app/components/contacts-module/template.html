@@ -1,11 +1,13 @@
 <contacts-module>
-    <header>
-        <div class="title">
-            <span class="icon"><i class="fa fa-user"></i></span>
+    <contact-controls>
+        <header>
+            <span class="icon">
+                <i class="fa fa-user"></i>
+            </span>
             <h3>Vos contacts</h3>
-            <span class="count">41 contacts</span>
-        </div>
-        <div class="buttons">
+            <span class="description">41 contacts</span>
+        </header>
+        <section>
             <a href="#"><i class="fa fa-user"></i></a>
             <a href="#"><i class="fa fa-trash"></i></a>
             <a href="#"><i class="fa fa-share-square-o"></i></a>
@@ -16,41 +18,8 @@
             <a href="#"><i class="fa fa-map-marker"></i></a>
             <span class="sep"></span>
             <a href="#"><i class="fa fa-search"></i></a>
-        </div>
-    </header>
-    <section>
-        <div>
-            <header>
-                <span class="status"><i class="fa fa-chevron-down"></i></span>
-                <span class="name">Nom</span>
-                <span class="info">Coordonnées</span>
-                <span class="exchange">Dernier échange</span>
-                <span class="contact">Contacter</span>
-                <span class="fiche">Fiche</span>
-                <span class="delete">Supprimer</span>
-            </header>
-            <ul>
-                <li>
-                    <span class="status"><div class="circle" id="circles-1"></div></span>
-                    <span class="name">Descours Roger</span>
-                    <span class="info"><span class="email">r.descours@gmail.com</span><span class="phone">04 75 48 74 75</span></span>
-                    <span class="exchange"><img src="images/perso-25.png"/> Stéphane Barrit</span>
-                    <span class="contact"><a href="#"><i class="fa fa-send"></i></a></span>
-                    <span class="fiche"><a href="#"><i class="fa fa-bars"></i></a></span>
-                    <span class="delete"><a href="#"><i class="fa fa-times"></i></a></span>
-                </li>
-                <li>
-                    <span class="status"><div class="circle" id="circles-2"></div></span>
-                    <span class="name">Descours Roger</span>
-                    <span class="info"><span class="email">r.descours@gmail.com</span><span class="phone">04 75 48 74 75</span></span>
-                    <span class="exchange"><img src="images/perso-25.png"/> Stéphane Barrit</span>
-                    <span class="contact"><a href="#"><i class="fa fa-send"></i></a></span>
-                    <span class="fiche"><a href="#"><i class="fa fa-bars"></i></a></span>
-                    <span class="delete"><a href="#"><i class="fa fa-times"></i></a></span>
-                </li>
-            </ul>
-        </div>
-        <div>
-        </div>
-    </section>
+        </section>
+    </contact-controls>
+    <contact-list></contact-list>
+    <contact-slider></contact-slider>
 </contacts-module>

@@ -1,0 +1,164 @@
+@include exports("contacts") {
+    contacts-module,
+    contact-controls,
+    contact-list,
+    contact-item {
+        display: block;
+    }
+
+    contact-controls,
+    contact-list {
+        background-color: #fff;
+    }
+
+    contact-controls {
+        height: 70px;
+
+        header {
+            float: left;
+            @include clearfix;
+            padding-right: 1em;
+
+            span.icon {
+                @include adjust-font-size-to(ms(2), 2);
+                float: left;
+                line-height: 70px;
+                width: 70px;
+                text-align: center;
+            }
+
+            h3 {
+                @include adjust-font-size-to(ms(0.8), 1.6);
+                text-transform: uppercase;
+                font-weight: normal;
+                margin-left: 70px;
+                letter-spacing: -2px;
+                color: #75A8C4;
+            }
+
+            span.description {
+                display: block;
+                text-align: right;
+            }
+        }
+
+        section {
+            float: right;
+
+            a {
+                display: inline-block;
+                vertical-align: top;
+                width: 70px;
+                height: 70px;
+                text-align: center;
+                @include adjust-font-size-to(ms(1.2));
+                line-height: 70px;
+                color: lighten(#A3A3A3, 10%);
+                @include transition(background-color, .2s);
+
+                &:hover {
+                    background-color: #75A8C4;
+                }
+            }
+
+            span.sep {
+                display: inline-block;
+                width: 35px;
+                height: 70px;
+            }
+        }
+    }
+
+    contact-list {
+        padding: 1em;
+        margin-top: 1em;
+        background-color: #FAFBFB;
+
+        header,
+        contact-item {
+            span {
+                display: inline-block;
+            }
+
+            .phone {
+                float: right;
+                margin-right: 1em;
+            }
+
+            .status {
+                width: 5%;
+                text-align: center;
+            }
+
+            .name {
+                width: 15%;
+            }
+
+            .info {
+                width: 30%;
+            }
+
+            .exchange {
+                width: 18%;
+            }
+
+            .contact,
+            .fiche,
+            .delete {
+                text-align: center;
+            }
+
+            .contact {
+                width: 8%;
+            }
+
+            .fiche {
+                width: 6%;
+            }
+
+            .delete {
+                width: 13%;
+            }
+        }
+
+        header {
+            @include adjust-font-size-to(ms(-0.2));
+            color: #777;
+        }
+
+        contact-item {
+            border: 1px solid #F4F5F5;
+            margin: .5em 0;
+            @include adjust-font-size-to(ms(-0.2), 1.8);
+            background-color: #fff;
+            @include transition(border, .2s);
+
+            &:hover,
+            &.selected {
+                border-color: #75A8C4;
+            }
+
+            .circle {
+                display: inline-block;
+                transform: rotate(180deg);
+            }
+
+            .status {
+                display: inline-block;
+                vertical-align: top;
+                height: 44px;
+                text-align: center;
+
+                svg {
+                    display: inline-block;
+                    height: 100%;
+                }
+            }
+
+            img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+}

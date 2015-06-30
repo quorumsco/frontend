@@ -7,9 +7,6 @@ module.exports = {
     template: require('./template.html'),
     data: {
         view: null,
-        posts: [
-            {id: 0, title: "Yolo"}
-        ],
         router: null
     },
     created: function() {
@@ -21,9 +18,7 @@ module.exports = {
 
         this.router('/contacts', contacts);
         this.router('/', '/contacts');
-        this.router({
-            hashbang: true
-        });
+        this.router({hashbang: true});
     },
     events: {
         navigate: function (path) {

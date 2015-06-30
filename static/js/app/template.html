@@ -1,19 +1,21 @@
 <app-nav>
-    <header>
-        <img src="images/quorums.co.png"/>
-    </header>
-    <ul>
-        <li><a href="#">Cartographie</a></li>
-        <li class="selected"><a href="#">Gestion de contact</a></li>
-        <li><a href="#">Rapports d'analyse</a></li>
-        <li><a href="#">Espace personnel</a></li>
-    </ul>
+    <h1>
+        <a href="#">
+            <img src="images/quorums.co.png" alt="Quorums"/>
+        </a>
+    </h1>
+    <nav-list>
+        <nav-item><a href="#">Cartographie</a></nav-item>
+        <nav-item class="selected"><a href="#">Gestion de contact</a></nav-item>
+        <nav-item><a href="#">Rapports d'analyse</a></nav-item>
+        <nav-item><a href="#">Espace personnel</a></nav-item>
+    </nav-list>
 </app-nav>
 
 <app-status>
     <a href="#">
         <i class="fa fa-envelope-o"></i>
-        <span class="number">5</span>
+        <div class="label">5</div>
     </a>
     <a href="#"><i class="fa fa-calendar-o"></i></a>
     <a href="#"><i class="fa fa-bar-chart"></i></a>

@@ -17,12 +17,23 @@
             background-color: #444;
         }
 
-        ul {
-            list-style-type: none;
+        h1 {
+            padding: 0;
+            margin: 0;
+            @include adjust-font-size-to(ms(0));
+
+            a {
+                display: block;
+            }
+        }
+
+        nav-list {
+            display: block;
             padding: 2em 0 0;
             margin: 0;
 
-            li {
+            nav-item {
+                display: block;
                 padding: 0 1.5em;
 
                 &.selected {

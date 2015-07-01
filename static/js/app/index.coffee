@@ -13,7 +13,11 @@ module.exports =
         contacts = =>
             @view = 'contacts-module'
 
+        new_contact = =>
+            @view = 'contacts-module'
+
         @router '/contacts', contacts
+        @router '/contacts/new', new_contact
         @router '/', '/contacts'
         @router {hashbang: true}
     events:

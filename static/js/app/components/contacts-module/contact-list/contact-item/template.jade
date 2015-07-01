@@ -16,6 +16,6 @@ contact-item(v-on="click: onClick", v-class="selected: selected")
     span.fiche
         a(href="#")
             i.fa.fa-bars
-    span.delete
+    span.delete(v-on="click: deleteContact(this)")
         a(href="#")
             i.fa.fa-times

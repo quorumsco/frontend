@@ -1,28 +1,21 @@
+contact_store = require '../../models/contact_store.coffee'
+
 module.exports =
     data: ->
-        contacts: [
-            id: 0
-            firstname: 'Roger'
-            surname: 'Descours'
-            email: 'r.descours@gmail.com'
-            phone: '04 75 48 74 75'
-            selected: false
-        ,
-            id: 1
-            firstname: 'Roger'
-            surname: 'Descours'
-            email: 'r.descours@gmail.com'
-            phone: '04 75 48 74 75'
-            selected: false
-        ,
-            id: 2
-            firstname: 'Roger'
-            surname: 'Descours'
-            email: 'r.descours@gmail.com'
-            phone: '04 75 48 74 75'
-            selected: false
-        ]
+        contacts: []
+        new_contact: {firstname: null, surname: null, phone: null}
+        contact_id: null
     replace: true
     template: require('./template.jade')()
+    created: ->
+        @fetchContacts()
     components:
         'contact-list': require './contact-list/index.coffee'
+    methods:
+        fetchContacts: ->
+            contact_store.find (res) =>
+                @contacts = res
+        createContact: (contact) ->
+            contact_store.save contact, (res) => @fetchContacts()
+        deleteContact: (contact) ->
+            contact_store.delete contact, (res) => @fetchContacts()

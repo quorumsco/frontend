@@ -1,2 +1,1 @@
-# marks
-A bookmark manager
+# Quorums frontend

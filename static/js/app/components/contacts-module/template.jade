@@ -1,0 +1,20 @@
+contacts-module
+    contact-controls
+        header
+            span.icon
+                i.fa.fa-user
+            h3 Vos contacts
+            span.description 41 contacts
+        section
+            each val in ['user', 'trash', 'share-square-o', 'check']
+                a(href="#")
+                    i(class="fa fa-#{val}")
+            span.sep
+            each val in ['comments', 'tag', 'map-marker']
+                a(href="#")
+                    i(class="fa fa-#{val}")
+            span.sep
+            a(href="#")
+                i.fa.fa-search
+    contact-list
+    contact-slider

@@ -6,6 +6,7 @@ var gulp        = require('gulp'),
     minifyCSS   = require('gulp-minify-css'),
     compass     = require('gulp-compass'),
     modernizr   = require('gulp-modernizr'),
+    jade        = require('gulp-jade'),
     merge       = require('merge-stream'),
     concat      = require('gulp-concat'),
     size        = require('gulp-size'),
@@ -30,7 +31,7 @@ handleErrors = function() {
 bfy = function() {
     var config = {
         entries: './static/js/app.js',
-        extensions: ['.js', '.html']
+        extensions: ['.coffee', '.js', '.html', '.jade']
     };
 
     var b = browserify(config);
@@ -106,8 +107,15 @@ gulp.task('html', function() {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('prod', ['html', 'images', 'fonts', 'css-prod', 'js-prod']);
-gulp.task('dev', ['html', 'images', 'fonts', 'css', 'js']);
+gulp.task('jade', function() {
+    return gulp.src('static/*.jade')
+        .pipe(jade())
+        .pipe(gulp.dest('public'))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('prod', ['jade', 'images', 'fonts', 'css-prod', 'js-prod']);
+gulp.task('dev', ['jade', 'images', 'fonts', 'css', 'js']);
 
 gulp.task('watch', ['dev'], function() {
     browserSync({server: {baseDir: 'public'}, ui: false, open: false});
@@ -115,6 +123,7 @@ gulp.task('watch', ['dev'], function() {
     gulp.watch('static/js/**/*', ['js']);
     gulp.watch('static/images/**/*', ['images']);
     gulp.watch('static/*.html', ['html']);
+    gulp.watch('static/*.jade', ['jade']);
 });
 
 gulp.task('default', ['watch']);

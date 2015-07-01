@@ -10,19 +10,25 @@
     "browserify": {
         "transform": [
             "babelify",
-            "partialify"
+            "partialify",
+            "jadeify",
+            "coffeeify"
         ]
     },
     "devDependencies": {
         "browserify": "latest",
         "babelify": "latest",
         "partialify": "latest",
+        "coffeeify": "latest",
+        "jade": "latest",
+        "jadeify": "latest",
 
         "gulp": "latest",
         "gulp-changed": "latest",
         "gulp-compass": "latest",
         "gulp-concat": "latest",
         "gulp-imagemin": "latest",
+        "gulp-jade": "latest",
         "gulp-minify-css": "latest",
         "gulp-modernizr": "latest",
         "gulp-notify": "latest",

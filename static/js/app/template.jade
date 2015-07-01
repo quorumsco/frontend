@@ -1,0 +1,24 @@
+app-nav
+    h1
+        a(href="#")
+            img(src="images/quorums.co.png", alt="Quorums")
+    nav-list
+        each val in ["Cartographie", "Gestion de contact", "Rapport d'analyse", "Espace personnel"]
+            nav-item
+                a(href="#")= val
+
+app-status
+    a(href="#")
+        i.fa.fa-envelope-o
+        .label 5
+    a(href="#")
+        i.fa.fa-calendar-o
+    a(href="#")
+        i.fa.fa-bar-chart
+    a(href="#")
+        span.name Jean-Pierre
+        i.fa.fa-chevron-down
+        img(src="images/perso.png")
+
+app-main
+    component(is="{{view}}")

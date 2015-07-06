@@ -30,7 +30,7 @@ handleErrors = function() {
 
 bfy = function() {
     var config = {
-        entries: './static/js/app.js',
+        entries: './static/js/app.coffee',
         extensions: ['.coffee', '.js', '.html', '.jade']
     };
 

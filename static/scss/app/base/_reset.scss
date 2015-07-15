@@ -3,68 +3,68 @@
 @import "app/helpers/mixins";
 
 @include exports("reset") {
-    // Must be 100% for off canvas to work
-    html,
-    body {
-        height: 100%;
-        //overflow: hidden;
-    }
+  // Must be 100% for off canvas to work
+  html,
+  body {
+    height: 100%;
+    //overflow: hidden;
+  }
 
-    // Set box-sizing globally to handle padding and border widths
-    *,
-    *:before,
-    *:after {
-        @include box-sizing(border-box);
-    }
+  // Set box-sizing globally to handle padding and border widths
+  *,
+  *:before,
+  *:after {
+    @include box-sizing(border-box);
+  }
 
-    // Fix Firefox annoying outline
-    :focus {
-        outline:none;
-    }
-    ::-moz-focus-inner {
-        border:0;
-    }
+  // Fix Firefox annoying outline
+  *:focus {
+    outline:none;
+  }
+  ::-moz-focus-inner {
+    border:0;
+  }
 
-    body {
-        margin: 0;
-        padding: 0;
-        position: relative;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
 
-    h1, h2, h3,
-    h4, h5, h6, p {
-        margin: 0;
-        padding: 0;
-    }
+  h1, h2, h3,
+  h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+  }
 
-    // Grid Defaults to get images and embeds to work properly
-    img {
-        max-width: 100%;
-        height: auto;
-    }
+  // Grid Defaults to get images and embeds to work properly
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
-    img {
-        -ms-interpolation-mode: bicubic;
-    }
+  img {
+    -ms-interpolation-mode: bicubic;
+  }
 
-    // Get rid of gap under images by making them display: inline-block; by default
-    img {
-        display: inline-block;
-        vertical-align: middle;
-    }
+  // Get rid of gap under images by making them display: inline-block; by default
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-    //
-    // Global resets for forms
-    //
+  //
+  // Global resets for forms
+  //
 
-    // Make sure textarea takes on height automatically
-    textarea {
-        height: auto;
-        min-height: 50px;
-    }
+  // Make sure textarea takes on height automatically
+  textarea {
+    height: auto;
+    min-height: 50px;
+  }
 
-    // Make select elements 100% width by default
-    select {
-        width: 100%;
-    }
+  // Make select elements 100% width by default
+  select {
+    width: 100%;
+  }
 }

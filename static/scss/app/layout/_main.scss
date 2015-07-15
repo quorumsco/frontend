@@ -1,15 +1,15 @@
 @import 'app/layout/grid';
 
 @include exports("main") {
-    app-main {
-        position: absolute;
-        top: $header-height;
-        right: 0;
-        bottom: 0;
-        left: $nav-width;
+  app-main {
+    position: absolute;
+    top: $header-height;
+    right: 0;
+    bottom: 0;
+    left: $nav-width;
 
-        background-color: #E4EAF1;
+    background-color: #E4EAF1;
 
-        padding: 1em;
-    }
+    padding: 1em;
+  }
 }

@@ -67,100 +67,100 @@ $body-font-family: $font-family-sans-serif !default;
 $font-smoothing: antialiased !default;
 
 @include exports("typography") {
-    html,
-    body {
-        font-size: $base-font-size;
-    }
+  html,
+  body {
+    font-size: $base-font-size;
+  }
 
-    // Default body styles
-    body {
-        background: $body-bg;
-        // @include debug-vertical-alignment;
-        color: $default-font-color;
-        font-family: $body-font-family;
-        // Set to $base-line-height to take on browser default of 150%
-        line-height: $base-line-height;
-    }
+  // Default body styles
+  body {
+    background: $body-bg;
+    // @include debug-vertical-alignment;
+    color: $default-font-color;
+    font-family: $body-font-family;
+    // Set to $base-line-height to take on browser default of 150%
+    line-height: $base-line-height;
+  }
 
-    @include establish-baseline($base-font-size);
+  @include establish-baseline($base-font-size);
 
-    @for $i from 1 through 6 {
-        h#{$i} {
-            @include adjust-font-size-to(ms(6-$i));
-        }
+  @for $i from 1 through 6 {
+    h#{$i} {
+      @include adjust-font-size-to(ms(6-$i));
     }
+  }
 
-    a {
-        color: $default-link-color;
-        text-decoration: none;
-        &:hover {
-            color: $default-link-hover-color;
-        }
+  a {
+    color: $default-link-color;
+    text-decoration: none;
+    &:hover {
+      color: $default-link-hover-color;
     }
+  }
 
-    #map_canvas,
-    .map_canvas {
-        img,
-        embed,
-        object {
-            max-width: none !important;
-        }
+  #map_canvas,
+  .map_canvas {
+    img,
+    embed,
+    object {
+      max-width: none !important;
     }
+  }
 
-    // Miscellaneous useful HTML classes
-    .left {
-        float: left !important;
-    }
-    .right {
-        float: right !important;
-    }
-    .clearfix {
-       @include clearfix;
-    }
+  // Miscellaneous useful HTML classes
+  .left {
+    float: left !important;
+  }
+  .right {
+    float: right !important;
+  }
+  .clearfix {
+    @include clearfix;
+  }
 
-    // Hide visually and from screen readers
-    .hide {
-        display: none !important;
-        visibility: hidden;
-    }
+  // Hide visually and from screen readers
+  .hide {
+    display: none !important;
+    visibility: hidden;
+  }
 
-    // Hide visually and from screen readers, but maintain layout
-    .invisible {
-        visibility: hidden;
-    }
+  // Hide visually and from screen readers, but maintain layout
+  .invisible {
+    visibility: hidden;
+  }
 
-    // Font smoothing
-    // Antialiased font smoothing works best for light text on a dark background.
-    // Apply to single elements instead of globally to body.
-    // Note this only applies to webkit-based desktop browsers and Firefox 25 (and later) on the Mac.
-    .antialiased {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+  // Font smoothing
+  // Antialiased font smoothing works best for light text on a dark background.
+  // Apply to single elements instead of globally to body.
+  // Note this only applies to webkit-based desktop browsers and Firefox 25 (and later) on the Mac.
+  .antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-    // Get rid of gap under images by making them display: inline-block; by default
-    img {
-        display: inline-block;
-        vertical-align: middle;
-    }
+  // Get rid of gap under images by making them display: inline-block; by default
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-    // Mac OS Style scrollbar
-    ::-webkit-scrollbar {
-        width: 8px; /* 1px wider than Lion. */
-        background-color: rgba(0, 0, 0, 0);
-        -webkit-border-radius: 100px;
-    }
+  // Mac OS Style scrollbar
+  *::-webkit-scrollbar {
+    width: 8px; /* 1px wider than Lion. */
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-border-radius: 100px;
+  }
 
-    ::-webkit-scrollbar:hover {
-        background-color: rgba(0, 0, 0, 0.09);
-    }
+  *::-webkit-scrollbar:hover {
+    background-color: rgba(0, 0, 0, 0.09);
+  }
 
-    ::-webkit-scrollbar-thumb:vertical {
-        background: rgba(0, 0, 0, 0.5);
-        -webkit-border-radius: 100px;
-    }
-    ::-webkit-scrollbar-thumb:vertical:active {
-        background: rgba(0, 0, 0, 0.61); /* Some darker color when you click it */
-        -webkit-border-radius: 100px;
-    }
+  *::-webkit-scrollbar-thumb:vertical {
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-border-radius: 100px;
+  }
+  *::-webkit-scrollbar-thumb:vertical:active {
+    background: rgba(0, 0, 0, 0.61); /* Some darker color when you click it */
+    -webkit-border-radius: 100px;
+  }
 }

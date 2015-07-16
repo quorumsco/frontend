@@ -115,10 +115,8 @@ $controls-size: 70px;
       background-color: #fff;
       @include transition(border, .2s);
 
-      &:hover,
-      &.selected {
-        border-color: #75A8C4;
-      }
+      &:hover {border-color: #75A8A4;}
+      &.selected {border-color: #75A8D4;}
 
       .circle {
         display: inline-block;

@@ -13,7 +13,7 @@ contact-item(v-on="click: onClick", v-class="selected: selected")
   span.contact
     a(href="#")
       i.fa.fa-send
-  span.fiche
+  span.fiche(v-on="click: showFiche(this.$parent.$parent)")
     a(href="#")
       i.fa.fa-bars
   span.delete(v-on="click: deleteContact(this)")

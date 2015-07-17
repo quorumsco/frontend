@@ -25,6 +25,7 @@ module.exports =
           i++
         ).value()
         @nb_contact = i
+        console.log(res)
     createContact: (contact) ->
       contact_store.save contact, (res) => @fetchContacts()
     deleteContact: (contact) ->

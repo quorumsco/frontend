@@ -10,6 +10,7 @@ $controls-size: 70px;
   }
 
   span {
+    vertical-align: middle;    
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -189,12 +190,34 @@ $controls-size: 70px;
     contact-tag {
       @include adjust-font-size-to(ms(+0.5));
       display: block;
-      background-color: #FAFAD2;
       margin: 0 1em 1em 4em;
+
+      span {display: inline-block;}
+
+      hr {
+        margin: 0;
+        color: #95AFC0;
+      }
+
+      .name {color: #99ADB9;}
+      .profil {width: 15%; color: #95AFC0;}
+      .echange {width: 15%;}
+      .name {width: 30%;}
+      .status {
+        display: inline-block;
+        vertical-align: top;
+        height: 100%;
+        text-align: center;
+
+        svg {
+          display: inline-block;
+          height: 100%;
+        }
+      }
     }
 
     contact-infos,
-    contact-notes {
+    contact-notes-container {
       width: 50%;
       display: inline-block;
       float: left;
@@ -228,7 +251,7 @@ $controls-size: 70px;
       span.info{color: #777;}
       category {display: block;}
       separator {
-        width: 46%;
+        width: 40%;
         display: inline-block;
         vertical-align: top;
       }
@@ -236,6 +259,7 @@ $controls-size: 70px;
         width: 5%;
         margin-right: 3%;
       }
+      separator.network {width: 45%}
       category.user,
       category.home {
         margin-bottom: 5%;
@@ -247,9 +271,9 @@ $controls-size: 70px;
       }
     }
 
-    contact-notes {
-      border: 1px solid #F1F1F1;
-      background-color: #F5F5F5;
+    contact-notes-container {
+      border: 1px solid #F8F8F8;
+      background-color: #FBFBFB;
       padding: 0 3em 0 3em;
       height: 100%;
 
@@ -264,13 +288,14 @@ $controls-size: 70px;
 
           .search {
           border: 0;
-          background-color: #F5F5F5;
+          background-color: #FBFBFB;
           @include adjust-font-size-to(ms(-1.3), 1.8);
           height: $controls-size * 0.5;
           width: 80%;
           border-bottom: 1px solid grey;
           font-style: italic;
           vertical-align: middle;
+          line-height: initial;
           box-sizing: border-box;
           }
 

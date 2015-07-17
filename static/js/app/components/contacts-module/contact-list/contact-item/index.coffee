@@ -6,3 +6,4 @@ module.exports =
     onClick: (e) ->
       e.preventDefault()
       @selected = !@selected
+      console.log(@.id)

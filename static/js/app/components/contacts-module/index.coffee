@@ -6,7 +6,9 @@ module.exports =
     contacts: []
     new_contact: {firstname: null, surname: null, phone: null}
     contact_id: null
+    contact_fiche: [firstname: 'Test', surname: null, phone: null]
     fiche: false
+    nb_contact: 0
   replace: true
   template: require('./template.jade')()
   created: ->
@@ -17,9 +19,12 @@ module.exports =
   methods:
     fetchContacts: ->
       contact_store.find (res) =>
+        i = 0
         @contacts = _(res).forEach((n) ->
           n = _.assign n, {selected: false}
+          i++
         ).value()
+        @nb_contact = i
     createContact: (contact) ->
       contact_store.save contact, (res) => @fetchContacts()
     deleteContact: (contact) ->
@@ -30,9 +35,13 @@ module.exports =
         if (contacts.$children[i].selected)
           contact_store.delete contacts.$children[i], (res) => @fetchContacts()
         i++
+    loadFiche: (fiche) ->
+      fiche.firstname = @contact_fiche[0].firstname
+      fiche.surname = @contact_fiche[0].surname
+      fiche.phone = @contact_fiche[0].phone
     showFiche: (contact) ->
-      console.log(contact)
-      console.log(contact.fiche)
-      contact.fiche = !contact.fiche
-
+      @contact_fiche[0].firstname = contact.firstname if contact?
+      @contact_fiche[0].surname = contact.surname if contact?
+      @contact_fiche[0].phone = contact.phone if contact?
+      @fiche = !@fiche
 

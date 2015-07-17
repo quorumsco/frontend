@@ -1,4 +1,10 @@
-contact-list
+contact-fiche
   header
-    section
-      contact-item(v-repeat="contacts")
+    a(href="#" v-on="click: showFiche(null)")
+      img(src="images/back.png", alt="Retour")
+    span.back
+      i.fa.fa-chevron-left
+    span Retour à la liste de contacts
+  contact-tag
+  contact-infos
+  contact-notes

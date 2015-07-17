@@ -4,13 +4,43 @@ $controls-size: 70px;
   contacts-module,
   contact-controls,
   contact-list,
-  contact-item {
+  contact-item,
+  contact-fiche {
     display: block;
   }
 
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  contact-new {
+    width: 100;
+    display: block;
+    input {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: left;
+      display: inline-block;
+      margin-right: 3px;
+    }
+  }
+
   contact-controls,
-  contact-list {
+  contact-list,
+  contact-fiche {
     background-color: #fff;
+  }
+
+  .fade-transition {
+    transition: all .3s ease;
+    overflow: hidden;
+  }
+
+  .fade-enter, .fade-leave {
+    height: 0;
+    padding: 0 10px;
+    opacity: 0;
   }
 
   contact-controls {
@@ -138,6 +168,120 @@ $controls-size: 70px;
       img {
         width: 25px;
         height: 25px;
+      }
+    }
+  }
+  
+  contact-fiche {
+    background-color: #FFFFFF;
+
+    header {
+      height: $controls-size;
+      @include adjust-font-size-to(ms(+0.5));
+      color: #777;
+      .pen {margin-right: 3%;}
+      .back {
+        margin-right: 1%;
+        margin-left: 1%;
+      }
+    }
+
+    contact-tag {
+      @include adjust-font-size-to(ms(+0.5));
+      display: block;
+      background-color: #FAFAD2;
+      margin: 0 1em 1em 4em;
+    }
+
+    contact-infos,
+    contact-notes {
+      width: 50%;
+      display: inline-block;
+      float: left;
+      margin: 1% 0 0 0;
+      @include adjust-font-size-to(ms(-0.2), 1.8);
+      @include transition(border, .2s);
+
+      .add {
+        @include adjust-font-size-to(ms(+0.4), 1.8);
+        padding: 0.3em 1em 0.3em 1em;
+        background-color: #BBBBBB;
+        color: white;
+        border-radius: 0.5em;
+        @include transition(background-color, .2s);
+  
+        &:hover {
+          background-color: #999999;
+        }
+
+      }
+      .notes,
+      .pen {
+        color: #7AAAC1;
+      }
+    }
+
+    contact-infos {
+      padding: 0 15% 0 4em;
+      @include adjust-font-size-to(ms(+0.5));
+      span {display: block;}
+      span.info{color: #777;}
+      category {display: block;}
+      separator {
+        width: 46%;
+        display: inline-block;
+        vertical-align: top;
+      }
+      separator.icon {
+        width: 5%;
+        margin-right: 3%;
+      }
+      category.user,
+      category.home {
+        margin-bottom: 5%;
+      }
+      cateory.phone,
+      category.cellpone,
+      category.mail {
+        margin-bottom: 3%
+      }
+    }
+
+    contact-notes {
+      border: 1px solid #F1F1F1;
+      background-color: #F5F5F5;
+      padding: 0 3em 0 3em;
+      height: 100%;
+
+      header {
+        height: $controls-size * 0.8;
+        @include adjust-font-size-to(ms(+1.3));
+
+        .search_container {
+          float: right;
+          display: block;
+          width: 50%;
+
+          .search {
+          border: 0;
+          background-color: #F5F5F5;
+          @include adjust-font-size-to(ms(-1.3), 1.8);
+          height: $controls-size * 0.5;
+          width: 80%;
+          border-bottom: 1px solid grey;
+          font-style: italic;
+          vertical-align: middle;
+          box-sizing: border-box;
+          }
+
+          .search_icon {
+            width: 20%;
+            vertical-align: middle;
+            &:hover {
+              color: #555;
+            }
+          }
+        }
       }
     }
   }

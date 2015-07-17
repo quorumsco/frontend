@@ -1,6 +1,12 @@
 module.exports =
+  data: ->
+    firstname: null
+    surname: null
+    phone: null
   inherit: true
   replace: true
   template: require('./template.jade')()
   components:
-    'contact-item': require './contact-item/index.coffee'
+    'contact-tag': require './contact-tag/index.coffee'
+    'contact-notes': require './contact-notes/index.coffee'
+    'contact-infos': require './contact-infos/index.coffee'

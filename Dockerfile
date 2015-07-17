@@ -1,10 +1,10 @@
 FROM frontdev
 MAINTAINER Douézan-Grard Guillaume - Quorums
 
-ADD . /srv/http
+ADD . /srv/http/front
 
-WORKDIR /srv/http
+WORKDIR /srv/http/front
 
 RUN gulp prod
 
-VOLUME ["/srv/http"]
+VOLUME ["/srv/http/front"]

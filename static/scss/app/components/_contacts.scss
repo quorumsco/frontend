@@ -245,21 +245,13 @@ $controls-size: 70px;
     }
 
     contact-infos {
-      padding: 0 15% 0 4em;
+      padding: 0 10% 0 4em;
       @include adjust-font-size-to(ms(+0.5));
+
+      color: #BBB;
       span {display: block;}
-      span.info{color: #777;}
+      span.info{color: #999;}
       category {display: block;}
-      separator {
-        width: 40%;
-        display: inline-block;
-        vertical-align: top;
-      }
-      separator.icon {
-        width: 5%;
-        margin-right: 3%;
-      }
-      separator.network {width: 45%}
       category.user,
       category.home {
         margin-bottom: 5%;
@@ -269,6 +261,41 @@ $controls-size: 70px;
       category.mail {
         margin-bottom: 3%
       }
+      separator {
+        width: 50%;
+        display: inline-block;
+        vertical-align: top;
+      }
+      separator.value {
+        width: 62%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      separator.title {width: 30%;}
+      separator.network {width: 65%}
+      separator.bubble,
+      separator.plane,
+      separator.facebook,
+      separator.twitter,
+      separator.icon {
+        text-align: center;
+        width: 5%;
+        margin-right: 3%;
+      }
+      separator.facebook {margin-right: 10%;}
+      separator.twitter,
+      separator.facebook,
+      separator.bubble,
+      separator.plane {
+        i {
+          padding: 30%;
+          border-radius: 50%;
+          background-color: #76A2C3;
+          color: #FFFFFF;
+        }
+      }
+      separator.facebook {i {background-color: lightgrey;}}
+      separator.twitter {i {background-color: darkgrey;}}
     }
 
     contact-notes-container {

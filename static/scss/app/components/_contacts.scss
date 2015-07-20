@@ -223,7 +223,7 @@ $controls-size: 70px;
           color: #FFF;
           margin-top: 1%;
           background-color: #7EA0F9;
-          border-radius: 0.7em;
+          @include border-radius(0.7em);
           margin-right: 1%;
           padding: 0 0.5% 0 0.5%;
         }
@@ -245,7 +245,7 @@ $controls-size: 70px;
         padding: 0.3em 1em 0.3em 1em;
         background-color: #BBBBBB;
         color: white;
-        border-radius: 0.5em;
+        @include border-radius(0.5em);
         @include transition(background-color, .2s);
   
         &:hover {
@@ -266,52 +266,52 @@ $controls-size: 70px;
       color: #BBB;
       span {display: block; margin-bottom: 5%;}
       span.info{color: #999;}
-      category {display: block;}
-      category.user,
-      category.home {
+      contact-category {display: block;}
+      contact-category.user,
+      contact-category.home {
         margin-bottom: 5%;
       }
-      cateory.phone,
-      category.cellpone,
-      category.mail {
+      contact-cateory.phone,
+      contact-category.cellpone,
+      contact-category.mail {
         margin-bottom: 3%
       }
-      separator {
+      contact-separator {
         width: 55%;
         display: inline-block;
         vertical-align: top;
       }
-      separator.value {
+      contact-separator.value {
         width: 67%;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      separator.title {width: 25%;}
-      separator.network {width: 65%}
-      separator.bubble,
-      separator.plane,
-      separator.facebook,
-      separator.twitter,
-      separator.icon {
+      contact-separator.title {width: 25%;}
+      contact-separator.network {width: 65%}
+      contact-separator.bubble,
+      contact-separator.plane,
+      contact-separator.facebook,
+      contact-separator.twitter,
+      contact-separator.icon {
         text-align: center;
         width: 5%;
         margin-right: 3%;
       }
-      separator.facebook {margin-right: 10%;}
-      separator.twitter,
-      separator.facebook,
-      separator.bubble,
-      separator.plane {
+      contact-separator.facebook {margin-right: 10%;}
+      contact-separator.twitter,
+      contact-separator.facebook,
+      contact-separator.bubble,
+      contact-separator.plane {
         i {
           padding: 30%;
           margin-bottom: 15%;
-          border-radius: 50%;
+          @include border-radius(50%);
           background-color: #76A2C3;
           color: #FFFFFF;
         }
       }
-      separator.facebook {i {background-color: lightgrey;}}
-      separator.twitter {i {background-color: darkgrey;}}
+      contact-separator.facebook {i {background-color: lightgrey;}}
+      contact-separator.twitter {i {background-color: darkgrey;}}
     }
 
     contact-notes-container {
@@ -330,16 +330,16 @@ $controls-size: 70px;
           width: 50%;
 
           .search {
-          border: 0;
-          background-color: #FBFBFB;
-          @include adjust-font-size-to(ms(-1.3), 1.8);
-          height: $controls-size * 0.5;
-          width: 80%;
-          border-bottom: 1px solid grey;
-          font-style: italic;
-          vertical-align: middle;
-          line-height: initial;
-          box-sizing: border-box;
+            border: 0;
+            background-color: #FBFBFB;
+            @include adjust-font-size-to(ms(-1.3), 1.8);
+            height: $controls-size * 0.5;
+            width: 80%;
+            border-bottom: 1px solid grey;
+            font-style: italic;
+            vertical-align: middle;
+            line-height: initial;
+            @include box-sizing(border-box);
           }
 
           .search_icon {

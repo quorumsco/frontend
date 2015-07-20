@@ -4,10 +4,12 @@ _ = require('lodash')
 module.exports =
   data: ->
     contacts: []
-    tags: []
     new_contact: {firstname: null, surname: null, phone: null}
     contact_id: null
+    #temporary
+    tags: [{tag: 'Test'}, {tag: 'famille'}, {tag: 'famille'}, {tag: 'bouffe'},{tag: 'lorem'},{tag: 'ipsum'},{tag: 'sécurité'},{tag: 'Europe'}]
     contact_fiche: [firstname: null, surname: null, phone: null]
+    #!temporary
     fiche: false
     nb_contact: 0
   replace: true

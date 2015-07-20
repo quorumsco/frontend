@@ -198,6 +198,7 @@ $controls-size: 70px;
       hr {
         margin: 0;
         color: #95AFC0;
+        display: block;
       }
 
       .name {color: #99ADB9;}
@@ -214,6 +215,19 @@ $controls-size: 70px;
           display: inline-block;
           height: 100%;
         }
+      }
+
+      tag-container {
+        span.tag {
+          @include adjust-font-size-to(ms(-0.3));
+          color: #FFF;
+          margin-top: 1%;
+          background-color: red;
+          border-radius: 10%;
+          margin-right: 1%;
+          padding: 0 0.5% 0 0.5%;
+        }
+        a:hover {color: black;}
       }
     }
 

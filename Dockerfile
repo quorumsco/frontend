@@ -1,4 +1,4 @@
-FROM frontdev
+FROM silverwyrda/frontdev
 MAINTAINER Douézan-Grard Guillaume - Quorums
 
 ADD . /srv/http/front

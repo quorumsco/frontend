@@ -175,6 +175,7 @@ $controls-size: 70px;
   
   contact-fiche {
     background-color: #FFFFFF;
+    height: 100%;
 
     header {
       height: $controls-size;
@@ -246,10 +247,10 @@ $controls-size: 70px;
 
     contact-infos {
       padding: 0 10% 0 4em;
-      @include adjust-font-size-to(ms(+0.5));
+      @include adjust-font-size-to(ms(+0.2));
 
       color: #BBB;
-      span {display: block;}
+      span {display: block; margin-bottom: 5%;}
       span.info{color: #999;}
       category {display: block;}
       category.user,
@@ -262,16 +263,16 @@ $controls-size: 70px;
         margin-bottom: 3%
       }
       separator {
-        width: 50%;
+        width: 55%;
         display: inline-block;
         vertical-align: top;
       }
       separator.value {
-        width: 62%;
+        width: 67%;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      separator.title {width: 30%;}
+      separator.title {width: 25%;}
       separator.network {width: 65%}
       separator.bubble,
       separator.plane,
@@ -289,6 +290,7 @@ $controls-size: 70px;
       separator.plane {
         i {
           padding: 30%;
+          margin-bottom: 15%;
           border-radius: 50%;
           background-color: #76A2C3;
           color: #FFFFFF;

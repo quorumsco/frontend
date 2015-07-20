@@ -4,9 +4,10 @@ _ = require('lodash')
 module.exports =
   data: ->
     contacts: []
+    tags: []
     new_contact: {firstname: null, surname: null, phone: null}
     contact_id: null
-    contact_fiche: [firstname: 'Test', surname: null, phone: null]
+    contact_fiche: [firstname: null, surname: null, phone: null]
     fiche: false
     nb_contact: 0
   replace: true
@@ -25,7 +26,6 @@ module.exports =
           i++
         ).value()
         @nb_contact = i
-        console.log(res)
     createContact: (contact) ->
       contact_store.save contact, (res) => @fetchContacts()
     deleteContact: (contact) ->

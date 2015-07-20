@@ -22,5 +22,5 @@ module.exports =
     @router {hashbang: true}
   events:
     navigate: (path) ->
-      this.router(path)
+      @router(path)
       return false

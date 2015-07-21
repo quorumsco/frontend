@@ -9,7 +9,7 @@ module.exports =
 
     #temporary
     tags: [{tag: 'Test'}, {tag: 'famille'}, {tag: 'Equipement sportif'}, {tag: 'bouffe'}, {tag: 'lorem'}, {tag: 'ipsum'}, {tag: 'sécurité'}, {tag: 'Europe'}]
-    notes: [{author: 'Guilleuahou', date: '16 juin 2015', hour: '17h29', content: 'Mdr mange mes couilles stp. lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum'}, {author: 'Guy yeu ahou', date: '17 juin 2015', hour: '03h29', content: 'Ok inchallah'}, {author: 'Nope', date: '6 juillet 2015', hour: '14h29', content: 'Invitez moi les gars'}, {author: 'Nope', date: '6 juillet 2015', hour: '14h29', content: 'Invitez moi les gars'}]
+    notes: [{author: 'Guilleuahou', date: '16 juin 2015', hour: '17h29', content: 'Mdr mange mes couilles stp. lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum'}, {author: 'Guy yeu ahou', date: '17 juin 2015', hour: '03h29', content: 'Ok inchallah'}, {author: 'Nope', date: '6 juillet 2015', hour: '14h29', content: 'Invitez moi les gars'}, {author: 'Nope', date: '6 juillet 2015', hour: '14h29', content: 'Invitez moi les gars eeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeee eeeeeeeeeee eeeeeeeeee eeeeeeee eeeeeeeeee eeeeeee  eeeeeeeeeeeeeee  eeeeeeee '}]
     contact_fiche: [firstname: null, surname: null, phone: null]
     #!temporary
 
@@ -67,7 +67,7 @@ module.exports =
           curOverflow = note[i].style.overflow;
           if (!curOverflow || curOverflow == "visible")
             note[i].style.overflow = "hidden";
-          isOverflowing = note[i].clientWidth < note[i].scrollWidth || note[i].clientHeight < note[i].scrollHeight
+          isOverflowing = note[i].clientWidth < note[i].scrollWidth - 5 || note[i].clientHeight < note[i].scrollHeight - 5
 
           note[i].style.overflow = curOverflow;
           @unfadeIt(note[i]) if !isOverflowing

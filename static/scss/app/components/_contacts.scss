@@ -361,8 +361,6 @@ $controls-size: 70px;
 
         contact-notes {
           height: 33%;
-          overflow: hidden;
-
           color: lightgrey;
           @include adjust-font-size-to(ms(0.2));
 

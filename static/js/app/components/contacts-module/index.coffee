@@ -54,13 +54,31 @@ module.exports =
       #temporary
       
       @displaying_profile = !@displaying_profile
+    unfadeIt: (note) ->
+      fade = note.getElementsByClassName("fade")
+      fade[0].style.display = "none"
+    manageOverflow: (i) ->
+      note = document.querySelectorAll(".content")
+      if ((!note || note.length == 0) && i < 10)
+        timeoutID = window.setTimeout(@manageOverflow, 1000, i + 1)
+      else if (note && note.length != 0)
+        i = 0
+        while (i < note.length)
+          curOverflow = note[i].style.overflow;
+          if (!curOverflow || curOverflow == "visible")
+            note[i].style.overflow = "hidden";
+          isOverflowing = note[i].clientWidth < note[i].scrollWidth || note[i].clientHeight < note[i].scrollHeight
 
+          note[i].style.overflow = curOverflow;
+          @unfadeIt(note[i]) if !isOverflowing
+          i++
+        window.clearTimeout(timeoutID)
     #temporary
     changeColor: (i) ->
       tag_array = document.querySelectorAll(".tag");
       if ((tag_array == null || tag_array.length == 0) && i < 10)
         timeoutID = window.setTimeout(@changeColor, 100, i + 1);
-      else if (tag_array != null && tag_array.length != 0)
+      else if (tag_array && tag_array.length != 0)
         i = 0
         while (i < tag_array.length)
           tag_array[i].style.background = "#" + Math.floor(Math.random() * 16777215).toString(16)

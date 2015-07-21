@@ -195,10 +195,18 @@ $controls-size: 70px;
       margin: 0 1em 1em 4em;
 
       span {display: inline-block;}
+      span.arrow {
+        display: block;
+        width: 0;
+        height: 0;
+        border-bottom: 0.6em solid grey;
+        border-right: 0.6em solid transparent;
+        border-left: 0.6em solid transparent;
+        margin-left: 6%;
+      }
 
       hr {
         margin: 0;
-        color: #95AFC0;
         display: block;
       }
 
@@ -395,7 +403,7 @@ $controls-size: 70px;
               width: 100%;
               height: 33%;
               position: absolute;
-              top: 70%;
+              top: 67%;
               right: 0;
               background-image: -webkit-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
               background-image: -moz-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));

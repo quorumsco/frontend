@@ -5,7 +5,8 @@ $controls-size: 70px;
   contact-controls,
   contact-list,
   contact-item,
-  contact-fiche {
+  contact-fiche,
+  contact-notes {
     display: block;
   }
 
@@ -175,7 +176,7 @@ $controls-size: 70px;
   
   contact-fiche {
     background-color: #FFFFFF;
-    height: 100%;
+    height: 770px;
 
     header {
       height: $controls-size;
@@ -220,9 +221,9 @@ $controls-size: 70px;
       tag-container {
         span.tag {
           @include adjust-font-size-to(ms(-0.3));
-          color: #FFF;
+          color: #EEE;
           margin-top: 1%;
-          background-color: #7EA0F9;
+          /*background-color: #7EA0F9;*/
           @include border-radius(0.7em);
           margin-right: 1%;
           padding: 0 0.5% 0 0.5%;
@@ -317,12 +318,14 @@ $controls-size: 70px;
     contact-notes-container {
       border: 1px solid #F8F8F8;
       background-color: #FBFBFB;
-      padding: 0 3em 0 3em;
-      height: 100%;
+      padding: 0 3em 0em 3em;
+      height: 70%;
+      margin-bottom: 1em;
 
       header {
         height: $controls-size * 0.8;
         @include adjust-font-size-to(ms(+1.3));
+        height: 10%;
 
         .search_container {
           float: right;
@@ -347,6 +350,60 @@ $controls-size: 70px;
             vertical-align: middle;
             &:hover {
               color: #555;
+            }
+          }
+        }
+      }
+
+      div.notes {
+        height: 80%;
+        overflow: scroll;
+
+        contact-notes {
+          height: 33%;
+          overflow: hidden;
+
+          color: lightgrey;
+          @include adjust-font-size-to(ms(0.2));
+
+          span.author {
+            height: 20%;
+            color: #7AAAC1;
+            @include adjust-font-size-to(ms(0.5));
+          }
+          div.arrow {
+            width: 0;
+            height: 0;
+            border-bottom: 0.5em solid #F2F3F7;
+            border-right: 0.5em solid transparent;
+            border-left: 0.5em solid transparent;
+            margin-left: 5%;
+          }
+          div.content {
+            margin-right: 3%;
+            background-color: #F2F3F7;
+            color: #C2C3C7;
+            height: 50%;
+            display: block;
+            margin-bottom: 3%;
+            @include border-radius(0.5em);
+            overflow: hidden;
+            position: relative;
+
+            p {padding: 1% 0% 0% 2%}
+
+            div.fade {
+              content: "";
+              width: 100%;
+              height: 33%;
+              position: absolute;
+              top: 70%;
+              right: 0;
+              background-image: -webkit-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
+              background-image: -moz-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
+              background-image: -ms-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
+              background-image: -o-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
+              background-image: linear-gradient(to left, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
             }
           }
         }

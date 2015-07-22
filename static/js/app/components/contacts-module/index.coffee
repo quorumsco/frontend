@@ -73,18 +73,19 @@ module.exports =
         @unfade(note, 0)
         window.clearTimeout(timeoutID)
     #temporary
+    assignColor: (tag_array, i) ->
+      if (i < tag_array.length)
+        color = "a"
+        color = Math.floor(Math.random() * 16777215).toString(16) while color.length != 6
+        console.log(color)
+        tag_array[i].style.background = "#" + color
+        @assignColor(tag_array, i + 1)
     changeColor: (i) ->
       tag_array = document.querySelectorAll(".tag");
       if ((tag_array == null || tag_array.length == 0) && i < 10)
         #Feeling dirty.. Must find something else
         timeoutID = window.setTimeout(@changeColor, 100, i + 1);
       else if (tag_array && tag_array.length != 0)
-        i = 0
-        while (i < tag_array.length)
-          color = Math.floor(Math.random() * 16777215).toString(16)
-          while (color.length != 6)
-            color = Math.floor(Math.random() * 16777215).toString(16)
-          tag_array[i].style.background = "#" + color
-          i++
+        @assignColor(tag_array, 0)
         window.clearTimeout(timeoutID)
     #!temporary

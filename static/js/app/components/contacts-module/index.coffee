@@ -35,12 +35,11 @@ module.exports =
       contact_store.save contact, (res) => @fetchContacts()
     deleteContact: (contact) ->
       contact_store.delete contact, (res) => @fetchContacts()
-    deleteMultiple: (contacts) ->
-      i = 0
-      while (contacts.$children[i])
+    deleteMultiple: (contacts, i) ->
+      if (contacts.$children[i])
         if (contacts.$children[i].selected)
           contact_store.delete contacts.$children[i], (res) => @fetchContacts()
-        i++
+        @deleteMultiple(contacts, i + 1)
     loadFiche: (fiche) ->
       fiche.firstname = @contact_fiche[0].firstname
       fiche.surname = @contact_fiche[0].surname

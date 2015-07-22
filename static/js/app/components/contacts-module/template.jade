@@ -8,7 +8,7 @@ contacts-module
     section(v-if="!displaying_profile")
       a(href="#")
         i(class="fa fa-plus")
-      a(href="#" v-on="click: deleteMultiple(this.$children[0])")
+      a(href="#" v-on="click: deleteMultiple(this.$children[0], 0)")
         i(class="fa fa-trash")
       each val in ['share-square-o', 'check']
         a(href="#")

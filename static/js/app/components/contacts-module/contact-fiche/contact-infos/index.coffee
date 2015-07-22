@@ -4,4 +4,3 @@ module.exports =
   template: require('./template.jade')()
   created: ->
     @loadFiche(this)
-   	@manageOverflow(0)

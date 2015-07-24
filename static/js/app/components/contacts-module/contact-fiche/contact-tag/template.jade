@@ -10,4 +10,14 @@ contact-tag
     a(href="#")
       span.echange Echange
     hr
-  tag-container(v-repeat="tags")
+  div.tags
+    tag-more
+      span.action(v-on="click: expandTags(this)")
+        a(href"#")
+          i . . .      
+          i.fa.fa-angle-down
+    tag-container(v-repeat="tags")
+  div.add
+    tag-add
+      span.action
+        a(href"#") +  Ajouter

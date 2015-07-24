@@ -8,11 +8,21 @@ module.exports =
     contact_id: null
 
     #temporary
-    tags: [{tag: 'Test'}, {tag: 'famille'}, {tag: 'Equipement sportif'}, {tag: 'bouffe'}, {tag: 'lorem'}, {tag: 'ipsum'}, {tag: 'sécurité'}, {tag: 'Europe'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}]
+    tags: [{tag: 'Test'}, {tag: 'famille'}, {tag: 'Equipement sportif'}, {tag: 'bouffe'}, {tag: 'lorem'}, {tag: 'ipsum'}, {tag: 'sécurité'}, {tag: 'Europe'}, 
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}]
     notes: [
-      {author: 'Guilleuahou', date: '16 juin 2015', hour: '17h29', content: 'Mdr mange mes couilles stp. lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum adazdazdddddddddddddddadad azdazdazd azdazdad adefzefqz ef rhtjytrhqegre yjherteyj reyztee yeyèih -èejhq-j hqhj qhzs-su yqztqsuyz tqysuqztys(eyq ztsuyqt )adazdadad adadad dazda dadsd qd azdsqd azdqs adazdazdadaz ddaazdaddad adazdazdadazd azdaddasd sdasdadasd adda&&d&d &d&d&z d&zdzdadaz dazdadad azdaadadasd qsdadqsd adqsdad qsdazdqs dazdqs dazdqsd azdqsd azdqsdaz dqsdazd qsdazd qsdazdasda zdad adsqd azdqsd azdqsd azd qsd azdqsd fqz ef rhtjytrhqegre yjherteyj reyztee yeyèih -èejhq-j hqhj qhzs-su yqztqsuyz tqysuqztys(eyq ztsuyqt )adazdadad adadad dazda dadsd qd azdsqd azdqs adazdazdadaz ddaazdaddad adazdazdadazd azdaddasd sdasdadasd adda&&d&d &d&d&z d&zdzdadaz dazdadad azdaadadasd qsdadqsd adqsdad qsdazdqs dazdqs dazdqsd azdqsd azdqsdaz dqsdazd qsdazd qsdazdasda zdad adsqd azdqsd azdqsd azd qsd azdqsd fqz ef rhtjytrhqegre yjherteyj reyztee yeyèih -èejhq-j hqhj qhzs-su yqztqsuyz tqysuqztys(eyq ztsuyqt )adazdadad adadad dazda dadsd qd azdsqd azdqs adazdazdadaz ddaazdaddad adazdazdadazd azdaddasd sdasdadasd adda&&d&d &d&d&z d&zdzdadaz dazdadad azdaadadasd qsdadqsd adqsdad qsdazdqs dazdqs dazdqsd azdqsd azdqsdaz dqsdazd qsdazd qsdazdasda zdad adsqd azdqsd azdqsd azd qsd azdqsd '}, 
+      {author: 'Guilleuahou', date: '16 juin 2015', hour: '17h29', content: 'Mdr mange mes couilles stp. lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+       ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+        ipsumlorem ipsum adazdazdddddddddddddddadad azdazdazd azdazdad adefzefqz ef rhtjytrhqegre yjherteyj reyztee yeyèih -èejhq-j hqhj qhzs-su yqztqsuyz tqysuqztys(eyq ztsuyqt )adazdadad adadad dazda dadsd qd azdsqd
+         azdqs adazdazdadaz ddaazdaddad adazdazdadazd azdaddasd sdasdadasd adda&&d&d &d&d&z d&zdzdadaz dazdadad azdaadadasd qsdadqsd adqsdad qsdazdqs dazdqs dazdqsd azdqsd azdqsdaz dqsdazd qsdazd qsdazdasda zdad adsqd
+          azdqsd azdqsd azd qsd azdqsd fqz ef rhtjytrhqegre yjherteyj reyztee yeyèih -èejhq-j hqhj qhzs-su yqztqsuyz tqysuqztys(eyq ztsuyqt )adazdadad adadad dazda dadsd qd azdsqd azdqs adazdazdadaz ddaazdaddad adazdazdadazd
+           azdaddasd sdasdadasd adda&&d&d &d&d&z d&zdzdadaz dazdadad azdaadadasd qsdadqsd adqsdad qsdazdqs dazdqs dazdqsd azdqsd azdqsdaz dqsdazd qsdazd qsdazdasda zdad adsqd azdqsd azdqsd azd qsd azdqsd fqz ef rhtjytrhqegre
+            yjherteyj reyztee yeyèih -èejhq-j hqhj qhzs-su yqztqsuyz tqysuqztys(eyq ztsuyqt )adazdadad adadad dazda dadsd qd azdsqd azdqs adazdazdadaz ddaazdaddad adazdazdadazd azdaddasd sdasdadasd adda&&d&d &d&d&z d&zdzdadaz
+             dazdadad azdaadadasd qsdadqsd adqsdad qsdazdqs dazdqs dazdqsd azdqsd azdqsdaz dqsdazd qsdazd qsdazdasda zdad adsqd azdqsd azdqsd azd qsd azdqsd '}, 
       {author: 'Guy yeu ahou', date: '17 juin 2015', hour: '03h29', content: 'Ok inchallah'}, 
-      {author: 'Nope', date: '6 juillet 2015', hour: '14h29', content: 'Invitez moi les gars eeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeeeeeeeee pinpinnpin npin inhobui buibvy vyuvtf yi uo u ui b iv uib ub y vyi  u yi yi uo vyi u yi uo  fyiueeeee eeeeeeee '}
+      {author: 'Nope', date: '6 juillet 2015', hour: '14h29', content: 'Invitez moi les gars eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeeeeeeeee
+       pinpinnpin npin inhobui buibvy vyuvtf yi uo u ui b iv uib ub y vyi  u yi yi uo vyi u yi uo  fyiueeeee eeeeeeee '}
     ]
     contact_fiche: [firstname: null, surname: null, phone: null]
     #!temporary
@@ -106,3 +116,7 @@ module.exports =
       @hideNotes(note, 0)
       note.$parent.$el.children[2].style.overflow = "hidden" if note.expanded
       note.$parent.$el.children[2].style.overflow = "scroll" if !note.expanded
+    expandTags: (tags) ->
+      tags.expanded = !tags.expanded
+      @$el.getElementsByTagName("contact-fiche")[0].className = "opacity" if tags.expanded
+      @$el.getElementsByTagName("contact-fiche")[0].className = "" if !tags.expanded

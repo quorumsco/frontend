@@ -115,6 +115,7 @@ $controls-size: 70px;
         display: inline-block;
       }
       .phone {
+        width: 40%;
         float: right;
         margin-right: 1em;
       }
@@ -122,7 +123,8 @@ $controls-size: 70px;
         width: 5%;
         text-align: center;
       }
-      .name {width: 15%;}
+      .email: {width: 60%;}
+      .name {width: 15%; white-space: nowrap;}
       .info {width: 30%;}
       .exchange {width: 18%;}
       .contact,
@@ -173,7 +175,22 @@ $controls-size: 70px;
       }
     }
   }
-  
+
+  contact-fiche.opacity {
+    background-color: rgba(255, 255, 255, 0.3);
+    header {opacity: 0.3;}
+    contact-infos {opacity: 0.3;}
+    contact-notes-container {opacity: 0.3;}
+    contact-tag {
+      div.tags {
+        height: 200%;
+        overflow: auto;
+        position: relative;
+        z-index: 1;
+      }
+      div.add {vertical-align: top;}
+    }
+  }
   contact-fiche {
     background-color: #FFFFFF;
     height: 770px;
@@ -191,11 +208,10 @@ $controls-size: 70px;
     }
 
     contact-tag {
+
       @include adjust-font-size-to(ms(+0.5));
       display: block;
       height: 16%;
-      overflow: hidden;
-      text-overflow: "YAYAAYAYAYAYAYAYAYA";
       margin: 0 1em 1em 5%;
 
       span {display: inline-block;}
@@ -216,7 +232,7 @@ $controls-size: 70px;
 
       .name,
       .echange,
-      .profil {height: 100%}
+      .profil {white-space: nowrap; height: 100%}
       .name {color: #99ADB9;}
       .profil,
       .echange {vertical-align: top;}
@@ -235,18 +251,45 @@ $controls-size: 70px;
         }
       }
 
-      tag-container {
-        span.tag {
-          @include adjust-font-size-to(ms(-0.3));
-          color: #ffffff;
-          margin-top: 1%;
-          /*background-color: #7EA0F9;*/
-          @include border-radius(0.7em);
-          margin-right: 1%;
-          padding: 0 0.5% 0 0.5%;
+      div.add,
+      div.tags {
+        height: 50%;
+        display: inline-block;
+        overflow: hidden;
+
+        tag-more,
+        tag-add,
+        tag-container {
+          span.action,
+          span.tag {
+            white-space: nowrap;
+            opacity: 0.8;
+            @include adjust-font-size-to(ms(-0.3));
+            color: #ffffff;
+            margin-top: 1%;
+            vertical-align: bottom;
+            @include border-radius(0.5em);
+            margin-right: 1%;
+            padding: 0 1% 0 1%;
+          }
+          a:hover {color: black;}
         }
-        a:hover {color: black;}
+        tag-add,
+        tag-more {
+          float: right;
+          padding-right: 1%;
+          span.action {background-color: darkgrey; padding: 0 10% 0 10%;}
+        }
       }
+      div.tags:after {
+        display: inline-block;
+        width: 100%;
+        content: '';
+      }
+    }
+    div.add {width: 13%;}
+    div.tags{
+      width: 87%;
     }
 
     contact-infos,
@@ -394,6 +437,12 @@ $controls-size: 70px;
             margin-left: 5%;
           }
           div.content {
+            word-wrap: break-word;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            -ms-hyphens: auto;
+            -o-hyphens: auto;
+            hyphens: auto;
             margin-right: 3%;
             background-color: #F2F3F7;
             color: #C2C3C7;

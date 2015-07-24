@@ -182,6 +182,7 @@ $controls-size: 70px;
       height: $controls-size;
       @include adjust-font-size-to(ms(+0.5));
       color: #777;
+
       .pen {margin-right: 3%;}
       .back {
         margin-right: 1%;
@@ -213,6 +214,9 @@ $controls-size: 70px;
         display: block;
       }
 
+      .name,
+      .echange,
+      .profil {height: 100%}
       .name {color: #99ADB9;}
       .profil,
       .echange {vertical-align: top;}

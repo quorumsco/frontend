@@ -192,7 +192,10 @@ $controls-size: 70px;
     contact-tag {
       @include adjust-font-size-to(ms(+0.5));
       display: block;
-      margin: 0 1em 1em 4em;
+      height: 16%;
+      overflow: hidden;
+      text-overflow: "YAYAAYAYAYAYAYAYAYA";
+      margin: 0 1em 1em 5%;
 
       span {display: inline-block;}
       span.arrow {
@@ -211,6 +214,8 @@ $controls-size: 70px;
       }
 
       .name {color: #99ADB9;}
+      .profil,
+      .echange {vertical-align: top;}
       .profil {width: 15%; color: #95AFC0;}
       .echange {width: 15%;}
       .name {width: 30%;}
@@ -269,7 +274,7 @@ $controls-size: 70px;
     }
 
     contact-infos {
-      padding: 0 10% 0 4em;
+      padding: 0 10% 0 5%;
       @include adjust-font-size-to(ms(+0.2));
 
       color: #BBB;
@@ -368,7 +373,6 @@ $controls-size: 70px;
         overflow: scroll;
 
         contact-notes {
-          height: 33%;
           color: lightgrey;
           @include adjust-font-size-to(ms(0.2));
 
@@ -389,11 +393,9 @@ $controls-size: 70px;
             margin-right: 3%;
             background-color: #F2F3F7;
             color: #C2C3C7;
-            height: 55%;
             display: block;
             margin-bottom: 3%;
             @include border-radius(0.5em);
-            overflow: hidden;
             position: relative;
 
             p {padding: 1% 0% 0% 2%}
@@ -402,9 +404,7 @@ $controls-size: 70px;
               content: "";
               display: initial;
               width: 100%;
-              height: 33%;
               position: absolute;
-              top: 67%;
               right: 0;
               background-image: -webkit-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
               background-image: -moz-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
@@ -415,6 +415,33 @@ $controls-size: 70px;
               text-align: right;
               color: #7AAAC1;
             }
+          }
+        }
+      }
+      contact-notes.notes {
+        height: 33%;
+
+        div.content {height: 55%;}
+        p {overflow: hidden;}
+        div.fade{
+          height: 33%;
+          top: 67%;
+        }
+      }
+      contact-notes.expanded {
+        height: 100%;
+
+        div.content {
+          height: 87%;
+
+          p {
+            height: 90%;
+            overflow: auto;
+          }
+
+          div.fade {
+            height: 10%;
+            top: 90%;
           }
         }
       }

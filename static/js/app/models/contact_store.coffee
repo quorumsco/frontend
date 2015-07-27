@@ -5,7 +5,6 @@ request = require('superagent')
 api = 'http://localhost:8080'
 
 store.find = (cb) ->
-  console.log(api + '/contacts')
   request
     .get api + '/contacts'
     .set 'Accept', 'application/json'
@@ -14,7 +13,6 @@ store.find = (cb) ->
         cb(res.body.data.contacts)
 
 store.save = (contact, cb) ->
-  console.log({data: {contact: contact}})
   request
     .post api + '/contacts'
     .set 'Content-Type', 'application/json'

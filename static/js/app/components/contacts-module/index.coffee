@@ -58,8 +58,25 @@ module.exports =
     deleteMultiple: (contacts, i) ->
       if (contacts.$children[i])
         if (contacts.$children[i].selected)
-          contact_store.delete contacts.$children[i], (res) => @fetchContacts()
+          contact_store.delete contacts.$children[i], (res) => 
+            i = 0
         @deleteMultiple(contacts, i + 1)
+      else
+        fetchContacts()
+    fetchTags: (id, tags) ->
+      tags_store.find (id, res) =>
+        tags = _(res).value()
+    createTag: (id, tag) ->
+      tags_store.save tag, (id, res) => @fetchTags()
+    deleteTag: (id, tag) ->
+      tags_store.delete tag, (id, res) => @fetchTags()
+    fetchNotes: (notes) ->
+      notes_store.find (id, res) =>
+        notes = _(res).value()
+    createNote: (id, note) ->
+      note_store.save note, (id, res) => @fetchNotes()
+    deleteNote: (id, note) ->
+      contact_store.delete note, (id, res) => @fetchNotes()
     loadFiche: (fiche) ->
       fiche.firstname = @contact_fiche[0].firstname
       fiche.surname = @contact_fiche[0].surname
@@ -119,7 +136,7 @@ module.exports =
       tags.addMode = !tags.addMode
       @expandTags(tags) if !tags.expanded && tags.addMode
       # @expandTags(tags) if tags.expanded && !tags.addMode
-      # Matter of preference, I don't like it
+      # Matter of preferences. I don't like it but some will.
     addNote: (notes) ->
       console.log(notes)
       notes.addMode = !notes.addMode

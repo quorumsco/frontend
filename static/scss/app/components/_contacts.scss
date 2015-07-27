@@ -188,12 +188,14 @@ $controls-size: 70px;
         position: relative;
         z-index: 1;
       }
-      div.add {vertical-align: top;}
     }
   }
   contact-fiche {
     background-color: #FFFFFF;
     height: 770px;
+
+
+    div.add {vertical-align: top;}
 
     header {
       height: $controls-size;
@@ -208,7 +210,6 @@ $controls-size: 70px;
     }
 
     contact-tag {
-
       @include adjust-font-size-to(ms(+0.5));
       display: block;
       height: 16%;

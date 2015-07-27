@@ -79,12 +79,7 @@ module.exports =
         @unfade(note, i + 1)
     manageOverflow: (i) ->
       note = document.querySelectorAll(".content")
-      if ((!note || note.length == 0) && i < 10)
-        #Feeling dirty.. Must find something else
-        timeoutID = window.setTimeout(@manageOverflow, 300, i + 1)
-      else if (note && note.length != 0)
-        @unfade(note, 0)
-        window.clearTimeout(timeoutID)
+      @unfade(note, 0)
     #temporary
     assignColor: (tag_array, i) ->
       if (i < tag_array.length)
@@ -92,14 +87,9 @@ module.exports =
         color = Math.floor(Math.random() * 16777215).toString(16) while color.length != 6
         tag_array[i].style.background = "#" + color
         @assignColor(tag_array, i + 1)
-    changeColor: (i) ->
+    changeColor: () ->
       tag_array = document.querySelectorAll(".tag");
-      if ((tag_array == null || tag_array.length == 0) && i < 10)
-        #Feeling dirty.. Must find something else
-        timeoutID = window.setTimeout(@changeColor, 100, i + 1);
-      else if (tag_array && tag_array.length != 0)
-        @assignColor(tag_array, 0)
-        window.clearTimeout(timeoutID)
+      @assignColor(tag_array, 0)
     #!temporary
     hideNotes: (note, i) ->
       if note.expanded
@@ -120,3 +110,9 @@ module.exports =
       tags.expanded = !tags.expanded
       @$el.getElementsByTagName("contact-fiche")[0].className = "opacity" if tags.expanded
       @$el.getElementsByTagName("contact-fiche")[0].className = "" if !tags.expanded
+    addTag: (addButton) ->
+      addButton.addMode = !addButton.addMode
+    displayProfile: (profile) ->
+      profile.displaying_exchanges = false
+    displayExchanges: (profile) ->
+      profile.displaying_exchanges = true

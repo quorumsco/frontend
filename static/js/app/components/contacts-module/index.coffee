@@ -118,7 +118,11 @@ module.exports =
     addTag: (tags) ->
       tags.addMode = !tags.addMode
       @expandTags(tags) if !tags.expanded && tags.addMode
-      @expandTags(tags) if tags.expanded && !tags.addMode
+      # @expandTags(tags) if tags.expanded && !tags.addMode
+      # Matter of preference, I don't like it
+    addNote: (notes) ->
+      console.log(notes)
+      notes.addMode = !notes.addMode
     displayProfile: (profile) ->
       profile.displaying_exchanges = false
     displayExchanges: (profile) ->

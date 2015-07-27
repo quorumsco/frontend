@@ -45,13 +45,14 @@ contact-infos
     contact-separator
       span.info {{mail}} {{surname}}.{{firstname}}@gmail.com
     contact-separator.plane
-      i.fa.fa-paper-plane
+      a(href="mailto:{{surname}}.{{firstname}}@gmail.com")
+        i.fa.fa-paper-plane
   contact-category.network
     contact-separator.icon 
       i.fa.fa-facebook-square
     contact-separator.network
       span Réseaux sociaux
     contact-separator.facebook
-      i.fa.fa-facebook
+      i.fa.fa-facebook.fa-fw
     contact-separator.twitter
-      i.fa.fa-twitter
+      i.fa.fa-twitter.fa-fw

@@ -23,3 +23,5 @@ contact-tag
       span.action(v-on="click: addTag(this)")
         a(href="#")
           i.add + Ajouter
+    input(v-model="new_tag.content", type="text", placeholder="tag" v-if="addMode")
+    button(v-on="click: createTag(new_tag)" v-if="addMode") Add

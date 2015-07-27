@@ -1,0 +1,17 @@
+contact-create-note(class="notes" v-class="expanded: expanded")
+  div.control
+    span.back
+      a(href="#" v-on="click: addNote(this.$parent)")
+        i.fa.fa-reply
+    span.check
+      a(href="#")
+        i.fa.fa-check
+    span.undo
+      a(href="#")
+        i.fa.fa-times
+  span.author Jean-Pierre 
+  span.text est en train de créer une note
+  div.arrow
+  textarea.content(v-transition="fade", v-model="new_note.content", type="text")
+
+

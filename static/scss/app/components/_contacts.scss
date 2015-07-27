@@ -184,26 +184,42 @@ $controls-size: 70px;
     contact-tag {
       overflow: initial;
 
+      div.add,
       div.tags {
         height: 200%;
         overflow: auto;
         position: relative;
         z-index: 1;
+
+        button,
+        input {
+          line-height: initial;
+          @include adjust-font-size-to(ms(-0.5));
+          margin-top: 5%;
+          float: right;
+          height: 15%;
+          width: 60%;
+        }
+        button {width: 30%; margin-right: 15%}
+        input {height: 12%;}
       }
     }
   }
   contact-fiche {
     background-color: #FFFFFF;
-    height: 770px;
-
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    left: 1em;
+    top: 70px + 16px + 16px + 20px;
 
     div.add {vertical-align: top;}
 
     header {
       height: $controls-size;
-      @include adjust-font-size-to(ms(+0.5));
       color: #777;
 
+      span {@include adjust-font-size-to(ms(+0.5));}
       .pen {margin-right: 3%;}
       .back {
         margin-right: 1%;
@@ -219,13 +235,15 @@ $controls-size: 70px;
 
       span {display: inline-block;}
       span.arrow {
+        position: absolute;
         display: block;
+        top: 85%;
         width: 0;
         height: 0;
-        border-bottom: 0.6em solid grey;
-        border-right: 0.6em solid transparent;
-        border-left: 0.6em solid transparent;
-        margin-left: 6%;
+        border-bottom: 0.4em solid grey;
+        border-right: 0.4em solid transparent;
+        border-left: 0.4em solid transparent;
+        margin-left: 43%;
       }
 
       hr {
@@ -235,10 +253,10 @@ $controls-size: 70px;
 
       .name,
       .echange,
-      .profil {white-space: nowrap; height: 100%}
+      .profil {white-space: nowrap; height: 100%; position: relative; line-height: 70px;}
       .name {color: #99ADB9;}
       .profil,
-      .echange {vertical-align: top;}
+      .echange {vertical-align: top; text-align: center;}
       .profil {width: 15%; color: #95AFC0;}
       .echange {width: 15%;}
       .name {width: 30%;}
@@ -284,6 +302,10 @@ $controls-size: 70px;
           span.action {background-color: darkgrey; padding: 0 10% 0 10%;}
           span.action:hover {background-color: grey; cursor:pointer;}
           a:hover {color: white;}
+        }
+        tag-add {
+          width: 60%;
+          span.action {width: 100%;}
         }
       }
       div.tags:after {
@@ -423,8 +445,9 @@ $controls-size: 70px;
 
       div.notes {
         height: 80%;
-        overflow: scroll;
+        overflow: initial;
 
+        contact-create-note,
         contact-notes {
           color: lightgrey;
           @include adjust-font-size-to(ms(0.2));
@@ -434,6 +457,7 @@ $controls-size: 70px;
             color: #7AAAC1;
             @include adjust-font-size-to(ms(0.5));
           }
+
           div.arrow {
             width: 0;
             height: 0;
@@ -442,6 +466,20 @@ $controls-size: 70px;
             border-left: 0.5em solid transparent;
             margin-left: 5%;
           }
+
+          div.control {
+            width: 100%;
+            height: 7%;
+            @include adjust-font-size-to(ms(0.5));
+
+            a {height: 100%; display: inline-block;}
+            span {display: inline-block; color: #7AAAC1; height: 100%; vertical-align: top;}
+            .back {width: 80%;}
+            .check,
+            .undo {width: 10%;}
+          }
+
+          textarea.content,
           div.content {
             word-wrap: break-word;
             -webkit-hyphens: auto;
@@ -474,6 +512,12 @@ $controls-size: 70px;
               text-align: right;
               color: #7AAAC1;
             }
+          }
+          textarea.content {
+            width: 100%;
+            height: 80%;
+            overflow: auto;
+            border: 0;
           }
         }
       }

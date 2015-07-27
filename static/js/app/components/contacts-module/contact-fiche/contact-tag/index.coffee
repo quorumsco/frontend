@@ -2,6 +2,7 @@ module.exports =
   data: ->
   	expanded: false
   	addMode: false
+  	new_tag: {content: null}
   inherit: true
   replace: true
   template: require('./template.jade')()

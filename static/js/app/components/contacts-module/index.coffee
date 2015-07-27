@@ -9,7 +9,13 @@ module.exports =
 
     #temporary
     tags: [{tag: 'Test'}, {tag: 'famille'}, {tag: 'Equipement sportif'}, {tag: 'bouffe'}, {tag: 'lorem'}, {tag: 'ipsum'}, {tag: 'sécurité'}, {tag: 'Europe'}, 
-    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}]
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'},
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'mdrgrostagdeoufsisi'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'},
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'},
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'},
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'},
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'},
+    {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'}, {tag: 'big'},]
     notes: [
       {author: 'Guilleuahou', date: '16 juin 2015', hour: '17h29', content: 'Mdr mange mes couilles stp. lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
        ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
@@ -67,7 +73,7 @@ module.exports =
       #temporary
       
       @displaying_profile = !@displaying_profile
-    unfade: (note, i) ->
+    unfadeNote: (note, i) ->
       if (i < note.length)
         curOverflow = note[i].style.overflow;
         if (!curOverflow || curOverflow == "visible")
@@ -76,11 +82,10 @@ module.exports =
         note[i].style.overflow = curOverflow;
         fade = note[i].getElementsByClassName("fade") if !isOverflowing
         fade[0].style.display = "none" if !isOverflowing
-        @unfade(note, i + 1)
+        @unfadeNote(note, i + 1)
     manageOverflow: (i) ->
       note = document.querySelectorAll(".content")
-      @unfade(note, 0)
-    #temporary
+      @unfadeNote(note, 0)
     assignColor: (tag_array, i) ->
       if (i < tag_array.length)
         color = "a"
@@ -90,7 +95,6 @@ module.exports =
     changeColor: () ->
       tag_array = document.querySelectorAll(".tag");
       @assignColor(tag_array, 0)
-    #!temporary
     hideNotes: (note, i) ->
       if note.expanded
         if (i < note.$parent.$children.length)
@@ -110,8 +114,11 @@ module.exports =
       tags.expanded = !tags.expanded
       @$el.getElementsByTagName("contact-fiche")[0].className = "opacity" if tags.expanded
       @$el.getElementsByTagName("contact-fiche")[0].className = "" if !tags.expanded
-    addTag: (addButton) ->
-      addButton.addMode = !addButton.addMode
+      tags.addMode = false if !tags.expanded
+    addTag: (tags) ->
+      tags.addMode = !tags.addMode
+      @expandTags(tags) if !tags.expanded && tags.addMode
+      @expandTags(tags) if tags.expanded && !tags.addMode
     displayProfile: (profile) ->
       profile.displaying_exchanges = false
     displayExchanges: (profile) ->

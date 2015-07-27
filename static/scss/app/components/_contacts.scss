@@ -272,13 +272,15 @@ $controls-size: 70px;
             margin-right: 1%;
             padding: 0 1% 0 1%;
           }
-          a:hover {color: black;}
+          span.tag {a:hover {color: black; cursor:pointer;}}
         }
         tag-add,
         tag-more {
           float: right;
           padding-right: 1%;
           span.action {background-color: darkgrey; padding: 0 10% 0 10%;}
+          span.action:hover {background-color: grey; cursor:pointer;}
+          a:hover {color: white;}
         }
       }
       div.tags:after {
@@ -321,12 +323,12 @@ $controls-size: 70px;
     }
 
     contact-infos {
-      padding: 0 10% 0 5%;
+      padding: 0 5% 0 5%;
       @include adjust-font-size-to(ms(+0.2));
 
       color: #BBB;
-      span {display: block; margin-bottom: 5%;}
-      span.info{color: #999;}
+      span {display: block; margin-bottom: 1em;}
+      span.info {color: #999;}
       contact-category {display: block;}
       contact-category.user,
       contact-category.home {
@@ -338,24 +340,24 @@ $controls-size: 70px;
         margin-bottom: 3%
       }
       contact-separator {
-        width: 55%;
+        width: 54%;
         display: inline-block;
         vertical-align: top;
       }
       contact-separator.value {
-        width: 67%;
+        width: 66%;
         overflow: hidden;
         text-overflow: ellipsis;
       }
       contact-separator.title {width: 25%;}
-      contact-separator.network {width: 65%}
+      contact-separator.network {width: 63%}
       contact-separator.bubble,
       contact-separator.plane,
       contact-separator.facebook,
       contact-separator.twitter,
       contact-separator.icon {
         text-align: center;
-        width: 5%;
+        width: 6%;
         margin-right: 3%;
       }
       contact-separator.facebook {margin-right: 10%;}
@@ -364,6 +366,7 @@ $controls-size: 70px;
       contact-separator.bubble,
       contact-separator.plane {
         i {
+          width: 100%;
           padding: 30%;
           margin-bottom: 15%;
           @include border-radius(50%);

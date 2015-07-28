@@ -5,7 +5,9 @@ contact-fiche
       span.back
         i.fa.fa-chevron-left
     span Retour à la liste de contacts
-  contact-tag(v-if="!displaying_exchanges" v-transition="fade")
-  contact-infos(v-if="!displaying_exchanges" v-transition="fade")
-  contact-notes-container(v-if="!displaying_exchanges" v-transition="fade")
+  contact-profil(v-if="!displaying_exchanges" v-transition="fade")
+    contact-tag
+    contact-infos(v-if="!editMode")
+    contact-edit(v-if="editMode")
+    contact-notes-container
   contact-exchange(v-if="displaying_exchanges" v-transition="fade")

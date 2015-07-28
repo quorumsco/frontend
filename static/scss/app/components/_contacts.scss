@@ -18,12 +18,12 @@ $controls-size: 70px;
 
   contact-new {
     width: 100;
+    height: auto;
     display: block;
     input {
       display: inline-block;
       vertical-align: middle;
       text-align: left;
-      display: inline-block;
       margin-right: 3px;
     }
   }
@@ -211,7 +211,7 @@ $controls-size: 70px;
     bottom: 1em;
     right: 1em;
     left: 1em;
-    top: 70px + 16px + 16px + 20px;
+    top: 70px + 16px + 16px;
 
     div.add {vertical-align: top;}
 
@@ -354,6 +354,15 @@ $controls-size: 70px;
       color: #BBB;
       span {display: block; margin-bottom: 1em;}
       span.info {color: #999;}
+      input.info {
+        display: block;
+        width: 90%;
+        margin-bottom: 1em;
+        border: 0;
+        border-bottom: 1px solid grey;
+        background-color: rgba(230, 230, 230, 0.1);
+        box-sizing: border-box;
+      }
       contact-category {display: block;}
       contact-category.user,
       contact-category.home {
@@ -377,6 +386,7 @@ $controls-size: 70px;
       contact-separator.title {width: 25%;}
       contact-separator.network {width: 63%}
       contact-separator.bubble,
+      contact-separator.delete,
       contact-separator.plane,
       contact-separator.facebook,
       contact-separator.twitter,
@@ -389,6 +399,7 @@ $controls-size: 70px;
       contact-separator.twitter,
       contact-separator.facebook,
       contact-separator.bubble,
+      contact-separator.delete,
       contact-separator.plane {
         i {
           width: 100%;
@@ -398,6 +409,9 @@ $controls-size: 70px;
           background-color: #76A2C3;
           color: #FFFFFF;
         }
+      }
+      contact-separator.delete {
+        i {background-color: white; color: red;}
       }
       contact-separator.facebook {i {background-color: lightgrey;}}
       contact-separator.twitter {i {background-color: darkgrey;}}
@@ -528,7 +542,7 @@ $controls-size: 70px;
       }
 
       contact-notes.notes {
-        height: 33%;
+        height: 31%;
 
         div.content {height: 55%;}
         p {overflow: hidden;}

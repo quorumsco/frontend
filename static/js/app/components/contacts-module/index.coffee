@@ -6,6 +6,8 @@ module.exports =
     contacts: []
     new_contact: {firstname: null, surname: null, phone: null}
     contact_id: null
+    addMode: false
+    editMode: false
 
     #temporary
     tags: [{tag: 'Test'}, {tag: 'famille'}, {tag: 'Equipement sportif'}, {tag: 'bouffe'}, {tag: 'lorem'}, {tag: 'ipsum'}, {tag: 'sécurité'}, {tag: 'Europe'}, 
@@ -30,7 +32,7 @@ module.exports =
       eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeee eeeeeeeeeee eeeeeeeeeeeeeeeeee
        pinpinnpin npin inhobui buibvy vyuvtf yi uo u ui b iv uib ub y vyi  u yi yi uo vyi u yi uo  fyiueeeee eeeeeeee '}
     ]
-    contact_fiche: [firstname: null, surname: null, phone: null]
+    contact_fiche: [firstname: null, surname: null, phone: null, id: null]
     #!temporary
 
     displaying_profile: false
@@ -43,7 +45,7 @@ module.exports =
     'contact-list': require './contact-list/index.coffee'
     'contact-fiche': require './contact-fiche/index.coffee'
   methods:
-    fetchContacts: () ->
+    fetchContacts: ->
       contact_store.find (res) =>
         contact = 0
         @contacts = _(res).forEach((n) ->
@@ -55,6 +57,10 @@ module.exports =
       contact_store.save contact, (res) => @fetchContacts()
     deleteContact: (contact) ->
       contact_store.delete contact, (res) => @fetchContacts()
+    deleteContactById: (id, contact_id) ->
+      contact = {id: contact_id}
+      contact_store.delete contact, (res) => @fetchContacts()
+      @displaying_profile = false
     deleteMultiple: (contacts, i) ->
       if (contacts.$children[i])
         if (contacts.$children[i].selected)
@@ -82,12 +88,14 @@ module.exports =
       fiche.firstname = @contact_fiche[0].firstname
       fiche.surname = @contact_fiche[0].surname
       fiche.phone = @contact_fiche[0].phone
+      fiche.id = @contact_fiche[0].id
     showFiche: (contact) ->
       
       #temporary
       @contact_fiche[0].firstname = contact.firstname if contact?
       @contact_fiche[0].surname = contact.surname if contact?
       @contact_fiche[0].phone = contact.phone if contact?
+      @contact_fiche[0].id = contact.id if contact?
       #temporary
       
       @displaying_profile = !@displaying_profile
@@ -139,9 +147,9 @@ module.exports =
       # @expandTags(tags) if tags.expanded && !tags.addMode
       # Matter of preferences. I don't like it but some will.
     addNote: (notes) ->
-      console.log(notes)
       notes.addMode = !notes.addMode
     displayProfile: (profile) ->
       profile.displaying_exchanges = false
     displayExchanges: (profile) ->
+      profile.editMode = false
       profile.displaying_exchanges = true

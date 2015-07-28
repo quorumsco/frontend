@@ -1,9 +1,9 @@
-contact-create-note(class="notes" v-class="expanded: expanded")
+contact-create-note()
   div.control
     span.back
       a(href="#" v-on="click: addNote(this.$parent)")
         i.fa.fa-reply
-    span.check
+    span.check(v-on="click: createNote(id, newNote, this)")
       a(href="#")
         i.fa.fa-check
     span.undo

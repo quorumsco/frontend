@@ -43,7 +43,7 @@ module.exports =
     'contact-list': require './contact-list/index.coffee'
     'contact-fiche': require './contact-fiche/index.coffee'
   methods:
-    fetchContacts: ->
+    fetchContacts: () ->
       contact_store.find (res) =>
         contact = 0
         @contacts = _(res).forEach((n) ->
@@ -58,22 +58,23 @@ module.exports =
     deleteMultiple: (contacts, i) ->
       if (contacts.$children[i])
         if (contacts.$children[i].selected)
-          contact_store.delete contacts.$children[i], (res) => 
-            i = 0
-        @deleteMultiple(contacts, i + 1)
+          contact_store.delete contacts.$children[i], (res) => @deleteMultiple(contacts, i + 1)
+        else
+          @deleteMultiple(contacts, i + 1)
       else
-        fetchContacts()
+        @fetchContacts()
     fetchTags: (id, tags) ->
       tags_store.find (id, res) =>
-        tags = _(res).value()
+        tags = res
     createTag: (id, tag) ->
       tags_store.save tag, (id, res) => @fetchTags()
     deleteTag: (id, tag) ->
       tags_store.delete tag, (id, res) => @fetchTags()
     fetchNotes: (notes) ->
       notes_store.find (id, res) =>
-        notes = _(res).value()
-    createNote: (id, note) ->
+        notes = res
+    createNote: (id, note, notes) ->
+      notes.addMode = false      
       note_store.save note, (id, res) => @fetchNotes()
     deleteNote: (id, note) ->
       contact_store.delete note, (id, res) => @fetchNotes()
@@ -126,7 +127,7 @@ module.exports =
       note.expanded = !note.expanded
       @hideNotes(note, 0)
       note.$parent.$el.children[2].style.overflow = "hidden" if note.expanded
-      note.$parent.$el.children[2].style.overflow = "scroll" if !note.expanded
+      note.$parent.$el.children[2].style.overflow = "initial" if !note.expanded
     expandTags: (tags) ->
       tags.expanded = !tags.expanded
       @$el.getElementsByTagName("contact-fiche")[0].className = "opacity" if tags.expanded

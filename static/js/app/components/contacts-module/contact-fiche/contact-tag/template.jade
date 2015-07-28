@@ -10,6 +10,8 @@ contact-tag
     a(href="#")
       span.echange(v-on="click: displayExchanges(this)") Echange
         span.arrow(v-if="displaying_exchanges")
+    span.cancel(v-if="editMode") Annuler
+    span.validate(v-if="editMode") Valider
     hr
   div.tags
     tag-more

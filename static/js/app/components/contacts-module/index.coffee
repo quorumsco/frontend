@@ -98,6 +98,7 @@ module.exports =
       @contact_fiche[0].id = contact.id if contact?
       #temporary
       
+      @addMode = false
       @displaying_profile = !@displaying_profile
     unfadeNote: (note, i) ->
       if (i < note.length)

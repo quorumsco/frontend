@@ -253,13 +253,21 @@ $controls-size: 70px;
 
       .name,
       .echange,
-      .profil {white-space: nowrap; height: 100%; position: relative; line-height: 70px;}
+      .validate,
+      .cancel,
+      .profil {white-space: nowrap; height: 100%; position: relative; line-height: 70px; vertical-align: top; text-align: center;}
       .name {color: #99ADB9;}
-      .profil,
-      .echange {vertical-align: top; text-align: center;}
       .profil {width: 15%; color: #95AFC0;}
       .echange {width: 15%;}
       .name {width: 30%;}
+      .validate,
+      .cancel {
+        position: relative;
+        float: right;
+        padding: 0 1% 0 1%;
+      }
+      .validate {color: green; border: 2px solid green;}
+      .cancel {color: red; border: 2px solid red; margin-left: 5%;}
       .status {
         display: inline-block;
         vertical-align: top;

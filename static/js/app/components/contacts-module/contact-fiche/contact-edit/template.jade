@@ -5,18 +5,22 @@ contact-infos
     contact-separator.title
       each val in ['Nom', 'Prénom', 'né(e) le']
         span #{val}
-    contact-separator.value
+    contact-separator
       each val in ['{{surname}}', '{{firstname}}', '{{birthdate}} 05/11/1996']
         input.info(value="#{val}")
+    contact-separator.delete
+      i.fa.fa-times
   contact-category.home
     contact-separator.icon
       i.fa.fa-home
     contact-separator.title
       each val in ['Adresse', 'Departement']
         span #{val}
-    contact-separator.value
+    contact-separator
       each val in ['{{adress}} 5 rue Barrenes 33000, Bordeaux', '{{department}} CACA']
         input.info(value="#{val}")
+    contact-separator.delete
+      i.fa.fa-times
   contact-category.phone
     contact-separator.icon
       i.fa.fa-phone

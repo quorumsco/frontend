@@ -26,19 +26,19 @@ handleErrors = function() {
 
     // Do not hang on this task
     this.emit('end');
-}
+};
 
 bfy = function() {
     var config = {
-        entries: './static/js/app.coffee',
-        extensions: ['.coffee', '.js', '.html', '.jade']
+        entries: './static/js/app.js',
+        extensions: ['.js', '.coffee', '.html', '.jade', '.json']
     };
 
     var b = browserify(config);
     return b.bundle()
         .on('error', handleErrors)
         .pipe(source('app.js'));
-}
+};
 
 cp = function() {
     var sass = gulp.src('static/scss/app.scss')
@@ -51,7 +51,7 @@ cp = function() {
     return merge(gulp.src(['node_modules/normalize.css/normalize.css', 'node_modules/font-awesome/css/font-awesome.min.css']), sass)
         .pipe(concat('app.css'))
         .pipe(size({title: 'css'}));
-}
+};
 
 gulp.task('js', function () {
     var brfy = bfy();
@@ -99,7 +99,7 @@ gulp.task('fonts', function() {
         .pipe(changed('node_modules/font-awesome/fonts/*'))
         .pipe(gulp.dest('public/fonts'))
         .pipe(browserSync.reload({stream: true}));
-})
+});
 
 gulp.task('html', function() {
     return gulp.src('static/*.html')

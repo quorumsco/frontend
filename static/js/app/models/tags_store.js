@@ -1,11 +1,11 @@
 var Emitter = require('events').EventEmitter,
-store = module.exports = new Emitter(),
-request = require('superagent'),
-api = 'http://localhost:8080';
+  store = module.exports = new Emitter(),
+  request = require('superagent'),
+  api = 'http://localhost:8080';
 
 store.find = function(id, cb) {
   return request
-  .get(api + '/contact/' + id + '/tags/')
+  .get(`${api}/contact/${ip}/tags`)
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (res.body.status === 'success') {
@@ -16,7 +16,7 @@ store.find = function(id, cb) {
 
 store.save = function(id, contact, cb) {
   return request
-  .post(api + '/contact/' + id + '/tags')
+  .post(`${api}/contact/${id}/tags`)
   .set('Content-Type', 'application/json')
   .send({
     data: {
@@ -28,9 +28,9 @@ store.save = function(id, contact, cb) {
   });
 };
 
-store["delete"] = function(id, tag, cb) {
+store.delete = function(id, tag, cb) {
   return request
-  .del(api + '/contacts/' + id + '/tags/' + tag.id)
+  .del(`${api}/contacts/${id}/tags/${tag.id}`)
   .end(function(err, res) {
     return cb(res);
   });

@@ -5,7 +5,7 @@ module.exports = {
   methods: {
     onClick: function(e) {
       e.preventDefault();
-      return this.selected = !this.selected;
+      this.selected = !this.selected;
     }
   }
 };

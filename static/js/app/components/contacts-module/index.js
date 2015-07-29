@@ -1,16 +1,16 @@
 var contact_store = require('../../models/contact_store.js'),
-_ = require('lodash');
+  _ = require('lodash');
 
 module.exports = {
   data: function() {
     return {
       contacts: [],
+      contact_id: null,
       new_contact: {
         firstname: null,
         surname: null,
         phone: null
-      },
-      contact_id: null
+      }
     };
   },
   replace: true,
@@ -20,7 +20,7 @@ module.exports = {
   },
   components: {
     'contact-list': require('./contact-list/index.js'),
-    'contact-fiche': require('./contact-fiche/index.coffee')
+    // 'contact-fiche': require('./contact-fiche/index.js')
   },
   methods: {
     fetchContacts: function() {
@@ -32,15 +32,15 @@ module.exports = {
           });
           return contact++;
         }).value();
-        return this.nb_contact = contact;
+        this.nb_contact = contact;
       });
     },
     createContact: function(contact) {
       return contact_store.save(contact, (res) => {
         return function(res) {
-          return this.fetchContacts();
+          this.fetchContacts();
         };
-      }
+      });
     }
   }
 };

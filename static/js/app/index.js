@@ -11,14 +11,16 @@ module.exports = {
   },
   created: function() {
     var contacts = () => {
-      return this.view = 'contacts-module';
+      this.view = 'contacts-module';
     };
     var new_contact = () => {
-      return this.view = 'contacts-module';
+      this.view = 'contacts-module';
     };
+
     this.router('/contacts', contacts);
     this.router('/contacts/new', new_contact);
     this.router('/', '/contacts');
+    
     return this.router({
       hashbang: true
     });

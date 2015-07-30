@@ -2,6 +2,7 @@ var contact_store = require('../../models/contact_store.js'),
   _ = require('lodash');
 
 module.exports = {
+  props: ['view', 'router'],
   data: function() {
     return {
       contacts: [],
@@ -16,11 +17,17 @@ module.exports = {
   replace: true,
   template: require('./template.jade')(),
   created: function() {
-    return this.fetchContacts();
+    this.router('/contacts', this.listContacts);
+    this.router('/contacts/create', this.createContact);
+    this.router('/contacts/:id', this.showContact);
+    this.router('/', '/contacts');
+    this.fetchContacts();
+    this.listContacts();
   },
   components: {
     'contact-list': require('./contact-list/index.js'),
-    // 'contact-fiche': require('./contact-fiche/index.js')
+    'contact-details': require('./contact-details/index.js'),
+    'contact-create': require('./contact-create/index.js')
   },
   methods: {
     fetchContacts: function() {
@@ -35,12 +42,27 @@ module.exports = {
         this.nb_contact = contact;
       });
     },
-    createContact: function(contact) {
-      return contact_store.save(contact, (res) => {
-        return function(res) {
-          this.fetchContacts();
-        };
-      });
+    navigate: function (path, event) {
+      event.preventDefault();
+      this.$dispatch('navigate', path);
+    },
+    listContacts: function() {
+      this.router('/contacts');
+      this.view = 'contact-list';
+    },
+    createContact: function() {
+      this.router('/contacts/create');
+      this.view = 'contact-create';
+    },
+    showContact: function(id) {
+      this.router(`/contacts/${id}`);
+      this.contact_id = id;
+      this.view = 'contact-details';
+    }
+  },
+  events: {
+    'contacts:list': function() {
+      this.listContacts();
     }
   }
 };

@@ -10,18 +10,11 @@ module.exports = {
     router: require('page')
   },
   created: function() {
-    var contacts = () => {
+    this.router('/', () => {
       this.view = 'contacts-module';
-    };
-    var new_contact = () => {
-      this.view = 'contacts-module';
-    };
+    });
 
-    this.router('/contacts', contacts);
-    this.router('/contacts/new', new_contact);
-    this.router('/', '/contacts');
-    
-    return this.router({
+    this.router({
       hashbang: true
     });
   },

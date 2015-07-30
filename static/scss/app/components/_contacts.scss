@@ -4,9 +4,7 @@ $controls-size: 70px;
   contacts-module,
   contact-controls,
   contact-list,
-  contact-item,
-  contact-fiche,
-  contact-notes {
+  contact-item {
     display: block;
   }
 
@@ -30,8 +28,7 @@ $controls-size: 70px;
   }
 
   contact-controls,
-  contact-list,
-  contact-fiche {
+  contact-list {
     background-color: #fff;
   }
 
@@ -107,17 +104,18 @@ $controls-size: 70px;
   }
 
   contact-list {
+    @include box-sizing(border-box);
     background-color: #fafbfb;
     bottom: 1em;
     left: 1em;
-    padding: 1em;
+    padding-right: 1em;
     position: absolute;
     right: 1em;
-    top: 1em;
+    top: 2*$base-font-size + $controls-size;
 
     & > section {
       bottom: 1em;
-      left: 1em;;
+      left: 1em;
       overflow-y: auto;
       position: absolute;
       right: 1em;

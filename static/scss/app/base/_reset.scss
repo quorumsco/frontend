@@ -1,8 +1,8 @@
-@import "compass";
+@import 'compass';
 
-@import "app/helpers/mixins";
+@import 'app/helpers/mixins';
 
-@include exports("reset") {
+@include exports('reset') {
   // Must be 100% for off canvas to work
   html,
   body {
@@ -19,10 +19,11 @@
 
   // Fix Firefox annoying outline
   *:focus {
-    outline:none;
+    outline: none;
   }
+
   ::-moz-focus-inner {
-    border:0;
+    border: 0;
   }
 
   body {
@@ -31,16 +32,21 @@
     position: relative;
   }
 
-  h1, h2, h3,
-  h4, h5, h6, p {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     margin: 0;
     padding: 0;
   }
 
   // Grid Defaults to get images and embeds to work properly
   img {
-    max-width: 100%;
     height: auto;
+    max-width: 100%;
   }
 
   img {

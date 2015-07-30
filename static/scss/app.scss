@@ -1,15 +1,14 @@
-@charset "UTF-8";
+@charset 'UTF-8';
 
-@import "app/base/reset";
-@import "app/base/typography";
+@import 'app/base/reset';
+@import 'app/base/typography';
 
-@import "app/layout/grid";
-@import "app/layout/nav";
-@import "app/layout/header";
-@import "app/layout/main";
-@import "app/layout/footer";
+@import 'app/layout/grid';
+@import 'app/layout/nav';
+@import 'app/layout/header';
+@import 'app/layout/main';
 
-@import "app/components/contacts";
+@import 'app/components/contacts';
 
 @font-face {
   font-family: 'PT Sans';

@@ -1,26 +1,25 @@
 @import 'app/layout/grid';
 
-@include exports("nav") {
+@include exports('nav') {
   app-nav {
-    position: absolute;
-    width: $nav-width;
-    top: 0;
-    bottom: 0;
-    left: 0;
-
     background-color: #666;
+    bottom: 0;
     color: #fff;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: $nav-width;
 
     img {
-      width: $nav-width;
-      height: $header-height;
       background-color: #444;
+      height: $header-height;
+      width: $nav-width;
     }
 
     h1 {
-      padding: 0;
-      margin: 0;
       @include adjust-font-size-to(ms(0));
+      margin: 0;
+      padding: 0;
 
       a {
         display: block;
@@ -29,8 +28,8 @@
 
     nav-list {
       display: block;
-      padding: 2em 0 0;
       margin: 0;
+      padding: 2em 0 0;
 
       nav-item {
         display: block;
@@ -38,8 +37,9 @@
 
         &.selected {
           $border: 3px;
-          border-left: $border solid #75A8C4;
-          color: #75A8C4;
+          border-left: $border solid #75a8c4;
+          color: #75a8c4;
+
           a {
             margin-left: -$border;
           }

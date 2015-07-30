@@ -1,6 +1,6 @@
-@import "susy";
-@import "app/helpers/functions";
-@import "app/helpers/mixins";
+@import 'susy';
+@import 'app/helpers/functions';
+@import 'app/helpers/mixins';
 
 // Media Query Ranges
 $small-range: (0, 40em) !default;
@@ -42,16 +42,16 @@ $xxlarge-range: (120.063em, 99999999em) !default;
 $header-height: 60px;
 $nav-width: 200px;
 
-@include exports("grid") {
+@include exports('grid') {
   body {
     overflow: hidden;
   }
 
   app-module {
     display: block;
-    position: relative;
-    width: 100%;
     height: 100%;
     overflow: hidden;
+    position: relative;
+    width: 100%;
   }
 }

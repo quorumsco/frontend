@@ -1,8 +1,8 @@
-@import "compass/typography/vertical_rhythm";
+@import 'compass/typography/vertical_rhythm';
 @import 'modular-scale';
 
-@import "app/settings";
-@import "app/helpers/mixins";
+@import 'app/settings';
+@import 'app/helpers/mixins';
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
 // for compatibility with browser-based text zoom or user-set defaults.
@@ -23,38 +23,38 @@ $ms-ratio: $major-second !default;
 $base-font-color: #ccc !default;
 
 // Colors
-$white         : #FFFFFF !default;
-$ghost         : #FAFAFA !default;
-$snow          : #F9F9F9 !default;
-$vapor         : #F6F6F6 !default;
-$white-smoke   : #F5F5F5 !default;
-$silver        : #EFEFEF !default;
-$smoke         : #EEEEEE !default;
-$gainsboro     : #DDDDDD !default;
-$iron          : #CCCCCC !default;
-$base          : #AAAAAA !default;
-$aluminum      : #999999 !default;
-$jumbo         : #888888 !default;
-$monsoon       : #777777 !default;
-$steel         : #666666 !default;
-$charcoal      : #555555 !default;
-$tuatara       : #444444 !default;
-$oil           : #333333 !default;
-$jet           : #222222 !default;
-$black         : #000000 !default;
+$white         : #fff !default;
+$ghost         : #fafafa !default;
+$snow          : #f9f9f9 !default;
+$vapor         : #f6f6f6 !default;
+$white-smoke   : #f5f5f5 !default;
+$silver        : #efefef !default;
+$smoke         : #eee !default;
+$gainsboro     : #ddd !default;
+$iron          : #ccc !default;
+$base          : #aaa !default;
+$aluminum      : #999 !default;
+$jumbo         : #888 !default;
+$monsoon       : #777 !default;
+$steel         : #666 !default;
+$charcoal      : #555 !default;
+$tuatara       : #444 !default;
+$oil           : #333 !default;
+$jet           : #222 !default;
+$black         : #000 !default;
 
 // We use these as default colors throughout
-$primary-color: #008CBA !default;   // bondi-blue
+$primary-color: #008cba !default;   // bondi-blue
 $secondary-color: #e7e7e7 !default; // white-lilac
 $alert-color: #f04124 !default;     // cinnabar
-$success-color: #43AC6A !default;   // sea-green
+$success-color: #43ac6a !default;   // sea-green
 $warning-color: #f08a24 !default;   // carrot
 $info-color: #a0d3e8 !default;      // cornflower
 
 // We use these to define default font stacks
-$font-family-sans-serif: Raleway, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif !default;
-$font-family-serif: Lora, Georgia, Cambria, "Times New Roman", Times, serif !default;
-$font-family-monospace: Consolas, "Liberation Mono", Courier, monospace !default;
+$font-family-sans-serif: Raleway, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif !default;
+$font-family-serif: Lora, Georgia, Cambria, 'Times New Roman', Times, serif !default;
+$font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace !default;
 
 // We use these to control various global styles
 $body-bg: #fff !default;
@@ -66,7 +66,9 @@ $body-font-family: $font-family-sans-serif !default;
 // We use this to control font-smoothing
 $font-smoothing: antialiased !default;
 
-@include exports("typography") {
+@include exports('typography') {
+  @include establish-baseline($base-font-size);
+
   html,
   body {
     font-size: $base-font-size;
@@ -82,8 +84,6 @@ $font-smoothing: antialiased !default;
     line-height: $base-line-height;
   }
 
-  @include establish-baseline($base-font-size);
-
   @for $i from 1 through 6 {
     h#{$i} {
       @include adjust-font-size-to(ms(6-$i));
@@ -93,34 +93,36 @@ $font-smoothing: antialiased !default;
   a {
     color: $default-link-color;
     text-decoration: none;
+
     &:hover {
       color: $default-link-hover-color;
     }
   }
 
-  #map_canvas,
-  .map_canvas {
+  .map-canvas {
     img,
     embed,
     object {
-      max-width: none !important;
+      max-width: none;
     }
   }
 
   // Miscellaneous useful HTML classes
   .left {
-    float: left !important;
+    float: left;
   }
+
   .right {
-    float: right !important;
+    float: right;
   }
+
   .clearfix {
     @include clearfix;
   }
 
   // Hide visually and from screen readers
   .hide {
-    display: none !important;
+    display: none;
     visibility: hidden;
   }
 
@@ -134,33 +136,13 @@ $font-smoothing: antialiased !default;
   // Apply to single elements instead of globally to body.
   // Note this only applies to webkit-based desktop browsers and Firefox 25 (and later) on the Mac.
   .antialiased {
-    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
   }
 
   // Get rid of gap under images by making them display: inline-block; by default
   img {
     display: inline-block;
     vertical-align: middle;
-  }
-
-  // Mac OS Style scrollbar
-  *::-webkit-scrollbar {
-    width: 8px; /* 1px wider than Lion. */
-    background-color: rgba(0, 0, 0, 0);
-    -webkit-border-radius: 100px;
-  }
-
-  *::-webkit-scrollbar:hover {
-    background-color: rgba(0, 0, 0, 0.09);
-  }
-
-  *::-webkit-scrollbar-thumb:vertical {
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-border-radius: 100px;
-  }
-  *::-webkit-scrollbar-thumb:vertical:active {
-    background: rgba(0, 0, 0, 0.61); /* Some darker color when you click it */
-    -webkit-border-radius: 100px;
   }
 }

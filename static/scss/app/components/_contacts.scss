@@ -1,6 +1,6 @@
 $controls-size: 70px;
 
-@include exports("contacts") {
+@include exports('contacts') {
   contacts-module,
   contact-controls,
   contact-list,
@@ -11,20 +11,21 @@ $controls-size: 70px;
   }
 
   span {
-    vertical-align: middle;    
     overflow: hidden;
     text-overflow: ellipsis;
+    vertical-align: middle;
   }
 
   contact-new {
-    width: 100;
-    height: auto;
     display: block;
+    height: auto;
+    width: 100;
+
     input {
       display: inline-block;
-      vertical-align: middle;
-      text-align: left;
       margin-right: 3px;
+      text-align: left;
+      vertical-align: middle;
     }
   }
 
@@ -35,42 +36,43 @@ $controls-size: 70px;
   }
 
   .fade-transition {
-    transition: all .3s ease;
     overflow: hidden;
+    transition: all .3s ease;
   }
 
-  .fade-enter, .fade-leave {
+  .fade-enter,
+  .fade-leave {
     height: 0;
-    padding: 0 10px;
     opacity: 0;
+    padding: 0 10px;
   }
 
   contact-controls {
     height: $controls-size;
 
     header {
-      float: left;
       @include clearfix;
+      float: left;
       padding-right: 1em;
 
       span.icon {
         @include adjust-font-size-to(ms(2), 2);
         float: left;
         line-height: $controls-size;
-        width: $controls-size;
         text-align: center;
+        width: $controls-size;
       }
 
       h3 {
-        @include adjust-font-size-to(ms(0.8), 1.6);
-        text-transform: uppercase;
+        @include adjust-font-size-to(ms(.8), 1.6);
+        color: #75a8c4;
         font-weight: normal;
-        margin-left: $controls-size;
         letter-spacing: -2px;
-        color: #75A8C4;
+        margin-left: $controls-size;
+        text-transform: uppercase;
       }
 
-      span.description {
+      .description {
         display: block;
         text-align: right;
       }
@@ -80,77 +82,120 @@ $controls-size: 70px;
       float: right;
 
       a {
+        @include adjust-font-size-to(ms(1.2));
+        @include transition(background-color, .2s);
+        color: lighten(#a3a3a3, 10%);
         display: inline-block;
+        height: $controls-size;
+        line-height: $controls-size;
+        text-align: center;
         vertical-align: top;
         width: $controls-size;
-        height: $controls-size;
-        text-align: center;
-        @include adjust-font-size-to(ms(1.2));
-        line-height: $controls-size;
-        color: lighten(#A3A3A3, 10%);
-        @include transition(background-color, .2s);
 
         &:hover {
-          background-color: #75A8C4;
+          background-color: #75a8c4;
           color: inherit;
         }
       }
 
-      span.sep {
+      .sep {
         display: inline-block;
-        width: $controls-size / 2;
         height: $controls-size;
+        width: $controls-size / 2;
       }
     }
   }
 
   contact-list {
+    background-color: #fafbfb;
+    bottom: 1em;
+    left: 1em;
     padding: 1em;
-    margin-top: 1em;
-    background-color: #FAFBFB;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+
+    & > section {
+      bottom: 1em;
+      left: 1em;;
+      overflow-y: auto;
+      position: absolute;
+      right: 1em;
+      top: $base-line-height + $base-font-size;
+    }
 
     header,
     contact-item {
       span {
         display: inline-block;
       }
+
       .phone {
-        width: 40%;
         float: right;
         margin-right: 1em;
+        width: 40%;
       }
+
       .status {
-        width: 5%;
         text-align: center;
+        width: 5%;
       }
-      .email: {width: 60%;}
-      .name {width: 15%; white-space: nowrap;}
-      .info {width: 30%;}
-      .exchange {width: 18%;}
+
+      .email {
+        width: 60%;
+      }
+
+      .name {
+        white-space: nowrap;
+        width: 15%;
+      }
+
+      .info {
+        width: 30%;
+      }
+
+      .exchange {
+        width: 18%;
+      }
+
       .contact,
       .fiche,
       .delete {
         text-align: center;
       }
-      .contact {width: 8%;}
-      .fiche {width: 6%;}
-      .delete {width: 13%;}
+
+      .contact {
+        width: 8%;
+      }
+
+      .fiche {
+        width: 6%;
+      }
+
+      .delete {
+        width: 13%;
+      }
     }
 
     header {
-      @include adjust-font-size-to(ms(-0.2));
+      @include adjust-font-size-to(ms(-.2));
       color: #777;
     }
 
     contact-item {
-      border: 1px solid #F4F5F5;
-      margin: .5em 0;
-      @include adjust-font-size-to(ms(-0.2), 1.8);
-      background-color: #fff;
+      @include adjust-font-size-to(ms(-.2), 1.8);
       @include transition(border, .2s);
+      background-color: #fff;
+      border: 1px solid #f4f5f5;
+      margin: .5em 0;
 
-      &:hover {border-color: #75A8A4;}
-      &.selected {border-color: #75A8D4;}
+      &:hover {
+        border-color: #75a8a4;
+      }
+
+      &.selected {
+        border-color: #75a8d4;
+      }
 
       .circle {
         display: inline-block;
@@ -159,9 +204,9 @@ $controls-size: 70px;
 
       .status {
         display: inline-block;
-        vertical-align: top;
         height: 44px;
         text-align: center;
+        vertical-align: top;
 
         svg {
           display: inline-block;
@@ -170,412 +215,8 @@ $controls-size: 70px;
       }
 
       img {
-        width: 25px;
         height: 25px;
-      }
-    }
-  }
-
-  contact-fiche.opacity {
-    background-color: rgba(255, 255, 255, 0.3);
-    header {opacity: 0.3;}
-    contact-infos {opacity: 0.3;}
-    contact-notes-container {opacity: 0.3;}
-    contact-tag {
-      overflow: initial;
-
-      div.add,
-      div.tags {
-        height: 200%;
-        overflow: auto;
-        position: relative;
-        z-index: 1;
-
-        button,
-        input {
-          line-height: initial;
-          @include adjust-font-size-to(ms(-0.5));
-          margin-top: 5%;
-          float: right;
-          height: 15%;
-          width: 60%;
-        }
-        button {width: 30%; margin-right: 15%}
-        input {height: 12%;}
-      }
-    }
-  }
-  contact-fiche {
-    background-color: #FFFFFF;
-    position: absolute;
-    bottom: 1em;
-    right: 1em;
-    left: 1em;
-    top: 70px + 16px + 16px;
-
-    div.add {vertical-align: top;}
-
-    header {
-      height: $controls-size;
-      color: #777;
-
-      span {@include adjust-font-size-to(ms(+0.5));}
-      .pen {margin-right: 3%;}
-      .back {
-        margin-right: 1%;
-        margin-left: 1%;
-      }
-    }
-
-    contact-tag {
-      @include adjust-font-size-to(ms(+0.5));
-      display: block;
-      height: 16%;
-      margin: 0 1em 1em 5%;
-
-      span {display: inline-block;}
-      span.arrow {
-        position: absolute;
-        display: block;
-        top: 85%;
-        width: 0;
-        height: 0;
-        border-bottom: 0.4em solid grey;
-        border-right: 0.4em solid transparent;
-        border-left: 0.4em solid transparent;
-        margin-left: 43%;
-      }
-
-      hr {
-        margin: 0;
-        display: block;
-      }
-
-      .name,
-      .echange,
-      .validate,
-      .cancel,
-      .profil {white-space: nowrap; height: 100%; position: relative; line-height: 70px; vertical-align: top; text-align: center;}
-      .name {color: #99ADB9;}
-      .profil {width: 15%; color: #95AFC0;}
-      .echange {width: 15%;}
-      .name {width: 30%;}
-      .validate,
-      .cancel {
-        position: relative;
-        float: right;
-        padding: 0 1% 0 1%;
-      }
-      .validate {color: green; border: 2px solid green;}
-      .cancel {color: red; border: 2px solid red; margin-left: 5%;}
-      .status {
-        display: inline-block;
-        vertical-align: top;
-        height: 100%;
-        text-align: center;
-
-        svg {
-          display: inline-block;
-          height: 100%;
-        }
-      }
-
-      div.add,
-      div.tags {
-        height: 50%;
-        display: inline-block;
-        overflow: hidden;
-
-        tag-more,
-        tag-add,
-        tag-container {
-          span.action,
-          span.tag {
-            white-space: nowrap;
-            opacity: 0.8;
-            @include adjust-font-size-to(ms(-0.3));
-            color: #ffffff;
-            margin-top: 1%;
-            vertical-align: bottom;
-            @include border-radius(0.5em);
-            margin-right: 1%;
-            padding: 0 1% 0 1%;
-          }
-          span.tag {a:hover {color: black; cursor:pointer;}}
-        }
-        tag-add,
-        tag-more {
-          float: right;
-          padding-right: 1%;
-          span.action {background-color: darkgrey; padding: 0 10% 0 10%;}
-          span.action:hover {background-color: grey; cursor:pointer;}
-          a:hover {color: white;}
-        }
-        tag-add {
-          width: 60%;
-          span.action {width: 100%;}
-        }
-      }
-      div.tags:after {
-        display: inline-block;
-        width: 100%;
-        content: '';
-      }
-    }
-    div.add {width: 13%;}
-    div.tags{
-      width: 87%;
-    }
-
-    contact-infos,
-    contact-notes-container {
-      width: 50%;
-      display: inline-block;
-      float: left;
-      margin: 1% 0 0 0;
-      @include adjust-font-size-to(ms(-0.2), 1.8);
-      @include transition(border, .2s);
-
-      .add {
-        @include adjust-font-size-to(ms(+0.4), 1.8);
-        padding: 0.3em 1em 0.3em 1em;
-        background-color: #BBBBBB;
-        color: white;
-        @include border-radius(0.5em);
-        @include transition(background-color, .2s);
-  
-        &:hover {
-          background-color: #999999;
-        }
-
-      }
-      .notes,
-      .pen {
-        color: #7AAAC1;
-      }
-    }
-
-    contact-infos {
-      padding: 0 5% 0 5%;
-      @include adjust-font-size-to(ms(+0.2));
-
-      color: #BBB;
-      span {display: block; margin-bottom: 1em;}
-      span.info {color: #999;}
-      input.info {
-        display: block;
-        width: 90%;
-        margin-bottom: 1em;
-        border: 0;
-        border-bottom: 1px solid grey;
-        background-color: rgba(230, 230, 230, 0.1);
-        box-sizing: border-box;
-      }
-      contact-category {display: block;}
-      contact-category.user,
-      contact-category.home {
-        margin-bottom: 5%;
-      }
-      contact-cateory.phone,
-      contact-category.cellpone,
-      contact-category.mail {
-        margin-bottom: 3%
-      }
-      contact-separator {
-        width: 54%;
-        display: inline-block;
-        vertical-align: top;
-      }
-      contact-separator.value {
-        width: 66%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      contact-separator.title {width: 25%;}
-      contact-separator.network {width: 63%}
-      contact-separator.bubble,
-      contact-separator.delete,
-      contact-separator.plane,
-      contact-separator.facebook,
-      contact-separator.twitter,
-      contact-separator.icon {
-        text-align: center;
-        width: 6%;
-        margin-right: 3%;
-      }
-      contact-separator.facebook {margin-right: 10%;}
-      contact-separator.twitter,
-      contact-separator.facebook,
-      contact-separator.bubble,
-      contact-separator.delete,
-      contact-separator.plane {
-        i {
-          width: 100%;
-          padding: 30%;
-          margin-bottom: 15%;
-          @include border-radius(50%);
-          background-color: #76A2C3;
-          color: #FFFFFF;
-        }
-      }
-      contact-separator.delete {
-        i {background-color: white; color: red;}
-      }
-      contact-separator.facebook {i {background-color: lightgrey;}}
-      contact-separator.twitter {i {background-color: darkgrey;}}
-    }
-
-    contact-notes-container {
-      border: 1px solid #F8F8F8;
-      background-color: #FBFBFB;
-      padding: 0 3em 0em 3em;
-      height: 70%;
-      margin-bottom: 1em;
-
-      a {display: block; margin-top: 3%;}
-
-      header {
-        height: $controls-size * 0.8;
-        @include adjust-font-size-to(ms(+1.3));
-        height: 10%;
-
-        .search_container {
-          float: right;
-          display: block;
-          width: 50%;
-
-          .search {
-            border: 0;
-            background-color: #FBFBFB;
-            @include adjust-font-size-to(ms(-1.3), 1.8);
-            height: $controls-size * 0.5;
-            width: 80%;
-            border-bottom: 1px solid grey;
-            font-style: italic;
-            vertical-align: middle;
-            line-height: initial;
-            @include box-sizing(border-box);
-          }
-
-          .search_icon {
-            width: 20%;
-            vertical-align: middle;
-            &:hover {
-              color: #555;
-            }
-          }
-        }
-      }
-
-      div.notes {
-        height: 80%;
-        overflow: initial;
-
-        contact-create-note,
-        contact-notes {
-          color: lightgrey;
-          @include adjust-font-size-to(ms(0.2));
-
-          span.author {
-            height: 20%;
-            color: #7AAAC1;
-            @include adjust-font-size-to(ms(0.5));
-          }
-
-          div.arrow {
-            width: 0;
-            height: 0;
-            border-bottom: 0.5em solid #F2F3F7;
-            border-right: 0.5em solid transparent;
-            border-left: 0.5em solid transparent;
-            margin-left: 5%;
-          }
-
-          div.control {
-            width: 100%;
-            height: 10%;
-            margin-bottom: 2%;
-            @include adjust-font-size-to(ms(0.5));
-
-            a {height: 100%; margin: 0;}
-            span {display: inline-block; color: #7AAAC1; height: 100%; vertical-align: top;}
-            .back {width: 80%;}
-            .check,
-            .undo {width: 10%;}
-          }
-
-          textarea.content,
-          div.content {
-            word-wrap: break-word;
-            -webkit-hyphens: auto;
-            -moz-hyphens: auto;
-            -ms-hyphens: auto;
-            -o-hyphens: auto;
-            hyphens: auto;
-            margin-right: 3%;
-            background-color: #F2F3F7;
-            color: #C2C3C7;
-            display: block;
-            margin-bottom: 3%;
-            @include border-radius(0.5em);
-            position: relative;
-
-            p {padding: 1% 0% 0% 2%}
-
-            div.fade {
-              content: "";
-              display: initial;
-              width: 100%;
-              position: absolute;
-              right: 0;
-              background-image: -webkit-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
-              background-image: -moz-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
-              background-image: -ms-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
-              background-image: -o-linear-gradient(right, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
-              background-image: linear-gradient(to left, rgba(242, 243, 247, 1), rgba(255, 255, 255, 0));
-              text-align: right;
-              color: #7AAAC1;
-
-              a {margin: 0;}
-            }
-          }
-
-          textarea.content {
-            width: 100%;
-            height: 80%;
-            overflow: auto;
-            border: 0;
-          }
-        }
-      }
-
-      contact-notes.notes {
-        height: 31%;
-
-        div.content {height: 55%;}
-        p {overflow: hidden;}
-        div.fade{
-          height: 33%;
-          top: 67%;
-        }
-      }
-
-      contact-notes.expanded {
-        height: 100%;
-
-        div.content {
-          height: 87%;
-
-          p {
-            height: 90%;
-            overflow: auto;
-          }
-
-          div.fade {
-            height: 10%;
-            top: 90%;
-          }
-        }
+        width: 25px;
       }
     }
   }

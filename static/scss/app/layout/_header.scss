@@ -1,27 +1,27 @@
-@import "app/layout/grid";
+@import 'app/layout/grid';
 
-@include exports("header") {
+@include exports('header') {
   app-status {
     display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: $nav-width;
     height: $header-height;
+    left: $nav-width;
     line-height: $header-height;
+    position: absolute;
+    right: 0;
     text-align: right;
+    top: 0;
 
     img {
-      width: 50px;
       height: 50px;
+      width: 50px;
     }
 
     a {
+      display: inline-block;
       margin: 0 1em;
       position: relative;
-      display: inline-block;
 
-      span.name {
+      .name {
         margin-right: 1em;
       }
 
@@ -29,21 +29,20 @@
         margin-left: 1em;
       }
 
-      div.label {
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        top: 17px;
-        right: -6px;
-
-        color: #fff;
+      .label {
+        @include adjust-font-size-to(11px);
         background-color: #75A8C4;
         border-radius: 50%;
-        @include adjust-font-size-to(11px);
-        line-height: 15px;
-        text-align: center;
+        color: #fff;
         font-weight: bold;
+        height: 15px;
+        line-height: 15px;
         overflow: hidden;
+        position: absolute;
+        right: -6px;
+        text-align: center;
+        top: 17px;
+        width: 15px;
       }
     }
   }

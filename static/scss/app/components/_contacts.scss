@@ -1,4 +1,4 @@
-$controls-size: 70px;
+$controls-size: 60px;
 
 @include exports('contacts') {
   contacts-module,
@@ -14,113 +14,39 @@ $controls-size: 70px;
     vertical-align: middle;
   }
 
-  contact-new {
-    display: block;
-    height: auto;
-    width: 100;
-
-    input {
-      display: inline-block;
-      margin-right: 3px;
-      text-align: left;
-      vertical-align: middle;
-    }
-  }
-
   contact-controls,
   contact-list {
-    background-color: #fff;
-  }
-
-  .fade-transition {
-    overflow: hidden;
-    transition: all .3s ease;
-  }
-
-  .fade-enter,
-  .fade-leave {
-    height: 0;
-    opacity: 0;
-    padding: 0 10px;
+    background-color: #fafbfb;
+    border: 1px solid #ddd;
   }
 
   contact-controls {
-    height: $controls-size;
-
-    header {
-      @include clearfix;
-      float: left;
-      padding-right: 1em;
-
-      span.icon {
-        @include adjust-font-size-to(ms(2), 2);
-        float: left;
-        line-height: $controls-size;
-        text-align: center;
-        width: $controls-size;
-      }
-
-      h3 {
-        @include adjust-font-size-to(ms(.8), 1.6);
-        color: #75a8c4;
-        font-weight: normal;
-        letter-spacing: -2px;
-        margin-left: $controls-size;
-        text-transform: uppercase;
-      }
-
-      .description {
-        display: block;
-        text-align: right;
-      }
-    }
+    @include clearfix;
+    padding: 0 1em;
+    border-bottom: none;
 
     section {
-      float: right;
-
-      a {
-        @include adjust-font-size-to(ms(1.2));
-        @include transition(background-color, .2s);
-        color: lighten(#a3a3a3, 10%);
+      h3 {
+        @include adjust-font-size-to(ms(0.5), 1.5);
         display: inline-block;
-        height: $controls-size;
-        line-height: $controls-size;
-        text-align: center;
         vertical-align: top;
-        width: $controls-size;
-
-        &:hover {
-          background-color: #75a8c4;
-          color: inherit;
-        }
       }
 
-      .sep {
-        display: inline-block;
-        height: $controls-size;
-        width: $controls-size / 2;
+      span.count {
+        margin: 0 1em;
+        @include adjust-font-size-to(ms(0), 1.5);
+      }
+
+      a {
+        @include adjust-font-size-to(ms(0), 1.5);
+        margin-left: .5em;
       }
     }
   }
 
   contact-list {
     @include box-sizing(border-box);
-    background-color: #fafbfb;
-    bottom: 1em;
-    left: 1em;
-    padding-right: 1em;
-    position: absolute;
-    right: 1em;
-    top: 2*$base-font-size + $controls-size;
-
-    & > section {
-      bottom: 1em;
-      left: 1em;
-      overflow-y: auto;
-      position: absolute;
-      right: 1em;
-      top: $base-line-height + $base-font-size;
-    }
+    padding: .5em 1em;
 
     header,
     contact-item {
@@ -134,26 +60,22 @@ $controls-size: 70px;
         width: 40%;
       }
 
-      .status {
-        text-align: center;
-        width: 5%;
-      }
-
       .email {
         width: 60%;
       }
 
+      .check {
+        padding-left: 1em;
+        width: 5%;
+      }
+
       .name {
         white-space: nowrap;
-        width: 15%;
+        width: 18%;
       }
 
       .info {
-        width: 30%;
-      }
-
-      .exchange {
-        width: 18%;
+        width: 48%;
       }
 
       .contact,
@@ -163,7 +85,7 @@ $controls-size: 70px;
       }
 
       .contact {
-        width: 8%;
+        width: 10%;
       }
 
       .fiche {
@@ -176,45 +98,22 @@ $controls-size: 70px;
     }
 
     header {
-      @include adjust-font-size-to(ms(-.2));
-      color: #777;
+      span:not(.check) {
+        @include adjust-font-size-to(ms(-.5));
+        font-weight: bold;
+        text-transform: uppercase;
+      }
     }
 
     contact-item {
       @include adjust-font-size-to(ms(-.2), 1.8);
       @include transition(border, .2s);
       background-color: #fff;
-      border: 1px solid #f4f5f5;
+      border: 1px solid darken(#f4f5f5, 3%);
       margin: .5em 0;
 
       &:hover {
         border-color: #75a8a4;
-      }
-
-      &.selected {
-        border-color: #75a8d4;
-      }
-
-      .circle {
-        display: inline-block;
-        transform: rotate(180deg);
-      }
-
-      .status {
-        display: inline-block;
-        height: 44px;
-        text-align: center;
-        vertical-align: top;
-
-        svg {
-          display: inline-block;
-          height: 100%;
-        }
-      }
-
-      img {
-        height: 25px;
-        width: 25px;
       }
     }
   }

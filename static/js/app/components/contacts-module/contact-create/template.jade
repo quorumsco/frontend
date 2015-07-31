@@ -1,1 +1,5 @@
-h3 Contact create
+contact-new
+  input(v-model="new_contact.firstname", type="text", placeholder="firstname")
+  input(v-model="new_contact.surname", type="text", placeholder="surname")
+  input(v-model="new_contact.phone", type="text", placeholder="phone")
+  button(v-on="click: createContact(new_contact)") Create

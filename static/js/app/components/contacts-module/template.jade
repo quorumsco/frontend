@@ -1,29 +1,12 @@
 contacts-module
   contact-controls
-    header
-      span.icon
-        i.fa.fa-user
-      h3 Vos contacts
-      span.description {{nb_contact}} contacts
-    section
+    section.left
+      h3 Contacts
+      span.count 20 contacts
+    section.right
       a(href="#")
         i(class="fa fa-plus" v-on="click: navigate('/contacts/create', $event)")
       a(href="#")
         i(class="fa fa-trash")
-      each val in ['share-square-o', 'check']
-        a(href="#")
-          i(class="fa fa-#{val}")
-      span.sep
-      each val in ['comments', 'tag', 'map-marker']
-        a(href="#")
-          i(class="fa fa-#{val}")
-      span.sep
-      a(href="#")
-        i.fa.fa-search
-  contact-new
-    input(v-model="new_contact.firstname", type="text", placeholder="firstname")
-    input(v-model="new_contact.surname", type="text", placeholder="surname")
-    input(v-model="new_contact.phone", type="text", placeholder="phone")
-    button(v-on="click: createContact(new_contact)") Create
   component(is="{{view}}")
   contact-slider

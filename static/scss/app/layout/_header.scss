@@ -2,47 +2,26 @@
 
 @include exports('header') {
   app-status {
+    @include clearfix();
     display: block;
     height: $header-height;
     left: $nav-width;
     line-height: $header-height;
+    padding: 0 1em;
     position: absolute;
     right: 0;
     text-align: right;
     top: 0;
 
-    img {
-      height: 50px;
-      width: 50px;
+    a {
+      @include adjust-font-size-to(ms(0.6), $header-height / $base-line-height);
     }
 
-    a {
-      display: inline-block;
-      margin: 0 1em;
-      position: relative;
+    a.user {
+      @include adjust-font-size-to(ms(0));
 
       .name {
-        margin-right: 1em;
-      }
-
-      img {
-        margin-left: 1em;
-      }
-
-      .label {
-        @include adjust-font-size-to(11px);
-        background-color: #75A8C4;
-        border-radius: 50%;
-        color: #fff;
-        font-weight: bold;
-        height: 15px;
-        line-height: 15px;
-        overflow: hidden;
-        position: absolute;
-        right: -6px;
-        text-align: center;
-        top: 17px;
-        width: 15px;
+        margin-right: .5em;
       }
     }
   }

@@ -2,9 +2,9 @@
 
 @include exports('nav') {
   app-nav {
-    background-color: #666;
+    background-color: #23282d;
     bottom: 0;
-    color: #fff;
+    color: #8b91a0;
     left: 0;
     position: absolute;
     top: 0;
@@ -17,9 +17,13 @@
     }
 
     h1 {
-      @include adjust-font-size-to(ms(0));
+      @include adjust-font-size-to(ms(1.5), $header-height / 24px);
       margin: 0;
-      padding: 0;
+      padding: 0 1em;
+      color: #fff;
+      background-color: #32373c;
+      height: $header-height;
+      width: $nav-width;
 
       a {
         display: block;
@@ -34,16 +38,6 @@
       nav-item {
         display: block;
         padding: 0 1.5em;
-
-        &.selected {
-          $border: 3px;
-          border-left: $border solid #75a8c4;
-          color: #75a8c4;
-
-          a {
-            margin-left: -$border;
-          }
-        }
 
         a {
           @include adjust-font-size-to(ms(0), 2);

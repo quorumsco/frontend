@@ -2,12 +2,13 @@
 
 @include exports('main') {
   app-main {
-    background-color: #e4eaf1;
+    background-color: #e5e9ec;
     bottom: 0;
     left: $nav-width;
     padding: 1em;
     position: absolute;
     right: 0;
     top: $header-height;
+    overflow-y: auto;
   }
 }

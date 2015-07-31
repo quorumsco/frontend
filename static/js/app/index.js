@@ -10,9 +10,22 @@ module.exports = {
     router: require('page')
   },
   created: function() {
-    this.router('/', () => {
+  },
+  ready: function() {
+    console.log(this);
+    this.router('/contacts', () => {
       this.view = 'contacts-module';
+      this.$.contacts.listContacts();
     });
+    this.router('/contacts/create', () => {
+      this.view = 'contacts-module';
+      this.$.contacts.createContact();
+    });
+    this.router('/contacts/:id', (id) => {
+      this.view = 'contacts-module';
+      this.$.contacts.showContact(id);
+    });
+    this.router('/', '/contacts');
 
     this.router({
       hashbang: true

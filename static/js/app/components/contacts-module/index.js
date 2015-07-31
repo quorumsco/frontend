@@ -17,12 +17,7 @@ module.exports = {
   replace: true,
   template: require('./template.jade')(),
   created: function() {
-    this.router('/contacts', this.listContacts);
-    this.router('/contacts/create', this.createContact);
-    this.router('/contacts/:id', this.showContact);
-    this.router('/', '/contacts');
     this.fetchContacts();
-    this.listContacts();
   },
   components: {
     'contact-list': require('./contact-list/index.js'),
@@ -43,26 +38,20 @@ module.exports = {
       });
     },
     navigate: function (path, event) {
-      event.preventDefault();
+      if (event !== undefined) {
+        event.preventDefault();
+      }
       this.$dispatch('navigate', path);
     },
     listContacts: function() {
-      this.router('/contacts');
       this.view = 'contact-list';
     },
     createContact: function() {
-      this.router('/contacts/create');
       this.view = 'contact-create';
     },
-    showContact: function(id) {
-      this.router(`/contacts/${id}`);
-      this.contact_id = id;
+    showContact: function(contact) {
+      this.contact_id = contact.id;
       this.view = 'contact-details';
-    }
-  },
-  events: {
-    'contacts:list': function() {
-      this.listContacts();
     }
   }
 };

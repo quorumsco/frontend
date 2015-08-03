@@ -8,7 +8,9 @@
 @import 'app/layout/header';
 @import 'app/layout/main';
 
-@import 'app/components/contacts';
+@import 'app/components/contacts/base';
+@import 'app/components/contacts/contact-list';
+@import 'app/components/contacts/contact-new';
 
 @font-face {
   font-family: 'PT Sans';

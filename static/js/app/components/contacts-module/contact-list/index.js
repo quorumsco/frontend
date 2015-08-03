@@ -1,8 +1,12 @@
 var _ = require('lodash');
 
 module.exports = {
-  inherit: true,
-  replace: true,
+  props: ['contacts'],
+  data: function() {
+    return {
+      select_all: false
+    };
+  },
   template: require('./template.jade')(),
   components: {
     'list-item': require('./list-item/index.js')

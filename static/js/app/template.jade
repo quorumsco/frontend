@@ -3,9 +3,8 @@ app-module(v-class="nav-collapse: !show_nav")
     h1
       a(href="#") Quorum
     nav-list
-      each val in ["Contact Management"]
-        nav-item
-          a(href="#")= val
+      nav-item
+        a(href="/contacts" v-on="click: navigate('/contacts')") Contact Management
 
   app-status
     section.left

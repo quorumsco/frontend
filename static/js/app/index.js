@@ -1,6 +1,5 @@
 module.exports = {
   el: 'app-module',
-  replace: true,
   components: {
     'contacts-module': require('./components/contacts-module/index.js')
   },
@@ -10,17 +9,14 @@ module.exports = {
     router: require('page'),
     show_nav: true
   },
-  created: function() {
-  },
   ready: function() {
-    console.log(this);
     this.router('/contacts', () => {
       this.view = 'contacts-module';
       this.$.contacts.listContacts();
     });
-    this.router('/contacts/create', () => {
+    this.router('/contacts/new', () => {
       this.view = 'contacts-module';
-      this.$.contacts.createContact();
+      this.$.contacts.newContact();
     });
     this.router('/contacts/:id', (id) => {
       this.view = 'contacts-module';
@@ -36,6 +32,12 @@ module.exports = {
     toggleNav: function(event) {
       event.preventDefault();
       this.show_nav = !this.show_nav;
+    },
+    navigate: function (path, event) {
+      if (event !== undefined) {
+        event.preventDefault();
+      }
+      this.$emit('navigate', path);
     }
   },
   events: {

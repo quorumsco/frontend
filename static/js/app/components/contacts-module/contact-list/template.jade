@@ -5,14 +5,14 @@ contact-list
       span.sep —
       span.count {{contactCount}} contacts - <em>{{selectedCount}} selected</em>
     section.right
-      a(href="#" v-on="click: navigate('/contacts/create', $event)" title="Add a new contact")
+      a(href="/contacts/new" title="Add a new contact" v-on="click: $root.navigate('/contacts/new', $event)")
         i(class="fa fa-plus")
       a.delete(href="#" title="Remove selected contacts")
         i(class="fa fa-trash")
   list-head
     span.select
       span(title="Select all")
-        input(type="checkbox" v-on="click: updateSelection(this.select_all)" v-model="select_all")
+        input(type="checkbox" v-model="select_all" v-on="click: updateSelection(this.select_all)")
     span.name Name
     span.info Infos
     span.details Details

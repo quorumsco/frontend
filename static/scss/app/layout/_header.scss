@@ -2,6 +2,7 @@
 
 @include exports('header') {
   app-status {
+    @include transition(left, .2s);
     @include clearfix();
     background-color: #fff;
     display: block;

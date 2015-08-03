@@ -1,0 +1,18 @@
+@include exports('contacts-module') {
+  contacts-module,
+  contact-new,
+  contact-list,
+  list-controls,
+  list-head,
+  list-body,
+  list-item {
+    display: block;
+  }
+
+  contact-new,
+  contact-list {
+    @include box-sizing(border-box);
+    background-color: #fafbfb;
+    border: 1px solid #ddd;
+  }
+}

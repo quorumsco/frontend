@@ -1,20 +1,5 @@
-$controls-size: 60px;
-
-@include exports('contacts') {
-  contacts-module,
-  contact-list,
-  list-controls,
-  list-head,
-  list-body,
-  list-item {
-    display: block;
-  }
-
+@include exports('contacts-list') {
   contact-list {
-    @include box-sizing(border-box);
-    background-color: #fafbfb;
-    border: 1px solid #ddd;
-
     .phone,
     .email,
     .select,

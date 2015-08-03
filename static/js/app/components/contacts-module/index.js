@@ -5,16 +5,9 @@ module.exports = {
   data: function() {
     return {
       contacts: [],
-      new_contact: {
-        firstname: null,
-        surname: null,
-        phone: null
-      },
-      view: null,
-      select_all: false
+      view: null
     };
   },
-  replace: true,
   template: require('./template.jade')(),
   created: function() {
     this.fetchContacts();
@@ -22,7 +15,7 @@ module.exports = {
   components: {
     'contact-list': require('./contact-list/index.js'),
     'contact-details': require('./contact-details/index.js'),
-    'contact-create': require('./contact-create/index.js')
+    'contact-new': require('./contact-new/index.js')
   },
   methods: {
     fetchContacts: function() {
@@ -30,6 +23,11 @@ module.exports = {
         this.contacts = _(res).forEach(function(n) {
           n = _.assign(n, {selected: false});
         }).value();
+      });
+    },
+    addContact: function(contact) {
+      return contact_store.save(contact, (res) => {
+        this.fetchContacts();
       });
     },
     navigate: function (path, event) {
@@ -41,8 +39,8 @@ module.exports = {
     listContacts: function() {
       this.view = 'contact-list';
     },
-    createContact: function() {
-      this.view = 'contact-create';
+    newContact: function() {
+      this.view = 'contact-new';
     },
     showContact: function(contact) {
       this.contact_id = contact.id;

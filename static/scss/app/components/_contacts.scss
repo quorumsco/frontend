@@ -32,14 +32,17 @@ $controls-size: 60px;
         vertical-align: top;
       }
 
+      span.sep {
+        margin: 0 .5em;
+      }
+
       span.count {
-        margin: 0 1em;
         @include adjust-font-size-to(ms(0), 1.5);
       }
 
       a {
-        @include adjust-font-size-to(ms(0), 1.5);
-        margin-left: .5em;
+        @include adjust-font-size-to(ms(0.5), 1.5);
+        margin-left: .8em;
       }
     }
   }
@@ -78,22 +81,17 @@ $controls-size: 60px;
         width: 48%;
       }
 
-      .contact,
       .fiche,
       .delete {
         text-align: center;
       }
 
-      .contact {
-        width: 10%;
-      }
-
       .fiche {
-        width: 6%;
+        width: 11%;
       }
 
       .delete {
-        width: 13%;
+        width: 18%;
       }
     }
 

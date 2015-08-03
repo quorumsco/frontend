@@ -5,9 +5,6 @@ contact-item(v-on="click: onClick", v-class="selected: selected")
   span.info
     span.email {{email}}
     span.phone {{phone}}
-  span.contact
-    a(href="#")
-      i.fa.fa-send
   span.fiche(v-on="click: navigate('/contacts/' + id, $event)")
     a(href="#")
       i.fa.fa-bars

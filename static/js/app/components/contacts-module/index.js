@@ -2,7 +2,6 @@ var contact_store = require('../../models/contact_store.js'),
   _ = require('lodash');
 
 module.exports = {
-  props: ['view', 'router'],
   data: function() {
     return {
       contacts: [],
@@ -11,7 +10,8 @@ module.exports = {
         firstname: null,
         surname: null,
         phone: null
-      }
+      },
+      view: null
     };
   },
   replace: true,

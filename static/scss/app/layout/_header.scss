@@ -3,6 +3,7 @@
 @include exports('header') {
   app-status {
     @include clearfix();
+    background-color: #fff;
     display: block;
     height: $header-height;
     left: $nav-width;
@@ -17,12 +18,12 @@
       @include adjust-font-size-to(ms(0.6), $header-height / $base-line-height);
     }
 
+    .right a {
+      margin-left: 1em;
+    }
+
     a.user {
       @include adjust-font-size-to(ms(0));
-
-      .name {
-        margin-right: .5em;
-      }
     }
   }
 }

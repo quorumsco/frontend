@@ -1,0 +1,13 @@
+list-item(v-class="selected: selected")
+  span.select
+    input(type="checkbox" v-model="selected")
+  span.name {{surname}} {{firstname}}
+  span.info
+    span.email {{email}}
+    span.phone {{phone}}
+  span.details
+    a(href="#" v-on="click: navigate('/contacts/' + id, $event)" title="Go to the contact details")
+      i.fa.fa-bars
+  span.delete
+    a(href="#" v-on="click: deleteContact(this)" title="Remove this contact")
+      i.fa.fa-times

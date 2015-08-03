@@ -7,5 +7,10 @@ module.exports = {
       e.preventDefault();
       this.selected = !this.selected;
     }
+  },
+  events: {
+    select: function(state) {
+      this.selected = state;
+    }
   }
 };

@@ -5,13 +5,13 @@ module.exports = {
   data: function() {
     return {
       contacts: [],
-      contact_id: null,
       new_contact: {
         firstname: null,
         surname: null,
         phone: null
       },
-      view: null
+      view: null,
+      select_all: false
     };
   },
   replace: true,
@@ -27,14 +27,9 @@ module.exports = {
   methods: {
     fetchContacts: function() {
       return contact_store.find((res) => {
-        var contact = 0;
         this.contacts = _(res).forEach(function(n) {
-          n = _.assign(n, {
-            selected: false
-          });
-          return contact++;
+          n = _.assign(n, {selected: false});
         }).value();
-        this.nb_contact = contact;
       });
     },
     navigate: function (path, event) {

@@ -1,6 +1,11 @@
 @import 'app/layout/grid';
 
 @include exports('nav') {
+  .nav-collapse app-status,
+  .nav-collapse app-main {
+    left: 0;
+  }
+
   app-nav {
     background-color: #23282d;
     bottom: 0;
@@ -33,11 +38,10 @@
     nav-list {
       display: block;
       margin: 0;
-      padding: 2em 0 0;
 
       nav-item {
         display: block;
-        padding: 0 1.5em;
+        padding: 0 1em;
 
         a {
           @include adjust-font-size-to(ms(0), 2);

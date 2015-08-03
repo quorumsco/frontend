@@ -2,117 +2,116 @@ $controls-size: 60px;
 
 @include exports('contacts') {
   contacts-module,
-  contact-controls,
   contact-list,
-  contact-item {
+  list-controls,
+  list-head,
+  list-body,
+  list-item {
     display: block;
-  }
-
-  span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-  }
-
-  contact-controls,
-  contact-list {
-    background-color: #fafbfb;
-    border: 1px solid #ddd;
-  }
-
-  contact-controls {
-    @include clearfix;
-    padding: 0 1em;
-    border-bottom: none;
-
-    section {
-      h3 {
-        @include adjust-font-size-to(ms(0.5), 1.5);
-        display: inline-block;
-        vertical-align: top;
-      }
-
-      span.sep {
-        margin: 0 .5em;
-      }
-
-      span.count {
-        @include adjust-font-size-to(ms(0), 1.5);
-      }
-
-      a {
-        @include adjust-font-size-to(ms(0.5), 1.5);
-        margin-left: .8em;
-      }
-    }
   }
 
   contact-list {
     @include box-sizing(border-box);
-    padding: .5em 1em;
+    background-color: #fafbfb;
+    border: 1px solid #ddd;
 
-    header,
-    contact-item {
-      span {
-        display: inline-block;
-      }
-
-      .phone {
-        float: right;
-        margin-right: 1em;
-        width: 40%;
-      }
-
-      .email {
-        width: 60%;
-      }
-
-      .check {
-        padding-left: 1em;
-        width: 5%;
-      }
-
-      .name {
-        white-space: nowrap;
-        width: 18%;
-      }
-
-      .info {
-        width: 48%;
-      }
-
-      .fiche,
-      .delete {
-        text-align: center;
-      }
-
-      .fiche {
-        width: 11%;
-      }
-
-      .delete {
-        width: 18%;
-      }
+    .phone,
+    .email,
+    .select,
+    .name,
+    .info,
+    .delete,
+    .details {
+      display: inline-block;
+      vertical-align: top;
     }
 
-    header {
-      span:not(.check) {
-        @include adjust-font-size-to(ms(-.5));
-        font-weight: bold;
-        text-transform: uppercase;
-      }
+    .phone {
+      float: right;
+      margin-right: 1em;
     }
 
-    contact-item {
-      @include adjust-font-size-to(ms(-.2), 1.8);
-      @include transition(border, .2s);
-      background-color: #fff;
-      border: 1px solid darken(#f4f5f5, 3%);
-      margin: .5em 0;
+    .select {
+      text-align: center;
+    }
 
-      &:hover {
-        border-color: #75a8a4;
-      }
+    .name {
+      white-space: nowrap;
+    }
+
+    .details,
+    .delete {
+      text-align: center;
+    }
+
+    .phone    { width: 40%; }
+    .email    { width: 60%; }
+    .select   { width: 5%; }
+    .name     { width: 25%; }
+    .info     { width: 50%; }
+    .details  { width: 10%; }
+    .delete   { width: 10%; }
+  }
+
+  list-controls {
+    @include clearfix;
+    padding: 0 1em;
+    border-bottom: 1px solid #ddd;;
+
+    h3 {
+      @include adjust-font-size-to(ms(0.5), 1.5);
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    span.sep {
+      margin: 0 .5em;
+    }
+
+    span.count {
+      @include adjust-font-size-to(ms(0), 1.5);
+    }
+
+    a {
+      @include adjust-font-size-to(ms(0.5), 1.5);
+      margin-left: .8em;
+    }
+
+    a.delete:hover {
+      color: #e74c3c;
+    }
+  }
+
+  list-head {
+    margin: .5em 0 .5em 1px; // to align with the border below
+    padding: 0 1em;
+
+    .phone,
+    .email,
+    .name,
+    .info,
+    .delete,
+    .details {
+      @include adjust-font-size-to(ms(-.5));
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+
+  list-body {
+    margin: .5em 0 1em;
+    padding: 0 1em;
+  }
+
+  list-item {
+    @include adjust-font-size-to(ms(-.2), 1.8);
+    @include transition(border, .2s);
+    background-color: #fff;
+    border: 1px solid darken(#f4f5f5, 3%);
+    margin: .5em 0;
+
+    .delete a:hover {
+      color: #e74c3c;
     }
   }
 }

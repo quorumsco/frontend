@@ -24,6 +24,6 @@ module.exports = function (id) {
   if (id) {
     return contact_gen(id);
   } else {
-    return array_of(10, contact_gen);
+    return array_of(25, contact_gen);
   }
 };

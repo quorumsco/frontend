@@ -1,19 +1,21 @@
-app-nav
-  h1
-    a(href="#") Quorum
-  nav-list
-    each val in ["Gestion de contact"]
-      nav-item
-        a(href="#")= val
+app-module(v-class="nav-collapse: !show_nav")
+  app-nav
+    h1
+      a(href="#") Quorum
+    nav-list
+      each val in ["Contact Management"]
+        nav-item
+          a(href="#")= val
 
-app-status
-  section.left
-    a(href="#")
-      i.fa.fa-bars
-  section.right
-    a(href="#").user
-      span.name Jean-Pierre
-      i.fa.fa-chevron-down
+  app-status
+    section.left
+      a(href="#" v-on="click: toggleNav($event)")
+        i.fa.fa-bars
+    section.right
+      a(href="#").user
+        span.name Rob Smith
+      a(href="#" title="Sign out")
+        i.fa.fa-sign-out
 
-app-main
-  contacts-module(v-ref="contacts")
+  app-main
+    contacts-module(v-ref="contacts")

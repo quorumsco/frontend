@@ -30,12 +30,6 @@ module.exports = {
         this.fetchContacts();
       });
     },
-    navigate: function (path, event) {
-      if (event !== undefined) {
-        event.preventDefault();
-      }
-      this.$dispatch('navigate', path);
-    },
     listContacts: function() {
       this.view = 'contact-list';
     },

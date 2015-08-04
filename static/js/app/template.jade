@@ -4,7 +4,7 @@ app-module(v-class="nav-collapse: !show_nav")
       a(href="#") Quorum
     nav-list
       nav-item
-        a(href="/contacts" v-on="click: navigate('/contacts')") Contact Management
+        a(href="{{path('contacts:list')}}" v-on="click: navigate('contacts:list', $event)") Contact Management
 
   app-status
     section.left

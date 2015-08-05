@@ -13,7 +13,7 @@ var array_of = function(times, generator) {
   var result = [];
 
   for (var i = 0; i < times; i++) {
-    var contact = generator(i);
+    var contact = generator(i+1);
     result.push(contact);
   }
 

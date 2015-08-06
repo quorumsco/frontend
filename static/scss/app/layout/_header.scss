@@ -2,20 +2,20 @@
 
 @include exports('header') {
   app-status {
-    @include transition(left, .2s);
     @include clearfix();
     background-color: #fff;
     display: block;
     height: $header-height;
+    width: 100%;
     left: $nav-width;
     line-height: $header-height;
     padding: 0 1em;
-    position: absolute;
+    position: fixed;
     right: 0;
-    text-align: right;
+    text-align: center;
     top: 0;
 
-    a {
+    section a {
       @include adjust-font-size-to(ms(0.6), $header-height / $base-line-height);
     }
 
@@ -25,6 +25,30 @@
 
     a.user {
       @include adjust-font-size-to(ms(0));
+    }
+
+    a.toggle-nav {
+      display: none;
+    }
+
+    h1 {
+      @include adjust-font-size-to(ms(1.5), $header-height / $base-line-height);
+      visibility: hidden;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    @include respond-to(mobile) {
+      color: #fff;
+      background-color: #32373c;
+
+      h1 {
+        visibility: visible;
+      }
+
+      a.toggle-nav {
+        display: inline;
+      }
     }
   }
 }

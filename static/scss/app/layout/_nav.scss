@@ -1,28 +1,18 @@
 @import 'app/layout/grid';
 
 @include exports('nav') {
-  .nav-collapse app-status,
-  .nav-collapse app-main {
-    left: 0;
-  }
-
   app-nav {
     background-color: #23282d;
     bottom: 0;
     color: #8b91a0;
     left: 0;
-    position: absolute;
+    position: fixed;
+    z-index: -1;
     top: 0;
     width: $nav-width;
 
-    img {
-      background-color: #444;
-      height: $header-height;
-      width: $nav-width;
-    }
-
     h1 {
-      @include adjust-font-size-to(ms(1.5), $header-height / 24px);
+      @include adjust-font-size-to(ms(1.5), $header-height / $base-line-height);
       margin: 0;
       padding: 0 1em;
       color: #fff;
@@ -32,6 +22,10 @@
 
       a {
         display: block;
+      }
+
+      @include respond-to(mobile) {
+        display: none;
       }
     }
 
@@ -47,6 +41,26 @@
           @include adjust-font-size-to(ms(0), 2);
         }
       }
+    }
+  }
+
+  @include respond-to(mobile) {
+    app-status {
+      left: 0;
+    }
+
+    main {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .nav-collapse app-status {
+      left: $nav-width;
+    }
+
+    .nav-collapse main {
+      margin-left: $nav-width;
+      opacity: .8;
     }
   }
 }

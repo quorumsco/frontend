@@ -1,7 +1,12 @@
 var _ = require('lodash');
 
 module.exports = {
-  props: ['contacts'],
+  props: {
+    contacts: {
+      type: Array,
+      required: true
+    }
+  },
   data: function() {
     return {
       select_all: false
@@ -11,9 +16,9 @@ module.exports = {
   components: {
     'list-item': require('./list-item/index.js')
   },
-  methods: {
-    updateSelection: function(state) {
-      this.$broadcast('select', state);
+  watch: {
+    'select_all': function (val) {
+      this.$broadcast('select', val);
     }
   },
   computed: {

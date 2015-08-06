@@ -6,15 +6,18 @@ app-module(v-class="nav-collapse: !show_nav")
       nav-item
         a(href="{{path('contacts:list')}}" v-on="click: navigate('contacts:list', $event)") Contact Management
 
-  app-status
-    section.left
-      a(href="#" v-on="click: toggleNav($event)")
-        i.fa.fa-bars
-    //- section.right
-    //-   a(href="#").user
-    //-     span.name Rob Smith
-    //-   a(href="#" title="Sign out")
-    //-     i.fa.fa-sign-out
+  main
+    app-status
+      h1
+        a(href="#") Quorum
+      section.left
+        a.toggle-nav(href="#" v-on="click: toggleNav($event)")
+          i.fa.fa-bars
+      //- section.right
+      //-   a(href="#").user
+      //-     span.name Rob Smith
+      //-   a(href="#" title="Sign out")
+      //-     i.fa.fa-sign-out
 
-  app-main
-    contacts-module(v-ref="contacts")
+    app-main
+      contacts-module(v-ref="contacts")

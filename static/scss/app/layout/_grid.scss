@@ -44,13 +44,13 @@ $nav-width: 200px;
 
 @include exports('grid') {
   body {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   app-module {
     display: block;
     height: 100%;
-    overflow: hidden;
     position: relative;
     width: 100%;
   }

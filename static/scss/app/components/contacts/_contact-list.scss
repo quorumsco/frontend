@@ -1,3 +1,9 @@
+$susy: (
+  columns: 20,
+  gutters: .25,
+  gutter-position: split
+);
+
 @include exports('contacts-list') {
   contact-list {
     .phone,
@@ -29,14 +35,6 @@
       text-align: center;
     }
 
-    .phone    { width: 40%; }
-    .email    { width: 60%; }
-    .select   { width: 5%; }
-    .name     { width: 25%; }
-    .info     { width: 50%; }
-    .details  { width: 10%; }
-    .delete   { width: 10%; }
-
     list-controls {
       @include clearfix;
       padding: 0 1em;
@@ -67,6 +65,7 @@
     }
 
     list-head {
+      @include container;
       margin: .5em 0 .5em 1px; // to align with the border below
       padding: 0 1em;
 
@@ -83,11 +82,13 @@
     }
 
     list-body {
+      @include container;
       margin: .5em 0 1em;
       padding: 0 1em;
     }
 
     list-item {
+      @include clearfix;
       @include adjust-font-size-to(ms(-.2), 1.8);
       @include transition(border, .2s);
       background-color: #fff;
@@ -97,6 +98,37 @@
       .delete a:hover {
         color: #e74c3c;
       }
+    }
+
+    .info     { @include span(11) }
+    .phone    { @include span(1) }
+    .email    { @include span(1) }
+
+    .select   { @include span(1) }
+    .name     { @include span(4) }
+    .details  { @include span(2) }
+    .delete   { @include span(2) }
+
+    @include respond-to(tablet) {
+      .info     { @include span(9) }
+      .phone    { @include span(1) }
+      .email    { @include span(1) }
+
+      .select   { @include span(2) }
+      .name     { @include span(7) }
+      .details  { @include span(1) }
+      .delete   { display: none }
+    }
+
+    @include respond-to(mobile) {
+      .info     { display: none }
+      .phone    { @include span(1) }
+      .email    { @include span(1) }
+
+      .select   { @include span(3) }
+      .name     { @include span(15) }
+      .details  { @include span(1) }
+      .delete   { display: none }
     }
   }
 }

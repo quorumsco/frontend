@@ -1,15 +1,24 @@
 @import 'app/layout/grid';
 
 @include exports('main') {
-  app-main {
-    @include transition(left, .2s);
+  main {
     background-color: #e5e9ec;
-    bottom: 0;
-    left: $nav-width;
-    padding: 1em;
-    position: absolute;
-    right: 0;
-    top: $header-height;
-    overflow-y: auto;
+    margin-left: $nav-width;
+    padding: $header-height 0 1em;
+    min-height: 100%;
+
+    @include respond-to(mobile) {
+      margin: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  app-main {
+    display: block;
+    margin: 1em 1em 0;
+
+    @include respond-to(mobile) {
+      margin: 0;
+    }
   }
 }

@@ -1,0 +1,32 @@
+$relative-header-height: 2.5;
+$header-height: $relative-header-height * $base-line-height;
+
+@include exports('header') {
+  app-header {
+    @include clearfix;
+    @include position(fixed, 0 0 auto);
+    z-index: 1;
+    display: block;
+    background-color: #2980b9;
+    color: #fff;
+    height: $header-height;
+
+    a {
+      @include adjust-font-size-to(ms(1), $relative-header-height);
+      color: inherit;
+    }
+
+    section.left a {
+      margin-right: 1em;
+    }
+
+    section.right a {
+      margin-left: 1em;
+    }
+
+    div {
+      @include position(absolute, 0);
+      padding: 0 1em;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@import 'header';
+
+@include exports('main') {
+  app-main {
+    display: block;
+    padding-top: $header-height;
+  }
+}

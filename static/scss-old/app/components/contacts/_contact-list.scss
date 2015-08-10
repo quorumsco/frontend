@@ -90,7 +90,6 @@ $susy: (
     list-item {
       @include clearfix;
       @include adjust-font-size-to(ms(-.2), 1.8);
-      @include transition(border, .2s);
       background-color: #fff;
       border: 1px solid darken(#f4f5f5, 3%);
       margin: .5em 0;
@@ -125,10 +124,26 @@ $susy: (
       .phone    { @include span(1) }
       .email    { @include span(1) }
 
-      .select   { @include span(3) }
+      .select   { display: none; }
       .name     { @include span(15) }
       .details  { @include span(1) }
       .delete   { display: none }
+
+    list-head {
+      display: none;
+    }
+
+    list-item {
+      @include clearfix;
+      @include adjust-font-size-to(ms(-.2), 1.8);
+      background-color: #fff;
+      border: none;
+      margin: 0;
+
+      .delete a:hover {
+        color: #e74c3c;
+      }
+    }
     }
   }
 }

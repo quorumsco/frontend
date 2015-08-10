@@ -7,7 +7,7 @@ contact-list
     section.right
       a(href="{{$root.path('contacts:new')}}" title="Add a new contact" v-on="click: $root.navigate('contacts:new', $event)")
         i(class="fa fa-plus")
-      a.delete(href="#" title="Remove selected contacts")
+      a(href="#" title="Remove selected contacts")
         i(class="fa fa-trash")
   list-head
     span.select

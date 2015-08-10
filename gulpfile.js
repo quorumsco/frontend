@@ -46,7 +46,7 @@ cp = function() {
             config_file: 'config.rb',
             sass: 'static/scss',
             css: '.sass-cache',
-            require: ['susy', 'modular-scale']}))
+            require: ['susy', 'bourbon', 'neat', 'modular-scale']}))
         .on('error', handleErrors);
     return merge(gulp.src(['node_modules/normalize.css/normalize.css', 'node_modules/font-awesome/css/font-awesome.min.css']), sass)
         .pipe(concat('app.css'))

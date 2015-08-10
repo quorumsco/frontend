@@ -1,23 +1,23 @@
 app-module(v-class="nav-collapse: !show_nav")
   app-nav
-    h1
-      a(href="#") Quorum
-    nav-list
-      nav-item
-        a(href="{{path('contacts:list')}}" v-on="click: navigate('contacts:list', $event)") Contact Management
-
-  main
-    app-status
+    div
       h1
         a(href="#") Quorum
+      nav-list
+        nav-item
+          a(href="{{path('contacts:list')}}" v-on="click: navigate('contacts:list', $event)") Contact Management
+
+  app-header
+    div
       section.left
         a.toggle-nav(href="#" v-on="click: toggleNav($event)")
-          i.fa.fa-bars
-      //- section.right
-      //-   a(href="#").user
-      //-     span.name Rob Smith
-      //-   a(href="#" title="Sign out")
-      //-     i.fa.fa-sign-out
+          i.fa.fa-fw.fa-bars
 
-    app-main
-      contacts-module(v-ref="contacts")
+      section.right
+        a(href="#")
+          i.fa.fa-fw.fa-search
+        a(href="#")
+          i.fa.fa-fw.fa-ellipsis-v
+
+  app-main
+    contacts-module(v-ref="contacts")

@@ -1,21 +1,13 @@
 @charset 'UTF-8';
 
-@import 'app/base/reset';
-@import 'app/base/typography';
+@import 'compass';
+@import 'modular-scale';
+@import 'bourbon';
+@import 'app/base/base';
+@import 'neat';
+@import 'app/helpers/mixins';
+@import 'app/settings';
 
-@import 'app/layout/grid';
-@import 'app/layout/header';
-@import 'app/layout/main';
-@import 'app/layout/nav';
-
-@import 'app/components/contacts/base';
-@import 'app/components/contacts/contact-list';
-@import 'app/components/contacts/contact-new';
-@import 'app/components/contacts/contact-details';
-
-@font-face {
-  font-family: 'PT Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('PT Sans'), local('PTSans-Regular'), url(http://fonts.gstatic.com/s/ptsans/v8/ATKpv8nLYAKUYexo8iqqrg.woff2) format('woff2'), url(http://fonts.gstatic.com/s/ptsans/v8/LKf8nhXsWg5ybwEGXk8UBQ.woff) format('woff');
-}
+@import 'app/components/header';
+@import 'app/components/nav';
+@import 'app/components/main';

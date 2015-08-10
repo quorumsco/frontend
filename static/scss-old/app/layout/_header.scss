@@ -1,7 +1,7 @@
 @import 'app/layout/grid';
 
 @include exports('header') {
-  app-status {
+  app-header {
     @include clearfix();
     background-color: #fff;
     display: block;

@@ -28,5 +28,11 @@ $header-height: $relative-header-height * $base-line-height;
       @include position(absolute, 0);
       padding: 0 1em;
     }
+
+    h2 {
+      @include adjust-font-size-to(ms(1), $relative-header-height);
+      display: inline;
+      margin-left: 1em;
+    }
   }
 }

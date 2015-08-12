@@ -1,0 +1,19 @@
+@include exports("contacts-list") {
+  contact-list {
+    list-item {
+      display: block;
+    }
+
+    list-item a {
+      display: block;
+      @include adjust-font-size-to(ms(0), 2.5);
+      padding: 0 1em;
+      color: inherit;
+
+      &:hover {
+        background-color: darken(#fff, 10%);
+        color: inherit;
+      }
+    }
+  }
+}

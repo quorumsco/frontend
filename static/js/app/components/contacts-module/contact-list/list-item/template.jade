@@ -1,13 +1,14 @@
 list-item(v-class="selected: selected")
-  span.select
-    input(type="checkbox" v-model="selected")
-  span.name {{surname}} {{firstname}}
-  span.info
-    span.email {{email}}
-    span.phone {{phone}}
-  span.details
-    a(href="{{$root.path('contacts:show', id)}}" v-on="click: $root.navigate('contacts:show', $event, id)" title="Go to the contact details")
-      i.fa.fa-bars
-  span.delete
-    a(href="#" v-on="click: deleteContact(this)" title="Remove this contact")
-      i.fa.fa-times
+  a(href="{{$root.path('contacts:show', id)}}" v-on="click: $root.navigate('contacts:show', $event, id)")
+    span.name {{surname}} {{firstname}}
+    //- span.select
+    //-   input(type="checkbox" v-model="selected")
+    //- span.info
+    //-   span.email {{email}}
+    //-   span.phone {{phone}}
+    //- span.details
+    //-   a(href="{{$root.path('contacts:show', id)}}" v-on="click: $root.navigate('contacts:show', $event, id)" title="Go to the contact details")
+    //-     i.fa.fa-bars
+    //- span.delete
+    //-   a(href="#" v-on="click: deleteContact(this)" title="Remove this contact")
+    //-     i.fa.fa-times

@@ -21,7 +21,8 @@ var expr = function(name) {
 module.exports = {
   el: 'app-module',
   components: {
-    'contacts-module': require('./components/contacts-module/index.js')
+    'contacts-module': require('./components/contacts-module/index.js'),
+    'app-header': require('./components/app-module/app-header/index.js')
   },
   template: require('./template.jade')(),
   data: {
@@ -33,14 +34,16 @@ module.exports = {
     this.router(expr('contacts:list'), () => {
       this.view = 'contacts-module';
       this.$.contacts.listContacts();
+      this.$.header['contacts:list']();
     });
     this.router(expr('contacts:new'), () => {
       this.view = 'contacts-module';
       this.$.contacts.newContact();
     });
-    this.router(expr('contacts:show'), (id) => {
+    this.router(expr('contacts:show'), (ctx) => {
       this.view = 'contacts-module';
-      this.$.contacts.showContact(id);
+      this.$.contacts.showContact(ctx.params.id);
+      this.$.header['contacts:show']();
     });
     this.router('/', '/contacts');
 
@@ -61,6 +64,9 @@ module.exports = {
     },
     path: function(name, ...args) {
       return API[name].apply(this, args);
+    },
+    header: function(title) {
+      this.$.header.set(title);
     }
   },
   events: {

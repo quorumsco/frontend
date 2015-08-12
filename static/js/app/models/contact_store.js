@@ -16,6 +16,19 @@ store.find = function(cb) {
   });
 };
 
+store.first = function(id, cb) {
+  request
+  .get(`${api}/contacts/${id}`)
+  .set('Accept', 'application/json')
+  .end(function(err, res) {
+    if (err) {
+      cb(require('../fixtures/contacts.js')(id));
+    } else if (res.body.status === 'success') {
+      cb(res.body.data.contact);
+    }
+  });
+};
+
 store.save = function(contact, cb) {
   request
   .post(`${api}/contacts`)

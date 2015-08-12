@@ -5,7 +5,8 @@ module.exports = {
   data: function() {
     return {
       contacts: [],
-      view: null
+      view: null,
+      contact_id: null
     };
   },
   template: require('./template.jade')(),
@@ -17,28 +18,40 @@ module.exports = {
     'contact-details': require('./contact-details/index.js'),
     'contact-new': require('./contact-new/index.js')
   },
+  computed: {
+    contact: function() {
+      _.find(this.contacts, {'id': this.contact_id});
+    }
+  },
   methods: {
     fetchContacts: function() {
-      return contact_store.find((res) => {
-        this.contacts = _(res).forEach(function(n) {
-          n = _.assign(n, {selected: false});
-        }).value();
+      contact_store.find((res) => {
+        this.contacts = res;
+      });
+    },
+    fetchContact: function(id) {
+      contact_store.first(id, (res) => {
+        console.log("fetchContact " + id);
+        console.log(res);
       });
     },
     addContact: function(contact) {
-      return contact_store.save(contact, (res) => {
+      contact_store.save(contact, (res) => {
         this.fetchContacts();
       });
     },
     listContacts: function() {
       this.view = 'contact-list';
+      this.$root.header("Contacts");
     },
     newContact: function() {
       this.view = 'contact-new';
     },
-    showContact: function(contact) {
-      this.contact_id = contact.id;
+    showContact: function(id) {
+      this.contact_id = id;
+      console.log(id);
       this.view = 'contact-details';
+      this.$root.header(`${this.contact.firstname} ${this.contact.lastname}`);
     }
   }
 };

@@ -1,21 +1,21 @@
 contact-list
-  list-controls
-    section.left
-      h3 Contacts
-      span.sep —
-      span.count {{contactCount}} contacts - <em>{{selectedCount}} selected</em>
-    section.right
-      a(href="{{$root.path('contacts:new')}}" title="Add a new contact" v-on="click: $root.navigate('contacts:new', $event)")
-        i(class="fa fa-plus")
-      a(href="#" title="Remove selected contacts")
-        i(class="fa fa-trash")
-  list-head
-    span.select
-      span(title="Select all")
-        input(type="checkbox" v-model="select_all")
-    span.name Name
-    span.info Infos
-    span.details Details
-    span.delete Delete
+  //- list-controls
+  //-   section.left
+  //-     h3 Contacts
+  //-     span.sep —
+  //-     span.count {{contactCount}} contacts - #[em {{selectedCount}} selected]
+  //-   section.right
+  //-     a(href="{{$root.path('contacts:new')}}" title="Add a new contact" v-on="click: $root.navigate('contacts:new', $event)")
+  //-       i(class="fa fa-plus")
+  //-     a(href="#" title="Remove selected contacts")
+  //-       i(class="fa fa-trash")
+  //- list-head
+  //-   span.select
+  //-     span(title="Select all")
+  //-       input(type="checkbox" v-model="select_all")
+  //-   span.name Name
+  //-   span.info Infos
+  //-   span.details Details
+  //-   span.delete Delete
   list-body
     list-item(v-repeat="contacts")

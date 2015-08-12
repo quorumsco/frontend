@@ -7,19 +7,7 @@ app-module(v-class="nav-collapse: !show_nav")
         nav-item
           a(href="{{path('contacts:list')}}" v-on="click: navigate('contacts:list', $event)") Contact Management
 
-  app-header
-    div
-      section.left
-        a.toggle-nav(href="#" v-on="click: toggleNav($event)")
-          i.fa.fa-fw.fa-bars
-            
-      h2 Contacts
-
-      section.right
-        a(href="#")
-          i.fa.fa-fw.fa-search
-        a(href="#")
-          i.fa.fa-fw.fa-ellipsis-v
+  app-header(v-ref="header")
 
   app-main
     contacts-module(v-ref="contacts")

@@ -1,0 +1,15 @@
+app-header
+  div
+    section.left
+      a.toggle-nav(href="#" v-on="click: toggleNav($event)" v-if="!prev")
+        i.fa.fa-fw.fa-bars
+      a.toggle-nav(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list')" v-if="prev")
+        i.fa.fa-fw.fa-arrow-left
+          
+    h2 {{title}}
+
+    section.right
+      a(href="#")
+        i.fa.fa-fw.fa-search
+      a(href="#")
+        i.fa.fa-fw.fa-ellipsis-v

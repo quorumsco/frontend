@@ -5,7 +5,7 @@ var Emitter = require('events').EventEmitter,
 
 store.find = function(id, cb) {
   return request
-  .get(`${api}/contact/${ip}/tags`)
+  .get(`${api}/contact/${id}/tags`)
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (res.body.status === 'success') {

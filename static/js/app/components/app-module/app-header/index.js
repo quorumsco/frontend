@@ -2,7 +2,8 @@ module.exports = {
   data: function() {
     return {
       title: "",
-      prev: false
+      prev: false,
+      dropdown: false
     };
   },
   template: require('./template.jade')(),
@@ -15,6 +16,16 @@ module.exports = {
     },
     set: function(title) {
       this.title = title;
+    },
+    toggleDropdown: function(e) {
+      e.preventDefault();
+      this.$dispatch('overlay:show', false);
+      this.dropdown = !this.dropdown;
+    }
+  },
+  events: {
+    'over:hide': function() {
+      this.dropdown = false;
     }
   }
 };

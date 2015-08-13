@@ -5,11 +5,46 @@ $nav-width: 200px;
     display: block;
     @include position(fixed, 0 auto 0 0);
     left: -$nav-width;
-    z-index: 2;
+    @include transform(translateX(0));
     width: $nav-width;
+    height: 100%;
+    background-color: #fff;
+    @include single-transition(translateY, .2s);
+
+    &.visible {
+      // left: 0;
+      @include box-shadow(1px 1px 5px 0px #656565);
+      @include transform(translateX($nav-width));
+    }
 
     div {
       position: absolute;
+      width: 100%;
+    }
+
+    h1 {
+      width: 100%;
+      height: 60px;
+      background-color: darken(#fff, 5%);
+      margin: 0;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav-list {
+      nav-item {
+        a {
+          color: inherit;
+          display: block;
+          padding: 0 1em;
+          @include adjust-font-size-to(ms(-1), 1.7);
+
+          &:hover {
+            color: inherit;
+            background-color: darken(#fff, 10%);
+          }
+        }
+      }
     }
   }
 }

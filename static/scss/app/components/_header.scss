@@ -5,22 +5,21 @@ $header-height: $relative-header-height * $base-line-height;
   app-header {
     @include clearfix;
     @include position(fixed, 0 0 auto);
-    z-index: 1;
     display: block;
     background-color: #2980b9;
     color: #fff;
     height: $header-height;
 
-    a {
+    section > a {
       @include adjust-font-size-to(ms(1), $relative-header-height);
       color: inherit;
     }
 
-    section.left a {
+    section.left > a {
       margin-right: 1em;
     }
 
-    section.right a {
+    section.right > a {
       margin-left: 1em;
     }
 
@@ -33,6 +32,38 @@ $header-height: $relative-header-height * $base-line-height;
       @include adjust-font-size-to(ms(1), $relative-header-height);
       display: inline;
       margin-left: 1em;
+    }
+  }
+  .dropdown {
+    display: none;
+    position: absolute;
+    color: #222;
+    background-color: white;
+    top: .5em;
+    right: .5em;
+    @include box-shadow(1px 1px 5px 0px #656565);
+    @include border-radius(3px);
+    overflow: hidden;
+    z-index: 3;
+
+    &.visible {
+      display: block;
+    }
+
+    li {
+      a {
+        display: block;
+        padding: 0 1em;
+        @include adjust-font-size-to(ms(-1), 1.7);
+        width: 100%;
+        height: 100%;
+        color: inherit;
+      }
+
+      &:hover {
+        background-color: darken(#fff, 10%);
+        color: inherit;
+      }
     }
   }
 }

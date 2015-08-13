@@ -20,7 +20,7 @@ module.exports = {
   },
   computed: {
     contact: function() {
-      _.find(this.contacts, {'id': this.contact_id});
+      return _.find(this.contacts, {'id': this.contact_id});
     }
   },
   methods: {
@@ -49,9 +49,8 @@ module.exports = {
     },
     showContact: function(id) {
       this.contact_id = id;
-      console.log(id);
       this.view = 'contact-details';
-      this.$root.header(`${this.contact.firstname} ${this.contact.lastname}`);
+      this.$root.header(`${this.contact.firstname} ${this.contact.surname}`);
     }
   }
 };

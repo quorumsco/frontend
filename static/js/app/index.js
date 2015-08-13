@@ -28,7 +28,9 @@ module.exports = {
   data: {
     view: null,
     router: require('page'),
-    show_nav: true
+    show_nav: false,
+    overlay: false,
+    darken: false
   },
   ready: function() {
     this.router(expr('contacts:list'), () => {
@@ -42,7 +44,7 @@ module.exports = {
     });
     this.router(expr('contacts:show'), (ctx) => {
       this.view = 'contacts-module';
-      this.$.contacts.showContact(ctx.params.id);
+      this.$.contacts.showContact(parseInt(ctx.params.id));
       this.$.header['contacts:show']();
     });
     this.router('/', '/contacts');
@@ -54,6 +56,9 @@ module.exports = {
   methods: {
     toggleNav: function(event) {
       event.preventDefault();
+      if (!this.show_nav) {
+        this.$emit('overlay:show', true);
+      }
       this.show_nav = !this.show_nav;
     },
     navigate: function (name, event, ...args) {
@@ -67,12 +72,29 @@ module.exports = {
     },
     header: function(title) {
       this.$.header.set(title);
+    },
+    back: function() {
+      window.history.back();
+    },
+    hide: function(e) {
+      e.preventDefault();
+      this.$broadcast('over:hide');
+      this.$emit('over:hide');
+      this.overlay = false;
     }
   },
   events: {
     navigate: function(name, ...args) {
       this.router(this.path(name, ...args));
       return false;
+    },
+    'overlay:show': function(darken) {
+      this.overlay = true;
+      this.darken = darken;
+    },
+    'over:hide': function() {
+      this.show_nav = false;
+      this.darken = false;
     }
   }
 };

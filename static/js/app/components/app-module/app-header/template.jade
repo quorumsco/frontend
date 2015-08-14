@@ -1,7 +1,7 @@
 app-header
   div
     section.left
-      a.toggle-nav(href="#" v-on="click: $root.toggleNav($event)" v-if="!prev")
+      a.toggle-nav(href="#" v-on="click: $dispatch('nav:show')" v-if="!prev")
         i.fa.fa-fw.fa-bars
       a.toggle-nav(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list')" v-if="prev")
         i.fa.fa-fw.fa-arrow-left
@@ -11,10 +11,11 @@ app-header
     section.right
       a(href="#")
         i.fa.fa-fw.fa-search
-      a(href="#" v-on="click: toggleDropdown($event)")
+      a(href="#" v-on="click: $dispatch('dropdown:show')")
         i.fa.fa-fw.fa-ellipsis-v
       ul.dropdown(v-class="visible: dropdown")
         li
           a(href="#") Sort by
         li
           a(href="#") Settings
+  app-overlay

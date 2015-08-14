@@ -10,6 +10,7 @@ $nav-width: 200px;
     height: 100%;
     background-color: #fff;
     @include single-transition(translateY, .2s);
+    z-index: 2;
 
     &.visible {
       // left: 0;

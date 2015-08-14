@@ -1,0 +1,13 @@
+app-nav(v-class="visible: show_nav")
+  div
+    h1
+      a(href="#") Quorum
+    nav-list
+      nav-item
+        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") Missions
+      nav-item
+        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") Contacts
+      nav-item
+        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") Settings
+      nav-item
+        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") About

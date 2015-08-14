@@ -7,25 +7,26 @@ module.exports = {
     };
   },
   template: require('./template.jade')(),
+  components: {
+    'app-overlay': require('../app-overlay/index.js')
+  },
   methods: {
-    'contacts:list': function() {
-      this.prev = false;
-    },
-    'contacts:show': function(name) {
-      this.prev = true;
-    },
     set: function(title) {
       this.title = title;
     },
-    toggleDropdown: function(e) {
-      e.preventDefault();
-      this.$dispatch('overlay:show', false);
-      this.dropdown = !this.dropdown;
+    showDropdown: function() {
+      this.dropdown = true;
+    },
+    hideDropdown: function(e) {
+      this.dropdown = false;
     }
   },
   events: {
-    'over:hide': function() {
-      this.dropdown = false;
-    }
+    'contacts:list': function() {
+      this.prev = false;
+    },
+    'contacts:show': function() {
+      this.prev = true;
+    },
   }
 };

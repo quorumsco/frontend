@@ -34,23 +34,22 @@ module.exports = {
         console.log("fetchContact " + id);
         console.log(res);
       });
-    },
-    addContact: function(contact) {
-      contact_store.save(contact, (res) => {
-        this.fetchContacts();
-      });
-    },
-    listContacts: function() {
+    }
+  },
+  events: {
+    'contacts:list': function() {
       this.view = 'contact-list';
-      this.$root.header("Contacts");
+      return false;
     },
-    newContact: function() {
+    'contacts:new': function() {
       this.view = 'contact-new';
+      return false;
     },
-    showContact: function(id) {
+    'contacts:show': function(id) {
       this.contact_id = id;
       this.view = 'contact-details';
-      this.$root.header(`${this.contact.firstname} ${this.contact.surname}`);
+      // this.$root.header(`${this.contact.firstname} ${this.contact.surname}`);
+      return false;
     }
   }
 };

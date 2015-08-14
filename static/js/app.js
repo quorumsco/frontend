@@ -1,6 +1,6 @@
 var Vue = require('vue');
 Vue.config.debug = true;
-var app = new Vue(require('./app/index.js'));
+var app = new Vue(require('./app/components/app-module/index.js'));
 
 var _ = require('lodash');
 

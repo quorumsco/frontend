@@ -21,31 +21,24 @@ var expr = function(name) {
 module.exports = {
   el: 'app-module',
   components: {
-    'contacts-module': require('./components/contacts-module/index.js'),
-    'app-header': require('./components/app-module/app-header/index.js')
+    'app-header': require('./app-header/index.js'),
+    'app-nav': require('./app-nav/index.js'),
+    'app-main': require('./app-main/index.js'),
+    'app-overlay': require('./app-overlay/index.js')
   },
   template: require('./template.jade')(),
   data: {
-    view: null,
-    router: require('page'),
-    show_nav: false,
-    overlay: false,
-    darken: false
+    router: require('page')
   },
   ready: function() {
     this.router(expr('contacts:list'), () => {
-      this.view = 'contacts-module';
-      this.$.contacts.listContacts();
-      this.$.header['contacts:list']();
+      this.$broadcast('contacts:list');
     });
     this.router(expr('contacts:new'), () => {
-      this.view = 'contacts-module';
-      this.$.contacts.newContact();
+      this.$broadcast('contacts:new');
     });
     this.router(expr('contacts:show'), (ctx) => {
-      this.view = 'contacts-module';
-      this.$.contacts.showContact(parseInt(ctx.params.id));
-      this.$.header['contacts:show']();
+      this.$broadcast('contacts:show', parseInt(ctx.params.id));
     });
     this.router('/', '/contacts');
 
@@ -54,13 +47,6 @@ module.exports = {
     });
   },
   methods: {
-    toggleNav: function(event) {
-      event.preventDefault();
-      if (!this.show_nav) {
-        this.$emit('overlay:show', true);
-      }
-      this.show_nav = !this.show_nav;
-    },
     navigate: function (name, event, ...args) {
       if (event !== undefined) {
         event.preventDefault();
@@ -70,17 +56,12 @@ module.exports = {
     path: function(name, ...args) {
       return API[name].apply(this, args);
     },
-    header: function(title) {
-      this.$.header.set(title);
-    },
     back: function() {
       window.history.back();
     },
-    hide: function(e) {
-      e.preventDefault();
-      this.$broadcast('over:hide');
-      this.$emit('over:hide');
-      this.overlay = false;
+    showNav: function() {
+      this.$.nav.showNav();
+      this.$broadcast('overlay:show', true);
     }
   },
   events: {
@@ -88,13 +69,20 @@ module.exports = {
       this.router(this.path(name, ...args));
       return false;
     },
-    'overlay:show': function(darken) {
-      this.overlay = true;
-      this.darken = darken;
+    'overlay:onclick': function() {
+      this.$broadcast('overlay:hide');
+      this.$.nav.hide();
+      this.$.header.hideDropdown();
     },
-    'over:hide': function() {
-      this.show_nav = false;
-      this.darken = false;
+    'nav:show': function() {
+      this.$.header.$broadcast('overlay:show', true);
+      this.$.main.$broadcast('overlay:show', true);
+      this.$.nav.show();
+    },
+    'dropdown:show': function() {
+      this.$.header.$broadcast('overlay:show', false);
+      this.$.main.$broadcast('overlay:show', false);
+      this.$.header.showDropdown();
     }
   }
 };

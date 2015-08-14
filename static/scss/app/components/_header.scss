@@ -9,6 +9,7 @@ $header-height: $relative-header-height * $base-line-height;
     background-color: #2980b9;
     color: #fff;
     height: $header-height;
+    z-index: 1;
 
     section > a {
       @include adjust-font-size-to(ms(1), $relative-header-height);

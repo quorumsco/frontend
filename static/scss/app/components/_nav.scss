@@ -9,7 +9,7 @@ $nav-width: 200px;
     width: $nav-width;
     height: 100%;
     background-color: #fff;
-    @include single-transition(translateY, .2s);
+    @include single-transition(transform, .2s);
     z-index: 2;
 
     &.visible {

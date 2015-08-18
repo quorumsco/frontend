@@ -2,4 +2,43 @@
 @import 'main';
 @import 'nav';
 
+app-module {
+  height: 100%;
+}
+
+app-login {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: #2980b9;
+
+  div.wrap {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  form {
+    max-width: 500px;
+    margin: auto;
+    padding: 0 1em;
+
+    input[type="submit"] {
+      width: 100%;
+      margin-top: 1em;
+    }
+  }
+
+  div.logo {
+    max-width: 220px;
+    padding: 1em;
+    margin: 0 auto 2em;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
 @import 'contacts/base';

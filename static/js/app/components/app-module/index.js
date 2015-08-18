@@ -1,4 +1,7 @@
 var API = {
+  'app:login': function() {
+    return '/login';
+  },
   'contacts:list': function() {
     return '/contacts';
   },
@@ -24,21 +27,29 @@ module.exports = {
     'app-header': require('./app-header/index.js'),
     'app-nav': require('./app-nav/index.js'),
     'app-main': require('./app-main/index.js'),
-    'app-overlay': require('./app-overlay/index.js')
+    'app-overlay': require('./app-overlay/index.js'),
+    'app-login': require('./app-login/index.js')
   },
   template: require('./template.jade')(),
   data: {
-    router: require('page')
+    router: require('page'),
+    login: false
   },
   ready: function() {
     this.router(expr('contacts:list'), () => {
+      this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:list');
     });
     this.router(expr('contacts:new'), () => {
+      this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:new');
     });
     this.router(expr('contacts:show'), (ctx) => {
+      this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:show', parseInt(ctx.params.id));
+    });
+    this.router(expr('app:login'), (ctx) => {
+      this.$.main.view = 'app-login';
     });
     this.router('/', '/contacts');
 
@@ -83,6 +94,9 @@ module.exports = {
       this.$.header.$broadcast('overlay:show', false);
       this.$.main.$broadcast('overlay:show', false);
       this.$.header.showDropdown();
+    },
+    'header:title': function(title) {
+      this.$.header.set(title);
     }
   }
 };

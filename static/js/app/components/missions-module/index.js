@@ -1,4 +1,4 @@
-var contact_store = require('../../models/contact_store.js'),
+var contact_store = require('../../models/mission_store.js'),
   _ = require('lodash');
 
 module.exports = {

@@ -13,14 +13,6 @@ var API = {
   }
 };
 
-var expr = function(name) {
-  let arrity = API[name].length;
-  let args = Array.apply(null, new Array(arrity)).map(function() {
-    return ':id';
-  });
-  return API[name].apply(this, args);
-};
-
 module.exports = {
   el: 'app-module',
   components: {
@@ -36,19 +28,19 @@ module.exports = {
     login: false
   },
   ready: function() {
-    this.router(expr('contacts:list'), () => {
+    this.router('/contacts', () => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:list');
     });
-    this.router(expr('contacts:new'), () => {
+    this.router('/contacts/new', () => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:new');
     });
-    this.router(expr('contacts:show'), (ctx) => {
+    this.router('/contacts/:id', (ctx) => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:show', parseInt(ctx.params.id));
     });
-    this.router(expr('app:login'), (ctx) => {
+    this.router('/login', (ctx) => {
       this.$.main.view = 'app-login';
     });
     this.router('/', '/contacts');

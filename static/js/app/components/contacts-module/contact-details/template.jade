@@ -1,10 +1,13 @@
 contact-details
-  h3 {{contact.firstname}} {{contact.surname}}
-  details-tags
-    tag-list
-      list-item NPA
-  details-infos
-    info-field Name
-  details-notes
-    note-list
-      list-item This is a note
+  tab-menu
+    a(href="#" v-on="click: ") Infos
+    a(href="#" v-on="click: ") Notes
+    a(href="#" v-on="click: ") Tags
+  component(is="{{view}}" contact="{{contact}}")
+
+  //- details-tags
+  //-   tag-list
+  //-     list-item NPA
+  //- details-notes
+  //-   note-list
+  //-     list-item This is a note

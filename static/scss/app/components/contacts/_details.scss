@@ -1,0 +1,8 @@
+@include exports("details-infos") {
+  info-field {
+    width : 95%;
+    margin: auto;
+    display: block;
+    text-transform: capitalize;
+  }
+}

@@ -1,9 +1,14 @@
-var _ = require('lodash');
+var contact_store = require('../../../models/contact_store.js'),
+  _ = require('lodash');
 
 module.exports = {
   props: {
     contacts: {
       type: Array,
+      required: true
+    },
+    contact: {
+      type: Object,
       required: true
     }
   },
@@ -11,6 +16,15 @@ module.exports = {
     return {
       select_all: false
     };
+  },
+  compiled: function() {
+    if (this.contacts.length == 0) {
+      console.log(this.contacts.length);
+      contact_store.find((res) => {
+        this.$set("contacts", res);
+        this.$emit("data-loaded");
+      });
+    }
   },
   template: require('./template.jade')(),
   components: {

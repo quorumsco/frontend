@@ -28,6 +28,18 @@ module.exports = {
     login: false
   },
   ready: function() {
+    this.router('/contacts/:id/details', () => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:list');
+    });
+    this.router('/contacts/:id/notes', () => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:list');
+    });
+    this.router('/contacts/:id/tags', () => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:list');
+    });
     this.router('/contacts', () => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:list');

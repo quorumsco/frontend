@@ -1,0 +1,24 @@
+@import '../header';
+$tab-width: 100% / 3;
+
+@include exports("tab-menu") {
+  tab-menu {
+    width: 100%;
+    height: $header-height;
+    display: block;
+
+    a {
+      width: $tab-width;
+      display: inline-block;
+      float: left;
+      text-align: center;
+      color: #828282;
+      font-weight: bold;
+    }
+
+    .selected {
+      background-color: darken(#fff, 5%);
+      border-bottom: 2px solid #2980b9;
+    }
+  }
+}

@@ -6,35 +6,20 @@ module.exports = {
     return {
       contacts: [],
       view: null,
-      contact_id: null
+      contact_id: null,
+      contact: {}
     };
   },
   template: require('./template.jade')(),
   created: function() {
-    this.fetchContacts();
+    this.$on("child-click", (child) => {
+      this.contact = child;
+    })
   },
   components: {
     'contact-list': require('./contact-list/index.js'),
     'contact-details': require('./contact-details/index.js'),
     'contact-new': require('./contact-new/index.js')
-  },
-  computed: {
-    contact: function() {
-      return _.find(this.contacts, {'id': this.contact_id});
-    }
-  },
-  methods: {
-    fetchContacts: function() {
-      contact_store.find((res) => {
-        this.contacts = res;
-      });
-    },
-    fetchContact: function(id) {
-      contact_store.first(id, (res) => {
-        console.log("fetchContact " + id);
-        console.log(res);
-      });
-    }
   },
   events: {
     'contacts:list': function() {
@@ -49,7 +34,6 @@ module.exports = {
     'contacts:show': function(id) {
       this.contact_id = id;
       this.view = 'contact-details';
-      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
       return false;
     }
   }

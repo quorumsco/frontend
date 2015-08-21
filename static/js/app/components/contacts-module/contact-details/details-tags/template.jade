@@ -1,0 +1,4 @@
+details-infos
+  each val in ["surname", "firstname", "email"]
+    info-field #{val} :
+      input(v-model="contact.#{val}" type="text" placeholder="#{val}" value="{{contact.#{val}}}")

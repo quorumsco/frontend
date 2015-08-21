@@ -1,5 +1,5 @@
 list-item(v-class="selected: selected")
-  a(href="{{$root.path('contacts:show', id)}}" v-on="click: $root.navigate('contacts:show', $event, id)")
+  a(href="{{$root.path('contacts:show', id)}}" v-on="click: onClick($event)")
     span.name {{surname}} {{firstname}}
     //- span.select
     //-   input(type="checkbox" v-model="selected")

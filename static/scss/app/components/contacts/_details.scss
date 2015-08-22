@@ -4,5 +4,9 @@
     margin: auto;
     display: block;
     text-transform: capitalize;
+
+    input:focus {
+      background-color: lighten(#2980B9, 54%);
+    }
   }
 }

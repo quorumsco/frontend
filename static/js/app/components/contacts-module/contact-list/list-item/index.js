@@ -4,7 +4,7 @@ module.exports = {
     onClick: function(e) {
       e.preventDefault();
       this.selected = !this.selected;
-      this.$root.navigate('contacts:show', undefined, this.id);
+      this.$root.navigate('contacts:showDetails', undefined, this.id);
       this.$dispatch('child-click', this.$data);
     }
   },

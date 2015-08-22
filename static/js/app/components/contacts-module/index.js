@@ -18,7 +18,9 @@ module.exports = {
   },
   components: {
     'contact-list': require('./contact-list/index.js'),
-    'contact-details': require('./contact-details/index.js'),
+    'contact-infos': require('./contact-details/details-infos/index.js'),
+    'contact-notes': require('./contact-details/details-notes/index.js'),
+    'contact-tags': require('./contact-details/details-tags/index.js'),
     'contact-new': require('./contact-new/index.js')
   },
   events: {
@@ -31,9 +33,19 @@ module.exports = {
       this.view = 'contact-new';
       return false;
     },
-    'contacts:show': function(id) {
+    'contacts:showInfos': function(id) {
       this.contact_id = id;
-      this.view = 'contact-details';
+      this.view = 'contact-infos';
+      return false;
+    },
+    'contacts:showNotes': function(id) {
+      this.contact_id = id;
+      this.view = 'contact-notes';
+      return false;
+    },
+    'contacts:showTags': function(id) {
+      this.contact_id = id;
+      this.view = 'contact-tags';
       return false;
     }
   }

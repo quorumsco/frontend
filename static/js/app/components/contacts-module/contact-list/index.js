@@ -19,7 +19,6 @@ module.exports = {
   },
   compiled: function() {
     if (this.contacts.length == 0) {
-      console.log(this.contacts.length);
       contact_store.find((res) => {
         this.$set("contacts", res);
         this.$emit("data-loaded");

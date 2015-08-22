@@ -8,8 +8,14 @@ var API = {
   'contacts:new': function() {
     return '/contacts/new';
   },
-  'contacts:show': function(id) {
-    return `/contacts/${id}`;
+  'contacts:showDetails': function(id) {
+    return `/contacts/${id}/infos`;
+  },
+  'contacts:showNotes': function(id) {
+    return `/contacts/${id}/notes`;
+  },
+  'contacts:showTags': function(id) {
+    return `/contacts/${id}/tags`;
   }
 };
 
@@ -28,18 +34,6 @@ module.exports = {
     login: false
   },
   ready: function() {
-    this.router('/contacts/:id/details', () => {
-      this.$.main.view = 'contacts-module';
-      this.$broadcast('contacts:list');
-    });
-    this.router('/contacts/:id/notes', () => {
-      this.$.main.view = 'contacts-module';
-      this.$broadcast('contacts:list');
-    });
-    this.router('/contacts/:id/tags', () => {
-      this.$.main.view = 'contacts-module';
-      this.$broadcast('contacts:list');
-    });
     this.router('/contacts', () => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:list');
@@ -50,7 +44,19 @@ module.exports = {
     });
     this.router('/contacts/:id', (ctx) => {
       this.$.main.view = 'contacts-module';
-      this.$broadcast('contacts:show', parseInt(ctx.params.id));
+      this.$broadcast('contacts:showInfos', parseInt(ctx.params.id));
+    });
+    this.router('/contacts/:id/infos', (ctx) => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:showInfos', parseInt(ctx.params.id));
+    });
+    this.router('/contacts/:id/tags', (ctx) => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:showTags', parseInt(ctx.params.id));
+    });
+    this.router('/contacts/:id/notes', (ctx) => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:showNotes', parseInt(ctx.params.id));
     });
     this.router('/login', (ctx) => {
       this.$.main.view = 'app-login';

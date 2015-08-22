@@ -1,0 +1,4 @@
+tab-menu
+  a(href="{{$root.path('contacts:showDetails', id)}}" v-on="click: onClick($event, 'contacts:showDetails')" v-class="selected: tab == 1") Infos
+  a(href="{{$root.path('contacts:showNotes', id)}}" v-on="click: onClick($event, 'contacts:showNotes')" v-class="selected: tab == 2") Notes
+  a(href="{{$root.path('contacts:showTags', id)}}" v-on="click: onClick($event, 'contacts:showTags')" v-class="selected: tab == 3") Tags

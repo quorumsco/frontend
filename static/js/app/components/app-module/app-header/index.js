@@ -19,6 +19,18 @@ module.exports = {
     },
     hideDropdown: function(e) {
       this.dropdown = false;
+    },
+    navOnClickOut: function(e) {
+      e.preventDefault();
+      this.$root.navigate('contacts:list');
+    },
+    navOnClickIn: function(e) {
+      e.preventDefault();
+      this.$dispatch('nav:show')
+    },
+    dropdownOnClick: function(e) {
+      e.preventDefault();
+      this.$dispatch('dropdown:show')
     }
   },
   events: {

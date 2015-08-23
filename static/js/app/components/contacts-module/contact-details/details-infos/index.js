@@ -22,15 +22,24 @@ module.exports = {
   components: {
     'tab-menu': require('../details-tabs/index.js')
   },
+  methods: {
+    updateContact: function() {
+      this.$dispatch('contacts:update', this.contact);
+    },
+    revertContact: function() {
+      contact_store.first(this.id, (res) => {
+        this.contact = res;
+        this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
+      });
+    }
+  },
   compiled: function () {
     if (!_.isEmpty(this.contact)) {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-      this.$emit("data-loaded");
     }
     contact_store.first(this.id, (res) => {
       this.contact = res;
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-      this.$emit("data-loaded");
     });
   }
 };

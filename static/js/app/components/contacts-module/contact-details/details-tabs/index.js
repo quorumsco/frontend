@@ -15,9 +15,5 @@ module.exports = {
       e.preventDefault();
       this.$root.navigate(route, undefined, this.id);
     }
-  },
-  compiled: function () {
-
-    return
   }
 };

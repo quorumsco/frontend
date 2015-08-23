@@ -9,13 +9,13 @@ app-header
     h2 {{title}}
 
     section.right
-      a(href="#")
+      a(href="#" v-on="click: $event.preventDefault()")
         i.fa.fa-fw.fa-search
       a(href="#" v-on="click: dropdownOnClick($event)")
         i.fa.fa-fw.fa-ellipsis-v
       ul.dropdown(v-class="visible: dropdown")
         li
-          a(href="#") Sort by
+          a(href="#" v-on="click: $event.preventDefault()") Sort by
         li
-          a(href="#") Settings
+          a(href="#" v-on="click: $event.preventDefault()") Settings
   app-overlay

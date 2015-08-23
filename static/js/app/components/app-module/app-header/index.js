@@ -37,8 +37,15 @@ module.exports = {
     'contacts:list': function() {
       this.prev = false;
     },
-    'contacts:show': function() {
+    'contacts:showInfos': function() {
       this.prev = true;
     },
+    'contacts:showNotes': function() {
+      this.prev = true;
+    },
+    'contacts:showTags': function() {
+      this.prev = true;
+    },
+
   }
 };

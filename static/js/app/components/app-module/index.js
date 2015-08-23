@@ -43,8 +43,7 @@ module.exports = {
       this.$broadcast('contacts:new');
     });
     this.router('/contacts/:id', (ctx) => {
-      this.$.main.view = 'contacts-module';
-      this.$broadcast('contacts:showInfos', parseInt(ctx.params.id));
+      this.$root.navigate('contacts:showDetails', undefined, ctx.params.id);
     });
     this.router('/contacts/:id/infos', (ctx) => {
       this.$.main.view = 'contacts-module';

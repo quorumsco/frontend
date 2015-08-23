@@ -1,5 +1,15 @@
 var contact_store = require('../../models/contact_store.js'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  upsert = function (arr, key, newval) {
+    var match = _.find(arr, key);
+    if(match){
+        // var index = _.indexOf(arr, _.find(arr, key));
+        var index = _.findIndex(arr, key);
+        arr.splice(index, 1, newval);
+    } else {
+        arr.push(newval);
+    }
+};
 
 module.exports = {
   data: function() {
@@ -46,6 +56,11 @@ module.exports = {
     'contacts:showTags': function(id) {
       this.contact_id = id;
       this.view = 'contact-tags';
+      return false;
+    },
+    'contacts:update': function(contact) {
+      upsert(this.contacts, {id: contact.id}, contact)
+      //save in the store
       return false;
     }
   }

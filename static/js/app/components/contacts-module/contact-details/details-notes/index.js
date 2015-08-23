@@ -19,18 +19,16 @@ module.exports = {
     };
   },
   template: require('./template.jade')(),
-    components: {
+  components: {
     'tab-menu': require('../details-tabs/index.js')
   },
   compiled: function () {
     if (!_.isEmpty(this.contact)) {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-      this.$emit("data-loaded");
     }
     contact_store.first(this.id, (res) => {
       this.contact = res;
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-      this.$emit("data-loaded");
     });
   }
 };

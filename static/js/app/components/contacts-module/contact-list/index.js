@@ -1,5 +1,15 @@
 var contact_store = require('../../../models/contact_store.js'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  upsert = function (arr, key, newval) {
+    var match = _.find(arr, key);
+    if(match){
+        // var index = _.indexOf(arr, _.find(arr, key));
+        var index = _.findIndex(arr, key);
+        arr.splice(index, 1, newval);
+    } else {
+        arr.push(newval);
+    }
+};
 
 module.exports = {
   props: {
@@ -21,7 +31,6 @@ module.exports = {
     if (this.contacts.length == 0) {
       contact_store.find((res) => {
         this.$set("contacts", res);
-        this.$emit("data-loaded");
       });
     }
   },

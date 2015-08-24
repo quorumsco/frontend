@@ -4,7 +4,7 @@ var tag_gen = function(id) {
   return {
     id: id,
     name: chance.word(),
-    color: chance.color()
+    color: chance.color({format: 'hex'})
   }
 }
 
@@ -23,8 +23,8 @@ var contact_gen = function(id) {
     firstname: chance.first(),
     surname: chance.last(),
     email: chance.email(),
-    notes: array_of(3, note_gen),
-    tags: array_of(10, tag_gen)
+    notes: array_of((Math.random() * 100) % 4 + 1, note_gen),
+    tags: array_of((Math.random() * 100) % 10 + 1, tag_gen)
   };
 };
 

@@ -1,3 +1,6 @@
 details-infos
   tab-menu(id="{{id}}" tab="3")
-  h1 Tags
+  tags-body
+    tags-item(v-repeat="contact.tags")
+      p
+        span(style="background-color: {{color}};") {{name}}

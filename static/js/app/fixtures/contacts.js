@@ -12,7 +12,7 @@ var note_gen = function(id) {
   return {
     id: id,
     author: chance.name(),
-    date: chance.date(),
+    date: chance.date({string: true, year: 2015, american: false}),
     content: chance.paragraph()
   }
 }
@@ -23,8 +23,8 @@ var contact_gen = function(id) {
     firstname: chance.first(),
     surname: chance.last(),
     email: chance.email(),
-    note: array_of(3, note_gen),
-    tag: array_of(10, tag_gen)
+    notes: array_of(3, note_gen),
+    tags: array_of(10, tag_gen)
   };
 };
 

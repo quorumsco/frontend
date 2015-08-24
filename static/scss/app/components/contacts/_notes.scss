@@ -1,0 +1,27 @@
+@include exports("notes-body") {
+  notes-body {
+    width: 95%;
+    display: block;
+    margin: auto;
+
+    div.content {
+      width: 100%;
+      word-wrap: break-word;
+      @include border-radius(0.2em);
+      margin-bottom: 1em;
+      padding: 0 0.5em 0 0.5em;
+      -moz-box-shadow: 0 0 2px 1px lighten(#000, 85%);
+      -webkit-box-shadow: 0 0 2px 1px lighten(#000, 85%);
+      -o-box-shadow: 0 0 2px 1px lighten(#000, 85%);
+      box-shadow: 0 0 2px 1px lighten(#000, 85%);
+
+      span.author {
+        font-weight: bold;
+      }
+
+      span.date {
+        color: grey;
+      }
+    }
+  }
+}

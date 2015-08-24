@@ -1,6 +1,8 @@
 details-infos
   tab-menu(id="{{id}}" tab="2")
-  h1 Notes
   notes-body
     notes-item(v-repeat="contact.notes")
-      i CACA
+      div.content
+        span.author {{author}} 
+        span.date {{date}}
+        p {{content}}

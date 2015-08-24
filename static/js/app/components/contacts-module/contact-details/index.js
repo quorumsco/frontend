@@ -22,9 +22,9 @@ module.exports = {
   template: require('./template.jade')(),
   components: {
     'tab-menu': require('./details-tabs/index.js'),
-    'contact-infos': require('./details-infos/index.js'),
-    'contact-notes': require('./details-notes/index.js'),
-    'contact-tags': require('./details-tags/index.js')
+    'details-infos': require('./details-infos/index.js'),
+    'details-notes': require('./details-notes/index.js'),
+    'details-tags': require('./details-tags/index.js')
   },
   compiled: function () {
     if (!_.isEmpty(this.contact)) {
@@ -36,22 +36,22 @@ module.exports = {
       this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
     });
   },
+  created: function() {
+    this.$dispatch("details:created");
+  },
   events: {
     'contacts:showInfos': function(id) {
-      console.log("INFOS 2");
-      this.view = 'contact-infos';
+      this.view = 'details-infos';
       this.tab = 1;
       return false;
     },
     'contacts:showNotes': function(id) {
-      console.log("NOTES 2");
-      this.view = 'contact-notes';
+      this.view = 'details-notes';
       this.tab = 2;
       return false;
     },
     'contacts:showTags': function(id) {
-      console.log("TAGS 2");
-      this.view = 'contact-tags';
+      this.view = 'details-tags';
       this.tab = 3;
       return false;
     },

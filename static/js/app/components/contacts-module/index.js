@@ -14,23 +14,25 @@ module.exports = {
   data: function() {
     return {
       contacts: [],
-      view: null,
+      view: "contact-list",
       contact_id: null,
-      contact: {}
+      contact: {},
+      details_event: null
     };
   },
   template: require('./template.jade')(),
   created: function() {
     this.$on("child-click", (child) => {
       this.contact = child;
-    })
+    });
+    this.$on("details:created", (child) => {
+      this.$broadcast(this.details_event);
+      this.$off("details:created");
+    });
   },
   components: {
     'contact-list': require('./contact-list/index.js'),
     'contact-details': require('./contact-details/index.js'),
-    // 'contact-infos': require('./contact-details/details-infos/index.js'),
-    // 'contact-notes': require('./contact-details/details-notes/index.js'),
-    // 'contact-tags': require('./contact-details/details-tags/index.js'),
     'contact-new': require('./contact-new/index.js')
   },
   events: {
@@ -45,21 +47,21 @@ module.exports = {
     },
     'contacts:showInfos': function(id) {
       this.contact_id = id;
+      this.details_event = "contacts:showInfos";
       this.view = 'contact-details';
-      console.log("INFOS 1");
     },
     'contacts:showNotes': function(id) {
       this.contact_id = id;
+      this.details_event = "contacts:showNotes";
       this.view = 'contact-details';
-      console.log("NOTES 1");
     },
     'contacts:showTags': function(id) {
       this.contact_id = id;
+      this.details_event = "contacts:showTags";
       this.view = 'contact-details';
-      console.log("TAGS 1");
     },
     'contacts:update': function(contact) {
-      upsert(this.contacts, {id: contact.id}, contact)
+      upsert(this.contacts, {id: contact.id}, contact);
       //save in the store
       return false;
     }

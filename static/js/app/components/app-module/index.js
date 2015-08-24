@@ -78,10 +78,6 @@ module.exports = {
     },
     back: function() {
       window.history.back();
-    },
-    showNav: function() {
-      this.$.nav.showNav();
-      this.$broadcast('overlay:show', true);
     }
   },
   events: {
@@ -95,13 +91,13 @@ module.exports = {
       this.$.header.hideDropdown();
     },
     'nav:show': function() {
-      this.$.header.$broadcast('overlay:show', true);
-      this.$.main.$broadcast('overlay:show', true);
+      this.$.header.$broadcast('overlay:show', true, false);
+      this.$.main.$broadcast('overlay:show', true, true);
       this.$.nav.show();
     },
     'dropdown:show': function() {
-      this.$.header.$broadcast('overlay:show', false);
-      this.$.main.$broadcast('overlay:show', false);
+      this.$.header.$broadcast('overlay:show', false, false);
+      this.$.main.$broadcast('overlay:show', false, true);
       this.$.header.showDropdown();
     },
     'header:title': function(title) {

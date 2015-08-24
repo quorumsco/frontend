@@ -29,6 +29,7 @@ module.exports = {
     contact_store.first(this.id, (res) => {
       this.contact = res;
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
+      console.log(this.contact);
     });
   }
 };

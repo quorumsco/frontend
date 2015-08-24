@@ -18,18 +18,5 @@ module.exports = {
       view: null
     };
   },
-  template: require('./template.jade')(),
-  components: {
-    'tab-menu': require('../details-tabs/index.js')
-  },
-  compiled: function () {
-    if (!_.isEmpty(this.contact)) {
-      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-    }
-    contact_store.first(this.id, (res) => {
-      this.contact = res;
-      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-      this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
-    });
-  }
+  template: require('./template.jade')()
 };

@@ -27,9 +27,10 @@ module.exports = {
   },
   components: {
     'contact-list': require('./contact-list/index.js'),
-    'contact-infos': require('./contact-details/details-infos/index.js'),
-    'contact-notes': require('./contact-details/details-notes/index.js'),
-    'contact-tags': require('./contact-details/details-tags/index.js'),
+    'contact-details': require('./contact-details/index.js'),
+    // 'contact-infos': require('./contact-details/details-infos/index.js'),
+    // 'contact-notes': require('./contact-details/details-notes/index.js'),
+    // 'contact-tags': require('./contact-details/details-tags/index.js'),
     'contact-new': require('./contact-new/index.js')
   },
   events: {
@@ -44,18 +45,18 @@ module.exports = {
     },
     'contacts:showInfos': function(id) {
       this.contact_id = id;
-      this.view = 'contact-infos';
-      return false;
+      this.view = 'contact-details';
+      console.log("INFOS 1");
     },
     'contacts:showNotes': function(id) {
       this.contact_id = id;
-      this.view = 'contact-notes';
-      return false;
+      this.view = 'contact-details';
+      console.log("NOTES 1");
     },
     'contacts:showTags': function(id) {
       this.contact_id = id;
-      this.view = 'contact-tags';
-      return false;
+      this.view = 'contact-details';
+      console.log("TAGS 1");
     },
     'contacts:update': function(contact) {
       upsert(this.contacts, {id: contact.id}, contact)

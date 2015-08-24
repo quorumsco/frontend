@@ -1,16 +1,20 @@
 @include exports("details-infos") {
-  info-field {
-    width : 95%;
-    margin: auto;
+  details-infos {
     display: block;
-    text-transform: capitalize;
 
-    input:focus {
-      background-color: lighten(#2980B9, 54%);
+    info-field {
+      width : 95%;
+      margin: auto;
+      display: block;
+      text-transform: capitalize;
+
+      input:focus {
+        background-color: lighten(#2980B9, 54%);
+      }
     }
-  }
   
-  button {
-    margin: 0 0 2.5% 2.5%;
+    button {
+      margin: 0 0 2.5% 2.5%;
+    }
   }
 }

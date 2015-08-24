@@ -23,9 +23,9 @@ module.exports = {
     }
   },
   events: {
-    'tabs:nb': function(nbNotes, NbTags) {
+    'tabs:nb': function(nbNotes, nbTags) {
       this.nbNotes = nbNotes;
-      this.nbTags = NbTags;
+      this.nbTags = nbTags;
       return false;
     }
   }

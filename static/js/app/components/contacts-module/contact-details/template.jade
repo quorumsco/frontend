@@ -1,9 +1,6 @@
 contact-details
-  tab-menu
-    a(href="{{$root.path('contacts:showDetails', id)}}" v-on="click: onClick($event, 'contacts:showDetails')") Infos
-    a(href="{{$root.path('contacts:showNotes', id)}}" v-on="click: onClick($event, 'contacts:showNotes')") Notes
-    a(href="{{$root.path('contacts:showTags', id)}}" v-on="click: onClick($event, 'contacts:showTags')") Tags
-  component(is="{{view}}" contact="{{contact}}")
+  tab-menu(id="{{id}}" tab="{{tab}}")
+  component(is="{{view}}" contact="{{contact}}" id="{{id}}")
 
   //- details-tags
   //-   tag-list

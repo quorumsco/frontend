@@ -1,11 +1,30 @@
 var casual = require('chance');
 
+var tag_gen = function(id) {
+  return {
+    id: id,
+    name: chance.word(),
+    color: chance.color()
+  }
+}
+
+var note_gen = function(id) {
+  return {
+    id: id,
+    author: chance.name(),
+    date: chance.date(),
+    content: chance.paragraph()
+  }
+}
+
 var contact_gen = function(id) {
   return {
     id: id,
     firstname: chance.first(),
     surname: chance.last(),
-    email: chance.email()
+    email: chance.email(),
+    note: array_of(3, note_gen),
+    tag: array_of(10, tag_gen)
   };
 };
 

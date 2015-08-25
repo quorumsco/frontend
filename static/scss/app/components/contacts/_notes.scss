@@ -6,7 +6,7 @@
 
     notes-item {
       display: block;
-      
+
       div.content {
         width: 100%;
         word-wrap: break-word;
@@ -26,6 +26,12 @@
         span.date {
           color: grey;
         }
+      }
+
+      .actions {
+        display: inline-block;
+        float: right;
+        color: darken(red, 10%);
       }
     }
   }

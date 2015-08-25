@@ -4,4 +4,7 @@ details-infos
       div.content
         span.author {{author}} 
         span.date {{date}}
+        a.actions(href="#" v-on="click: deleteNote($event, this)")
+          i.fa.fa-fw.fa-times
+        span.edit
         p {{content}}

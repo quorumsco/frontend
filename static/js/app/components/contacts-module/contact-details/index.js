@@ -33,11 +33,20 @@ module.exports = {
     contact_store.first(this.id, (res) => {
       this.contact = res;
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
+      // this.$set("contact", res);
       this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
     });
   },
   created: function() {
     this.$dispatch("details:created");
+  },
+  computed: {
+    notesCount: function() {
+      return this.contact.notes ? this.contact.notes.length : 0;
+    },
+    tagsCount: function() {
+      return this.contact.tags ? this.contact.tags.length : 0;
+    }
   },
   events: {
     'contacts:showInfos': function(id) {

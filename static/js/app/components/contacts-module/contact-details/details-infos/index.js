@@ -27,7 +27,6 @@ module.exports = {
       contact_store.first(this.id, (res) => {
         this.contact = res;
         this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-        this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
       });
     }
   }

@@ -8,6 +8,14 @@ module.exports = {
       type: Number,
       required: true
     }
+    // nbNotes: {
+    //   type: Number,
+    //   required: true
+    // },
+    // nbTags: {
+    //   type: Number,
+    //   required: true
+    // }
   },
   data: function() {
     return {

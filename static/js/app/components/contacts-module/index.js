@@ -64,6 +64,11 @@ module.exports = {
       upsert(this.contacts, {id: contact.id}, contact);
       //save in the store
       return false;
+    },
+    'tabs:nb': function(nbNotes, nbTags) {
+      this.$dispatch('tabs:nb', nbNotes, nbTags);
+      console.log("ya")
+      return false;
     }
   }
 };

@@ -18,5 +18,19 @@ module.exports = {
       view: null
     };
   },
-  template: require('./template.jade')()
+  template: require('./template.jade')(),
+  methods: {
+    deleteNote: function(e, note) {
+      e.preventDefault();
+      var remove = function (arr, key) {
+        var match = _.find(arr, key);
+        if (match) {
+          arr.$remove(key);
+        }
+      };
+      remove(this.contact.notes, note.$data);
+      this.$dispatch('contacts:update', this.contact);
+      this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+    }
+  }
 };

@@ -26,7 +26,7 @@ module.exports = {
     'details-notes': require('./details-notes/index.js'),
     'details-tags': require('./details-tags/index.js')
   },
-  compiled: function () {
+  attached: function () {
     if (!_.isEmpty(this.contact)) {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
     }

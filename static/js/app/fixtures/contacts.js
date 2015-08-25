@@ -23,8 +23,8 @@ var contact_gen = function(id) {
     firstname: chance.first(),
     surname: chance.last(),
     email: chance.email(),
-    notes: array_of((Math.random() * 100) % 4 + 1, note_gen),
-    tags: array_of((Math.random() * 100) % 10 + 1, tag_gen)
+    notes: array_of((Math.random() * 10000) % 10, note_gen),
+    tags: array_of((Math.random() * 10000) % 100, tag_gen)
   };
 };
 

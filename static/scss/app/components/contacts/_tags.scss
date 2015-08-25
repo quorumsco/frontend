@@ -1,0 +1,23 @@
+@include exports("tags-body") {
+  tags-body {
+    width: 95%;
+    display: block;
+    margin: auto;
+
+    tags-item {
+      display: inline-block;
+      margin: 1% 1% 0 0;
+      @include border-radius(0.5em);
+      padding: 0 1% 0 1%;
+
+      span {
+        white-space: nowrap;
+        opacity: 0.8;
+        color: #ffffff;
+        margin-top: 1%;
+        vertical-align: bottom;
+        box-sizing: border-box;
+      }
+    }
+  }
+}

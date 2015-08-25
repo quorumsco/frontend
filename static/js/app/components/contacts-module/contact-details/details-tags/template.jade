@@ -1,5 +1,4 @@
 details-infos
   tags-body
-    tags-item(v-repeat="contact.tags")
-      p
-        span(style="background-color: {{color}};") {{name}}
+    tags-item(v-repeat="contact.tags" style="background-color: {{color}};")
+      span {{name}}

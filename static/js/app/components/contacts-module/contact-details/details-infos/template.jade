@@ -1,5 +1,5 @@
 details-infos
-  each val in ["surname", "firstname", "email"]
+  each val in ["surname", "firstname", "email", "phone", "adress"]
     info-field #{val} :
       input(v-model="contact.#{val}" type="text" placeholder="#{val}" value="{{contact.#{val}}}")
   button(v-on="click: updateContact()") Ok

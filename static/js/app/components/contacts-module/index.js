@@ -67,7 +67,6 @@ module.exports = {
     },
     'tabs:nb': function(nbNotes, nbTags) {
       this.$dispatch('tabs:nb', nbNotes, nbTags);
-      console.log("ya")
       return false;
     }
   }

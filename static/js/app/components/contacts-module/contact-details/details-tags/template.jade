@@ -2,3 +2,5 @@ details-infos
   tags-body
     tags-item(v-repeat="contact.tags" style="background-color: {{color}};")
       span {{name}}
+      a.actions(href="#" v-on="click: deleteTag($event, this)")
+        i.fa.fa-fw.fa-times

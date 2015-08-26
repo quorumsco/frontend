@@ -4,6 +4,10 @@
   app-main {
     display: block;
     padding-top: $header-height;
+
+    .fixed {
+      position: fixed;
+    }
   }
 
   .overlay {
@@ -35,10 +39,6 @@
 
     div.darken {
       opacity: 1;
-    }
-
-    div.fixed {
-      position: fixed;
     }
   }
 }

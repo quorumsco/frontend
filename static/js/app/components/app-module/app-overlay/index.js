@@ -2,8 +2,7 @@ module.exports = {
   data: function() {
     return {
       visible: false,
-      darken: false,
-      fixed: false
+      darken: false
     };
   },
   template: require('./template.jade')(),
@@ -18,10 +17,9 @@ module.exports = {
       this.visible = false;
       this.darken = false;
     },
-    'overlay:show': function(darken, fixed) {
+    'overlay:show': function(darken) {
       this.visible = true;
       this.darken = darken;
-      this.fixed = fixed;
     }
   }
 };

@@ -11,9 +11,6 @@ var API = {
   'contacts:showDetails': function(id) {
     return `/contacts/${id}/infos`;
   },
-  'contacts:hideNote': function(id) {
-    return `/contacts/${id}/notes`;
-  },
   'contacts:showNote': function(id, noteID) {
     return `/contacts/${id}/notes/${noteID}`;
   },

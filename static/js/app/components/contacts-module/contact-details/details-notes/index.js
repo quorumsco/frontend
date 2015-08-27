@@ -32,17 +32,19 @@ module.exports = {
   },
   template: require('./template.jade')(),
   methods: {
-    deleteNote: function(e, note) {
+    deleteNote: function(e) {
       e.preventDefault();
       var remove = function (arr, key) {
         var match = _.find(arr, key);
         if (match) {
-          arr.$remove(key);
+          _.remove(arr, key);
+          // arr.$remove(key);
         }
       };
-      remove(this.contact.notes, note.$data);
+      remove(this.contact.notes, {id: this.note.id});
       this.$dispatch('contacts:update', this.contact);
-      this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+      this.$root.$emit("contacts:hideNote");
+      this.$root.navigate('contacts:showNotes', undefined, this.id);
     },
     showNote: function(e, note) {
       e.preventDefault();
@@ -60,14 +62,15 @@ module.exports = {
       this.$dispatch("tabs:hide");
       var cb = function()  {
         this.$dispatch("contacts:hideNote");
-        this.$root.navigate('contacts:hideNote', undefined, id);
+        this.$root.navigate('contacts:showNotes', undefined, id);
       }
-      this.$dispatch('header:setPrev', this.$root.path('contacts:hideNote', id), cb);
+      this.$dispatch('header:setPrev', this.$root.path('contacts:showNotes', id), cb);
       this.$dispatch('header:title', "Note");
     },
     'contacts:hideNote': function(id) {
       this.$set("focus", false);
       this.$dispatch("tabs:show");
+      this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
     }
   }
 };

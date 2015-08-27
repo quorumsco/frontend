@@ -1,5 +1,5 @@
 contact-details
-  tab-menu(id="{{id}}" tab="{{tab}}" v-if="showTabs")
+  tab-menu(id="{{id}}" tab="{{tab}}" nbTabs="{{nbTabs}}" nbNotes="{{nbNotes}}" v-class="hidden: !showTabs")
   component(is="{{view}}" contact="{{contact}}" id="{{id}}" keep-alive)
 
   //- details-tags

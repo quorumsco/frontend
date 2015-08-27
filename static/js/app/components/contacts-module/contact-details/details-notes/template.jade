@@ -10,15 +10,8 @@ details-infos
   notes-body(v-if="focus")
     notes-item
       div.edit
-        span.author {{@ note.author}} 
-        span.date {{@ note.date}}
-        textarea(v-model="note.content") {{@ note.content}}
-      button(v-on="click: updateNote()") Ok
-
-
-
-
-        //- a.actions(href="#" v-on="click: deleteNote($event, this)")
-        //-   i.fa.fa-fw.fa-times
-        //- a.actions(href="#" v-on="click: deleteNote($event, this)")
-        //-   i.fa.fa-pencil-square-o
+        span.author {{note.author}} 
+        span.date {{note.date}}
+        textarea(v-model="note.content") {{note.content}}
+  button(v-on="click: updateNote()" v-if="focus") Update
+  button(v-on="click: deleteNote($event)" v-if="focus") Delete

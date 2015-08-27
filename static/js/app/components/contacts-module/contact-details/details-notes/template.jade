@@ -1,10 +1,24 @@
 details-infos
-  notes-body
+  notes-body(v-if="!focus")
     notes-item(v-repeat="contact.notes")
+      a(href="{{$root.path('contacts:showNote', contact.id, id)}}" v-on="click: showNote($event, this)")
+        span.link
       div.content
         span.author {{author}} 
         span.date {{date}}
-        a.actions(href="#" v-on="click: deleteNote($event, this)")
-          i.fa.fa-fw.fa-times
-        span.edit
         p {{content}}
+  notes-body(v-if="focus")
+    notes-item
+      div.edit
+        span.author {{@ note.author}} 
+        span.date {{@ note.date}}
+        textarea(v-model="note.content") {{@ note.content}}
+      button(v-on="click: updateNote()") Ok
+
+
+
+
+        //- a.actions(href="#" v-on="click: deleteNote($event, this)")
+        //-   i.fa.fa-fw.fa-times
+        //- a.actions(href="#" v-on="click: deleteNote($event, this)")
+        //-   i.fa.fa-pencil-square-o

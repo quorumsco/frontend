@@ -12,12 +12,6 @@ module.exports = {
       required: true
     }
   },
-  data: function() {
-    return {
-      contact: {},
-      view: null
-    };
-  },
   template: require('./template.jade')(),
   methods: {
     updateContact: function() {

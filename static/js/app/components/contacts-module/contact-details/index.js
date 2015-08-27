@@ -6,7 +6,8 @@ module.exports = {
     return {
       view: null,
       contact: {},
-      tab: 0
+      tab: 0,
+      showTabs: true
     };
   },
   props: {
@@ -31,9 +32,8 @@ module.exports = {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
     }
     contact_store.first(this.id, (res) => {
-      this.contact = res;
+      this.$set("contact", res);
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-      // this.$set("contact", res);
       this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
     });
   },
@@ -49,23 +49,47 @@ module.exports = {
     }
   },
   events: {
-    'contacts:showInfos': function(id) {
+    'contacts:showInfos': function() {
       this.view = 'details-infos';
       this.tab = 1;
       return false;
     },
-    'contacts:showNotes': function(id) {
+    'contacts:showNotes': function() {
       this.view = 'details-notes';
       this.tab = 2;
       return false;
     },
-    'contacts:showTags': function(id) {
+    'contacts:hideNote': function() {
+      this.view = 'details-notes';
+      this.tab = 2;
+      var cb = function() {
+        this.$root.navigate("contacts:list");
+      }
+      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), cb);
+    },
+    'contacts:showNote': function(id, noteID) {
+      this.view = 'details-notes';
+      this.tab = 2;
+      var cb = function() {
+        this.$root.navigate("contacts:list");
+      }
+      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), cb);
+    },
+    'contacts:showTags': function() {
       this.view = 'details-tags';
       this.tab = 3;
       return false;
     },
     'tabs:nb': function(nbNotes, nbTags) {
       this.$broadcast('tabs:nb', nbNotes, nbTags);
+      return false;
+    },
+    'tabs:hide': function() {
+      this.showTabs = false;
+      return false;
+    },
+    'tabs:show': function() {
+      this.showTabs = true;
       return false;
     }
   }

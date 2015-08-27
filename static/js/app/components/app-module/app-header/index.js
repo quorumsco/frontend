@@ -3,7 +3,10 @@ module.exports = {
     return {
       title: "",
       prev: false,
-      dropdown: false
+      dropdown: false,
+      prevEvent: null,
+      prevUrl: null,
+      cb: undefined
     };
   },
   template: require('./template.jade')(),
@@ -17,20 +20,21 @@ module.exports = {
     showDropdown: function() {
       this.dropdown = true;
     },
-    hideDropdown: function(e) {
+    hideDropdown: function() {
       this.dropdown = false;
     },
     navOnClickOut: function(e) {
       e.preventDefault();
-      this.$root.navigate('contacts:list');
+      this.cb();
+      // this.$root.navigate(this.prevEvent);
     },
     navOnClickIn: function(e) {
       e.preventDefault();
-      this.$dispatch('nav:show')
+      this.$dispatch('nav:show');
     },
     dropdownOnClick: function(e) {
       e.preventDefault();
-      this.$dispatch('dropdown:show')
+      this.$dispatch('dropdown:show');
     }
   },
   events: {
@@ -39,13 +43,33 @@ module.exports = {
     },
     'contacts:showInfos': function() {
       this.prev = true;
+      this.prevEvent = "contacts:list";
+      this.prevUrl = this.$root.path(this.prevEvent);
+      this.cb = function() {
+        this.$root.navigate(this.prevEvent);
+      }
     },
     'contacts:showNotes': function() {
       this.prev = true;
+      this.prevEvent = "contacts:list";
+      this.prevUrl = this.$root.path(this.prevEvent);
+      this.cb = function() {
+        this.$root.navigate(this.prevEvent);
+      }
     },
     'contacts:showTags': function() {
       this.prev = true;
+      this.prevEvent = "contacts:list";
+      this.prevUrl = this.$root.path(this.prevEvent);
+      this.cb = function() {
+        this.$root.navigate(this.prevEvent);
+      }
     },
-
+    'header:setPrev': function(url, cb) {
+      this.prev = true;
+      this.prevUrl = url;
+      this.cb = cb;
+      return false;
+    },
   }
 };

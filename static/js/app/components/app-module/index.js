@@ -11,6 +11,12 @@ var API = {
   'contacts:showDetails': function(id) {
     return `/contacts/${id}/infos`;
   },
+  'contacts:hideNote': function(id) {
+    return `/contacts/${id}/notes`;
+  },
+  'contacts:showNote': function(id, noteID) {
+    return `/contacts/${id}/notes/${noteID}`;
+  },
   'contacts:showNotes': function(id) {
     return `/contacts/${id}/notes`;
   },
@@ -57,6 +63,10 @@ module.exports = {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:showNotes', parseInt(ctx.params.id));
     });
+    this.router('/contacts/:id/notes/:noteID', (ctx) => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:showNote', parseInt(ctx.params.id), parseInt(ctx.params.noteID));
+    });
     this.router('/login', (ctx) => {
       this.$.main.view = 'app-login';
     });
@@ -100,8 +110,15 @@ module.exports = {
       this.$.main.$broadcast('overlay:show', false);
       this.$.header.showDropdown();
     },
+    'header:setPrev': function(url, cb) {
+      this.$.header.$emit('header:setPrev', url, cb);
+      return false
+    },
     'header:title': function(title) {
       this.$.header.set(title);
+    },
+    'contacts:hideNote': function(id) {
+      this.$broadcast("contacts:hideNote", id);
     }
   }
 };

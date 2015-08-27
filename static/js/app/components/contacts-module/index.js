@@ -26,7 +26,7 @@ module.exports = {
       this.contact = child;
     });
     this.$on("details:created", (child) => {
-      this.$broadcast(this.details_event);
+      this.details_event();
       this.$off("details:created");
     });
   },
@@ -47,17 +47,37 @@ module.exports = {
     },
     'contacts:showInfos': function(id) {
       this.contact_id = id;
-      this.details_event = "contacts:showInfos";
+      this.details_event = function() {
+        this.$broadcast("contacts:showInfos");
+       }
       this.view = 'contact-details';
     },
     'contacts:showNotes': function(id) {
       this.contact_id = id;
-      this.details_event = "contacts:showNotes";
+      this.details_event = function() {
+        this.$broadcast("contacts:showNotes");
+       }
+      this.view = 'contact-details';
+    },
+    'contacts:showNote': function(id, noteID) {
+      this.contact_id = id;
+      this.details_event = function() {
+        this.$broadcast("contacts:showNote", id, noteID);
+       }
+      this.view = 'contact-details';
+    },
+    'contacts:hideNote': function(id) {
+      this.contact_id = id;
+      this.details_event = function() {
+        this.$broadcast("contacts:hideNote", id);
+       }
       this.view = 'contact-details';
     },
     'contacts:showTags': function(id) {
       this.contact_id = id;
-      this.details_event = "contacts:showTags";
+      this.details_event = function() {
+        this.$broadcast("contacts:showTags");
+       }
       this.view = 'contact-details';
     },
     'contacts:update': function(contact) {

@@ -1,5 +1,4 @@
 module.exports = {
-  replace: false,
   data: function() {
     return {
       contact: this.baseContact()

@@ -49,7 +49,7 @@ module.exports = {
       return false;
     },
     'contacts:new': function() {
-      this.view = 'contact-new';
+      this.view = 'new';
       this.$dispatch('header:title', "New Contact");
       var cb = function() {
         this.$root.navigate("contacts:list");

@@ -23,9 +23,9 @@ module.exports = {
   template: require('./template.jade')(),
   components: {
     'tab-menu': require('./details-tabs/index.js'),
-    'details-infos': require('./details-infos/index.js'),
-    'details-notes': require('./details-notes/index.js'),
-    'details-tags': require('./details-tags/index.js')
+    'infos': require('./details-infos/index.js'),
+    'notes': require('./details-notes/index.js'),
+    'tags': require('./details-tags/index.js')
   },
   attached: function () {
     if (!_.isEmpty(this.contact)) {
@@ -50,17 +50,17 @@ module.exports = {
   },
   events: {
     'contacts:showInfos': function() {
-      this.view = 'details-infos';
+      this.view = 'infos';
       this.tab = 1;
       return false;
     },
     'contacts:showNotes': function() {
-      this.view = 'details-notes';
+      this.view = 'notes';
       this.tab = 2;
       return false;
     },
     'contacts:hideNote': function() {
-      this.view = 'details-notes';
+      this.view = 'notes';
       this.tab = 2;
       var cb = function() {
         this.$root.navigate("contacts:list");
@@ -68,7 +68,7 @@ module.exports = {
       this.$dispatch('header:setPrev', this.$root.path("contacts:list"), cb);
     },
     'contacts:showNote': function(id, noteID) {
-      this.view = 'details-notes';
+      this.view = 'notes';
       this.tab = 2;
       var cb = function() {
         this.$root.navigate("contacts:list");
@@ -76,7 +76,7 @@ module.exports = {
       this.$dispatch('header:setPrev', this.$root.path("contacts:list"), cb);
     },
     'contacts:showTags': function() {
-      this.view = 'details-tags';
+      this.view = 'tags';
       this.tab = 3;
       return false;
     },

@@ -2,6 +2,7 @@ var contact_store = require('../../../models/contact_store.js'),
   _ = require('lodash')
 
 module.exports = {
+  replace: false,
   props: {
     contacts: {
       type: Array,

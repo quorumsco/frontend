@@ -23,10 +23,11 @@ var API = {
 };
 
 module.exports = {
+  replace: false,
   el: 'app-module',
   components: {
     'app-header': require('./app-header/index.js'),
-    'app-nav': require('./app-nav/index.js'),
+    'nav': require('./app-nav/index.js'),
     'app-main': require('./app-main/index.js'),
     'app-overlay': require('./app-overlay/index.js'),
     'app-login': require('./app-login/index.js')
@@ -65,7 +66,7 @@ module.exports = {
       this.$broadcast('contacts:showNote', parseInt(ctx.params.id), parseInt(ctx.params.noteID));
     });
     this.router('/login', (ctx) => {
-      this.$.main.view = 'app-login';
+      this.login = true;
     });
     this.router('/', '/contacts');
 

@@ -1,4 +1,5 @@
 module.exports = {
+  replace: false,
   data: function() {
     return {
       title: "",

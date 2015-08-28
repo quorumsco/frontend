@@ -44,7 +44,7 @@
     "socket.io": "latest",
     "superagent": "latest",
     "vinyl-source-stream": "latest",
-    "vue": "0.12.8"
+    "vue": "latest"
   },
   "dependencies": {}
 }

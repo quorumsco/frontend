@@ -1,4 +1,5 @@
 module.exports = {
+  replace: false,
   props: {
     id: {
       type: Number,

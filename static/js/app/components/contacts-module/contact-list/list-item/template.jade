@@ -1,4 +1,4 @@
-list-item(v-class="selected: selected")
+div(v-class="selected: selected")
   a(href="{{$root.path('contacts:showDetails', id)}}" v-on="click: onClick($event)")
     span.name {{surname}} {{firstname}}
     //- span.select

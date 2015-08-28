@@ -1,4 +1,4 @@
-details-infos
+details-notes
   notes-body(v-if="!focus")
     notes-item(v-repeat="contact.notes")
       a(href="{{$root.path('contacts:showNote', contact.id, id)}}" v-on="click: showNote($event, this)")

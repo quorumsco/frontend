@@ -1,4 +1,5 @@
 module.exports = {
+  replace: false,
   template: require('./template.jade')(),
   components: {
     'app-overlay': require('../app-overlay/index.js'),

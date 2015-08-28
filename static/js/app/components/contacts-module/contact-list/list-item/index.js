@@ -1,4 +1,5 @@
 module.exports = {
+  replace: false,
   template: require('./template.jade')(),
   methods: {
     onClick: function(e) {

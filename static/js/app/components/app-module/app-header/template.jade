@@ -1,21 +1,20 @@
-app-header
-  div
-    section.left
-      a.toggle-nav(href="#" v-on="click: navOnClickIn($event)" v-if="!prev")
-        i.fa.fa-fw.fa-bars
-      a.toggle-nav(href="{{prevUrl}}" v-on="click: navOnClickOut($event)" v-if="prev")
-        i.fa.fa-fw.fa-arrow-left
-          
-    h2 {{title}}
+div
+  section.left
+    a.toggle-nav(href="#" v-on="click: navOnClickIn($event)" v-if="!prev")
+      i.fa.fa-fw.fa-bars
+    a.toggle-nav(href="{{prevUrl}}" v-on="click: navOnClickOut($event)" v-if="prev")
+      i.fa.fa-fw.fa-arrow-left
+        
+  h2 {{title}}
 
-    section.right
-      a(href="#" v-on="click: $event.preventDefault()")
-        i.fa.fa-fw.fa-search
-      a(href="#" v-on="click: dropdownOnClick($event)")
-        i.fa.fa-fw.fa-ellipsis-v
-      ul.dropdown(v-class="visible: dropdown")
-        li
-          a(href="#" v-on="click: $event.preventDefault()") Sort by
-        li
-          a(href="#" v-on="click: $event.preventDefault()") Settings
-  app-overlay
+  section.right
+    a(href="#" v-on="click: $event.preventDefault()")
+      i.fa.fa-fw.fa-search
+    a(href="#" v-on="click: dropdownOnClick($event)")
+      i.fa.fa-fw.fa-ellipsis-v
+    ul.dropdown(v-class="visible: dropdown")
+      li
+        a(href="#" v-on="click: $event.preventDefault()") Sort by
+      li
+        a(href="#" v-on="click: $event.preventDefault()") Settings
+app-overlay

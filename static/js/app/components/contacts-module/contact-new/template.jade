@@ -1,6 +1,8 @@
 contact-new
-  form
-    each val in ["firstname", "surname", "email", "phone", "adress"]
-      info-field #{val} :
-        input(id="#{val]" v-model="contact.#{val}" type="text" placeholder="#{val}")
-    button(v-on="click: submit(contact, $event)") Ok
+  details-infos
+    br
+    form
+      each val in ["firstname", "surname", "email", "phone", "adress"]
+        info-field #{val} :
+          input(id="#{val]" v-model="contact.#{val}" type="text" placeholder="#{val}")
+      button(v-on="click: submit(contact, $event)") Ok

@@ -1,2 +1,3 @@
-contacts-module(v-ref="contacts")
+contacts-module(v-if="view == contacts" v-ref="contacts")
+map-module(v-if="view == map")
 app-overlay.fixed(ref="overlay")

@@ -8,6 +8,7 @@ module.exports = {
   template: require('./template.jade')(),
   methods: {
     submit: function(contact, event) {
+      console.log(this.$parent)
       event.preventDefault();
       this.$parent.addContact(contact);
       this.contact = this.baseContact();
@@ -16,7 +17,9 @@ module.exports = {
       return {
         firstname: null,
         surname: null,
-        phone: null
+        email: null,
+        phone: null,
+        adress: null
       };
     }
   }

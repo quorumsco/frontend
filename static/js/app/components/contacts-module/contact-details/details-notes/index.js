@@ -38,7 +38,6 @@ module.exports = {
         var match = _.find(arr, key);
         if (match) {
           _.remove(arr, key);
-          // arr.$remove(key);
         }
       };
       remove(this.contact.notes, {id: this.note.id});
@@ -71,6 +70,7 @@ module.exports = {
       this.$set("focus", false);
       this.$dispatch("tabs:show");
       this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
     }
   }
 };

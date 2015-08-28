@@ -8,6 +8,8 @@ div
   h2 {{title}}
 
   section.right
+    a(href="{{addUrl}}" v-on="click: addUser($event)")
+      i.fa.fa-fw.fa-plus    
     a(href="#" v-on="click: $event.preventDefault()")
       i.fa.fa-fw.fa-search
     a(href="#" v-on="click: dropdownOnClick($event)")
@@ -17,4 +19,4 @@ div
         a(href="#" v-on="click: $event.preventDefault()") Sort by
       li
         a(href="#" v-on="click: $event.preventDefault()") Settings
-app-overlay
+  app-overlay

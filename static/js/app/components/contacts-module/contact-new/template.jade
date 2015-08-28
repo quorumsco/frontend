@@ -1,18 +1,8 @@
 contact-new
-  h3 New Contact
-  form
-    div
-      label(for="firstname") Firstname
-      div
-        input(id="firstname" v-model="contact.firstname" type="text" placeholder="firstname")
-    div
-      label(for="surname") Surname
-      div
-        input(id="surname" v-model="contact.surname" type="text" placeholder="surname")
-    div
-      label(for="phone") Phone
-      div
-        input(id="phone" v-model="contact.phone" type="text" placeholder="phone")
-    div
-      div
-        input(type="submit" value="Submit" v-on="click: submit(contact, $event)")
+  details-infos
+    br
+    form
+      each val in ["firstname", "surname", "email", "phone", "adress"]
+        info-field #{val} :
+          input(id="#{val]" v-model="contact.#{val}" type="text" placeholder="#{val}")
+      button(v-on="click: submit(contact, $event)") Ok

@@ -7,6 +7,7 @@ module.exports = {
       dropdown: false,
       prevEvent: null,
       prevUrl: null,
+      addUrl: this.$root.path('contacts:new'),
       cb: undefined
     };
   },
@@ -27,7 +28,6 @@ module.exports = {
     navOnClickOut: function(e) {
       e.preventDefault();
       this.cb();
-      // this.$root.navigate(this.prevEvent);
     },
     navOnClickIn: function(e) {
       e.preventDefault();
@@ -36,6 +36,9 @@ module.exports = {
     dropdownOnClick: function(e) {
       e.preventDefault();
       this.$dispatch('dropdown:show');
+    },
+    addUser: function(e) {
+      this.$root.navigate('contacts:new');
     }
   },
   events: {

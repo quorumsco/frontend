@@ -53,6 +53,9 @@ module.exports = {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:list');
     });
+    this.router('/map', () => {
+      this.$.main.view = 'map';
+    });
     this.router('/contacts/new', () => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:new');

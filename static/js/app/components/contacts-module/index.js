@@ -35,6 +35,12 @@ module.exports = {
     'contact-details': require('./contact-details/index.js'),
     'contact-new': require('./contact-new/index.js')
   },
+  methods: {
+    addContact: function(contact) {
+      contact.id = this.contacts.length + 1;
+      upsert(this.contacts, {id: contact.id}, contact);
+    }
+  },
   events: {
     'contacts:list': function() {
       this.view = 'contact-list';
@@ -43,6 +49,11 @@ module.exports = {
     },
     'contacts:new': function() {
       this.view = 'contact-new';
+      this.$dispatch('header:title', "New Contact");
+      var cb = function() {
+        this.$root.navigate("contacts:list");
+      }
+      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), cb);
       return false;
     },
     'contacts:showInfos': function(id) {

@@ -76,7 +76,7 @@ module.exports = {
       this.details_event = function() {
         this.$broadcast("contacts:showNote", id, noteID);
        }
-      this.view = 'contact-details';
+      this.view = 'details';
     },
     'contacts:hideNote': function(id) {
       this.contact_id = id;

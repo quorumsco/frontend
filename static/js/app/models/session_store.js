@@ -5,13 +5,13 @@ var Emitter = require('events').EventEmitter,
 
 //Test session, si oui ok si non on go sur login
 
-store.me = function(cb) {
+store.me = function(cb, error, root) {
   request
   .get(`${api}/me`)
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (err) {
-      this.$root.navigate('app:login');
+      error(root);
     } else if (res.body.status === 'success') {
       cb(res.body.data.user);
     }
@@ -24,7 +24,7 @@ store.getSession = function(cb) {
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (err) {
-      //tu ecris de la merde bro
+      //"tu ecris de la merde bro"
     } else if (res.body.status === 'success') {
       cb(res.body.data.session);
     }

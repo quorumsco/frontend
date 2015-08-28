@@ -21,6 +21,8 @@ var API = {
     return `/contacts/${id}/tags`;
   }
 };
+var session_store = require('../../models/session_store.js');
+var _ = require('lodash');
 
 module.exports = {
   replace: false,
@@ -35,9 +37,18 @@ module.exports = {
   template: require('./template.jade')(),
   data: {
     router: require('page'),
-    login: false
+    login: false,
+    me: null
   },
   ready: function() {
+    var error = function(root) {
+      console.log("Vers login")
+      //root.navigate('app:login');
+    }
+    session_store.me((res) => {
+      this.$set("me", res);
+    }, error, this.$root);
+
     this.router('/contacts', () => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:list');

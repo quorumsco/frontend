@@ -1,7 +1,10 @@
 module.exports = {
   replace: false,
-  data: {
-    view: "map"
+  data: function() {
+    return {
+      contacts: true,
+      map: false
+    }
   },
   template: require('./template.jade')(),
   components: {

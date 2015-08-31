@@ -4,11 +4,12 @@ module.exports = {
     return {
       title: "",
       prev: false,
+      prevFunc: undefined,
       dropdown: false,
-      prevEvent: null,
       prevUrl: null,
-      addUrl: this.$root.path('contacts:new'),
-      cb: undefined
+      addUrl: null,
+      addFunc: undefined,
+      add: null
     };
   },
   template: require('./template.jade')(),
@@ -27,7 +28,7 @@ module.exports = {
     },
     navOnClickOut: function(e) {
       e.preventDefault();
-      this.cb();
+      this.prevFunc();
     },
     navOnClickIn: function(e) {
       e.preventDefault();
@@ -37,8 +38,9 @@ module.exports = {
       e.preventDefault();
       this.$dispatch('dropdown:show');
     },
-    addUser: function(e) {
-      this.$root.navigate('contacts:new');
+    addOnClick: function(e) {
+      e.preventDefault();
+      addFunc();
     }
   },
   events: {
@@ -47,33 +49,40 @@ module.exports = {
     },
     'contacts:showInfos': function() {
       this.prev = true;
-      this.prevEvent = "contacts:list";
-      this.prevUrl = this.$root.path(this.prevEvent);
-      this.cb = function() {
-        this.$root.navigate(this.prevEvent);
+      this.prevUrl = this.$root.path("contacts:list");
+      this.prevFunc = function() {
+        this.$root.navigate("contacts:list");
       }
     },
     'contacts:showNotes': function() {
       this.prev = true;
-      this.prevEvent = "contacts:list";
-      this.prevUrl = this.$root.path(this.prevEvent);
-      this.cb = function() {
-        this.$root.navigate(this.prevEvent);
+      this.prevUrl = this.$root.path("contacts:list");
+      this.prevFunc = function() {
+        this.$root.navigate("contacts:list");
       }
     },
     'contacts:showTags': function() {
       this.prev = true;
-      this.prevEvent = "contacts:list";
-      this.prevUrl = this.$root.path(this.prevEvent);
-      this.cb = function() {
-        this.$root.navigate(this.prevEvent);
+      this.prevUrl = this.$root.path("contacts:list");
+      this.prevFunc = function() {
+        this.$root.navigate("contacts:list");
       }
     },
-    'header:setPrev': function(url, cb) {
+    'header:setPrev': function(url, prevFunc) {
       this.prev = true;
       this.prevUrl = url;
-      this.cb = cb;
+      this.prevFunc = prevFunc;
       return false;
     },
+    'header:setAdd': function(url, addFunc) {
+      this.add = true;
+      this.addUrl = url;
+      this.addFunc = addFunc;
+      return false;
+    },
+    'header:hideAdd': function(url, addFunc) {
+      this.add = false;
+      return false;
+    }
   }
 };

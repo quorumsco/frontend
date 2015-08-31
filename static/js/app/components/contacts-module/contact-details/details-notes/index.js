@@ -59,12 +59,13 @@ module.exports = {
       this.$set("focus", true);
       this.$set("note", _.cloneDeep(_.find(this.contact.notes, {id: noteID})));
       this.$dispatch("tabs:hide");
-      var cb = function()  {
+      var prevFunc = function()  {
         this.$dispatch("contacts:hideNote");
         this.$root.navigate('contacts:showNotes', undefined, id);
       }
-      this.$dispatch('header:setPrev', this.$root.path('contacts:showNotes', id), cb);
+      this.$dispatch('header:setPrev', this.$root.path('contacts:showNotes', id), prevFunc);
       this.$dispatch('header:title', "Note");
+      this.$dispatch('header:hideAdd');
     },
     'contacts:hideNote': function(id) {
       this.$set("focus", false);

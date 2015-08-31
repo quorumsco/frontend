@@ -8,6 +8,12 @@ var API = {
   'contacts:new': function() {
     return '/contacts/new';
   },
+  'contacts:newNote': function(id) {
+    return `/contacts/${id}/notes/new`;
+  },
+  'contacts:newTag': function(id) {
+    return `/contacts/${id}/tags/new`;
+  },
   'contacts:showDetails': function(id) {
     return `/contacts/${id}/infos`;
   },
@@ -71,9 +77,17 @@ module.exports = {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:showTags', parseInt(ctx.params.id));
     });
+    this.router('/contacts/:id/tags/new', (ctx) => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:newTag', parseInt(ctx.params.id));
+    });
     this.router('/contacts/:id/notes', (ctx) => {
       this.$.main.view = 'contacts-module';
       this.$broadcast('contacts:showNotes', parseInt(ctx.params.id));
+    });
+    this.router('/contacts/:id/notes/new', (ctx) => {
+      this.$.main.view = 'contacts-module';
+      this.$broadcast('contacts:newNote', parseInt(ctx.params.id));
     });
     this.router('/contacts/:id/notes/:noteID', (ctx) => {
       this.$.main.view = 'contacts-module';
@@ -122,8 +136,16 @@ module.exports = {
       this.$.main.$broadcast('overlay:show', false);
       this.$.header.showDropdown();
     },
-    'header:setPrev': function(url, cb) {
-      this.$.header.$emit('header:setPrev', url, cb);
+    'header:setPrev': function(url, prevFunc) {
+      this.$.header.$emit('header:setPrev', url, prevFunc);
+      return false
+    },
+    'header:setAdd': function(url, addFunc) {
+      this.$.header.$emit('header:setAdd', url, addFunc);
+      return false
+    },
+    'header:hideAdd': function() {
+      this.$.header.$emit('header:hideAdd');
       return false
     },
     'header:title': function(title) {

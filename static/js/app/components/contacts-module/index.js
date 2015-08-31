@@ -34,7 +34,9 @@ module.exports = {
   components: {
     'list': require('./contact-list/index.js'),
     'details': require('./contact-details/index.js'),
-    'new': require('./contact-new/index.js')
+    'new': require('./contact-new/index.js'),
+    'newNote': require('./contact-new/note/index.js'),
+    'newTag': require('./contact-new/tag/index.js')
   },
   methods: {
     addContact: function(contact) {
@@ -46,15 +48,19 @@ module.exports = {
     'contacts:list': function() {
       this.view = 'list';
       this.$dispatch('header:title', "Contacts");
+      var addFunc = function() {
+        this.$root.navigate("contacts:new");
+      }
+      this.$dispatch('header:setAdd', this.$root.path('contacts:new'), addFunc);
       return false;
     },
     'contacts:new': function() {
       this.view = 'new';
       this.$dispatch('header:title', "New Contact");
-      var cb = function() {
+      var prevFunc = function() {
         this.$root.navigate("contacts:list");
       }
-      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), cb);
+      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), prevFunc);
       return false;
     },
     'contacts:showInfos': function(id) {
@@ -67,9 +73,18 @@ module.exports = {
     'contacts:showNotes': function(id) {
       this.contact_id = id;
       this.details_event = function() {
-        this.$broadcast("contacts:showNotes");
+        this.$broadcast("contacts:showNotes", id);
        }
       this.view = 'details';
+    },
+    'contacts:newNote': function(id) {
+      this.view = 'newNote';
+      var prevFunc = function() {
+        this.$root.navigate("contacts:showNotes", undefined, id);
+      }
+      this.$dispatch('header:setPrev', this.$root.path("contacts:showNotes", id), prevFunc);
+      this.$dispatch('header:title', "New Note");
+      return false;
     },
     'contacts:showNote': function(id, noteID) {
       this.contact_id = id;
@@ -88,9 +103,18 @@ module.exports = {
     'contacts:showTags': function(id) {
       this.contact_id = id;
       this.details_event = function() {
-        this.$broadcast("contacts:showTags");
+        this.$broadcast("contacts:showTags", id);
        }
       this.view = 'details';
+    },
+    'contacts:newTag': function(id) {
+      this.view = 'newTag';
+      var prevFunc = function() {
+        this.$root.navigate("contacts:showTags", undefined, id);
+      }
+      this.$dispatch('header:setPrev', this.$root.path("contacts:showTags", id), prevFunc);
+      this.$dispatch('header:title', "New Tag");
+      return false;
     },
     'contacts:update': function(contact) {
       upsert(this.contacts, {id: contact.id}, contact);
@@ -103,3 +127,16 @@ module.exports = {
     }
   }
 };
+
+    // 'contacts:newTag': function(id) {
+    //   this.view = "tags-new";
+    //   var prevFunc = function()  {
+    //     this.$root.navigate('contacts:showTags', undefined, id);
+    //     this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
+    //     this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+    //   }
+    //   this.$dispatch('header:setPrev', this.$root.path('contacts:showTags', id), prevFunc);
+    //   this.$dispatch('header:title', "New Tag");  
+    //   this.$dispatch("tabs:hide");
+    //   return false;
+    // },

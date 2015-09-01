@@ -42,7 +42,7 @@ module.exports = {
       };
       remove(this.contact.notes, {id: this.note.id});
       this.$dispatch('contacts:update', this.contact);
-      this.$root.$emit("contacts:hideNote");
+      this.$root.$emit("contacts:hideNote", this.id);
       this.$root.navigate('contacts:showNotes', undefined, this.id);
     },
     showNote: function(e, note) {
@@ -60,7 +60,7 @@ module.exports = {
       this.$set("note", _.cloneDeep(_.find(this.contact.notes, {id: noteID})));
       this.$dispatch("tabs:hide");
       var prevFunc = function()  {
-        this.$dispatch("contacts:hideNote");
+        this.$dispatch("contacts:hideNote", id);
         this.$root.navigate('contacts:showNotes', undefined, id);
       }
       this.$dispatch('header:setPrev', this.$root.path('contacts:showNotes', id), prevFunc);

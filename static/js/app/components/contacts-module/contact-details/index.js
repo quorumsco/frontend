@@ -35,19 +35,20 @@ module.exports = {
       this.$set("contact", res);
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
       this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+      this.$dispatch('contacts:update', this.contact)
     });
   },
   created: function() {
     this.$dispatch("details:created");
   },
-  computed: {
-    notesCount: function() {
-      return this.contact.notes ? this.contact.notes.length : 0;
-    },
-    tagsCount: function() {
-      return this.contact.tags ? this.contact.tags.length : 0;
-    }
-  },
+  // computed: {
+  //   notesCount: function() {
+  //     return this.contact.notes ? this.contact.notes.length : 0;
+  //   },
+  //   tagsCount: function() {
+  //     return this.contact.tags ? this.contact.tags.length : 0;
+  //   }
+  // },
   events: {
     'contacts:showInfos': function() {
       this.view = 'infos';

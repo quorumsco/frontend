@@ -11,6 +11,7 @@ var contact_store = require('../../models/contact_store.js'),
       }
       arr.push(newval);
     }
+    return arr
 };
 
 module.exports = {
@@ -42,13 +43,24 @@ module.exports = {
     'newTag': require('./contact-new/tag/index.js')
   },
   methods: {
+    findContact: function() {
+      return _.find(this.contacts, {id: this.contact_id});
+    },
     addContact: function(contact) {
       contact.id = this.contacts ? this.contacts.length + 1 : 1;
-      upsert(this.contacts, {id: contact.id}, contact);
+      this.contacts = upsert(this.contacts, {id: contact.id}, contact);
     },
     addNote: function(note) {
+      this.contact = this.findContact();
       note.id = this.contact.notes ? this.contact.notes.length + 1 : 1;
-      upsert(this.contact.notes, {id: note.id}, note);
+      this.contact.notes = upsert(this.contact.notes, {id: note.id}, note);
+      upsert(this.contacts, {id: this.contact.id}, this.contact);
+    },
+    addTag: function(tag) {
+      this.contact = this.findContact();
+      tag.id = this.contact.tags ? this.contact.tags.length + 1 : 1;
+      this.contact.tags = upsert(this.contact.tags, {id: tag.id}, tag);
+      upsert(this.contacts, {id: this.contact.id}, this.contact);
     }
   },
   events: {
@@ -138,16 +150,3 @@ module.exports = {
     }
   }
 };
-
-    // 'contacts:newTag': function(id) {
-    //   this.view = "tags-new";
-    //   var prevFunc = function()  {
-    //     this.$root.navigate('contacts:showTags', undefined, id);
-    //     this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-    //     this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
-    //   }
-    //   this.$dispatch('header:setPrev', this.$root.path('contacts:showTags', id), prevFunc);
-    //   this.$dispatch('header:title', "New Tag");  
-    //   this.$dispatch("tabs:hide");
-    //   return false;
-    // },

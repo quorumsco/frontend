@@ -1,3 +1,6 @@
 details-tags
+  br
   tags-body
-    h1 add Tag
+    input(v-model="newTag.name")
+    br
+    button(v-on="click: createTag(newTag, $event)") Create

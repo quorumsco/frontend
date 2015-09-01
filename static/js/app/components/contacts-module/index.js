@@ -6,7 +6,10 @@ var contact_store = require('../../models/contact_store.js'),
         var index = _.findIndex(arr, key);
         arr.splice(index, 1, newval);
     } else {
-        arr.push(newval);
+      if (!arr) {
+        arr = [];
+      }
+      arr.push(newval);
     }
 };
 
@@ -40,8 +43,12 @@ module.exports = {
   },
   methods: {
     addContact: function(contact) {
-      contact.id = this.contacts.length + 1;
+      contact.id = this.contacts ? this.contacts.length + 1 : 1;
       upsert(this.contacts, {id: contact.id}, contact);
+    },
+    addNote: function(note) {
+      note.id = this.contact.notes ? this.contact.notes.length + 1 : 1;
+      upsert(this.contact.notes, {id: note.id}, note);
     }
   },
   events: {
@@ -78,12 +85,14 @@ module.exports = {
       this.view = 'details';
     },
     'contacts:newNote': function(id) {
+      this.contact_id = id;
       this.view = 'newNote';
       var prevFunc = function() {
         this.$root.navigate("contacts:showNotes", undefined, id);
       }
       this.$dispatch('header:setPrev', this.$root.path("contacts:showNotes", id), prevFunc);
       this.$dispatch('header:title', "New Note");
+      this.$dispatch('header:hideAdd');
       return false;
     },
     'contacts:showNote': function(id, noteID) {
@@ -108,12 +117,14 @@ module.exports = {
       this.view = 'details';
     },
     'contacts:newTag': function(id) {
+      this.contact_id = id;
       this.view = 'newTag';
       var prevFunc = function() {
         this.$root.navigate("contacts:showTags", undefined, id);
       }
       this.$dispatch('header:setPrev', this.$root.path("contacts:showTags", id), prevFunc);
       this.$dispatch('header:title', "New Tag");
+      this.$dispatch('header:hideAdd');
       return false;
     },
     'contacts:update': function(contact) {

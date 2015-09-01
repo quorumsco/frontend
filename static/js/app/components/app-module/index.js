@@ -44,7 +44,10 @@ module.exports = {
   data: {
     router: require('page'),
     login: false,
-    me: null
+    me: {
+      firstname: "Poncholay",
+      surname: "Jerryolay"
+    }
   },
   ready: function() {
     var error = function(root) {

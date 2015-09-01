@@ -1,3 +1,5 @@
 details-notes
   notes-body
-    h1 add Notes
+    notes-item
+      textarea(v-model="newNote.content")
+  button(v-on="click: createNote()") Create

@@ -40,11 +40,11 @@
           top: 0;
           bottom: 0;
           display: block;
+        }
 
-          textarea {
-            background-color: lighten(#2980B9, 54%);
-            height: 300px;
-          }
+        textarea {
+          background-color: lighten(#2980B9, 54%);
+          height: 300px;
         }
 
 
@@ -55,15 +55,6 @@
           top: 0;
           left: 0;
         }
-
-  /*      .actions {
-          font-size: 1.4em;
-          margin-left: 0.5%;
-          vertical-align: top;
-          display: inline-block;
-          float: right;
-          color: darken(red, 10%);
-        }*/
 
         &:hover {
           div.content {

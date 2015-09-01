@@ -40,7 +40,7 @@ module.exports = {
     },
     addOnClick: function(e) {
       e.preventDefault();
-      addFunc();
+      this.addFunc();
     }
   },
   events: {

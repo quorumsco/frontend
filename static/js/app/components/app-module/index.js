@@ -50,6 +50,7 @@ module.exports = {
     }
   },
   ready: function() {
+    //Test de connexion
     var error = function(root) {
       console.log("Vers login")
       //root.navigate('app:login');

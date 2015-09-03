@@ -1,7 +1,8 @@
 var Emitter = require('events').EventEmitter,
   store = module.exports = new Emitter(),
   request = require('superagent'),
-  api = 'http://api.quorumapps.com';
+  // api = 'http://api.quorumapps.com';
+  api = 'http://localhost:8080';
 
 //Test session, si oui ok si non on go sur login
 
@@ -18,10 +19,12 @@ store.me = function(cb, error, root) {
   });
 }
 
-store.getSession = function(cb) {
+store.getSession = function(data, cb, error) {
   request
   .post(`${api}/session`)
   .set('Accept', 'application/json')
+  .type('form')
+  .send(data)
   .end(function(err, res) {
     if (err) {
       //"tu ecris de la merde bro"

@@ -49,19 +49,21 @@ module.exports = {
       surname: "Jerryolay"
     }
   },
-  ready: function() {
-    //Test de connexion
+  beforeCompile: function() {
     var error = function(root) {
-      console.log("Vers login")
-      //root.navigate('app:login');
+      root.navigate('app:login');
     }
     session_store.me((res) => {
       this.$set("me", res);
     }, error, this.$root);
-
+  },
+  ready: function() {
+    //Test de connexion
     this.router('/contacts', () => {
-      this.$.main.view = 'contacts-module';
-      this.$broadcast('contacts:list');
+      if (this.$.main) {
+        this.$.main.view = 'contacts-module';
+        this.$broadcast('contacts:list');
+      }
     });
     this.router('/map', () => {
       this.$.main.view = 'map';
@@ -100,6 +102,7 @@ module.exports = {
     this.router('/login', (ctx) => {
       this.login = true;
     });
+
     this.router('/', '/contacts');
 
     this.router({

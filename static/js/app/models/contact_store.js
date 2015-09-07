@@ -6,6 +6,7 @@ var Emitter = require('events').EventEmitter,
 store.find = function(cb) {
   request
   .get(`${api}/contacts`)
+  .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (err) {
@@ -19,6 +20,7 @@ store.find = function(cb) {
 store.first = function(id, cb) {
   request
   .get(`${api}/contacts/${id}`)
+  .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (err) {
@@ -32,6 +34,7 @@ store.first = function(id, cb) {
 store.save = function(contact, cb) {
   request
   .post(`${api}/contacts`)
+  .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
     data: {
@@ -52,6 +55,7 @@ store.save = function(contact, cb) {
 store.delete = function(contact, cb) {
   request
   .del(`${api}/contacts/${contact.id}`)
+  .withCredentials()
   .end(function(err, res) {
     if (err) {
       cb(require('../fixtures/contacts.js')(contact.id));

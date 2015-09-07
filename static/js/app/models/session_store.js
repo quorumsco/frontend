@@ -9,6 +9,7 @@ var Emitter = require('events').EventEmitter,
 store.me = function(cb, error, root) {
   request
   .get(`${api}/me`)
+  .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (err) {
@@ -22,6 +23,7 @@ store.me = function(cb, error, root) {
 store.getSession = function(data, cb, error) {
   request
   .post(`${api}/session`)
+  .withCredentials()
   .set('Accept', 'application/json')
   .type('form')
   .send(data)

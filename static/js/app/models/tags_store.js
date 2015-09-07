@@ -7,6 +7,7 @@ var Emitter = require('events').EventEmitter,
 store.find = function(id, cb) {
   return request
   .get(`${api}/contact/${id}/tags`)
+  .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (res.body.status === 'success') {
@@ -18,6 +19,7 @@ store.find = function(id, cb) {
 store.save = function(id, contact, cb) {
   return request
   .post(`${api}/contact/${id}/tags`)
+  .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
     data: {
@@ -32,6 +34,7 @@ store.save = function(id, contact, cb) {
 store.delete = function(id, tag, cb) {
   return request
   .del(`${api}/contacts/${id}/tags/${tag.id}`)
+  .withCredentials()
   .end(function(err, res) {
     return cb(res);
   });

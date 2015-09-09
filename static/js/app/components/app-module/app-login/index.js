@@ -17,6 +17,13 @@ module.exports = {
   		var cb = function(root) {
   			root.login = false
   			root.navigate("contacts:list");
+  		    var error = function(root) {
+  		    	console.log("Error");
+		    }
+		    session_store.me((res) => {
+		        this.login = false;
+		        this.$root.$set("me", res);
+	        }, error, this.$root);	
   		}
   		var cbError = function(err) {
   			console.log("Bad Identifiers");

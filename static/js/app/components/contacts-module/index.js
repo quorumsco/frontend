@@ -1,4 +1,5 @@
 var contact_store = require('../../models/contact_store.js'),
+  note_store = require('../../models/note_store.js'),
   _ = require('lodash'),
   upsert = function (arr, key, newval) {
     var match = _.find(arr, key);
@@ -55,9 +56,10 @@ module.exports = {
     },
     addNote: function(note) {
       this.contact = this.findContact();
-      note.id = this.contact.notes ? this.contact.notes.length + 1 : 1;
-      this.contact.notes = upsert(this.contact.notes, {id: note.id}, note);
-      upsert(this.contacts, {id: this.contact.id}, this.contact);
+      note_store.save(this.contact_id, note, (res) => {
+        this.contact.notes = upsert(this.contact.notes, {id: res.body.data.note.id}, res.body.data.note);
+        upsert(this.contacts, {id: this.contact.id}, this.contact);
+      });
     },
     addTag: function(tag) {
       this.contact = this.findContact();

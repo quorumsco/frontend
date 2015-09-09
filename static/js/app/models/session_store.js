@@ -6,21 +6,21 @@ var Emitter = require('events').EventEmitter,
 
 //Test session, si oui ok si non on go sur login
 
-store.me = function(cb, error, root) {
+store.me = function(cb, cbError, root) {
   request
   .get(`${api}/me`)
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
     if (err) {
-      error(root);
+      cbError(root);
     } else if (res.body.status === 'success') {
       cb(res.body.data.user);
     }
   });
 }
 
-store.getSession = function(data, cb, error) {
+store.getSession = function(data, cb, cbError, root) {
   request
   .post(`${api}/session`)
   .withCredentials()
@@ -29,9 +29,9 @@ store.getSession = function(data, cb, error) {
   .send(data)
   .end(function(err, res) {
     if (err) {
-      //"tu ecris de la merde bro"
+      cbError(err);
     } else if (res.body.status === 'success') {
-      cb(res.body.data.session);
+      cb(root);
     }
   });
 }

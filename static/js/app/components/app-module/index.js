@@ -44,59 +44,72 @@ module.exports = {
   data: {
     router: require('page'),
     login: false,
-    me: {
-      firstname: "Poncholay",
-      surname: "Jerryolay"
-    }
+    me: null
   },
-  beforeCompile: function() {
+  ready: function() {
+    //Test de connexion
     var error = function(root) {
       root.navigate('app:login');
     }
     session_store.me((res) => {
+      if (this.login == true) {
+        this.login = false
+        this.$on("main:created", (child) => {
+          this.$root.navigate("contacts:list");
+          this.$off("main:created");
+        });
+      }
+      console.log(res)
       this.$set("me", res);
     }, error, this.$root);
-  },
-  ready: function() {
-    //Test de connexion
     this.router('/contacts', () => {
+      console.log(this.$)
       if (this.$.main) {
-        this.$.main.view = 'contacts-module';
-        this.$broadcast('contacts:list');
+        this.$.main.map = false;
+        this.$.main.contacts = true;
       }
+      this.$broadcast('contacts:list');
     });
     this.router('/map', () => {
-      this.$.main.view = 'map';
+        this.$.main.map = true;
+        this.$.main.contacts = false;
     });
     this.router('/contacts/new', () => {
-      this.$.main.view = 'contacts-module';
+      this.$.main.map = false;
+      this.$.main.contacts = true;
       this.$broadcast('contacts:new');
     });
     this.router('/contacts/:id', (ctx) => {
       this.$root.navigate('contacts:showDetails', undefined, ctx.params.id);
     });
     this.router('/contacts/:id/infos', (ctx) => {
-      this.$.main.view = 'contacts-module';
+      this.$.main.map = false;
+      this.$.main.contacts = true;
       this.$broadcast('contacts:showInfos', parseInt(ctx.params.id));
     });
     this.router('/contacts/:id/tags', (ctx) => {
-      this.$.main.view = 'contacts-module';
+      this.$.main.map = false;
+      this.$.main.contacts = true;
       this.$broadcast('contacts:showTags', parseInt(ctx.params.id));
     });
     this.router('/contacts/:id/tags/new', (ctx) => {
-      this.$.main.view = 'contacts-module';
+      this.$.main.map = false;
+      this.$.main.contacts = true;
       this.$broadcast('contacts:newTag', parseInt(ctx.params.id));
     });
     this.router('/contacts/:id/notes', (ctx) => {
-      this.$.main.view = 'contacts-module';
+      this.$.main.map = false;
+      this.$.main.contacts = true;
       this.$broadcast('contacts:showNotes', parseInt(ctx.params.id));
     });
     this.router('/contacts/:id/notes/new', (ctx) => {
-      this.$.main.view = 'contacts-module';
+      this.$.main.map = false;
+      this.$.main.contacts = true;
       this.$broadcast('contacts:newNote', parseInt(ctx.params.id));
     });
     this.router('/contacts/:id/notes/:noteID', (ctx) => {
-      this.$.main.view = 'contacts-module';
+      this.$.main.map = false;
+      this.$.main.contacts = true;
       this.$broadcast('contacts:showNote', parseInt(ctx.params.id), parseInt(ctx.params.noteID));
     });
     this.router('/login', (ctx) => {

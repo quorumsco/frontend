@@ -27,23 +27,12 @@ module.exports = {
     'notes': require('./details-notes/index.js'),
     'tags': require('./details-tags/index.js')
   },
-  ready: function() {
-    if (!_.isEmpty(this.contact)) {
-      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-    }
-    contact_store.first(this.id, (res) => {
-      this.$set("contact", res);
-      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
-      this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
-      this.$dispatch('contacts:update', this.contact)
-    });
-  },
   attached: function () {
     if (!_.isEmpty(this.contact)) {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
     }
     contact_store.first(this.id, (res) => {
-      // this.$set("contact", res);
+      this.$set("contact", res);
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
       this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
       this.$dispatch('contacts:update', this.contact)

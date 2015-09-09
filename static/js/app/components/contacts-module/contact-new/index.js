@@ -15,7 +15,7 @@ module.exports = {
       return {
         firstname: null,
         surname: null,
-        email: null,
+        mail: null,
         phone: null,
         adress: null
       };

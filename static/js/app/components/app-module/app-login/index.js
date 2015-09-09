@@ -14,13 +14,15 @@ module.exports = {
   methods: {
   	logIn: function(e) {
   		e.preventDefault();
-  		var cb = function() {
-  			console.log("Youpi")
+  		var cb = function(root) {
+  			root.login = false
+  			root.navigate("contacts:list");
   		}
-  		var error = function() {
-  			console.log("Merde")
+  		var cbError = function(err) {
+  			console.log("Bad Identifiers");
+  			console.log(err)
   		}
-  		session_store.getSession(this.user, cb, error);
+  		session_store.getSession(this.user, cb, cbError, this.$root);
   	}
   }
 };

@@ -47,8 +47,11 @@ module.exports = {
       return _.find(this.contacts, {id: this.contact_id});
     },
     addContact: function(contact) {
-      contact.id = this.contacts ? this.contacts.length + 1 : 1;
-      this.contacts = upsert(this.contacts, {id: contact.id}, contact);
+      console.log(contact)
+      contact_store.save(contact, (res) => {
+        this.contacts = upsert(this.contacts, {id: res.body.data.contact.id}, res.body.data.contact);
+        console.log(res.body.data.contact);
+      });
     },
     addNote: function(note) {
       this.contact = this.findContact();

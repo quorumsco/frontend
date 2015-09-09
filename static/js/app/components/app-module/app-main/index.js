@@ -6,6 +6,9 @@ module.exports = {
       map: false
     }
   },
+  attached: function() {
+    this.$dispatch("main:created");
+  },
   template: require('./template.jade')(),
   components: {
     'app-overlay': require('../app-overlay/index.js'),

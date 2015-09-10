@@ -51,11 +51,11 @@ module.exports = {
     var error = function(root) {
       root.navigate('app:login');
     }
-    session_store.me((res) => {
+    session_store.me((res, root) => {
       if (this.login == true) {
         this.login = false
         this.$on("main:created", (child) => {
-          this.$root.navigate("contacts:list");
+          root.navigate("contacts:list");
           this.$off("main:created");
         });
       }

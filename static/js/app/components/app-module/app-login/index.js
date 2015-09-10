@@ -20,9 +20,9 @@ module.exports = {
   		    var error = function(root) {
   		    	console.log("Error");
 		    }
-		    session_store.me((res) => {
+		    session_store.me((res, root) => {
 		        this.login = false;
-		        this.$root.$set("me", res);
+		        root.$set("me", res);
 	        }, error, this.$root);	
   		}
   		var cbError = function(err) {

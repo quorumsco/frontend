@@ -15,7 +15,7 @@ store.me = function(cb, cbError, root) {
     if (err) {
       cbError(root);
     } else if (res.body.status === 'success') {
-      cb(res.body.data.user);
+      cb(res.body.data.user, root);
     }
   });
 }

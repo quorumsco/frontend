@@ -40,10 +40,12 @@ module.exports = {
           _.remove(arr, key);
         }
       };
-      remove(this.contact.notes, {id: this.note.id});
-      this.$dispatch('contacts:update', this.contact);
-      this.$root.$emit("contacts:hideNote", this.id);
-      this.$root.navigate('contacts:showNotes', undefined, this.id);
+      note_store.delete(this.contact.id, this.note.id, () => {
+        remove(this.contact.notes, {id: this.note.id});
+        this.$dispatch('contacts:update', this.contact);
+        this.$root.$emit("contacts:hideNote", this.id);
+        this.$root.navigate('contacts:showNotes', undefined, this.id);
+      });
     },
     showNote: function(e, note) {
       e.preventDefault();

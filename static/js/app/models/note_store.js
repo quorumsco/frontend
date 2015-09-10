@@ -80,8 +80,8 @@ store.delete = function(id, note_id, cb) {
   .withCredentials()
   .end(function(err, res) {
     if (err) {
-      cb(require('../fixtures/contacts.js')(contact.id));
-    } else if (res.body.status === 'success') {
+      console.log(err);
+    } else {
       cb(res);
     }
   });

@@ -1,4 +1,4 @@
-  var contact_store = require('../../../../models/contact_store.js'),
+  var note_store = require('../../../../models/note_store.js'),
   _ = require('lodash'),
   upsert = function (arr, key, newval) {
     var match = _.find(arr, key);
@@ -49,9 +49,12 @@ module.exports = {
       e.preventDefault();
       this.$root.navigate('contacts:showNote', e, this.id, note.id);
     },
-    updateNote: function() {
-      upsert(this.contact.notes, {id: this.note.id}, this.note);
-      this.$dispatch('contacts:update', this.contact);
+    updateNote: function(e) {
+      e.preventDefault();
+      note_store.update(this.contact.id,  this.note, (res) => {
+        upsert(this.contact.notes, {id: this.note.id}, this.note);
+        this.$dispatch('contacts:update', this.contact);
+      });
     }
   },
   events: {

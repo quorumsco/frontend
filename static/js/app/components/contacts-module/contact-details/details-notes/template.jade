@@ -13,5 +13,5 @@ details-notes
         span.author {{note.author}} 
         span.date {{note.date}}
         textarea(v-model="note.content") {{note.content}}
-  button(v-on="click: updateNote()" v-if="focus") Update
+  button(v-on="click: updateNote($event)" v-if="focus") Update
   button(v-on="click: deleteNote($event)" v-if="focus") Delete

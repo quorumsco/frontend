@@ -53,10 +53,11 @@ store.save = function(id, note, cb) {
 };
 
 store.update = function(id, note, cb) {
+  console.log(note)
   request
-  .post(`${api}/contacts/${id}/notes`)
+  .patch(`${api}/contacts/${id}/notes/${note.id}`)
   .withCredentials()
-  .set('Content-Type', 'application/json-patch')
+  .set('Content-Type', 'application/json')
   .send({
     data: {
       note: note

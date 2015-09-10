@@ -53,7 +53,6 @@ store.save = function(id, note, cb) {
 };
 
 store.update = function(id, note, cb) {
-  console.log(note)
   request
   .patch(`${api}/contacts/${id}/notes/${note.id}`)
   .withCredentials()

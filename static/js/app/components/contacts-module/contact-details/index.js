@@ -1,5 +1,6 @@
 var contact_store = require('../../../models/contact_store.js'),
   note_store = require('../../../models/note_store.js'),
+  tags_store = require('../../../models/tags_store.js'),
   _ = require('lodash');
 
 module.exports = {
@@ -36,10 +37,12 @@ module.exports = {
       this.$set("contact", res);
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
       note_store.find(this.id, (notes_res) => {
-        console.log(notes_res)
         this.contact.$set("notes", notes_res);
-        this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
-        this.$dispatch('contacts:update', this.contact)
+        tags_store.find(this.id, (tags_res) => {
+          this.contact.$set("tags", tags_res);
+          this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+          this.$dispatch('contacts:update', this.contact)
+        });
       });
     });
   },

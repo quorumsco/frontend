@@ -1,5 +1,6 @@
 var contact_store = require('../../models/contact_store.js'),
   note_store = require('../../models/note_store.js'),
+  tags_store = require('../../models/tags_store.js'),
   _ = require('lodash'),
   upsert = function (arr, key, newval) {
     var match = _.find(arr, key);
@@ -48,10 +49,8 @@ module.exports = {
       return _.find(this.contacts, {id: this.contact_id});
     },
     addContact: function(contact) {
-      console.log(contact)
       contact_store.save(contact, (res) => {
         this.contacts = upsert(this.contacts, {id: res.body.data.contact.id}, res.body.data.contact);
-        console.log(res.body.data.contact);
       });
     },
     addNote: function(note) {
@@ -63,9 +62,10 @@ module.exports = {
     },
     addTag: function(tag) {
       this.contact = this.findContact();
-      tag.id = this.contact.tags ? this.contact.tags.length + 1 : 1;
-      this.contact.tags = upsert(this.contact.tags, {id: tag.id}, tag);
-      upsert(this.contacts, {id: this.contact.id}, this.contact);
+      tags_store.save(this.contact_id, tag, (res) => {
+        this.contact.tags = upsert(this.contact.tags, {id: res.body.data.tag.id}, res.body.data.tag);
+        upsert(this.contacts, {id: this.contact.id}, this.contact);
+      });
     }
   },
   events: {

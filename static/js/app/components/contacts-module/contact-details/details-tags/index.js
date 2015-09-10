@@ -1,4 +1,4 @@
-  var contact_store = require('../../../../models/contact_store.js'),
+  var tags_store = require('../../../../models/tags_store.js'),
   _ = require('lodash');
 
 module.exports = {
@@ -22,9 +22,11 @@ module.exports = {
           arr.$remove(key);
         }
       };
-      remove(this.contact.tags, tag.$data);
-      this.$dispatch('contacts:update', this.contact);
-      this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+      tags_store.delete(this.contact.id, tag, () => {
+        remove(this.contact.tags, tag.$data);
+        this.$dispatch('contacts:update', this.contact);
+        this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+      });
     }
   }
 };

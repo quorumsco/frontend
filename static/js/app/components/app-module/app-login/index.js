@@ -15,15 +15,16 @@ module.exports = {
   	logIn: function(e) {
   		e.preventDefault();
   		var cb = function(root) {
-  			root.login = false
-  			root.navigate("contacts:list");
+  			// console.log(this.$root);
   		    var error = function(root) {
   		    	console.log("Error");
+            root.login = true
 		    }
 		    session_store.me((res, root) => {
-		        this.login = false;
+		        root.login = false;
 		        root.$set("me", res);
-	        }, error, this.$root);	
+       			root.navigate("contacts:list");
+	        }, error, root);	
   		}
   		var cbError = function(err) {
   			console.log("Bad Identifiers");

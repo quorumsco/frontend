@@ -6,19 +6,21 @@ var Emitter = require('events').EventEmitter,
 
 store.find = function(id, cb) {
   return request
-  .get(`${api}/contact/${id}/tags`)
+  .get(`${api}/contacts/${id}/tags`)
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
-    if (res.body.status === 'success') {
-      return cb(res.body.data.contacts);
+    if (err) {
+      console.log(err);
+    } else if (res.body.status === 'success') {
+      cb(res.body.data.tags);
     }
   });
 };
 
-store.save = function(id, contact, cb) {
+store.save = function(id, tag, cb) {
   return request
-  .post(`${api}/contact/${id}/tags`)
+  .post(`${api}/contacts/${id}/tags`)
   .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
@@ -27,7 +29,11 @@ store.save = function(id, contact, cb) {
     }
   })
   .end(function(err, res) {
-    return cb(res);
+    if (err) {
+      console.log(err);
+    } else {
+      cb(res);
+    }
   });
 };
 
@@ -36,6 +42,6 @@ store.delete = function(id, tag, cb) {
   .del(`${api}/contacts/${id}/tags/${tag.id}`)
   .withCredentials()
   .end(function(err, res) {
-    return cb(res);
+    cb(res);
   });
 };

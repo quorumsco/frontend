@@ -59,11 +59,9 @@ module.exports = {
           this.$off("main:created");
         });
       }
-      console.log(res)
       this.$set("me", res);
     }, error, this.$root);
     this.router('/contacts', () => {
-      console.log(this.$)
       if (this.$.main) {
         this.$.main.map = false;
         this.$.main.contacts = true;

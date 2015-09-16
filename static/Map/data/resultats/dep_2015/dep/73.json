@@ -1,0 +1,79 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "151909",
+    "pourcent_blancs_ins": "3.01",
+    "pourcent_nuls_ins": "1.37",
+    "pourcent_exp_vot": "90.79",
+    "votants": "137887",
+    "pourcent_exp_ins": "43.2",
+    "blancs": "8715",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "2.18",
+        "voix": "2730",
+        "sieges": "0",
+        "pourcent_voix_ins": "0.94",
+        "code_nuance": "BC-FG"
+      },
+      {
+        "pourcent_voix_exp": "17.93",
+        "voix": "22445",
+        "sieges": "6",
+        "pourcent_voix_ins": "7.75",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "3.54",
+        "voix": "4436",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.53",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "2.41",
+        "voix": "3019",
+        "sieges": "0",
+        "pourcent_voix_ins": "1.04",
+        "code_nuance": "BC-VEC"
+      },
+      {
+        "pourcent_voix_exp": "7.17",
+        "voix": "8976",
+        "sieges": "4",
+        "pourcent_voix_ins": "3.1",
+        "code_nuance": "BC-UDI"
+      },
+      {
+        "pourcent_voix_exp": "32.86",
+        "voix": "41140",
+        "sieges": "18",
+        "pourcent_voix_ins": "14.2",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "16.47",
+        "voix": "20620",
+        "sieges": "6",
+        "pourcent_voix_ins": "7.12",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "17.43",
+        "voix": "21824",
+        "sieges": "0",
+        "pourcent_voix_ins": "7.53",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "73",
+    "pourcent_nuls_vot": "2.89",
+    "lib": "SAVOIE",
+    "pourcent_blancs_vot": "6.32",
+    "nuls": "3982",
+    "exprimes": "125190",
+    "pourcent_vot_ins": "47.58",
+    "inscrits": "289796",
+    "pourcent_abs_ins": "52.42"
+  }
+}

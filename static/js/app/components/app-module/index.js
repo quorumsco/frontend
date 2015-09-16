@@ -25,6 +25,9 @@ var API = {
   },
   'contacts:showTags': function(id) {
     return `/contacts/${id}/tags`;
+  },
+  'ciblage:show': function() {
+    return `/map`;
   }
 };
 var session_store = require('../../models/session_store.js');

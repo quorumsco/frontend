@@ -1,0 +1,86 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "231462",
+    "pourcent_blancs_ins": "3.08",
+    "pourcent_nuls_ins": "1.2",
+    "pourcent_exp_vot": "91.52",
+    "votants": "235476",
+    "pourcent_exp_ins": "46.15",
+    "blancs": "14386",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "17.22",
+        "voix": "37108",
+        "sieges": "4",
+        "pourcent_voix_ins": "7.95",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "5.42",
+        "voix": "11671",
+        "sieges": "6",
+        "pourcent_voix_ins": "2.5",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "6.07",
+        "voix": "13082",
+        "sieges": "4",
+        "pourcent_voix_ins": "2.8",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "2.05",
+        "voix": "4427",
+        "sieges": "2",
+        "pourcent_voix_ins": "0.95",
+        "code_nuance": "BC-MDM"
+      },
+      {
+        "pourcent_voix_exp": "2.28",
+        "voix": "4904",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.05",
+        "code_nuance": "BC-UDI"
+      },
+      {
+        "pourcent_voix_exp": "4.79",
+        "voix": "10330",
+        "sieges": "2",
+        "pourcent_voix_ins": "2.21",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "25.88",
+        "voix": "55768",
+        "sieges": "12",
+        "pourcent_voix_ins": "11.94",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "20.78",
+        "voix": "44781",
+        "sieges": "16",
+        "pourcent_voix_ins": "9.59",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "15.51",
+        "voix": "33431",
+        "sieges": "0",
+        "pourcent_voix_ins": "7.16",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "14",
+    "pourcent_nuls_vot": "2.37",
+    "lib": "CALVADOS",
+    "pourcent_blancs_vot": "6.11",
+    "nuls": "5588",
+    "exprimes": "215502",
+    "pourcent_vot_ins": "50.43",
+    "inscrits": "466938",
+    "pourcent_abs_ins": "49.57"
+  }
+}

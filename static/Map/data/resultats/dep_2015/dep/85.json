@@ -1,0 +1,58 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "140662",
+    "pourcent_blancs_ins": "3.44",
+    "pourcent_nuls_ins": "1.84",
+    "pourcent_exp_vot": "89.7",
+    "votants": "147786",
+    "pourcent_exp_ins": "45.96",
+    "blancs": "9924",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "10.48",
+        "voix": "13896",
+        "sieges": "2",
+        "pourcent_voix_ins": "4.82",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "4.79",
+        "voix": "6344",
+        "sieges": "0",
+        "pourcent_voix_ins": "2.2",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "52.25",
+        "voix": "69265",
+        "sieges": "14",
+        "pourcent_voix_ins": "24.01",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "10.79",
+        "voix": "14309",
+        "sieges": "4",
+        "pourcent_voix_ins": "4.96",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "21.69",
+        "voix": "28754",
+        "sieges": "0",
+        "pourcent_voix_ins": "9.97",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "85",
+    "pourcent_nuls_vot": "3.58",
+    "lib": "VENDEE",
+    "pourcent_blancs_vot": "6.72",
+    "nuls": "5294",
+    "exprimes": "132568",
+    "pourcent_vot_ins": "51.23",
+    "inscrits": "288448",
+    "pourcent_abs_ins": "48.77"
+  }
+}

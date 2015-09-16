@@ -1,0 +1,107 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "868369",
+    "pourcent_blancs_ins": "3.06",
+    "pourcent_nuls_ins": "1.82",
+    "pourcent_exp_vot": "91.25",
+    "votants": "1095717",
+    "pourcent_exp_ins": "50.91",
+    "blancs": "60127",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "0.6",
+        "voix": "5978",
+        "sieges": "2",
+        "pourcent_voix_ins": "0.3",
+        "code_nuance": "BC-FG"
+      },
+      {
+        "pourcent_voix_exp": "30.41",
+        "voix": "304054",
+        "sieges": "96",
+        "pourcent_voix_ins": "15.48",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "10.11",
+        "voix": "101131",
+        "sieges": "40",
+        "pourcent_voix_ins": "5.15",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "3.86",
+        "voix": "38554",
+        "sieges": "20",
+        "pourcent_voix_ins": "1.96",
+        "code_nuance": "BC-RDG"
+      },
+      {
+        "pourcent_voix_exp": "7.74",
+        "voix": "77349",
+        "sieges": "34",
+        "pourcent_voix_ins": "3.94",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "0.27",
+        "voix": "2724",
+        "sieges": "0",
+        "pourcent_voix_ins": "0.14",
+        "code_nuance": "BC-DIV"
+      },
+      {
+        "pourcent_voix_exp": "0.25",
+        "voix": "2520",
+        "sieges": "0",
+        "pourcent_voix_ins": "0.13",
+        "code_nuance": "BC-UC"
+      },
+      {
+        "pourcent_voix_exp": "1.49",
+        "voix": "14849",
+        "sieges": "2",
+        "pourcent_voix_ins": "0.76",
+        "code_nuance": "BC-UDI"
+      },
+      {
+        "pourcent_voix_exp": "2.04",
+        "voix": "20432",
+        "sieges": "12",
+        "pourcent_voix_ins": "1.04",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "13.61",
+        "voix": "136062",
+        "sieges": "26",
+        "pourcent_voix_ins": "6.93",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "14.16",
+        "voix": "141543",
+        "sieges": "36",
+        "pourcent_voix_ins": "7.21",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "15.47",
+        "voix": "154668",
+        "sieges": "0",
+        "pourcent_voix_ins": "7.87",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "73",
+    "pourcent_nuls_vot": "3.26",
+    "lib": "MIDI-PYRENEES",
+    "pourcent_blancs_vot": "5.49",
+    "nuls": "35726",
+    "exprimes": "999864",
+    "pourcent_vot_ins": "55.79",
+    "inscrits": "1964086",
+    "pourcent_abs_ins": "44.21"
+  }
+}

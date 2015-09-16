@@ -1,0 +1,93 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "115208",
+    "pourcent_blancs_ins": "4.68",
+    "pourcent_nuls_ins": "2.9",
+    "pourcent_exp_vot": "86.53",
+    "votants": "148611",
+    "pourcent_exp_ins": "48.75",
+    "blancs": "12351",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "6.9",
+        "voix": "8879",
+        "sieges": "2",
+        "pourcent_voix_ins": "3.37",
+        "code_nuance": "BC-FG"
+      },
+      {
+        "pourcent_voix_exp": "41.31",
+        "voix": "53122",
+        "sieges": "22",
+        "pourcent_voix_ins": "20.14",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "8.96",
+        "voix": "11527",
+        "sieges": "4",
+        "pourcent_voix_ins": "4.37",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "3.04",
+        "voix": "3914",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.48",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "4.31",
+        "voix": "5548",
+        "sieges": "2",
+        "pourcent_voix_ins": "2.1",
+        "code_nuance": "BC-UC"
+      },
+      {
+        "pourcent_voix_exp": "1.94",
+        "voix": "2493",
+        "sieges": "0",
+        "pourcent_voix_ins": "0.94",
+        "code_nuance": "BC-UDI"
+      },
+      {
+        "pourcent_voix_exp": "6.63",
+        "voix": "8527",
+        "sieges": "4",
+        "pourcent_voix_ins": "3.23",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "8.22",
+        "voix": "10574",
+        "sieges": "4",
+        "pourcent_voix_ins": "4.01",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "4.9",
+        "voix": "6306",
+        "sieges": "2",
+        "pourcent_voix_ins": "2.39",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "13.77",
+        "voix": "17710",
+        "sieges": "0",
+        "pourcent_voix_ins": "6.71",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "87",
+    "pourcent_nuls_vot": "5.15",
+    "lib": "HAUTE VIENNE",
+    "pourcent_blancs_vot": "8.31",
+    "nuls": "7660",
+    "exprimes": "128600",
+    "pourcent_vot_ins": "56.33",
+    "inscrits": "263819",
+    "pourcent_abs_ins": "43.67"
+  }
+}

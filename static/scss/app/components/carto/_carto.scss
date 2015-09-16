@@ -1,0 +1,583 @@
+html, body, #content{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding:0;
+	font-size: 1em;
+    background-color: #e4eaf0;
+    font-family: "Open Sans",sans-serif;
+    color: #6a6a6b;
+}
+
+/* structure globale de la page */
+#content{
+	display: block;
+    width: 90%;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+    padding:0;
+}
+
+#toolbar{
+    position: absolute;
+    left: 0;
+    top: 10px;
+    right: 0;
+    background-color: #fff;
+    height: 50px;
+}
+
+#select-data{
+    display: block;
+    height: 41px;
+    left: 0;
+    position: absolute;
+    top: 80px;
+    width: 40%;
+    z-index: 10;
+    background-color: rgba(255,255,255,.8);
+    text-align: right;
+    padding: 6px 5px;
+}
+
+#select-subview{
+    display: block;
+    height: 41px;
+    right: 365px;
+    position: absolute;
+    top: 80px;
+    z-index: 10;
+    background-color: rgba(255,255,255,.8);
+    font-size: 0.8em;
+    padding: 6px 15px;
+}
+
+#map{
+	position: absolute;
+    height: 500px;
+    bottom: 10px;
+    left: 0;
+    top: 70px;
+    right: 300px;
+}
+
+#infos{
+    position: absolute;
+    height: 500px;
+    bottom: 10px;
+    right: 0;
+    top: 70px;
+	background: #fff;
+	width: 300px;
+    overflow: auto;
+    color: #a3a3a3;
+}
+
+@media screen and (max-width: 640px){
+    #content{
+        width: 100%;   
+    }
+    #toolbar{
+        top: 0;
+    }
+    #map{
+        bottom: 20%;
+        width: auto;
+        left: 0;
+        right: 0;
+        top: 50px;
+    }
+    
+	#infos{
+        width: auto;
+        left: 0;
+        right: 0;
+        height: 20%;
+        bottom: 0;
+        top: auto;
+	}
+}	
+
+/* toolbar */
+#toolbar ul, #toolbar li{
+    margin: 0;
+    padding:0;
+    list-style-type: none;
+}
+#toolbar li {
+    display: inline-block
+}
+
+/* selection des donnees a afficher */
+#select-data h1{
+    font-size: 1.1em;
+    display: inline-block;
+}
+#select-data button{
+    background: transparent;
+    border: 0;
+    font-size: 1.5em;
+    vertical-align: sub;
+    font-weight: bold;
+}
+#select-data button:hover{
+    cursor: pointer;
+}
+#select-data button:hover, #select-data button:focus{
+   color: #ec5353;
+}
+#select-data ul{
+    background-color: rgba(255, 255, 255, 0.8);
+    display: none;
+    list-style-type: none;
+    margin: 10px 0 0 40%;
+    padding: 0; 
+    text-align: left;
+}
+#select-data ul li a{
+    display: block;
+    padding: 5px 14px;
+    color: #6a6a6b;
+    text-decoration: none;
+}
+
+#select-data ul li a:hover:before,
+#select-data ul li a.selected:before{
+    font-family: 'FontAwesome';
+    content: "\f105";
+    position: absolute;
+    margin-left: -10px;
+    margin-top: 1px;
+    color: #ec5353;
+}
+#select-data ul li a.selected{
+    font-weight: bold;   
+}
+
+
+#select-subview input{
+    display: none;
+}
+#select-subview label{
+    display: block; 
+    padding: 1px 1px 1px 16px;
+}
+#select-subview label:hover{
+    cursor: pointer;
+}
+#select-subview input:checked + label:before{
+    font-family: 'FontAwesome';
+    content: "\f111";
+    margin-right: 5px;
+}
+#select-subview input:checked + label{
+    padding-left: 0;
+}
+#select-subview input:checked + label:hover:before{
+    color: #ec5353;
+}
+
+/* zone d'affichage des infos */
+#infos {font-size: 0.7em;}
+#infos h2, #infos h3, #infos dl{ margin: 25px 10px 30px; color: #a3a3a3}
+#infos h2{color:#7e7e7e}
+#infos h3{font-size: 1.4em}
+#infos h3.participation{
+    background: #fff url("../images/votes.png") no-repeat scroll left top;
+    padding: 4px 5px 0 30px;
+}
+#infos h3.resultats{
+    background: url(../images/stats40.png) no-repeat scroll left top;
+    padding: 4px 5px 0 30px;
+}
+
+#infos div.participation{
+    display: block;
+    font-size: 1.1em;
+    height: 50px;
+    padding-left: 10px;
+    position: relative;
+}
+#infos ul, #infos li{   
+    margin: 0;
+    padding:0;
+    list-style-type: none;
+}
+#infos ul.legend li {
+    display: inline-block;
+    padding-left: 18%;
+    width: 25%;
+}
+#infos ul.detail{
+    margin-top: 20px;
+}
+#infos ul.detail li {
+    padding: 0 10px 25px;
+    position: relative;
+    margin-bottom: 10px;
+}
+#infos ul.detail li span.votes{
+    float: right;   
+}
+/* barres de stats */
+#infos .bar{
+    background-color: #eeeeee;
+    height: 12px;
+    left: 10px;
+    position: absolute;
+    right: 60px;
+    top: 20px;
+}
+#infos span.pourcent-fill{
+    display: block;
+    height: 10px;
+    margin-top: 1px;
+}
+#infos span.pourcent-value{
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+.pourcent-fill.pourcent-0,
+.pourcent-fill.pourcent-1,
+.pourcent-fill.pourcent-2{
+    width: 0%;   
+}
+.pourcent-fill.pourcent-3,
+.pourcent-fill.pourcent-4,
+.pourcent-fill.pourcent-5,
+.pourcent-fill.pourcent-6,
+.pourcent-fill.pourcent-7{
+    width: 5%;   
+}
+.pourcent-fill.pourcent-8,
+.pourcent-fill.pourcent-9,
+.pourcent-fill.pourcent-10,
+.pourcent-fill.pourcent-11,
+.pourcent-fill.pourcent-12{
+    width: 10%;
+}
+.pourcent-fill.pourcent-13,
+.pourcent-fill.pourcent-14,
+.pourcent-fill.pourcent-15,
+.pourcent-fill.pourcent-16,
+.pourcent-fill.pourcent-17{
+    width: 15%;   
+}
+.pourcent-fill.pourcent-18,
+.pourcent-fill.pourcent-19,
+.pourcent-fill.pourcent-20,
+.pourcent-fill.pourcent-21,
+.pourcent-fill.pourcent-22{
+    width: 20%;
+}
+.pourcent-fill.pourcent-23,
+.pourcent-fill.pourcent-24,
+.pourcent-fill.pourcent-25,
+.pourcent-fill.pourcent-26,
+.pourcent-fill.pourcent-27{
+    width: 25%;   
+}
+.pourcent-fill.pourcent-28,
+.pourcent-fill.pourcent-29,
+.pourcent-fill.pourcent-30,
+.pourcent-fill.pourcent-31,
+.pourcent-fill.pourcent-32{
+    width: 30%;
+}
+.pourcent-fill.pourcent-33,
+.pourcent-fill.pourcent-34,
+.pourcent-fill.pourcent-35,
+.pourcent-fill.pourcent-36,
+.pourcent-fill.pourcent-37{
+    width: 35%;   
+}
+.pourcent-fill.pourcent-38,
+.pourcent-fill.pourcent-39,
+.pourcent-fill.pourcent-40,
+.pourcent-fill.pourcent-41,
+.pourcent-fill.pourcent-42{
+    width: 40%;
+}
+.pourcent-fill.pourcent-43,
+.pourcent-fill.pourcent-44,
+.pourcent-fill.pourcent-45,
+.pourcent-fill.pourcent-46,
+.pourcent-fill.pourcent-47{
+    width: 45%;   
+}
+.pourcent-fill.pourcent-48,
+.pourcent-fill.pourcent-49,
+.pourcent-fill.pourcent-50,
+.pourcent-fill.pourcent-51,
+.pourcent-fill.pourcent-52{
+    width: 50%;
+}
+.pourcent-fill.pourcent-53,
+.pourcent-fill.pourcent-54,
+.pourcent-fill.pourcent-55,
+.pourcent-fill.pourcent-56,
+.pourcent-fill.pourcent-57{
+    width: 55%;   
+}
+.pourcent-fill.pourcent-58,
+.pourcent-fill.pourcent-59,
+.pourcent-fill.pourcent-60,
+.pourcent-fill.pourcent-61,
+.pourcent-fill.pourcent-62{
+    width: 60%;
+}
+.pourcent-fill.pourcent-63,
+.pourcent-fill.pourcent-64,
+.pourcent-fill.pourcent-65,
+.pourcent-fill.pourcent-66,
+.pourcent-fill.pourcent-67{
+    width: 65%;   
+}
+.pourcent-fill.pourcent-68,
+.pourcent-fill.pourcent-69,
+.pourcent-fill.pourcent-70,
+.pourcent-fill.pourcent-71,
+.pourcent-fill.pourcent-72{
+    width: 70%;
+}
+.pourcent-fill.pourcent-73,
+.pourcent-fill.pourcent-74,
+.pourcent-fill.pourcent-75,
+.pourcent-fill.pourcent-76,
+.pourcent-fill.pourcent-77{
+    width: 75%;   
+}
+.pourcent-fill.pourcent-78,
+.pourcent-fill.pourcent-79,
+.pourcent-fill.pourcent-80,
+.pourcent-fill.pourcent-81,
+.pourcent-fill.pourcent-82{
+    width: 80%;
+}
+.pourcent-fill.pourcent-83,
+.pourcent-fill.pourcent-84,
+.pourcent-fill.pourcent-85,
+.pourcent-fill.pourcent-86,
+.pourcent-fill.pourcent-87{
+    width: 85%;   
+}
+.pourcent-fill.pourcent-88,
+.pourcent-fill.pourcent-89,
+.pourcent-fill.pourcent-90,
+.pourcent-fill.pourcent-91,
+.pourcent-fill.pourcent-92{
+    width: 90%;
+}
+.pourcent-fill.pourcent-93,
+.pourcent-fill.pourcent-94,
+.pourcent-fill.pourcent-95,
+.pourcent-fill.pourcent-96,
+.pourcent-fill.pourcent-97{
+    width: 95%;   
+}
+.pourcent-fill.pourcent-98,
+.pourcent-fill.pourcent-99,
+.pourcent-fill.pourcent-100{
+    width: 100%;
+}
+
+
+/* utils */
+.color-BC-UD{
+	color: #008bcb;
+}
+.bgcolor-BC-UD{
+	background-color: #008bcb;
+}
+
+.color-BC-UG{
+	color: #f2a2d4;
+}
+.bgcolor-BC-UG{
+	background-color: #f2a2d4;
+}
+
+.color-BC-UC{
+	color: #74C2C3;
+}
+.bgcolor-BC-UC{
+	background-color: #74C2C3;
+}
+
+.color-BC-DVD{
+	color: #3f6cc1;
+}
+.bgcolor-BC-DVD{
+	background-color: #3f6cc1;
+}
+
+.color-BC-DVG{
+	color: #FFC0C0;
+}
+.bgcolor-BC-DVG{
+	background-color: #FFC0C0;
+}
+
+.color-BC-SOC{
+	color: #e88ac4;
+}
+.bgcolor-BC-SOC{
+	background-color: #e88ac4;
+}
+
+.color-BC-UMP{
+	color: #0066CC;
+}
+.bgcolor-BC-UMP{
+	background-color: #0066CC;
+}
+
+.color-BC-MDM{
+	color: #FF9900;
+}
+.bgcolor-BC-MDM{
+	background-color: #FF9900;
+}
+
+.color-BC-UDI{
+	color: #00FFFF;
+}
+.bgcolor-BC-UDI{
+	background-color: #00FFFF;
+}
+
+.color-BC-DIV{
+	color: #F0F0F0;
+}
+.bgcolor-BC-DIV{
+	background-color: #F0F0F0;
+}
+
+.color-BC-FG{
+	color: #DD0000;
+}
+.bgcolor-BC-FG{
+	background-color: #DD0000;
+}
+
+.color-BC-COM{
+	color: #DD0000;
+}
+.bgcolor-BC-COM{
+	background-color: #DD0000;
+}
+
+.color-BC-FN{
+	color: #032c79;
+}
+.bgcolor-BC-FN{
+	background-color: #032c79;
+}
+
+.color-BC-RDG{
+	color: #550000;
+}
+.bgcolor-BC-RDG{
+	background-color: #550000;
+}
+
+.color-BC-VEC{
+	color: #16d94a;
+}
+.bgcolor-BC-VEC{
+	background-color: #16d94a;
+}
+
+.color-BC-DLF{
+	color: #7e7e7e;
+}
+.bgcolor-BC-DLF{
+    background-color: #7e7e7e;   
+}
+
+.color-BC-EXG{
+	color: #7e7e7e;
+}
+.bgcolor-BC-EXG{
+    background-color: #7e7e7e;   
+}
+
+.color-BC-EXD{
+	color: #7e7e7e;
+}
+.bgcolor-BC-EXD {
+    background-color: #7e7e7e;   
+}
+
+.color-DEFAULT{
+	color: #7e7e7e;
+}
+.bgcolor-DEFAULT{
+    background-color: #7e7e7e;   
+}
+
+.color-sympathisants{
+	color: #60bc7a;
+}
+.bgcolor-sympathisants{
+    background-color: #60bc7a;   
+}
+
+.color-indecis{
+	color: #4fadab;
+}
+.bgcolor-indecis{
+    background-color: #4fadab;   
+}
+
+.color-opposants{
+	color: #ca394f;
+}
+.bgcolor-opposants{
+    background-color: #ca394f;   
+}
+
+
+.hide{visibility: hidden;}
+.center{text-align: center;}
+.quorum-layer-ctrl{clear: none}
+
+#debug{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+    border: 1px solid #75a8c4;
+    overflow: auto;
+}
+
+#popupinfo{
+    position: absolute;
+    padding: 10px;
+    display: block;
+    background-color: rgba(255,255,255,0.8);
+}
+
+/* surcharge styles par défaut de leaflet */
+.leaflet-bar a,
+.leaflet-bar a:first-child,
+.leaflet-bar a:last-child, 
+.leaflet-bar {
+    border-radius: 0;   
+    box-shadow: none;
+    color: #6a6a6b;
+}
+.leaflet-bar a, .leaflet-bar a:hover {
+    background-color: rgba(255,255,255,0.8);   
+}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus{
+    color: #ec5353;
+}

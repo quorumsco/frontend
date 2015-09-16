@@ -1,0 +1,72 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "58499",
+    "pourcent_blancs_ins": "2.59",
+    "pourcent_nuls_ins": "1.16",
+    "pourcent_exp_vot": "92.83",
+    "votants": "64054",
+    "pourcent_exp_ins": "48.52",
+    "blancs": "3168",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "2.61",
+        "voix": "1553",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.27",
+        "code_nuance": "BC-COM"
+      },
+      {
+        "pourcent_voix_exp": "19.07",
+        "voix": "11338",
+        "sieges": "4",
+        "pourcent_voix_ins": "9.25",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "8.37",
+        "voix": "4977",
+        "sieges": "0",
+        "pourcent_voix_ins": "4.06",
+        "code_nuance": "BC-UDI"
+      },
+      {
+        "pourcent_voix_exp": "10.64",
+        "voix": "6325",
+        "sieges": "6",
+        "pourcent_voix_ins": "5.16",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "6.81",
+        "voix": "4050",
+        "sieges": "4",
+        "pourcent_voix_ins": "3.3",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "28.22",
+        "voix": "16782",
+        "sieges": "12",
+        "pourcent_voix_ins": "13.69",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "24.28",
+        "voix": "14439",
+        "sieges": "2",
+        "pourcent_voix_ins": "11.78",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "55",
+    "pourcent_nuls_vot": "2.22",
+    "lib": "MEUSE",
+    "pourcent_blancs_vot": "4.95",
+    "nuls": "1422",
+    "exprimes": "59464",
+    "pourcent_vot_ins": "52.27",
+    "inscrits": "122553",
+    "pourcent_abs_ins": "47.73"
+  }
+}

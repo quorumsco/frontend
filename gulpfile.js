@@ -54,8 +54,26 @@ cp = function() {
 };
 
 gulp.task('js', function () {
+    var carto = gulp.src('static/js/carto.js')
+        .pipe(streamify(concat('carto.js')))
+        .pipe(streamify(size({title: 'js'})))
+        .pipe(gulp.dest('public/javascripts'));
+        /*.pipe(streamify(concat('leaflet.groupedlayercontrol.min.js')))
+        .pipe(streamify(size({title: 'js'})))
+        .pipe(gulp.dest('public/javascripts'));*/
+    
+    /*var leaflet_ajax = gulp.src('static/js/leaflet.ajax.min.js');*/
+    /*var leaflet_layer = gulp.src('static/js/leaflet.groupedlayercontrol.min.js')*/
+    var jquery = gulp.src('static/js/jquery.js');
+    var leaflet = gulp.src('static/js/leaflet.js');
+    var chart = gulp.src('static/js/chart.min.js');
     var brfy = bfy();
-    return merge(brfy.pipe(streamify(modernizr())), brfy)
+    
+    var tmp = merge(leaflet, jquery);
+    /*var tmp = merge(tmp, leaflet_layer);*/
+    var tmp = merge(tmp, chart);
+    var tmp = merge(tmp, brfy.pipe(streamify(modernizr())));
+    return merge(tmp, brfy)
         .pipe(streamify(concat('app.js')))
         .pipe(streamify(size({title: 'js'})))
         .pipe(gulp.dest('public/javascripts'))
@@ -101,6 +119,13 @@ gulp.task('fonts', function() {
         .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('geojson', function() {
+    return gulp.src('static/Map/data/**/*')
+	.pipe(changed('static/Map/data/**/*'))
+	.pipe(gulp.dest('public/data'))
+	.pipe(browserSync.reload({stream: true}));
+});
+	  
 gulp.task('html', function() {
     return gulp.src('static/*.html')
         .pipe(gulp.dest('public'))
@@ -114,8 +139,8 @@ gulp.task('jade', function() {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('prod', ['jade', 'images', 'fonts', 'css-prod', 'js-prod']);
-gulp.task('dev', ['jade', 'images', 'fonts', 'css', 'js']);
+gulp.task('prod', ['jade', 'images', 'fonts', 'css-prod', 'js-prod', 'geojson']);
+gulp.task('dev', ['jade', 'images', 'fonts', 'css', 'js', 'geojson']);
 
 gulp.task('watch', ['dev'], function() {
     browserSync({server: {baseDir: 'public'}, ui: false, open: false});

@@ -1,0 +1,72 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "131994",
+    "pourcent_blancs_ins": "2.81",
+    "pourcent_nuls_ins": "1.27",
+    "pourcent_exp_vot": "91.63",
+    "votants": "125085",
+    "pourcent_exp_ins": "44.58",
+    "blancs": "7217",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "5.43",
+        "voix": "6224",
+        "sieges": "0",
+        "pourcent_voix_ins": "2.42",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "3.27",
+        "voix": "3751",
+        "sieges": "0",
+        "pourcent_voix_ins": "1.46",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "11.02",
+        "voix": "12628",
+        "sieges": "2",
+        "pourcent_voix_ins": "4.91",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "35.65",
+        "voix": "40858",
+        "sieges": "16",
+        "pourcent_voix_ins": "15.89",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "12.96",
+        "voix": "14857",
+        "sieges": "6",
+        "pourcent_voix_ins": "5.78",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "3.92",
+        "voix": "4493",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.75",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "27.75",
+        "voix": "31802",
+        "sieges": "0",
+        "pourcent_voix_ins": "12.37",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "28",
+    "pourcent_nuls_vot": "2.6",
+    "lib": "EURE ET LOIR",
+    "pourcent_blancs_vot": "5.77",
+    "nuls": "3255",
+    "exprimes": "114613",
+    "pourcent_vot_ins": "48.66",
+    "inscrits": "257079",
+    "pourcent_abs_ins": "51.34"
+  }
+}

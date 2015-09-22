@@ -1,0 +1,58 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "156783",
+    "pourcent_blancs_ins": "2.99",
+    "pourcent_nuls_ins": "1.06",
+    "pourcent_exp_vot": "92.45",
+    "votants": "180933",
+    "pourcent_exp_ins": "49.53",
+    "blancs": "10093",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "2.12",
+        "voix": "3553",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.05",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "25.28",
+        "voix": "42290",
+        "sieges": "16",
+        "pourcent_voix_ins": "12.52",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "2.2",
+        "voix": "3678",
+        "sieges": "0",
+        "pourcent_voix_ins": "1.09",
+        "code_nuance": "BC-RDG"
+      },
+      {
+        "pourcent_voix_exp": "47.56",
+        "voix": "79550",
+        "sieges": "26",
+        "pourcent_voix_ins": "23.56",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "22.84",
+        "voix": "38205",
+        "sieges": "0",
+        "pourcent_voix_ins": "11.31",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "21",
+    "pourcent_nuls_vot": "1.97",
+    "lib": "COTE D'OR",
+    "pourcent_blancs_vot": "5.58",
+    "nuls": "3564",
+    "exprimes": "167276",
+    "pourcent_vot_ins": "53.58",
+    "inscrits": "337716",
+    "pourcent_abs_ins": "46.42"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "187780",
+    "pourcent_blancs_ins": "3.74",
+    "pourcent_nuls_ins": "1.45",
+    "pourcent_exp_vot": "90.38",
+    "votants": "219655",
+    "pourcent_exp_ins": "48.73",
+    "blancs": "15225",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "1.48",
+        "voix": "2945",
+        "sieges": "2",
+        "pourcent_voix_ins": "0.72",
+        "code_nuance": "BC-FG"
+      },
+      {
+        "pourcent_voix_exp": "3.51",
+        "voix": "6977",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.71",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "17.32",
+        "voix": "34376",
+        "sieges": "14",
+        "pourcent_voix_ins": "8.44",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "1.9",
+        "voix": "3781",
+        "sieges": "0",
+        "pourcent_voix_ins": "0.93",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "2.72",
+        "voix": "5409",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.33",
+        "code_nuance": "BC-DIV"
+      },
+      {
+        "pourcent_voix_exp": "4.86",
+        "voix": "9644",
+        "sieges": "4",
+        "pourcent_voix_ins": "2.37",
+        "code_nuance": "BC-UDI"
+      },
+      {
+        "pourcent_voix_exp": "10.56",
+        "voix": "20959",
+        "sieges": "8",
+        "pourcent_voix_ins": "5.14",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "13.37",
+        "voix": "26537",
+        "sieges": "8",
+        "pourcent_voix_ins": "6.51",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "5.24",
+        "voix": "10393",
+        "sieges": "4",
+        "pourcent_voix_ins": "2.55",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "39.04",
+        "voix": "77505",
+        "sieges": "2",
+        "pourcent_voix_ins": "19.02",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "80",
+    "pourcent_nuls_vot": "2.69",
+    "lib": "SOMME",
+    "pourcent_blancs_vot": "6.93",
+    "nuls": "5904",
+    "exprimes": "198526",
+    "pourcent_vot_ins": "53.91",
+    "inscrits": "407435",
+    "pourcent_abs_ins": "46.09"
+  }
+}

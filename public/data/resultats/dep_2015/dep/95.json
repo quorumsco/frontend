@@ -1,0 +1,51 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "429604",
+    "pourcent_blancs_ins": "2.67",
+    "pourcent_nuls_ins": "0.97",
+    "pourcent_exp_vot": "90.95",
+    "votants": "289804",
+    "pourcent_exp_ins": "36.64",
+    "blancs": "19224",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "20.36",
+        "voix": "53667",
+        "sieges": "10",
+        "pourcent_voix_ins": "7.46",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "40.02",
+        "voix": "105483",
+        "sieges": "22",
+        "pourcent_voix_ins": "14.66",
+        "code_nuance": "BC-UMP"
+      },
+      {
+        "pourcent_voix_exp": "15.44",
+        "voix": "40697",
+        "sieges": "10",
+        "pourcent_voix_ins": "5.66",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "24.18",
+        "voix": "63731",
+        "sieges": "0",
+        "pourcent_voix_ins": "8.86",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "95",
+    "pourcent_nuls_vot": "2.42",
+    "lib": "VAL D'OISE",
+    "pourcent_blancs_vot": "6.63",
+    "nuls": "7002",
+    "exprimes": "263578",
+    "pourcent_vot_ins": "40.28",
+    "inscrits": "719408",
+    "pourcent_abs_ins": "59.72"
+  }
+}

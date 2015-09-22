@@ -1,0 +1,79 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "75848",
+    "pourcent_blancs_ins": "3.62",
+    "pourcent_nuls_ins": "2.44",
+    "pourcent_exp_vot": "88.91",
+    "votants": "91423",
+    "pourcent_exp_ins": "48.6",
+    "blancs": "6047",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "3.13",
+        "voix": "2544",
+        "sieges": "2",
+        "pourcent_voix_ins": "1.52",
+        "code_nuance": "BC-FG"
+      },
+      {
+        "pourcent_voix_exp": "21.9",
+        "voix": "17805",
+        "sieges": "6",
+        "pourcent_voix_ins": "10.64",
+        "code_nuance": "BC-SOC"
+      },
+      {
+        "pourcent_voix_exp": "10.54",
+        "voix": "8565",
+        "sieges": "4",
+        "pourcent_voix_ins": "5.12",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "23.1",
+        "voix": "18780",
+        "sieges": "10",
+        "pourcent_voix_ins": "11.23",
+        "code_nuance": "BC-RDG"
+      },
+      {
+        "pourcent_voix_exp": "8.42",
+        "voix": "6843",
+        "sieges": "2",
+        "pourcent_voix_ins": "4.09",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "19.59",
+        "voix": "15922",
+        "sieges": "4",
+        "pourcent_voix_ins": "9.52",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "9.46",
+        "voix": "7690",
+        "sieges": "4",
+        "pourcent_voix_ins": "4.6",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "3.86",
+        "voix": "3138",
+        "sieges": "0",
+        "pourcent_voix_ins": "1.88",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "65",
+    "pourcent_nuls_vot": "4.47",
+    "lib": "HAUTES PYRENEES",
+    "pourcent_blancs_vot": "6.61",
+    "nuls": "4089",
+    "exprimes": "81287",
+    "pourcent_vot_ins": "54.66",
+    "inscrits": "167271",
+    "pourcent_abs_ins": "45.34"
+  }
+}

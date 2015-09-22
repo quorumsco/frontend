@@ -1,0 +1,58 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "428040",
+    "pourcent_blancs_ins": "3.5",
+    "pourcent_nuls_ins": "1.16",
+    "pourcent_exp_vot": "90.45",
+    "votants": "407605",
+    "pourcent_exp_ins": "44.12",
+    "blancs": "29209",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "28.71",
+        "voix": "105848",
+        "sieges": "20",
+        "pourcent_voix_ins": "12.67",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "4.72",
+        "voix": "17407",
+        "sieges": "4",
+        "pourcent_voix_ins": "2.08",
+        "code_nuance": "BC-DVG"
+      },
+      {
+        "pourcent_voix_exp": "1.87",
+        "voix": "6906",
+        "sieges": "2",
+        "pourcent_voix_ins": "0.83",
+        "code_nuance": "BC-DIV"
+      },
+      {
+        "pourcent_voix_exp": "41.82",
+        "voix": "154179",
+        "sieges": "32",
+        "pourcent_voix_ins": "18.45",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "22.88",
+        "voix": "84344",
+        "sieges": "0",
+        "pourcent_voix_ins": "10.09",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "38",
+    "pourcent_nuls_vot": "2.38",
+    "lib": "ISERE",
+    "pourcent_blancs_vot": "7.17",
+    "nuls": "9712",
+    "exprimes": "368684",
+    "pourcent_vot_ins": "48.78",
+    "inscrits": "835645",
+    "pourcent_abs_ins": "51.22"
+  }
+}

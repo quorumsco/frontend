@@ -1,0 +1,51 @@
+{
+  "status": "success",
+  "data": {
+    "abstentions": "92999",
+    "pourcent_blancs_ins": "3.14",
+    "pourcent_nuls_ins": "1.49",
+    "pourcent_exp_vot": "90.56",
+    "votants": "89270",
+    "pourcent_exp_ins": "44.35",
+    "blancs": "5721",
+    "resultats": [
+      {
+        "pourcent_voix_exp": "22.76",
+        "voix": "18401",
+        "sieges": "4",
+        "pourcent_voix_ins": "10.1",
+        "code_nuance": "BC-UG"
+      },
+      {
+        "pourcent_voix_exp": "49.29",
+        "voix": "39846",
+        "sieges": "18",
+        "pourcent_voix_ins": "21.86",
+        "code_nuance": "BC-UD"
+      },
+      {
+        "pourcent_voix_exp": "18.36",
+        "voix": "14842",
+        "sieges": "6",
+        "pourcent_voix_ins": "8.14",
+        "code_nuance": "BC-DVD"
+      },
+      {
+        "pourcent_voix_exp": "9.59",
+        "voix": "7750",
+        "sieges": "0",
+        "pourcent_voix_ins": "4.25",
+        "code_nuance": "BC-FN"
+      }
+    ],
+    "code": "53",
+    "pourcent_nuls_vot": "3.04",
+    "lib": "MAYENNE",
+    "pourcent_blancs_vot": "6.41",
+    "nuls": "2710",
+    "exprimes": "80839",
+    "pourcent_vot_ins": "48.98",
+    "inscrits": "182269",
+    "pourcent_abs_ins": "51.02"
+  }
+}

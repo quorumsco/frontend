@@ -1,0 +1,17 @@
+{
+	"status":"success",
+	"data":{
+		"opinions":{
+			"participation":[
+				{ "key": "va_voter", "value": 223433, "pourcent": 36.02},
+				{ "key": "ne_va_pas", "value": 135226, "pourcent": 21.80},
+				{ "key": "ne_sait_pas", "value": 261644, "pourcent": 42.18}
+			],
+			"soutien":[
+				{ "key": "sympathisants", "value": 289247, "pourcent": 46.63},
+				{ "key": "indecis", "value": 214810, "pourcent": 34.63},
+				{ "key": "opposants", "value": 134853, "pourcent": 21.74}
+			]
+		}
+	}
+}

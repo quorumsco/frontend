@@ -54,8 +54,8 @@ html, body, #content{
 }
 
 #map{
-	position: absolute;
-    height: 800px;
+    position: absolute;
+    height: 500px;
     bottom: 10px;
     left: 0;
     top: 70px;
@@ -64,7 +64,7 @@ html, body, #content{
 
 #infos{
     position: absolute;
-    height: 800px;
+    height: 500px;
     bottom: 10px;
     right: 0;
     top: 70px;
@@ -184,11 +184,11 @@ html, body, #content{
 #infos h2{color:#7e7e7e}
 #infos h3{font-size: 1.4em}
 #infos h3.participation{
-    background: #fff url("../images/votes.png") no-repeat scroll left top;
+    background: #fff url("images/votes.png") no-repeat scroll left top;
     padding: 4px 5px 0 30px;
 }
 #infos h3.resultats{
-    background: url(../images/stats40.png) no-repeat scroll left top;
+    background: url(images/stats40.png) no-repeat scroll left top;
     padding: 4px 5px 0 30px;
 }
 
@@ -565,7 +565,7 @@ html, body, #content{
     background-color: rgba(255,255,255,0.8);
 }
 
-/*surcharge style par defaut de leaflet*/
+/* surcharge styles par défaut de leaflet */
 .leaflet-bar a,
 .leaflet-bar a:first-child,
 .leaflet-bar a:last-child, 

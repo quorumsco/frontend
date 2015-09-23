@@ -40,37 +40,3 @@
     <div id="map"></div>
     <div id="infos"></div>
 </div>
-
-<script type="text/javascript" src="javascripts/leaflet.js")></script>
-<script type="text/javascript" src="javascripts/leaflet.ajax.min.js")></script>
-<script type="text/javascript" src="javascripts/leaflet.groupedlayercontrol.min.js")></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js")></script>
-<script type="text/javascript" src="javascripts/carto.js")></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js")></script>
-<script type="text/javascript">
-function prout() {
-    console.log("Yo");
-    /* creation de la carte */
-    var map = hL.map('map', {zoomControl: false}).setView([46.49839, 2.76855]);
-
-    map.addControl( L.control.zoom({position: 'topright'}) )
-
-    /* zoom auto en fonction de la taille de la zone */
-    var southWest = L.latLng(40.36329, -5.00977);
-    var northEast = L.latLng(51.49506, 10.06348);
-    var bounds = L.latLngBounds(southWest, northEast);
-    map.fitBounds(bounds);
-
-    /* affichage fond osm */
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | &copy; <a href="http://www.quorums.co">Quorums.co</a>'
-    }).addTo(map);
-
-    /* reset des styles et zoom par défaut si on clique hors de la carte */
-    map.on('click', function(){
-        $("#select-data ul").hide();
-        resetAllLayerState();
-    });
-}
-prout();
-</script>

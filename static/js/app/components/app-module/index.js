@@ -52,7 +52,7 @@ module.exports = {
   ready: function() {
     //Test de connexion
     var error = function(root) {
-      root.navigate('app:login');
+      //root.navigate('app:login');
     }
     session_store.me((res, root) => {
       if (this.login == true) {

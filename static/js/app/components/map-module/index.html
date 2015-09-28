@@ -29,14 +29,19 @@
       </select>
       -->
   <div id="select-subview">
-    <label class="hide circonscriptions"><input class="hide circonscriptions" id="radio_circo" type="radio" name="dep_view" value="circonsc" checked/>Circonscriptions</label>
+    
+      <input class="hide circonscriptions" id="radio_circo" type="radio" name="dep_view" value="circonsc"/>
+      <label for="radio_circo" class="hide circonscriptions">Circonscriptions</label>
     <!--<label class="hide circonscriptions" for="radio_circo">Circonscriptions</label>-->
-    <label class="hide communes"><input class="hide communes" id="radio_com" type="radio" name="dep_view" value="communes_elections" />Communes</label>
-    <label class="hide iris"><input class="hide iris" id="radio_iris" type="radio" name="dep_view" value="iris2000"/>Iris (nb de chomeurs)</label>
+    <label class="hide communes">
+      
+      <input class="hide communes" id="radio_com" type="radio" name="dep_view" value="communes_elections" checked="checked"/>
+    Communes
+    </label>
+    <label class="hide iris"><input class="hide iris" id="radio_iris" type="radio" name="dep_view" value="iris2000"/>rapport nb de familles/nb de ménages</label>
     <label class="hide pauvrete"><input class="hide pauvrete" id="radio_pauvrete" type="radio" name="dep_view" value="communes_pauvrete"/>Tx de pauvreté</label>
     <label class="hide chomage"><input class="hide chomage" id="radio_chomage" type="radio" name="dep_view" value="communes_chomage"/>Tx de chomage T4 2014</label>
   </div>
-  
   <div id="map"></div>
   <div id="infos"></div>
 </div>

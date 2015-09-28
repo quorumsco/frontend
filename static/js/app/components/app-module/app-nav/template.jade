@@ -4,10 +4,12 @@ app-nav(v-class="visible: show_nav")
       a(href="#") Quorum
     nav-list
       nav-item
-        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('ciblage:show', $event)") Ciblage
+        a(href="{{$root.path('ciblage:show')}}" v-on="click: $root.navigate('ciblage:show', $event)") Ciblage
       nav-item
         a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") Contacts
       nav-item
         a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") Settings
       nav-item
         a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") About
+      nav-item
+        a(href="{{$root.path('app:logout')}}" v-on="click: $root.navigate('app:logout', $event)") Logout

@@ -2,6 +2,9 @@ var API = {
   'app:login': function() {
     return '/login';
   },
+  'app:logout': function() {
+    return '/logout';
+  },
   'contacts:list': function() {
     return '/contacts';
   },
@@ -64,6 +67,8 @@ module.exports = {
       }
       this.$set("me", res);
     }, error, this.$root);
+
+
     this.router('/contacts', () => {
       if (this.$.main) {
         this.$.main.map = false;
@@ -115,6 +120,11 @@ module.exports = {
     });
     this.router('/login', (ctx) => {
       this.login = true;
+    });
+    this.router('/logout', (ctx) => {
+      session_store.delSession(this, (app) => {
+        app.login = true;
+      });
     });
 
     this.router('/', '/contacts');

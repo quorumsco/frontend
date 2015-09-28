@@ -15,7 +15,6 @@ module.exports = {
   	logIn: function(e) {
   		e.preventDefault();
   		var cb = function(root) {
-  			// console.log(this.$root);
   		    var error = function(root) {
   		    	console.log("Error");
             root.login = true

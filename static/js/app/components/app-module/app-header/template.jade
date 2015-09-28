@@ -5,7 +5,8 @@ div
     a.toggle-nav(href="{{prevUrl}}" v-on="click: navOnClickOut($event)" v-if="prev")
       i.fa.fa-fw.fa-arrow-left
         
-  h2 {{title}}
+  h2 Quorum : 
+  h2.title {{title}}
 
   section.right
     a(href="{{addUrl}}" v-on="click: addOnClick($event)" v-if="add")

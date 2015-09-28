@@ -55,8 +55,7 @@ cp = function() {
 
 gulp.task('js', function () {
     var brfy = bfy();
-    var tmp = merge(brfy.pipe(streamify(modernizr())), brfy);
-    return merge(tmp, brfy)
+    return merge(brfy.pipe(streamify(modernizr())), brfy)
         .pipe(streamify(concat('app.js')))
         .pipe(streamify(size({title: 'js'})))
         .pipe(gulp.dest('public/javascripts'))

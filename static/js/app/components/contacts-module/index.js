@@ -14,7 +14,11 @@ var contact_store = require('../../models/contact_store.js'),
       arr.push(newval);
     }
     return arr
-};
+  },
+  addFunc = function() {
+    this.$root.navigate("contacts:new");
+  };
+
 
 module.exports = {
   replace: false,
@@ -36,6 +40,12 @@ module.exports = {
       this.details_event();
       this.$off("details:created");
     });
+  },
+  attached: function() {
+    if (this.view == 'list') {
+      this.$dispatch('header:title', "Contacts");
+      this.$dispatch('header:setAdd', this.$root.path('contacts:new'), addFunc);
+    }
   },
   components: {
     'list': require('./contact-list/index.js'),
@@ -72,9 +82,6 @@ module.exports = {
     'contacts:list': function() {
       this.view = 'list';
       this.$dispatch('header:title', "Contacts");
-      var addFunc = function() {
-        this.$root.navigate("contacts:new");
-      }
       this.$dispatch('header:setAdd', this.$root.path('contacts:new'), addFunc);
       return false;
     },

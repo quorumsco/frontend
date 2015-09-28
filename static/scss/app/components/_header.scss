@@ -33,6 +33,9 @@ $header-height: $relative-header-height * $base-line-height;
       @include adjust-font-size-to(ms(1), $relative-header-height);
       display: inline;
       margin-left: 1em;
+      &.title {
+        margin: 0 auto 0 auto;
+      }
     }
   }
   .dropdown {

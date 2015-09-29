@@ -120,201 +120,200 @@ function shadeColor2(color, percent) {
 /* gestion du choix des donnes a affiche */
 var dataResultatsDirectory = 'dep_2015';
 
+function listen() {
+    $(function() {
+      $("#select-data button").on('click', function(){
+          $("#select-data ul").toggle();
+      });
+        
+      $("#select-data ul li a").on('click', function(event){
+          event.preventDefault();
+          dataResultatsDirectory =  $(this).attr('data-rel');
+          $("#select-data h1").html($(this).html());
+          $("#select-data ul li a.selected").removeClass('selected');
+          $(this).addClass('selected');
 
-$(function() {
-  $("#select-data button").on('click', function(){
-      $("#select-data ul").toggle();
-  });
-    
-  $("#select-data ul li a").on('click', function(event){
-      event.preventDefault();
-      dataResultatsDirectory =  $(this).attr('data-rel');
-      $("#select-data h1").html($(this).html());
-      $("#select-data ul li a.selected").removeClass('selected');
-      $(this).addClass('selected');
-
-      /* en vue region */
-      if( currentViewType == 'france' ){
-          map.removeLayer(regionsLayer);
-          //regionsLayer.addTo(map);
-          regionsLayer = new L.GeoJSON.AJAX(
-                "data/contours/france-metropolitaine/regions-2015.geojson",
-                {
-                    onEachFeature: onEachFeatureReg
-                }
-            ).addTo(map);
-      }else if( currentViewType == 'reg2015' ){
-        for( var index in subLayers_cache ){
-            if( index.indexOf('-dep-') >= 0  ){
-                map.removeLayer(subLayers_cache[index]);
-            }
-        }
-        var n = currentRegLayer.feature.properties.NUMERO + '-dep-' + dataResultatsDirectory;
-        if( ! subLayers_cache[n] ){
-            var subLayers = new L.GeoJSON.AJAX(
-                'data/contours/regions-2015/'+currentRegLayer.feature.properties.NUMERO+'/departements.geojson',
-                {
-                    onEachFeature: onEachFeatureDep
-                }
-            ).addTo(map);
-            subLayers_cache[n] = subLayers;
-        }else{
-            subLayers_cache[n].addTo(map);
-        }
-         displayInfos(currentRegLayer.feature, currentViewType);
-      }else if( currentViewType == 'dep' ){
-
-                
-                if (dataResultatsDirectory!="insee")
-                {
-                    //$('#select-subview').removeClass('hide');
-                    $('.communes').show().css("visibility", "visible");
-                    $('.communes').checked="checked";
-                    $('.circonscriptions').show().css("visibility", "visible");
-                    $('.iris').hide();
-                    $('.pauvrete').hide();
-                    $('.chomage').hide();
-                }else{
-                    //$('#select-insee_subview').removeClass('hide');
-                    $('.iris').show().css("visibility", "visible");
-                    $('.pauvrete').show().css("visibility", "visible");
-                    $('.pauvrete').checked="checked";
-                    $('.chomage').show().css("visibility", "visible");
-                    $('.communes').hide();
-                    $('.circonscriptions').hide();
-                }
-
-
-        if (dep_subview.substring(0,8)!="iris2000")
-            {          
-                    for( var index in subLayers_cache )
+          /* en vue region */
+          if( currentViewType == 'france' ){
+              map.removeLayer(regionsLayer);
+              //regionsLayer.addTo(map);
+              regionsLayer = new L.GeoJSON.AJAX(
+                    "data/contours/france-metropolitaine/regions-2015.geojson",
                     {
-                        if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0  ){
-                            map.removeLayer(subLayers_cache[index]);
-                        }
-                    }  
-                    // load and display sub-layers
+                        onEachFeature: onEachFeatureReg
+                    }
+                ).addTo(map);
+          }else if( currentViewType == 'reg2015' ){
+            for( var index in subLayers_cache ){
+                if( index.indexOf('-dep-') >= 0  ){
+                    map.removeLayer(subLayers_cache[index]);
+                }
+            }
+            var n = currentRegLayer.feature.properties.NUMERO + '-dep-' + dataResultatsDirectory;
+            if( ! subLayers_cache[n] ){
+                var subLayers = new L.GeoJSON.AJAX(
+                    'data/contours/regions-2015/'+currentRegLayer.feature.properties.NUMERO+'/departements.geojson',
+                    {
+                        onEachFeature: onEachFeatureDep
+                    }
+                ).addTo(map);
+                subLayers_cache[n] = subLayers;
+            }else{
+                subLayers_cache[n].addTo(map);
+            }
+             displayInfos(currentRegLayer.feature, currentViewType);
+          }else if( currentViewType == 'dep' ){
+
                     
-                        var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
-                        if( ! subLayers_cache[n] ){
-                            
+                    if (dataResultatsDirectory!="insee")
+                    {
+                        //$('#select-subview').removeClass('hide');
+                        $('.communes').show().css("visibility", "visible");
+                        $('.communes').checked="checked";
+                        $('.circonscriptions').show().css("visibility", "visible");
+                        $('.iris').hide();
+                        $('.pauvrete').hide();
+                        $('.chomage').hide();
+                    }else{
+                        //$('#select-insee_subview').removeClass('hide');
+                        $('.iris').show().css("visibility", "visible");
+                        $('.pauvrete').show().css("visibility", "visible");
+                        $('.pauvrete').checked="checked";
+                        $('.chomage').show().css("visibility", "visible");
+                        $('.communes').hide();
+                        $('.circonscriptions').hide();
+                    }
+
+
+            if (dep_subview.substring(0,8)!="iris2000")
+                {          
+                        for( var index in subLayers_cache )
+                        {
+                            if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0  ){
+                                map.removeLayer(subLayers_cache[index]);
+                            }
+                        }  
+                        // load and display sub-layers
+                        
+                            var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
+                            if( ! subLayers_cache[n] ){
+                                
+                                    var subLayers = new L.GeoJSON.AJAX(
+                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                        {
+                                            onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                        }
+                                    ).addTo(map);
+                                
+                                subLayers_cache[n] = subLayers;
+                            }else{
+                                subLayers_cache[n].addTo(map);
+                            } 
+                }
+                else
+                {
+                        for( var index in subLayers_cache )
+                        {
+                            if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0){
+                                map.removeLayer(subLayers_cache[index]);
+                            }
+                        }
+
+                        // load and display sub-layers
+                            var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
+                            if( ! subLayers_cache[n] ){
                                 var subLayers = new L.GeoJSON.AJAX(
                                     'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                     {
-                                        onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                        onEachFeature: onEachFeatureIris
                                     }
                                 ).addTo(map);
-                            
-                            subLayers_cache[n] = subLayers;
-                        }else{
-                            subLayers_cache[n].addTo(map);
-                        } 
-            }
-            else
-            {
-                    for( var index in subLayers_cache )
-                    {
-                        if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0){
-                            map.removeLayer(subLayers_cache[index]);
-                        }
-                    }
-
-                    // load and display sub-layers
-                        var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
-                        if( ! subLayers_cache[n] ){
-                            var subLayers = new L.GeoJSON.AJAX(
-                                'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
-                                {
-                                    onEachFeature: onEachFeatureIris
-                                }
-                            ).addTo(map);
-                            subLayers_cache[n] = subLayers;
-                        }else{
-                            subLayers_cache[n].addTo(map);
-                        } 
-            }
-         displayInfos(currentDeptLayer.feature, currentViewType);
-      }
-      
-
-      
-  });
-});
+                                subLayers_cache[n] = subLayers;
+                            }else{
+                                subLayers_cache[n].addTo(map);
+                            } 
+                }
+             displayInfos(currentDeptLayer.feature, currentViewType);
+          }
+      });
+    });
+}
 
 /* gestion de la navigation departement */
 var dep_subview ='';
 if (dataResultatsDirectory!="insee"){dep_subview ='communes_elections';}else{dep_subview ='communes_pauvrete';} // communes | circonscriptions
-$(function() {
+function listen_switch() {
+    $(function() {
 
-    //if (dataResultatsDirectory!="insee")
-            
-      $("#select-subview input[type=radio]").on('change', function(){
-          if( $(this).prop('checked') ){
-          
-          // remove current sublayer
-            for( var index in subLayers_cache ){
-                if( index.indexOf('-'+dep_subview+'-') >= 0  ){
-                    map.removeLayer(subLayers_cache[index]);
-                }
+        //if (dataResultatsDirectory!="insee")
+                
+          $("#select-subview input[type=radio]").on('change', function(){
+              if( $(this).prop('checked') ){
+              
+              // remove current sublayer
+                for( var index in subLayers_cache ){
+                    if( index.indexOf('-'+dep_subview+'-') >= 0  ){
+                        map.removeLayer(subLayers_cache[index]);
+                    }
 
-            }      
-              printDebug($(this).val());
-              // change subview
-            dep_subview = $(this).val() ;
-            console.log(dep_subview)
-                // load and display sub-layers
-                var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
-                if (dep_subview.substring(0,8)!="iris2000")
-                        {
-                                // load and display sub-layers
-                                if( ! subLayers_cache[n] )
-                                {
-                                    
-                                        if (dep_subview.substring(0,8)=='communes')
-                                        {
-                                                    var subLayers = new L.GeoJSON.AJAX(
-                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
-                                            {
-                                                onEachFeature:onEachFeatureCom
-                                            }).addTo(map);
-                                        }
-                                        else if(dep_subview.substring(0,8)=='circonsc')
-                                        {
-                                                    var subLayers = new L.GeoJSON.AJAX(
-                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
-                                            {
-                                                onEachFeature:onEachFeatureCirco
-                                            }).addTo(map);
-                                        }
-                                            //onEachFeature: (dep_subview=='communes' ? onEachFeatureCom : onEachFeatureCirco)
-                                
-                                    
-                                    subLayers_cache[n] = subLayers;
-                                }else{
-                                    subLayers_cache[n].addTo(map);
-                                } 
-                        }
-                        else
-                        {
+                }      
+                  printDebug($(this).val());
+                  // change subview
+                dep_subview = $(this).val() ;
+                    // load and display sub-layers
+                    var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
+                    if (dep_subview.substring(0,8)!="iris2000")
+                            {
                                     // load and display sub-layers
-                                if( ! subLayers_cache[n] ){
-                                    var subLayers = new L.GeoJSON.AJAX(
-                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
-                                        {
-                                            onEachFeature: onEachFeatureIris
-                                        }
-                                    ).addTo(map);
-                                  subLayers_cache[n] = subLayers;
-                                }else{
-                                    subLayers_cache[n].addTo(map);
-                                }  
-                        }    
+                                    if( ! subLayers_cache[n] )
+                                    {
+                                        
+                                            if (dep_subview.substring(0,8)=='communes')
+                                            {
+                                                        var subLayers = new L.GeoJSON.AJAX(
+                                            'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
+                                                {
+                                                    onEachFeature:onEachFeatureCom
+                                                }).addTo(map);
+                                            }
+                                            else if(dep_subview.substring(0,8)=='circonsc')
+                                            {
+                                                        var subLayers = new L.GeoJSON.AJAX(
+                                            'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                                {
+                                                    onEachFeature:onEachFeatureCirco
+                                                }).addTo(map);
+                                            }
+                                                //onEachFeature: (dep_subview=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                    
+                                        
+                                        subLayers_cache[n] = subLayers;
+                                    }else{
+                                        subLayers_cache[n].addTo(map);
+                                    } 
+                            }
+                            else
+                            {
+                                        // load and display sub-layers
+                                    if( ! subLayers_cache[n] ){
+                                        var subLayers = new L.GeoJSON.AJAX(
+                                            'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                            {
+                                                onEachFeature: onEachFeatureIris
+                                            }
+                                        ).addTo(map);
+                                      subLayers_cache[n] = subLayers;
+                                    }else{
+                                        subLayers_cache[n].addTo(map);
+                                    }  
+                            }    
 
-          }
-          
-        });
-        
-});
+              }
+              
+            });
+            
+    });
+}
 
 /* affichage popin d'info au survol des zones*/
 function updatePopupPosition(e){
@@ -1360,6 +1359,8 @@ function buildDetailsBars(datas, unity){
 return {
     createMap: function() {
         /* creation de la carte */
+        listen();
+        listen_switch();
         map = L.map('map', {zoomControl: false}).setView([46.49839, 2.76855]);
 
         map.addControl( L.control.zoom({position: 'topright'}) )

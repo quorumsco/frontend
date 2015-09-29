@@ -21,26 +21,17 @@
       <li><a href="#" data-rel="insee">Données INSEE</a></li>
     </ul>
   </div>
-  <!--
-      <select id="election">
-        <option value="dep_2015" selected>Elections départementales 2015</option>
-        <option value="pres_2012_t1">Election Présidentielle 2012 - 1er tour</option>
-        <option value="pres_2012_t2">Election Présidentielle 2012 - 2nd tour</option>
-      </select>
-      -->
-  <div id="select-subview">
-    
-      <input class="hide circonscriptions" id="radio_circo" type="radio" name="dep_view" value="circonsc"/>
-      <label for="radio_circo" class="hide circonscriptions">Circonscriptions</label>
-    <!--<label class="hide circonscriptions" for="radio_circo">Circonscriptions</label>-->
-    <label class="hide communes">
-      
-      <input class="hide communes" id="radio_com" type="radio" name="dep_view" value="communes_elections" checked="checked"/>
-    Communes
-    </label>
-    <label class="hide iris"><input class="hide iris" id="radio_iris" type="radio" name="dep_view" value="iris2000"/>rapport nb de familles/nb de ménages</label>
-    <label class="hide pauvrete"><input class="hide pauvrete" id="radio_pauvrete" type="radio" name="dep_view" value="communes_pauvrete"/>Tx de pauvreté</label>
-    <label class="hide chomage"><input class="hide chomage" id="radio_chomage" type="radio" name="dep_view" value="communes_chomage"/>Tx de chomage T4 2014</label>
+  
+<div id="select-subview" class="hide">
+    <input class="circonscriptions" id="radio_circo" type="radio" name="dep_view" value="circonscriptions_elections" checked/><label for="radio_circo" class="circonscriptions">Circonscriptions</label>
+    <input class="communes" id="radio_com" type="radio" name="dep_view" value="communes_elections" /><label for="radio_com" class="communes">Communes</label>
+    <input class="iris" id="radio_iris" type="radio" name="dep_view" value="iris2000"/><label for="radio_iris" class="iris">Iris (nb de chomeurs)</label>
+    <input class="pauvrete" id="radio_pauvrete" type="radio" name="dep_view" value="communes_pauvrete"/><label for="radio_pauvrete" class="pauvrete">Tx de pauvreté</label>
+    <input class="chomage" id="radio_chomage" type="radio" name="dep_view" value="communes_chomage"/><label for="radio_chomage" class="chomage">Tx de chomage T4 2014</label>
+
+
+
+
   </div>
   <div id="map"></div>
   <div id="infos"></div>

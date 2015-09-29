@@ -10,6 +10,9 @@ html, body, #content{
 }
 
 /* structure globale de la page */
+app-main, map-module{
+    height: 100%;
+}
 #content{
 	display: block;
     width: 90%;
@@ -30,7 +33,7 @@ html, body, #content{
 
 #select-data{
     display: block;
-    height: 41px;
+    height: 52px;
     left: 0;
     position: absolute;
     top: 80px;
@@ -43,7 +46,7 @@ html, body, #content{
 
 #select-subview{
     display: block;
-    height: 41px;
+    height: 52px;
     right: 365px;
     position: absolute;
     top: 80px;
@@ -55,7 +58,6 @@ html, body, #content{
 
 #map{
     position: absolute;
-    height: 500px;
     bottom: 10px;
     left: 0;
     top: 70px;
@@ -64,7 +66,6 @@ html, body, #content{
 
 #infos{
     position: absolute;
-    height: 500px;
     bottom: 10px;
     right: 0;
     top: 70px;
@@ -113,6 +114,9 @@ html, body, #content{
 #select-data h1{
     font-size: 1.1em;
     display: inline-block;
+    height: 44px;
+    line-height: 44px;
+    margin-bottom: 0;
 }
 #select-data button{
     background: transparent;
@@ -120,6 +124,8 @@ html, body, #content{
     font-size: 1.5em;
     vertical-align: sub;
     font-weight: bold;
+    padding: 0 5px;
+    color: #6a6a6b;
 }
 #select-data button:hover{
     cursor: pointer;
@@ -161,21 +167,43 @@ html, body, #content{
 }
 #select-subview label{
     display: block; 
-    padding: 1px 1px 1px 16px;
+    padding: 1px 1px 1px 0px;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+    line-height: 1.5em;
+}
+#select-subview label.iris,
+#select-subview label.pauvrete,
+#select-subview label.chomage{
+    font-size: 11px;
+    line-height: 1.2em;
 }
 #select-subview label:hover{
     cursor: pointer;
 }
-#select-subview input:checked + label:before{
+#select-subview input + label:before{
     font-family: 'FontAwesome';
     content: "\f111";
     margin-right: 5px;
 }
-#select-subview input:checked + label{
-    padding-left: 0;
+
+#select-subview input + label:before{
+    color: #efefef;
 }
-#select-subview input:checked + label:hover:before{
+#select-subview input:checked + label:before{
+    color: #6a6a6b;
+}
+#select-subview input + label:hover:before{
     color: #ec5353;
+}
+
+#select-subview.insee .circonscriptions,
+#select-subview.insee .communes,
+#select-subview.com-circo .iris,
+#select-subview.com-circo .pauvrete,
+#select-subview.com-circo .chomage{
+    display: none;
 }
 
 /* zone d'affichage des infos */
@@ -579,4 +607,19 @@ html, body, #content{
 .leaflet-bar a:hover,
 .leaflet-bar a:focus{
     color: #ec5353;
+}
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar{
+    border: 0;   
+}
+.leaflet-touch .leaflet-bar a{
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+}
+.leaflet-touch .leaflet-control-zoom-out{
+    font-size: 20px;
+}
+.leaflet-touch .leaflet-control-zoom-in{
+    font-size: 18px;   
 }

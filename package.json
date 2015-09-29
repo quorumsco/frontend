@@ -1,0 +1,50 @@
+{
+  "name": "quorums",
+  "version": "0.0.1",
+  "description": "Quorums frontend",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/quroumsco/frontend.git"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "partialify",
+      "jadeify",
+      "coffeeify"
+    ]
+  },
+  "devDependencies": {
+    "babelify": "latest",
+    "browser-sync": "latest",
+    "browserify": "latest",
+    "chance": "latest",
+    "coffeeify": "latest",
+    "font-awesome": "latest",
+    "gulp": "latest",
+    "gulp-changed": "latest",
+    "gulp-compass": "latest",
+    "gulp-concat": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-jade": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-modernizr": "latest",
+    "gulp-notify": "latest",
+    "gulp-size": "latest",
+    "gulp-streamify": "latest",
+    "gulp-uglify": "latest",
+    "jade": "latest",
+    "jadeify": "latest",
+    "lodash": "latest",
+    "merge-stream": "latest",
+    "normalize.css": "latest",
+    "page": "latest",
+    "partialify": "latest",
+    "socket.io": "latest",
+    "superagent": "latest",
+    "vinyl-source-stream": "latest",
+    "vue": "latest"
+  },
+  "dependencies": {}
+}

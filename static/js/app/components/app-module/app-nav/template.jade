@@ -1,15 +1,27 @@
 app-nav(v-class="visible: show_nav")
   div
+    a.left(href="#" v-on="click: this.$dispatch('overlay:onclick');")
+      i.fa.fa-fw.fa-arrow-left
     h1
       a(href="#") Quorum
     nav-list
       nav-item
-        a(href="{{$root.path('ciblage:show')}}" v-on="click: $root.navigate('ciblage:show', $event)") Ciblage
+        a(href="{{$root.path('ciblage:show')}}" v-on="click: this.$dispatch('overlay:onclick'); $root.navigate('ciblage:show', $event)") Ciblage
+          span
+            i.fa.fa-fw.fa-map-marker
       nav-item
-        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") Contacts
+        a(href="{{$root.path('contacts:list')}}" v-on="click: this.$dispatch('overlay:onclick'); $root.navigate('contacts:list', $event)") Contacts
+          span
+            i.fa.fa-fw.fa-user
       nav-item
-        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") Settings
+        a(href="{{$root.path('contacts:list')}}" v-on="click: this.$dispatch('overlay:onclick'); $root.navigate('contacts:list', $event)") Settings
+          span
+            i.fa.fa-fw.fa-cogs
       nav-item
-        a(href="{{$root.path('contacts:list')}}" v-on="click: $root.navigate('contacts:list', $event)") About
+        a(href="{{$root.path('contacts:list')}}" v-on="click: this.$dispatch('overlay:onclick'); $root.navigate('contacts:list', $event)") About
+          span
+            i.fa.fa-fw.fa-ellipsis-h
       nav-item
-        a(href="{{$root.path('app:logout')}}" v-on="click: $root.navigate('app:logout', $event)") Logout
+        a(href="{{$root.path('app:logout')}}" v-on="click: this.$dispatch('overlay:onclick'); $root.navigate('app:logout', $event)") Logout
+          span
+            i.fa.fa-fw.fa-times

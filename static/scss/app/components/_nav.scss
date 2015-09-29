@@ -30,20 +30,33 @@ $nav-width: 200px;
       margin: 0;
       padding: 1em;
       text-align: center;
+      vertical-align: top;
     }
+
+    a.left {
+      position: absolute;
+      float: left;
+      padding: 0.93em 0 0 0.5em;
+      vertical-align: top;
+    }
+
 
     nav-list {
       nav-item {
         a {
           color: inherit;
           display: block;
-          padding: 0 1em;
+          padding: 0 1em 0 0;
           @include adjust-font-size-to(ms(-1), 1.7);
 
           &:hover {
             color: inherit;
             background-color: darken(#fff, 10%);
           }
+        }
+        span {
+          width: 15%;
+          float: left;
         }
       }
     }

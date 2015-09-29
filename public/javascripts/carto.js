@@ -5,53 +5,53 @@ var debug = false;
 /* styles par défaut des zones cliquables */
 
 var defaultStyle = {
-	color: '#000000', 
-	weight: 1,
+    color: '#000000', 
+    weight: 1,
     opacity: 0.5,
-	fillOpacity: 0.9,
-	className: ''
+    fillOpacity: 0.9,
+    className: ''
 };
 
 var highlightStyle = {
-	color: '#000000', 
-	weight: 1,
+    color: '#000000', 
+    weight: 1,
     opacity: 1,
-	fillOpacity: 0.5,
-	className: ''
+    fillOpacity: 0.5,
+    className: ''
 }
 
 var selectStyle = {
-	color: '#000000', 
-	weight: 5,
-	fillOpacity: 0.5
+    color: '#000000', 
+    weight: 5,
+    fillOpacity: 0.5
 };
 
 
 // a adapter en f° du niveau de zoom, y compris sur les styles par defaut
 // alignement de la liste deroulantes, du switch, du zoom et du titre
 var disabledStyle = {
-	weight: 1,
+    weight: 1,
     fillColor: '#eeeeee',
-	fillOpacity: 0.8,
-	className: ''
+    fillOpacity: 0.8,
+    className: ''
 };
 
 /* codes couleurs des partis politiques */
 var colors = {
-	"BC-UD": "#008bcb",
-	"BC-UG": "#f2a2d4",
-	"BC-UC": "#74C2C3",
-	"BC-DVD": "#3f6cc1",
-	"BC-DVG": "#FFC0C0",
-	"BC-SOC": "#e88ac4",
-	"BC-UMP": "#0066CC",
-	"BC-MDM": "#FF9900",
-	"BC-UDI": "#00FFFF",
-	"BC-DIV": "#F0F0F0",
-	"BC-FG": "#DD0000",
-	"BC-COM": "#DD0000",
-	"BC-FN": "#032c79",
-	"BC-RDG": "#550000",
+    "BC-UD": "#008bcb",
+    "BC-UG": "#f2a2d4",
+    "BC-UC": "#74C2C3",
+    "BC-DVD": "#3f6cc1",
+    "BC-DVG": "#FFC0C0",
+    "BC-SOC": "#e88ac4",
+    "BC-UMP": "#0066CC",
+    "BC-MDM": "#FF9900",
+    "BC-UDI": "#00FFFF",
+    "BC-DIV": "#F0F0F0",
+    "BC-FG": "#DD0000",
+    "BC-COM": "#DD0000",
+    "BC-FN": "#032c79",
+    "BC-RDG": "#550000",
     "BC-VEC": "#16d94a",
     "BC-DLF" : "#f8ec89",
     "BC-EXG" : "#f8ec89",
@@ -70,20 +70,20 @@ var shades = {
 
 /* libellés des partis politiques */
 var labels = {
-	"BC-UD": "Union de la droite",
-	"BC-UG": "Union de la gauche",
-	"BC-UC": "Union du centre",
-	"BC-DVD": "Divers droite",
-	"BC-DVG": "Divers gauche",
-	"BC-SOC": "Parti socialiste",
-	"BC-UMP": "Union pour un mouvement populaire",
-	"BC-MDM": "Modem",
-	"BC-UDI": "Union des démocrates indépendants",
-	"BC-DIV": "Divers",
-	"BC-FG": "Front de gauche",
-	"BC-COM": "Parti communiste français",
-	"BC-FN": "Front national",
-	"BC-RDG": "Parti radical de gauche",
+    "BC-UD": "Union de la droite",
+    "BC-UG": "Union de la gauche",
+    "BC-UC": "Union du centre",
+    "BC-DVD": "Divers droite",
+    "BC-DVG": "Divers gauche",
+    "BC-SOC": "Parti socialiste",
+    "BC-UMP": "Union pour un mouvement populaire",
+    "BC-MDM": "Modem",
+    "BC-UDI": "Union des démocrates indépendants",
+    "BC-DIV": "Divers",
+    "BC-FG": "Front de gauche",
+    "BC-COM": "Parti communiste français",
+    "BC-FN": "Front national",
+    "BC-RDG": "Parti radical de gauche",
     "BC-VEC": "Europe écologie les Verts (EELV)",
     "BC-DLF" : "Debout la France",
     "BC-EXG" : "Extrême gauche",
@@ -244,6 +244,7 @@ function listen() {
 /* gestion de la navigation departement */
 var dep_subview ='';
 if (dataResultatsDirectory!="insee"){dep_subview ='circonscriptions_elections';}else{dep_subview ='communes_pauvrete';} // communes | circonscriptions
+
 function listen_switch() {
     $(function() {
 
@@ -369,45 +370,45 @@ function hidePopup(e){
 }
 /* centrage sur la zone cliquable */
 function zoomToFeature(e) {
-	map.fitBounds(e.target.getBounds());
+    map.fitBounds(e.target.getBounds());
 }
 
 /* mise en evidence d'une zone cliquable (au survol) */
 function highlightFeature(e) {
-	var layer = e.target;
+    var layer = e.target;
 
-	if( layer.options && layer.options.className != 'active' ){
-		layer.setStyle(highlightStyle);
-	}else if(layer._layers){
-		for(var key in layer._layers) {
-			var sublayer = layer._layers[key];
-			if( sublayer.options && sublayer.options.className != 'active' ){
-				sublayer.setStyle(highlightStyle);
-			}
-		}
-	}
+    if( layer.options && layer.options.className != 'active' ){
+        layer.setStyle(highlightStyle);
+    }else if(layer._layers){
+        for(var key in layer._layers) {
+            var sublayer = layer._layers[key];
+            if( sublayer.options && sublayer.options.className != 'active' ){
+                sublayer.setStyle(highlightStyle);
+            }
+        }
+    }
 }
 /* mise en evidence d'une zone cliquable (au clic) */
 function highlightSelectedFeature(e) {
-	var layer = e.target;
+    var layer = e.target;
     
     layer.setStyle(selectStyle);
 }
 /* reset du style d'une zone cliquable */
 function resetHighlightOnFeature(e) {
-	var layer = e.target;
-	if( layer.options && layer.options.className != 'active' ){
-		layer.setStyle(defaultStyle);
-		layer.setStyle({fillColor:layer.bgcolor});
-	}else if(layer._layers){
-		for(var key in layer._layers) {
-			var sublayer = layer._layers[key];
-			if( sublayer.options && sublayer.options.className != 'active' ){
-				sublayer.setStyle(defaultStyle);
-				sublayer.setStyle({fillColor:layer.bgcolor});
-			}
-		}
-	}
+    var layer = e.target;
+    if( layer.options && layer.options.className != 'active' ){
+        layer.setStyle(defaultStyle);
+        layer.setStyle({fillColor:layer.bgcolor});
+    }else if(layer._layers){
+        for(var key in layer._layers) {
+            var sublayer = layer._layers[key];
+            if( sublayer.options && sublayer.options.className != 'active' ){
+                sublayer.setStyle(defaultStyle);
+                sublayer.setStyle({fillColor:layer.bgcolor});
+            }
+        }
+    }
 }
 /* reset du style par défaut de toutes les zones cliquables */
 function resetAllLayerState(){
@@ -432,8 +433,8 @@ function resetAllLayerState(){
         // retour du layer region selectionné
         currentRegLayer.addTo(map);
             
-		currentRegLayer.setStyle(defaultStyle);
-		currentRegLayer.setStyle({fillColor:currentRegLayer.bgcolor});
+        currentRegLayer.setStyle(defaultStyle);
+        currentRegLayer.setStyle({fillColor:currentRegLayer.bgcolor});
         
         printDebug('currentViewType : ' + currentViewType + ' -> france' , true);
         currentViewType = 'france';
@@ -462,8 +463,8 @@ function resetAllLayerState(){
         // retour du layer dep selectionné
         currentDeptLayer.addTo(map);
             
-		currentDeptLayer.setStyle(defaultStyle);
-		currentDeptLayer.setStyle({fillColor:currentDeptLayer.bgcolor});
+        currentDeptLayer.setStyle(defaultStyle);
+        currentDeptLayer.setStyle({fillColor:currentDeptLayer.bgcolor});
         
         printDebug('currentViewType : ' + currentViewType + ' -> reg2015' , true);
         currentViewType = 'reg2015';
@@ -506,8 +507,8 @@ function resetAllLayerState(){
         // retour du layer com/circo selectionné
         currentParentLayer.addTo(map);
             
-		currentParentLayer.setStyle(defaultStyle);
-		currentParentLayer.setStyle({fillColor:currentParentLayer.bgcolor});
+        currentParentLayer.setStyle(defaultStyle);
+        currentParentLayer.setStyle({fillColor:currentParentLayer.bgcolor});
         
          printDebug('currentViewType : ' + currentViewType + ' -> dep' , true);
         currentViewType = 'dep';
@@ -644,6 +645,8 @@ function selectFeature(e, feature, layer, type){
 
 /* affichage des infos relatives à la zone sélectionnée */
 function displayInfos(feature, type){
+    
+    printDebug("feature:"+feature+" type:"+type+" dataResultatsDirectory:"+dataResultatsDirectory);
     var resultats_key = feature.properties.NUMERO;
     var infosContent = "";
     $('#infos').html('');
@@ -658,160 +661,216 @@ function displayInfos(feature, type){
         $('#infos').append("<h2>"+feature.properties.COMMUNE + "</h2>");
         resultats_key = feature.properties.REF_INSEE;
         resultats_key = resultats_key.slice(0, 2) + "/" + resultats_key.slice(2);
+    }else if( type == 'iris' ){
+        $('#infos').append("<h2>"+feature.properties.NOM_IRIS +" ("+feature.properties.NOM_COM+")" + "</h2>");
+        
+        resultats_key = feature.properties.DEPCOM.slice(0, 2) +"/"+feature.properties.DCOMIRIS;
     }
     
+
     $.ajax({
-		url: "data/resultats/"+dataResultatsDirectory+"/"+type+"/" + resultats_key + ".json",
-		dataType: "json"
-	})
-	.done(function(data) {
-		if( "success" == data.status ){
+        url: "data/resultats/"+dataResultatsDirectory+"/"+type+"/" + resultats_key + ".json",
+        dataType: "json"
+    })
+    .done(function(data) 
+    {
+        //if( "success" == data.status ){
             if( type == 'circo' ){
                 $('#infos').prepend("<h2>"+data.data.lib_dep + " " + data.data.lib_circo + "</h2>");
             }
             
-            if( dataResultatsDirectory == 'opinion' ){
-                
-                /* niveau de participation */
-                var pie1Data = [];
-                var pie2Data = [];
-                
-                var resultats = data.data.opinions.participation;
-                resultats.sort(function(a,b){
-                    var sortResult = 0;
-                    sortResult = b.value - a.value;
-                    return sortResult;
-                });
-                for ( var i in resultats ){
-                    var res = resultats[i];
+            if( dataResultatsDirectory == 'opinion' )
+            {
+                        
+                        /* niveau de participation */
+                        var pie1Data = [];
+                        var pie2Data = [];
+                        
+                        var resultats = data.data.opinions.participation;
+                        resultats.sort(function(a,b){
+                            var sortResult = 0;
+                            sortResult = b.value - a.value;
+                            return sortResult;
+                        });
+                        for ( var i in resultats ){
+                            var res = resultats[i];
 
-                    var label = labels[res.key];
-                    var color = shadeColor2('#a3a3a3', shades[res.key]);
-                                            
- pie1Data.push({value:res.value,color:color,highlight:color,label: label,key:'DEFAULT',pourcent:res.pourcent});
+                            var label = labels[res.key];
+                            var color = shadeColor2('#a3a3a3', shades[res.key]);
+                                                    
+                        pie1Data.push({value:res.value,color:color,highlight:color,label: label,key:'DEFAULT',pourcent:res.pourcent});
 
-                }
-                
-                resultats = data.data.opinions.soutien;
-                resultats.sort(function(a,b){
-                    var sortResult = 0;
-                    sortResult = b.value - a.value;
-                    return sortResult;
-                });
-                for ( var i in resultats ){
-                    var res = resultats[i];
-
-                    var label = labels[res.key];
-                    var color = colors[res.key];
-                                            
- pie2Data.push({value:res.value,color:color,highlight:color,label: label,key:res.key,pourcent:res.pourcent});
-
-                }
-
-                $('#infos').append('<h3 class="resultats">Niveau de participation</h3>');
-                $('#infos').append('<div class="center"><canvas id="resultsPie1" width="280" height="150" /></div>');
-                $('#infos').append(buildDetailsBars(pie1Data, 'électeurs'));
-                
-                
-                // generate pie
-                var ctx1 = document.getElementById("resultsPie1").getContext("2d");
-                window.resultsPie = new Chart(ctx1).Pie(pie1Data, {
-                    tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> électeurs",
-                    //segmentShowStroke : false, // default: true
-                    segmentStrokeWidth : 1, // default: 2
-                    animateRotate : false, // default: true
-                    //animateScale : true // default: false
-                });
-                
-                $('#infos').append('<h3 class="resultats">Niveau de soutien</h3>');
-                $('#infos').append('<div class="center"><canvas id="resultsPie2" width="280" height="150" /></div>');
-                $('#infos').append(buildDetailsBars(pie2Data, 'électeurs'));
-                
-                // generate pie
-                var ctx2 = document.getElementById("resultsPie2").getContext("2d");
-                window.resultsPie = new Chart(ctx2).Pie(pie2Data, {
-                    tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> électeurs",
-                    //segmentShowStroke : false, // default: true
-                    segmentStrokeWidth : 1, // default: 2
-                    animateRotate : false, // default: true
-                    //animateScale : true // default: false
-                });                
-            }else{
-                $('#infos').append('<h3 class="participation">Participation</h3>');
-            
-                $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de participation sur '+data.data.inscrits+' inscrits<div class="bar"><span class="pourcent-fill pourcent-'+parseInt(100-data.data.pourcent_abs_ins)+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+(100-data.data.pourcent_abs_ins)+' %</span></div>');
-
-                $('#infos').append('<h3 class="resultats">Résultats</h3>');
-                $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
-
-
-                if( data.data.resultats ){
-                    var resultats = data.data.resultats;
-
-                    resultats.sort(function(a,b){
-                        var sortResult = 0;
-                        sortResult = b.voix - a.voix;
-                        return sortResult;
-                    });
-
-                    var pieData = [];
-                    var pieLegend = '<ul class="legend">';
-                    //var resultDetail = '<ul class="detail">';
-
-                    for ( var i in resultats ){
-                        var res = resultats[i];
-
-                        var label = labels[res.code_nuance];
-                        if (dataResultatsDirectory == 'pres_2012_t1'
-                                  || dataResultatsDirectory == 'pres_2012_t2'){
-                             label = res.nom + ' ' + res.prenom;
                         }
-                        pieData.push({value:res.voix,color:colors[res.code_nuance],highlight:colors[res.code_nuance],label: label,key:res.code_nuance,pourcent:res.pourcent_voix_exp});
+                        
+                        resultats = data.data.opinions.soutien;
+                        resultats.sort(function(a,b){
+                            var sortResult = 0;
+                            sortResult = b.value - a.value;
+                            return sortResult;
+                        });
+                        for ( var i in resultats ){
+                            var res = resultats[i];
 
-                    }
+                            var label = labels[res.key];
+                            var color = colors[res.key];
+                                                    
+                        pie2Data.push({value:res.value,color:color,highlight:color,label: label,key:res.key,pourcent:res.pourcent});
 
-                    $('#infos').append(buildDetailsBars(pieData, 'votes'));        
-                    
-                    // generate pie
-                    var ctx = document.getElementById("resultsPie").getContext("2d");
-                    window.resultsPie = new Chart(ctx).Pie(pieData, {
-                        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> voix",
-                        //segmentShowStroke : false, // default: true
-                        segmentStrokeWidth : 1, // default: 2
-                        animateRotate : false, // default: true
-                        //animateScale : true // default: false
-                    });
-                
-                }
-            }
-		}else{
-			$('#infos').html("<p>Erreur lors du chargement des données</p>");
-		}
-  
-	})
-	.fail(function() {
-		$('#infos').html('<p>Données non disponibles</p>');
-	})
+                        }
+
+                        $('#infos').append('<h3 class="resultats">Niveau de participation</h3>');
+                        $('#infos').append('<div class="center"><canvas id="resultsPie1" width="280" height="150" /></div>');
+                        $('#infos').append(buildDetailsBars(pie1Data, 'électeurs'));
+                        
+                        
+                        // generate pie
+                        var ctx1 = document.getElementById("resultsPie1").getContext("2d");
+                        window.resultsPie = new Chart(ctx1).Pie(pie1Data, {
+                            tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> électeurs",
+                            //segmentShowStroke : false, // default: true
+                            segmentStrokeWidth : 1, // default: 2
+                            animateRotate : false, // default: true
+                            //animateScale : true // default: false
+                        });
+                        
+                        $('#infos').append('<h3 class="resultats">Niveau de soutien</h3>');
+                        $('#infos').append('<div class="center"><canvas id="resultsPie2" width="280" height="150" /></div>');
+                        $('#infos').append(buildDetailsBars(pie2Data, 'électeurs'));
+                        
+                        // generate pie
+                        var ctx2 = document.getElementById("resultsPie2").getContext("2d");
+                        window.resultsPie = new Chart(ctx2).Pie(pie2Data, {
+                            tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> électeurs",
+                            //segmentShowStroke : false, // default: true
+                            segmentStrokeWidth : 1, // default: 2
+                            animateRotate : false, // default: true
+                            //animateScale : true // default: false
+                        });                
+            }else if (dataResultatsDirectory == 'insee' )
+            {
+                        if( data.data[0])
+                        {
+                                //var res = data.data[0].NbFamilles;
+
+                                var res=Math.round((parseInt(data.data[0].NbFamilles)/parseInt(data.data[0].NbMenages))*100);
+                            printDebug(res);
+                            $('#infos').append('<h3 class="participation">Participation</h3>');
+                            $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de familles sur '+data.data[0].NbMenages+' ménages<div class="bar"><span class="pourcent-fill pourcent-'+res+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+res+' %</span></div>');
+                            $('#infos').append('<h3 class="resultats">Résultats</h3>');
+                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
+
+
+                            
+                                //var res = data.data[0].NbFamilles;
+                                //var res=(parseInt(data.data[0].NbFamilles)/parseInt(data.data[0].NbMenages))*100;
+                                 /*
+                                resultats.sort(function(a,b){
+                                    var sortResult = 0;
+                                    sortResult = b.voix - a.voix;
+                                    return sortResult;
+                                });
+                                 */
+                                var pieData = [];
+                                var pieLegend = '<ul class="legend">';
+                                //var resultDetail = '<ul class="detail">';
+
+                                var label = "label!";
+                                    
+                                //pieData.push({value:res.voix,color:colors[res.code_nuance],highlight:colors[res.code_nuance],label: label,key:res.code_nuance,pourcent:res.pourcent_voix_exp});
+                                pieData.push({value:res,color:colors["BC-UD"],highlight:colors["BC-UD"],label: label,key:res,pourcent:res});
+                                }
+
+                                $('#infos').append(buildDetailsBars(pieData, 'votes'));        
+                                
+                                // generate pie
+                                var ctx = document.getElementById("resultsPie").getContext("2d");
+                                window.resultsPie = new Chart(ctx).Pie(pieData, {
+                                    tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> voix",
+                                    //segmentShowStroke : false, // default: true
+                                    segmentStrokeWidth : 1, // default: 2
+                                    animateRotate : false, // default: true
+                                    //animateScale : true // default: false
+                                });
+                            
+                            
+                        }else
+                        {
+                            $('#infos').append('<h3 class="participation">Participation</h3>');
+                        
+                            $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de participation sur '+data.data.inscrits+' inscrits<div class="bar"><span class="pourcent-fill pourcent-'+parseInt(100-data.data.pourcent_abs_ins)+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+(100-data.data.pourcent_abs_ins)+' %</span></div>');
+
+                            $('#infos').append('<h3 class="resultats">Résultats</h3>');
+                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
+
+
+                            if( data.data.resultats ){
+                                var resultats = data.data.resultats;
+
+                                resultats.sort(function(a,b){
+                                    var sortResult = 0;
+                                    sortResult = b.voix - a.voix;
+                                    return sortResult;
+                                });
+
+                                var pieData = [];
+                                var pieLegend = '<ul class="legend">';
+                                //var resultDetail = '<ul class="detail">';
+
+                                for ( var i in resultats ){
+                                    var res = resultats[i];
+
+                                    var label = labels[res.code_nuance];
+                                    if (dataResultatsDirectory == 'pres_2012_t1'
+                                              || dataResultatsDirectory == 'pres_2012_t2'){
+                                         label = res.nom + ' ' + res.prenom;
+                                    }
+                                    pieData.push({value:res.voix,color:colors[res.code_nuance],highlight:colors[res.code_nuance],label: label,key:res.code_nuance,pourcent:res.pourcent_voix_exp});
+
+                                }
+
+                                $('#infos').append(buildDetailsBars(pieData, 'votes'));        
+                                
+                                // generate pie
+                                var ctx = document.getElementById("resultsPie").getContext("2d");
+                                window.resultsPie = new Chart(ctx).Pie(pieData, {
+                                    tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> voix",
+                                    //segmentShowStroke : false, // default: true
+                                    segmentStrokeWidth : 1, // default: 2
+                                    animateRotate : false, // default: true
+                                    //animateScale : true // default: false
+                                });
+                            
+                            }
+                        }
+        //}else{
+        //  $('#infos').html("<p>Erreur lors du chargement des données</p>");
+        //}
+            
+    })
+    .fail(function() {
+        $('#infos').html('<p>Données non disponibles</p>');
+    })
 }
+
 
 function onEachFeatureReg(feature, layer) {
 
-	layer.setStyle(defaultStyle);
-	layer.on('mouseover', function(e){
+    layer.setStyle(defaultStyle);
+    layer.on('mouseover', function(e){
         displayPopup(e, 'Région ' + feature.properties.REGION);
-		highlightFeature(e);
-	});
-	layer.on('mouseout', function(e){
+        highlightFeature(e);
+    });
+    layer.on('mouseout', function(e){
         hidePopup(e);
-		resetHighlightOnFeature(e);
-	});
-	
+        resetHighlightOnFeature(e);
+    });
+    
     layer.off('click');
-	layer.on('click', function(e){
-    	selectFeature(e, feature, layer, 'reg2015');
-	});
+    layer.on('click', function(e){
+        selectFeature(e, feature, layer, 'reg2015');
+    });
 
-	layer.setStyle({fillColor:layer.bgcolor});
+    layer.setStyle({fillColor:layer.bgcolor});
         
     printDebug('ajax call to resultats...', true);
     
@@ -868,21 +927,21 @@ function onEachFeatureReg(feature, layer) {
 /* Départements */
 function onEachFeatureDep(feature, layer) {
 
-	layer.setStyle(defaultStyle);
-	layer.on('mouseover', function(e){
+    layer.setStyle(defaultStyle);
+    layer.on('mouseover', function(e){
         displayPopup(e, feature.properties.NOM + '('+feature.properties.NUMERO+')');
-		highlightFeature(e);
-	});
-	layer.on('mouseout', function(e){
+        highlightFeature(e);
+    });
+    layer.on('mouseout', function(e){
         hidePopup(e);
-		resetHighlightOnFeature(e);
-	});
-	layer.off('click');
-	layer.on('click', function(e){
-    	selectFeature(e, feature, layer, 'dep');
-	});
+        resetHighlightOnFeature(e);
+    });
+    layer.off('click');
+    layer.on('click', function(e){
+        selectFeature(e, feature, layer, 'dep');
+    });
 
-	layer.setStyle({fillColor:layer.bgcolor});
+    layer.setStyle({fillColor:layer.bgcolor});
     
     if( dataResultatsDirectory != 'insee' ){
         $.ajax({
@@ -932,21 +991,21 @@ function onEachFeatureDep(feature, layer) {
 /* Circonscriptions législatives */
 function onEachFeatureCirco(feature, layer) {
 
-	layer.setStyle(defaultStyle);
-	layer.on('mouseover', function(e){
+    layer.setStyle(defaultStyle);
+    layer.on('mouseover', function(e){
         displayPopup(e, parseInt(feature.properties.num_circo) + '<sup>e</sup> circonscription');
-		highlightFeature(e);
-	});
-	layer.on('mouseout', function(e){
+        highlightFeature(e);
+    });
+    layer.on('mouseout', function(e){
         hidePopup(e);
-		resetHighlightOnFeature(e);
-	});
+        resetHighlightOnFeature(e);
+    });
     layer.off('click');
-	layer.on('click', function(e){
-    	selectFeature(e, feature, layer, 'circo');
-	});
+    layer.on('click', function(e){
+        selectFeature(e, feature, layer, 'circo');
+    });
 
-	layer.setStyle({fillColor:layer.bgcolor});
+    layer.setStyle({fillColor:layer.bgcolor});
   
     
     $.ajax({
@@ -974,21 +1033,21 @@ function onEachFeatureCirco(feature, layer) {
 function onEachFeatureCom(feature, layer) {
 
 //printDebug("enter oneachfeaturecom->dataResultatsDirectory:"+dataResultatsDirectory);
-	layer.setStyle(defaultStyle);
-	layer.on('mouseover', function(e){
+    layer.setStyle(defaultStyle);
+    layer.on('mouseover', function(e){
         displayPopup(e, feature.properties.COMMUNE);
-		highlightFeature(e);
-	});
-	layer.on('mouseout', function(e){
+        highlightFeature(e);
+    });
+    layer.on('mouseout', function(e){
         hidePopup(e);
-		resetHighlightOnFeature(e);
-	});
-	layer.off('click');
-	layer.on('click', function(e){
-    	selectFeature(e, feature, layer, 'com');
-	});
+        resetHighlightOnFeature(e);
+    });
+    layer.off('click');
+    layer.on('click', function(e){
+        selectFeature(e, feature, layer, 'com');
+    });
 
-	layer.setStyle({fillColor:layer.bgcolor});
+    layer.setStyle({fillColor:layer.bgcolor});
 
 
   if (dataResultatsDirectory!="insee")
@@ -1151,22 +1210,22 @@ var bvMarkerSelectedOptions = {
 }
 
 function pointToLayerBV(feature, latlng) {
-	return L.circleMarker(latlng, bvMarkerOptions);
+    return L.circleMarker(latlng, bvMarkerOptions);
 }
 function onEachFeatureBV(feature, layer) {
-	layer.on('mouseover', function(e){
+    layer.on('mouseover', function(e){
         displayPopup(e, feature.properties.lib_commune + ', bureau ' + feature.properties.code_bv);
-		//highlightFeature(e);
+        //highlightFeature(e);
         layer.setStyle(bvMarkerHighlightOptions);
-	});
-	layer.on('mouseout', function(e){
+    });
+    layer.on('mouseout', function(e){
         hidePopup(e);
-		//resetHighlightOnFeature(e);
+        //resetHighlightOnFeature(e);
         if( layer.options.className != 'active' ){
             layer.setStyle(bvMarkerOptions);
             layer.setStyle({fillColor:layer.bgcolor});
         }
-	});
+    });
     $.ajax({
         url: "data/resultats/"+dataResultatsDirectory+"/bv/" + feature.properties.code_dpt + "/" + feature.properties.code_commune + "/"+ feature.properties.code_bv + ".json",
         dataType: "json"
@@ -1194,7 +1253,7 @@ function onEachFeatureBV(feature, layer) {
         map.eachLayer(function(otherLayer){
             if( otherLayer.feature && otherLayer != layer &&  otherLayer.quorums_type == 'bv'){
                 otherLayer.setStyle(bvMarkerOptions);
-		      otherLayer.setStyle({fillColor:otherLayer.bgcolor});
+              otherLayer.setStyle({fillColor:otherLayer.bgcolor});
             }
         });
         $('#infos').html('');
@@ -1208,7 +1267,7 @@ function onEachFeatureBV(feature, layer) {
 
         $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
         var resultats = feature.datas.resultats;
-				
+                
         resultats.sort(function(a,b){
             var sortResult = 0;
             sortResult = b.voix - a.voix;
@@ -1239,18 +1298,18 @@ function onEachFeatureBV(feature, layer) {
         var ctx = document.getElementById("resultsPie").getContext("2d");
         window.resultsPie = new Chart(ctx).Pie(pieData);
 
-	});
+    });
 }
 
 /* pour le debug */
 function displayObjProperties(obj){
-	var message = 'displayObjProperties : \r\n';
-	for(var key in obj) {
-		var value = obj[key];
-		message += key + ' => ' + value + '\r\n';
-	}
-	message += '\r\nend.';
-	alert(message); 
+    var message = 'displayObjProperties : \r\n';
+    for(var key in obj) {
+        var value = obj[key];
+        message += key + ' => ' + value + '\r\n';
+    }
+    message += '\r\nend.';
+    alert(message); 
 }
 
 function printDebug(message, append){

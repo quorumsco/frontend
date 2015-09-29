@@ -2,8 +2,14 @@
 
 @include exports('main') {
   app-main {
+    overflow: auto;
     display: block;
-    padding-top: $header-height;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: $header-height;
 
     .fixed {
       position: fixed;

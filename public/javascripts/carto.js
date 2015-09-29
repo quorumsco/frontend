@@ -7,7 +7,7 @@ var debug = false;
 var defaultStyle = {
 	color: '#000000', 
 	weight: 1,
-    opacity: 1,
+    opacity: 0.5,
 	fillOpacity: 0.9,
 	className: ''
 };
@@ -169,7 +169,7 @@ $(function() {
                 {
                     //$('#select-subview').removeClass('hide');
                     $('.communes').show().css("visibility", "visible");
-                    $('.communes').checked=true;
+                    $('.communes').checked="checked";
                     $('.circonscriptions').show().css("visibility", "visible");
                     $('.iris').hide();
                     $('.pauvrete').hide();
@@ -178,7 +178,7 @@ $(function() {
                     //$('#select-insee_subview').removeClass('hide');
                     $('.iris').show().css("visibility", "visible");
                     $('.pauvrete').show().css("visibility", "visible");
-                    $('.pauvrete').checked=true;
+                    $('.pauvrete').checked="checked";
                     $('.chomage').show().css("visibility", "visible");
                     $('.communes').hide();
                     $('.circonscriptions').hide();
@@ -214,7 +214,7 @@ $(function() {
             {
                     for( var index in subLayers_cache )
                     {
-                        if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0  ){
+                        if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0){
                             map.removeLayer(subLayers_cache[index]);
                         }
                     }
@@ -539,13 +539,13 @@ function resetAllLayerState(){
                     //$('#select-subview').removeClass('hide');
 
                     $('.communes').show().css("visibility", "visible");
-                    $('.communes').checked=true;
+                    $('.communes').checked="checked";
                     $('.circonscriptions').show().css("visibility", "visible");
                 }else{
                     //$('#select-insee_subview').removeClass('hide');
                     $('.iris').show().css("visibility", "visible");
                     $('.pauvrete').show().css("visibility", "visible");
-                    $('.pauvrete').checked=true;
+                    $('.pauvrete').checked="checked";
                     $('.chomage').show().css("visibility", "visible");
                 }  
     }
@@ -670,7 +670,7 @@ function selectFeature(e, feature, layer, type){
 
                     $('.communes').show().css("visibility", "visible");
                     $('.circonscriptions').show().css("visibility", "visible");
-                    $('.communes').checked=true;
+                    $('.communes').checked="checked";
                     $('.iris').hide();
                     $('.pauvrete').hide();
                     $('.chomage').hide();
@@ -682,7 +682,7 @@ function selectFeature(e, feature, layer, type){
                     $('.iris').show().css("visibility", "visible");
                     $('.pauvrete').show().css("visibility", "visible");
                     $('.chomage').show().css("visibility", "visible");
-                    $('.pauvrete').checked=true;
+                    $('.pauvrete').checked="checked";
 
 
         }  
@@ -1105,10 +1105,10 @@ function onEachFeatureCom(feature, layer) {
                                             {
                                                 var resul=data.data[0].TxPauvrete;
                                                 if (parseInt(resul)>=10)
-                                                {layer.bgcolor = '#60bc7a';}
-                                                else{layer.bgcolor = '#aff2d5';}
+                                                {layer.bgcolor = '#15702e';}
+                                                else{layer.bgcolor = '#77c6a4';}
                                             }else{
-                                                layer.bgcolor = '#8b8b8b';
+                                                layer.bgcolor = '#f2f1f0';
                                             }
                                         layer.setStyle({fillColor:layer.bgcolor});
                                         layer.quorums_type = 'com';
@@ -1130,7 +1130,7 @@ function onEachFeatureCom(feature, layer) {
                                                 {layer.bgcolor = '#60bc7a';}
                                                 else{layer.bgcolor = '#aff2d5';}
                                             }else{
-                                                layer.bgcolor = '#8b8b8b';
+                                                layer.bgcolor = '#f2f1f0';
                                             }
                                         layer.setStyle({fillColor:layer.bgcolor});
                                         layer.quorums_type = 'com';
@@ -1146,7 +1146,7 @@ function onEachFeatureIris(feature, layer) {
 
     layer.setStyle(defaultStyle);
     layer.on('mouseover', function(e){
-        displayPopup(e, 'Iris : '+ feature.properties.LIB_IRIS +" ("+feature.properties.LIB_COM+")" );
+        displayPopup(e, 'Iris : '+ feature.properties.NOM_IRIS +" ("+feature.properties.NOM_COM+")" );
         highlightFeature(e);
     });
     layer.on('mouseout', function(e){
@@ -1160,28 +1160,49 @@ function onEachFeatureIris(feature, layer) {
                     
             $.ajax({
                 //url: "data/resultats/INSEE/"+ feature.properties.COD_COM.slice(0, 2) +"/IRIS_CUB_chomeurs.json",
-                url: "data/resultats/insee/iris/"+ feature.properties.COD_COM.slice(0, 2) +"/"+feature.properties.IRIS+".json",
+                url: "data/resultats/insee/iris/"+ feature.properties.DEPCOM.slice(0, 2) +"/"+feature.properties.DCOMIRIS+".json",
                 dataType: "json"
             })
             .done(function(data) 
             {
                     if(data.data){
-                        var resul=data.data[0].TxChomage;
-                        if (parseInt(resul)>=300)
-                            {layer.bgcolor = '#60bc7a';}
-                        else{layer.bgcolor = '#aff2d5';}
+                        var resul=(parseInt(data.data[0].NbFamilles)/parseInt(data.data[0].NbMenages))*100;
+                        printDebug("@"+resul);
+                        if (parseInt(resul)>=90)
+                            {layer.bgcolor = '#17734b';}
+                        else if (parseInt(resul)>=80)
+                            {layer.bgcolor = '#1a8053';}
+                        else if (parseInt(resul)>=75)
+                            {layer.bgcolor = '#1d8c5c';}
+                        else if (parseInt(resul)>=70)
+                            {layer.bgcolor = '#1f9964';}
+                        else if (parseInt(resul)>=65)
+                            {layer.bgcolor = '#22a66c';}
+                        else if (parseInt(resul)>=60)
+                            {layer.bgcolor = '#24b375';}
+                        else if (parseInt(resul)>=55)
+                            {layer.bgcolor = '#27bf7d';}
+                        else if (parseInt(resul)>=45)
+                            {layer.bgcolor = '#2acc86';}
+                        else if (parseInt(resul)>=35)
+                            {layer.bgcolor = '#2cd98e';}
+                        else if (parseInt(resul)>=25)
+                            {layer.bgcolor = '#2fe696';}
+                        else{layer.bgcolor = '#31f29f';}
 
                         layer.setStyle({fillColor:layer.bgcolor});
                         layer.quorums_type = 'iris';
                         return resul;
 
                         }else{
-                            layer.bgcolor = '#fdfbd0';
+                            layer.bgcolor = '#f2f1f0';
                             layer.setStyle({fillColor:layer.bgcolor});
                             layer.quorums_type = 'iris';
                         }
             });
-    
+            layer.bgcolor = '#f2f1f0';
+            layer.setStyle({fillColor:layer.bgcolor});
+            layer.quorums_type = 'iris';
  }
 
 /* Bureaux de votes */

@@ -120,6 +120,27 @@ function shadeColor2(color, percent) {
 /* gestion du choix des donnes a affiche */
 var dataResultatsDirectory = 'dep_2015';
 
+function hideSelectSubview(){
+    $('#select-subview').addClass('hide');
+    $('#select-subview').removeClass('com-circo insee');
+}
+function showSelectSubview(){
+    $('#select-subview').removeClass('hide');
+    
+    if (dataResultatsDirectory == 'insee'){
+        $('#select-subview').addClass('insee');
+        $('#select-subview').removeClass('com-circo');
+        $('#select-subview input.pauvrete').prop('checked', true);
+        dep_subview ='communes_pauvrete';
+    }else{
+        $('#select-subview').addClass('com-circo');
+        $('#select-subview').removeClass('insee');
+        $('#select-subview input.circonscriptions').prop('checked', true);
+        dep_subview = 'circonscriptions_elections';
+    }
+
+}
+
 function listen() {
     $(function() {
       $("#select-data button").on('click', function(){
@@ -164,26 +185,7 @@ function listen() {
              displayInfos(currentRegLayer.feature, currentViewType);
           }else if( currentViewType == 'dep' ){
 
-                    
-                    if (dataResultatsDirectory!="insee")
-                    {
-                        //$('#select-subview').removeClass('hide');
-                        $('.communes').show().css("visibility", "visible");
-                        $('.communes').checked="checked";
-                        $('.circonscriptions').show().css("visibility", "visible");
-                        $('.iris').hide();
-                        $('.pauvrete').hide();
-                        $('.chomage').hide();
-                    }else{
-                        //$('#select-insee_subview').removeClass('hide');
-                        $('.iris').show().css("visibility", "visible");
-                        $('.pauvrete').show().css("visibility", "visible");
-                        $('.pauvrete').checked="checked";
-                        $('.chomage').show().css("visibility", "visible");
-                        $('.communes').hide();
-                        $('.circonscriptions').hide();
-                    }
-
+                    showSelectSubview();
 
             if (dep_subview.substring(0,8)!="iris2000")
                 {          
@@ -241,7 +243,7 @@ function listen() {
 
 /* gestion de la navigation departement */
 var dep_subview ='';
-if (dataResultatsDirectory!="insee"){dep_subview ='communes_elections';}else{dep_subview ='communes_pauvrete';} // communes | circonscriptions
+if (dataResultatsDirectory!="insee"){dep_subview ='circonscriptions_elections';}else{dep_subview ='communes_pauvrete';} // communes | circonscriptions
 function listen_switch() {
     $(function() {
 
@@ -472,21 +474,7 @@ function resetAllLayerState(){
         
         currentDeptLayer = null;
         
-
-
-        if (dataResultatsDirectory!="insee")
-                {
-                    //$('#select-subview').addClass('hide');
-                    
-                    $('.communes').hide();
-                    $('.circonscriptions').hide();
-                }else{
-                    //$('#select-insee_subview').addClass('hide');
-                      $('.iris').hide();
-                    $('.pauvrete').hide();
-                    $('.chomage').hide();
-                    
-                }  
+        hideSelectSubview(); 
         
     }else if( currentViewType == 'com' || currentViewType == 'circo' || currentViewType == 'iris'){
         // suppression des bv
@@ -532,21 +520,7 @@ function resetAllLayerState(){
         currentComLayer = null;
         currentIrisLayer = null;
 
-
-        if (dataResultatsDirectory!="insee")
-                {
-                    //$('#select-subview').removeClass('hide');
-
-                    $('.communes').show().css("visibility", "visible");
-                    $('.communes').checked="checked";
-                    $('.circonscriptions').show().css("visibility", "visible");
-                }else{
-                    //$('#select-insee_subview').removeClass('hide');
-                    $('.iris').show().css("visibility", "visible");
-                    $('.pauvrete').show().css("visibility", "visible");
-                    $('.pauvrete').checked="checked";
-                    $('.chomage').show().css("visibility", "visible");
-                }  
+        showSelectSubview();
     }
     
 }
@@ -609,25 +583,9 @@ function selectFeature(e, feature, layer, type){
         }else{
             subLayers_cache[n].addTo(map);
         }
-        
-
-        if (dataResultatsDirectory!="insee")
-                {
-                    //$('#select-subview').addClass('hide');
-
-                    $('.communes').hide();
-                    $('.circonscriptions').hide();
-
-                }else{
-                    //$('#select-insee_subview').addClass('hide');
-                    $('.iris').hide();
-                    $('.pauvrete').hide();
-                    $('.chomage').hide();
-                    
-                }  
-                
             
     } else if( type == 'dep' ){
+        showSelectSubview();
          // load and display sub-layers
         var n = feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
         if (dep_subview.substring(0,8)!="iris2000")
@@ -636,7 +594,7 @@ function selectFeature(e, feature, layer, type){
                     if( ! subLayers_cache[n] ){
                         
                             var subLayers = new L.GeoJSON.AJAX(
-                                'data/contours/departements/'+feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                'data/contours/departements/'+feature.properties.NUMERO+'/'+(dep_subview.substring(0,8)=='communes' ? 'communes' : 'circonsc')+'.geojson',
                                 {
                                     onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
                                 }
@@ -661,31 +619,6 @@ function selectFeature(e, feature, layer, type){
                         subLayers_cache[n].addTo(map);
                     } 
         }
-        //printDebug("au bon endroit"+dataResultatsDirectory);
-        if (dataResultatsDirectory!="insee")
-        {
-                    //$('#select-subview').removeClass('hide');
-                    //$('#select-insee_subview').addClass('hide');
-
-                    $('.communes').show().css("visibility", "visible");
-                    $('.circonscriptions').show().css("visibility", "visible");
-                    $('.communes').checked="checked";
-                    $('.iris').hide();
-                    $('.pauvrete').hide();
-                    $('.chomage').hide();
-        }else{
-                    //$('#select-subview').removeClass('hide');
-                    //$('#select-subview').addClass('hide');
-                    $('.communes').hide();
-                    $('.circonscriptions').hide();
-                    $('.iris').show().css("visibility", "visible");
-                    $('.pauvrete').show().css("visibility", "visible");
-                    $('.chomage').show().css("visibility", "visible");
-                    $('.pauvrete').checked="checked";
-
-
-        }  
-
     }
     else if( type == 'com' && feature.properties.REF_INSEE == '33063')
     {
@@ -703,16 +636,8 @@ function selectFeature(e, feature, layer, type){
         }else{
             subLayers_cache[n].addTo(map);
         }
-                    $('.communes').hide();
-                    $('.circonscriptions').hide();
-                    $('.iris').hide();
-                    $('.pauvrete').hide();
-                    $('.chomage').hide();
-       
+        hideSelectSubview();
     }
-    //$('#select-subview').addClass('hide');  
-
-
     currentViewType = type;
 }
 

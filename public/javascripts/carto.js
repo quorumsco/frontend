@@ -189,14 +189,22 @@ function listen() {
              displayInfos(currentRegLayer.feature, currentViewType);
           }else if( currentViewType == 'dep' ){
 
-                    showSelectSubview();
+              var previous_subview = dep_subview;
+              
+            showSelectSubview();
 
+              printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview, true);
             if (dep_subview.substring(0,8)!="iris2000")
                 {          
                         for( var index in subLayers_cache )
                         {
-                            if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0  ){
+                            
+                            if( index.indexOf('-'+dep_subview+'-') >= 0  
+                               || index.indexOf('-'+previous_subview+'-') >= 0 ){
                                 map.removeLayer(subLayers_cache[index]);
+                                printDebug('remove subview layer ' + index, true);
+                            }else{
+                                printDebug('DON\'T remove subview layer ' + index, true);
                             }
                         }  
                         // load and display sub-layers
@@ -220,8 +228,12 @@ function listen() {
                 {
                         for( var index in subLayers_cache )
                         {
-                            if( index.indexOf('-'+dep_subview.substring(0,8)+'-') >= 0){
+                            if( index.indexOf('-'+dep_subview+'-') >= 0 
+                               || index.indexOf('-'+previous_subview+'-') >= 0){
                                 map.removeLayer(subLayers_cache[index]);
+                                printDebug('remove subview layer ' + index, true);
+                            }else{
+                                printDebug('DON\'T remove subview layer ' + index, true);
                             }
                         }
 
@@ -257,14 +269,16 @@ function listen_switch() {
           $("#select-subview input[type=radio]").on('change', function(){
               if( $(this).prop('checked') ){
               
-              // remove current sublayer
+              printDebug('change subview to display : from ' + dep_subview + ', to ' + $(this).val(), true);
+              
+            // remove current sublayer
                 for( var index in subLayers_cache ){
                     if( index.indexOf('-'+dep_subview+'-') >= 0  ){
                         map.removeLayer(subLayers_cache[index]);
                     }
 
                 }      
-                  printDebug($(this).val());
+                
                   // change subview
                 dep_subview = $(this).val() ;
                     // load and display sub-layers
@@ -427,6 +441,9 @@ function resetAllLayerState(){
             }
         }
         
+        // retour du layer region selectionné
+        currentRegLayer.addTo(map);
+        
         // re init des layer regions
         map.eachLayer(function(layer){
             if( layer.quorums_type == 'reg2015' ){
@@ -434,13 +451,10 @@ function resetAllLayerState(){
             }
         });
         
-        // retour du layer region selectionné
-        currentRegLayer.addTo(map);
-            
-        currentRegLayer.setStyle(defaultStyle);
-        currentRegLayer.setStyle({fillColor:currentRegLayer.bgcolor});
+        //currentRegLayer.setStyle(defaultStyle);
+        //currentRegLayer.setStyle({fillColor:currentRegLayer.bgcolor});
         
-        printDebug('currentViewType : ' + currentViewType + ' -> france' , true);
+        printDebug('reset(reg) : currentViewType : ' + currentViewType + ' -> france' , true);
         currentViewType = 'france';
         
         map.fitBounds(bounds);
@@ -451,11 +465,15 @@ function resetAllLayerState(){
         
     }else if( currentViewType == 'dep'){
         // suppression du decoupage commune/circo
+        printDebug('reset(dep) : suppression sublayer type : ' + dep_subview , true);
         for( var index in subLayers_cache ){
             if( index.indexOf('-'+dep_subview+'-') >= 0  ){
                 map.removeLayer(subLayers_cache[index]);
             }
         }
+        
+        // retour du layer dep selectionné
+        currentDeptLayer.addTo(map);
         
         // re init des layer dep
         map.eachLayer(function(layer){
@@ -464,13 +482,10 @@ function resetAllLayerState(){
             }
         });
         
-        // retour du layer dep selectionné
-        currentDeptLayer.addTo(map);
-            
-        currentDeptLayer.setStyle(defaultStyle);
-        currentDeptLayer.setStyle({fillColor:currentDeptLayer.bgcolor});
+        //currentDeptLayer.setStyle(defaultStyle);
+        //currentDeptLayer.setStyle({fillColor:currentDeptLayer.bgcolor});
         
-        printDebug('currentViewType : ' + currentViewType + ' -> reg2015' , true);
+        printDebug('reset(dep) : currentViewType : ' + currentViewType + ' -> reg2015' , true);
         currentViewType = 'reg2015';
         
         map.fitBounds(currentRegLayer);
@@ -489,6 +504,17 @@ function resetAllLayerState(){
             }
         }
         
+        var currentParentLayer;
+        if( currentCircoLayer != null ){
+            currentParentLayer = currentCircoLayer;
+        }else if ( currentComLayer != null ){
+            currentParentLayer = currentComLayer;
+        }else if ( currentIrisLayer != null ){
+            currentParentLayer = currentIrisLayer;
+        }
+        // retour du layer com/circo selectionné
+        currentParentLayer.addTo(map);
+
         // re init des layer communes/circo et suppression des bv
         map.eachLayer(function(layer){
             if( layer.quorums_type == 'com' ){
@@ -500,21 +526,11 @@ function resetAllLayerState(){
             }
         });
         
-        var currentParentLayer;
-        if( currentCircoLayer != null ){
-            currentParentLayer = currentCircoLayer;
-        }else if ( currentComLayer != null ){
-            currentParentLayer = currentComLayer;
-        }else if ( currentIrisLayer != null ){
-            currentParentLayer = currentIrisLayer;
-        }
-        // retour du layer com/circo selectionné
-        currentParentLayer.addTo(map);
             
-        currentParentLayer.setStyle(defaultStyle);
-        currentParentLayer.setStyle({fillColor:currentParentLayer.bgcolor});
+        //currentParentLayer.setStyle(defaultStyle);
+        //currentParentLayer.setStyle({fillColor:currentParentLayer.bgcolor});
         
-         printDebug('currentViewType : ' + currentViewType + ' -> dep' , true);
+        printDebug('reset(com|circo|iris) : currentViewType : ' + currentViewType + ' -> dep' , true);
         currentViewType = 'dep';
         
         map.fitBounds(currentDeptLayer);
@@ -532,9 +548,10 @@ function resetAllLayerState(){
 /* selection d'une zone cliquable */
 function selectFeature(e, feature, layer, type){
     
+    printDebug('before selectFeature() : currentRegLayer='+currentRegLayer+', currentDeptLayer='+currentDeptLayer+', currentCircoLayer='+currentCircoLayer+', currentComLayer='+currentComLayer+', currentViewType='+currentViewType+', currentIrisLayer='+currentIrisLayer+', dataResultatsDirectory='+dataResultatsDirectory+', dep_subview='+dep_subview, true);
     $("#select-data ul").hide();
     
-    printDebug('selectFeature() : changement currentViewType ' + currentViewType + ' -> ' + type, true);
+    //printDebug('selectFeature() : changement currentViewType ' + currentViewType + ' -> ' + type, true);
     //alert('selectFeature('+type+'). currentLayer : '+layer._leaflet_id+', regionLayer : ' + (currentRegLayer!=null?currentRegLayer._leaflet_id:'null'));
    
     if( type == 'reg2015' ){
@@ -644,13 +661,14 @@ function selectFeature(e, feature, layer, type){
         hideSelectSubview();
     }
     currentViewType = type;
+    printDebug( 'after selectFeature() : currentRegLayer='+currentRegLayer+', currentDeptLayer='+currentDeptLayer+', currentCircoLayer='+currentCircoLayer+', currentComLayer='+currentComLayer+', currentViewType='+currentViewType+', currentIrisLayer='+currentIrisLayer+', dataResultatsDirectory='+dataResultatsDirectory+', dep_subview='+dep_subview, true);
 }
 
 
 /* affichage des infos relatives à la zone sélectionnée */
 function displayInfos(feature, type){
     
-    printDebug("feature:"+feature+" type:"+type+" dataResultatsDirectory:"+dataResultatsDirectory);
+    printDebug("displayInfo() : feature:"+feature+" type:"+type+" dataResultatsDirectory:"+dataResultatsDirectory, true);
     var resultats_key = feature.properties.NUMERO;
     var infosContent = "";
     $('#infos').html('');
@@ -757,7 +775,7 @@ function displayInfos(feature, type){
                                 //var res = data.data[0].NbFamilles;
 
                                 var res=Math.round((parseInt(data.data[0].NbFamilles)/parseInt(data.data[0].NbMenages))*100);
-                            printDebug(res);
+                            printDebug('ajax call done() : res = ' + res, true);
                             $('#infos').append('<h3 class="participation">Participation</h3>');
                             $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de familles sur '+data.data[0].NbMenages+' ménages<div class="bar"><span class="pourcent-fill pourcent-'+res+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+res+' %</span></div>');
                             $('#infos').append('<h3 class="resultats">Résultats</h3>');
@@ -876,7 +894,7 @@ function onEachFeatureReg(feature, layer) {
 
     layer.setStyle({fillColor:layer.bgcolor});
         
-    printDebug('ajax call to resultats...', true);
+    printDebug('ajax call(reg)...', true);
     
     if( dataResultatsDirectory != 'insee' ){
         $.ajax({
@@ -884,9 +902,9 @@ function onEachFeatureReg(feature, layer) {
             dataType: "json"
         })
         .done(function(data) {
-            printDebug('... done. status : ' + data.status, true);
+            printDebug('ajax call(reg)... done. status : ' + data.status, true);
             if( "success" == data.status ){
-                printDebug('opinions ?  ' + data.data.opinions, true);
+                printDebug('success : opinions ?  ' + data.data.opinions, true);
 
                 if( data.data.resultats ){
                     var resultats = data.data.resultats;
@@ -1078,7 +1096,7 @@ function onEachFeatureCom(feature, layer) {
 { // sinon résultats de type INSEE
     // selection des datas selon le radio bouton INSEE sélectionné
     //printDebug("dep_subview==pauvrete"+type,true);
-    printDebug(dep_subview);
+    //printDebug(dep_subview);
             if (dep_subview=="communes_pauvrete")
                 {
                     $.ajax({
@@ -1154,7 +1172,7 @@ function onEachFeatureIris(feature, layer) {
             {
                     if(data.data){
                         var resul=(parseInt(data.data[0].NbFamilles)/parseInt(data.data[0].NbMenages))*100;
-                        printDebug("@"+resul);
+                        printDebug("@"+resul, true);
                         if (parseInt(resul)>=90)
                             {layer.bgcolor = '#17734b';}
                         else if (parseInt(resul)>=80)
@@ -1317,11 +1335,12 @@ function displayObjProperties(obj){
 }
 
 function printDebug(message, append){
+    var current_time = new Date(); 
     if( debug ){
         if( append ){
-            $('#debug').prepend(message+'<br/>');
+            $('#debug').prepend( current_time.toJSON() + ' : ' + message+'<br/>');
         }else{
-            $('#debug').html(message+'</p>');
+            $('#debug').html( current_time.toJSON() + ' : ' + message+'<br/>');
         }
     }
 }   
@@ -1346,6 +1365,7 @@ function buildDetailsBars(datas, unity){
 
 return {
     createMap: function() {
+        printDebug('init : currentRegLayer='+currentRegLayer+', currentDeptLayer='+currentDeptLayer+', currentCircoLayer='+currentCircoLayer+', currentComLayer='+currentComLayer+', currentViewType='+currentViewType+', currentIrisLayer='+currentIrisLayer+', dataResultatsDirectory='+dataResultatsDirectory+', dep_subview='+dep_subview, true);
         /* creation de la carte */
         listen();
         listen_switch();

@@ -75,31 +75,6 @@ map-module{
     color: #a3a3a3;
 }
 
-@media screen and (max-width: 640px){
-    #content{
-        width: 100%;   
-    }
-    #toolbar{
-        top: 0;
-    }
-    #map{
-        bottom: 20%;
-        width: auto;
-        left: 0;
-        right: 0;
-        top: 50px;
-    }
-    
-	#infos{
-        width: auto;
-        left: 0;
-        right: 0;
-        height: 20%;
-        bottom: 0;
-        top: auto;
-	}
-}	
-
 /* toolbar */
 #toolbar ul, #toolbar li{
     margin: 0;
@@ -623,3 +598,56 @@ map-module{
 .leaflet-touch .leaflet-control-zoom-in{
     font-size: 18px;   
 }
+
+@media screen and (max-width: 640px){
+    #content{
+        width: 100%;   
+    }
+    #toolbar{
+        top: 0;
+    }
+    #map{
+        bottom: 20%;
+        width: auto;
+        left: 0;
+        right: 0;
+        top: 50px;
+    }
+    
+	#infos{
+        width: auto;
+        left: 0;
+        right: 0;
+        height: 20%;
+        bottom: 0;
+        top: auto;
+	}
+    
+    #select-data{
+        width: auto; 
+        right: 60px;
+        top: 60px;
+    }
+    #select-data h1{
+        font-size: 11px;
+    }
+    #select-data ul{
+        margin-left: 0;   
+    }
+    
+    #select-subview{
+        right: auto;
+        left: 0;
+        padding: 5px;
+        top: 120px;
+        height: 45px;
+    }
+    #select-subview label{
+        font-size: 10px;
+    }
+    #select-subview label.iris, #select-subview label.pauvrete, #select-subview label.chomage{
+        font-size: 10px;
+        line-height: 1.1em;
+    }
+}	
+

@@ -126,8 +126,7 @@ $(function() {
       $("#select-data ul").toggle();
   });
     
-  $("#select-data ul li a").on('click', function(event){
-      event.preventDefault();
+  $("#select-data ul li a").on('click', function(){
       dataResultatsDirectory =  $(this).attr('data-rel');
       $("#select-data h1").html($(this).html());
       $("#select-data ul li a.selected").removeClass('selected');
@@ -261,7 +260,7 @@ $(function() {
               printDebug($(this).val());
               // change subview
             dep_subview = $(this).val() ;
-            console.log(dep_subview)
+              
                 // load and display sub-layers
                 var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                 if (dep_subview.substring(0,8)!="iris2000")
@@ -1336,39 +1335,38 @@ function buildDetailsBars(datas, unity){
     return res;
 }
 
-return {
-    createMap: function() {
-        /* creation de la carte */
-        map = L.map('map', {zoomControl: false}).setView([46.49839, 2.76855]);
+function createMap() {
+    /* creation de la carte */
+    console.log("suce ma queu")
+    var map = L.map('map', {zoomControl: false}).setView([46.49839, 2.76855]);
 
-        map.addControl( L.control.zoom({position: 'topright'}) )
+    map.addControl( L.control.zoom({position: 'topright'}) )
 
-        /* zoom auto en fonction de la taille de la zone */
-        southWest = L.latLng(40.36329, -5.00977);
-        northEast = L.latLng(51.49506, 10.06348);
-        bounds = L.latLngBounds(southWest, northEast);
-        map.fitBounds(bounds);
+    /* zoom auto en fonction de la taille de la zone */
+    var southWest = L.latLng(40.36329, -5.00977);
+    var northEast = L.latLng(51.49506, 10.06348);
+    var bounds = L.latLngBounds(southWest, northEast);
+    map.fitBounds(bounds);
 
-        /* affichage fond osm */
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | &copy; <a href="http://www.quorumapps.com">Quorum</a>'
-        }).addTo(map);
+    /* affichage fond osm */
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | &copy; <a href="http://www.quorumapps.com">Quorum</a>'
+    }).addTo(map);
 
-        /* reset des styles et zoom par défaut si on clique hors de la carte */
-        map.on('click', function(){
-            $("#select-data ul").hide();
-            resetAllLayerState();
-        });
+    /* reset des styles et zoom par défaut si on clique hors de la carte */
+    map.on('click', function(){
+        $("#select-data ul").hide();
+        resetAllLayerState();
+    });
 
 
-        /* Régions */
-        regionsLayer = new L.GeoJSON.AJAX(
-            "data/contours/france-metropolitaine/regions-2015.geojson",
-            {
-                onEachFeature: onEachFeatureReg
-            }
-        ).addTo(map);
-    }
+    /* Régions */
+    var regionsLayer = new L.GeoJSON.AJAX(
+        "data/contours/france-metropolitaine/regions-2015.geojson",
+        {
+            onEachFeature: onEachFeatureReg
+        }
+    ).addTo(map);
 }
 // contour blanc sur zone taux de cuverture deja visitée + attention à la légende, rajouter fond gris
 // bilan d'opinion : couleur de base = ne sait pas, + foncé va voter, + clair, ne va pas voter

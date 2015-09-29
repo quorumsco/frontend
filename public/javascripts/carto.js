@@ -548,6 +548,9 @@ function resetAllLayerState(){
 /* selection d'une zone cliquable */
 function selectFeature(e, feature, layer, type){
     
+    // force hidePopup, because when selectFeature, mouseout can't be called considering feature is removed
+    hidePopup(e);
+    
     printDebug('before selectFeature() : currentRegLayer='+currentRegLayer+', currentDeptLayer='+currentDeptLayer+', currentCircoLayer='+currentCircoLayer+', currentComLayer='+currentComLayer+', currentViewType='+currentViewType+', currentIrisLayer='+currentIrisLayer+', dataResultatsDirectory='+dataResultatsDirectory+', dep_subview='+dep_subview, true);
     $("#select-data ul").hide();
     

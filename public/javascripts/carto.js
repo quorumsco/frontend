@@ -149,6 +149,10 @@ function listen() {
         
       $("#select-data ul li a").on('click', function(event){
           event.preventDefault();
+          
+          // close dropdown
+          $("#select-data ul").hide();
+          
           dataResultatsDirectory =  $(this).attr('data-rel');
           $("#select-data h1").html($(this).html());
           $("#select-data ul li a.selected").removeClass('selected');

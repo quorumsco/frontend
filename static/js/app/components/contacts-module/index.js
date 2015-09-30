@@ -8,17 +8,22 @@ var contact_store = require('../../models/contact_store.js'),
         var index = _.findIndex(arr, key);
         arr.splice(index, 1, newval);
     } else {
-      if (!arr) {
-        arr = [];
-      }
+      // if (!arr) {
+      //   arr = [];
+      // }
       arr.push(newval);
     }
     return arr
   },
   addFunc = function() {
     this.$root.navigate("contacts:new");
+  },
+  remove = function (arr, key) {
+    var match = _.find(arr, key);
+    if (match) {
+      _.remove(arr, key);
+    }
   };
-
 
 module.exports = {
   replace: false,
@@ -60,20 +65,20 @@ module.exports = {
     },
     addContact: function(contact) {
       contact_store.save(contact, (res) => {
-        this.contacts = upsert(this.contacts, {id: res.body.data.contact.id}, res.body.data.contact);
+        upsert(this.contacts, {id: res.body.data.contact.id}, res.body.data.contact);
       });
     },
     addNote: function(note) {
       this.contact = this.findContact();
       note_store.save(this.contact_id, note, (res) => {
-        this.contact.notes = upsert(this.contact.notes, {id: res.body.data.note.id}, res.body.data.note);
+        upsert(this.contact.notes, {id: res.body.data.note.id}, res.body.data.note);
         upsert(this.contacts, {id: this.contact.id}, this.contact);
       });
     },
     addTag: function(tag) {
       this.contact = this.findContact();
       tags_store.save(this.contact_id, tag, (res) => {
-        this.contact.tags = upsert(this.contact.tags, {id: res.body.data.tag.id}, res.body.data.tag);
+        upsert(this.contact.tags, {id: res.body.data.tag.id}, res.body.data.tag);
         upsert(this.contacts, {id: this.contact.id}, this.contact);
       });
     }
@@ -152,8 +157,18 @@ module.exports = {
       return false;
     },
     'contacts:update': function(contact) {
-      upsert(this.contacts, {id: contact.id}, contact);
-      //save in the store
+      contact.tags = undefined;
+      contact.notes = undefined;
+      contact_store.update(contact, (res) => {
+        upsert(this.contacts, {id: contact.id}, contact);
+      });
+      return false;
+    },
+    'contacts:remove': function(id) {
+      remove(this.contacts, {id: id});
+      this.$nextTick(() => {
+        console.log(this.contacts);
+      });
       return false;
     },
     'tabs:nb': function(nbNotes, nbTags) {

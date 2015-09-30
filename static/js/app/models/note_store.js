@@ -9,10 +9,10 @@ store.find = function(id, cb) {
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')());
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res.body.data.notes);
+    } else {
+      console.log("error");
     }
   });
 };
@@ -23,10 +23,10 @@ store.first = function(id, cb) {
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')(id));
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res.body.data.note);
+    } else {
+      console.log("error");
     }
   });
 };
@@ -42,12 +42,10 @@ store.save = function(id, note, cb) {
     }
   })
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')());
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res);
     } else {
-      cb(require('../fixtures/contacts.js')());
+      console.log("error");
     }
   });
 };
@@ -63,12 +61,10 @@ store.update = function(id, note, cb) {
     }
   })
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')());
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res);
     } else {
-      cb(require('../fixtures/contacts.js')());
+      console.log("error");
     }
   });
 };

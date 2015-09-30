@@ -10,10 +10,10 @@ store.find = function(id, cb) {
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
-    if (err) {
-      console.log(err);
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res.body.data.tags);
+    } else {
+      console.log("error");
     }
   });
 };
@@ -29,10 +29,10 @@ store.save = function(id, tag, cb) {
     }
   })
   .end(function(err, res) {
-    if (err) {
-      console.log(err);
-    } else {
+    if (res.body.status === 'success') {
       cb(res);
+    } else {
+      console.log("error");
     }
   });
 };

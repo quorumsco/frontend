@@ -1,5 +1,5 @@
 var contact_store = require('../../../models/contact_store.js'),
-  _ = require('lodash')
+  _ = require('lodash');
 
 module.exports = {
   replace: false,
@@ -22,6 +22,7 @@ module.exports = {
     if (this.contacts.length == 0) {
       contact_store.find((res) => {
         this.$set("contacts", res);
+        console.log(this.contacts);
       });
     }
   },

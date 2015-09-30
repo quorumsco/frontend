@@ -9,10 +9,10 @@ store.find = function(cb) {
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')());
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res.body.data.contacts);
+    } else {
+      console.log("error");
     }
   });
 };
@@ -23,10 +23,10 @@ store.first = function(id, cb) {
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')(id));
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res.body.data.contact);
+    } else {
+      console.log("error");
     }
   });
 };
@@ -42,19 +42,17 @@ store.save = function(contact, cb) {
     }
   })
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')());
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res);
     } else {
-      cb(require('../fixtures/contacts.js')());
+      console.log("error");
     }
   });
 };
 
 store.update = function(contact, cb) {
   request
-  .patch(`${api}/contacts`)
+  .patch(`${api}/contacts/${contact.id}`)
   .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
@@ -63,25 +61,23 @@ store.update = function(contact, cb) {
     }
   })
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')());
-    } else if (res.body.status === 'success') {
+    if (res.body.status === 'success') {
       cb(res);
     } else {
-      cb(require('../fixtures/contacts.js')());
+      console.log("error");
     }
   });
 };
 
-store.delete = function(contact, cb) {
+store.delete = function(id, cb) {
   request
-  .del(`${api}/contacts/${contact.id}`)
+  .del(`${api}/contacts/${id}`)
   .withCredentials()
   .end(function(err, res) {
-    if (err) {
-      cb(require('../fixtures/contacts.js')(contact.id));
-    } else if (res.body.status === 'success') {
+    if (!err) {
       cb(res);
+    } else {
+      console.log("error");
     }
   });
 };

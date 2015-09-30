@@ -34,6 +34,11 @@ module.exports = {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
     }
     contact_store.first(this.id, (res) => {
+      if (res.surname == "" || res.surname === undefined) {res.surname = "not specified"};
+      if (res.firstname == "" || res.firstname === undefined) {res.firstname = "not specified";};
+      if (res.mail == "" || res.mail === undefined) {res.mail = "not specified"};
+      if (res.adress == "" || res.adress === undefined) {res.adress = "not specified"};
+      if (res.phone == "" || res.phone === undefined) {res.phone = "not specified"};
       this.$set("contact", res);
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
       note_store.find(this.id, (notes_res) => {
@@ -41,7 +46,6 @@ module.exports = {
         tags_store.find(this.id, (tags_res) => {
           this.contact.$set("tags", tags_res);
           this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
-          this.$dispatch('contacts:update', this.contact)
         });
       });
     });

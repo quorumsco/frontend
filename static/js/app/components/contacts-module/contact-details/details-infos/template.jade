@@ -1,6 +1,13 @@
 details-infos
-  each val in ["surname", "firstname", "mail", "phone", "adress"]
-    info-field #{val} :
-      input(v-model="contact.#{val}" type="text" placeholder="#{val}" value="{{contact.#{val}}}")
-  button(v-on="click: updateContact()") Ok
-  button(v-on="click: revertContact()") Revert
+  detail-body(v-if="!modifying")
+    each val in ["surname", "firstname", "mail", "phone", "adress"]
+      info-field #[strong #{val} :]
+        p {{contact.#{val}}}
+    button(v-on="click: modifying = true") Modify
+    button(v-on="click: deleteContact()") Delete
+  detail-body(v-if="modifying")
+    each val in ["surname", "firstname", "mail", "phone", "adress"]
+      info-field #{val} :
+        input(v-model="contact.#{val}" type="text" placeholder="#{val}" value="{{contact.#{val}}}")
+    button(v-on="click: updateContact()") OK
+    button(v-on="click: cancelModify()") Cancel

@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = false;
+var debug = true;
 
 
 /* styles par défaut des zones cliquables */
@@ -209,15 +209,11 @@ function listen() {
                  displayInfos(currentRegLayer.feature, currentViewType);
 
           }
-          else if( currentViewType == 'dep'||currentViewType == 'circo'||currentViewType == 'com'||currentViewType == 'iris' )
+          else if( currentViewType == 'dep')
           {
-
-                var previous_subview = dep_subview;
-              
+                var previous_subview = dep_subview;   
                 showSelectSubview();
-
-                printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview, true);
-
+                printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
                 gestionCacheRemove('-'+previous_subview+'-');
 
                 if (dep_subview.substring(0,8)!="iris2000")
@@ -232,7 +228,6 @@ function listen() {
                                             onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
                                         }
                                     ).addTo(map);
-                                
                                 subLayers_cache[n] = subLayers;
                             }else{
                                 subLayers_cache[n].addTo(map);
@@ -254,20 +249,53 @@ function listen() {
                                 subLayers_cache[n].addTo(map);
                             } 
                 }
-             displayInfos(currentDeptLayer.feature, currentViewType);
-          }else 
+                displayInfos(currentDeptLayer.feature, currentViewType);
+          }
+          else if (currentViewType == 'circo'||currentViewType == 'com'||currentViewType == 'iris')
           { 
-                   /*     for( var index in subLayers_cache )
-                        {
-                            if( index.indexOf('-'+dep_subview+'-') >= 0 
-                               || index.indexOf('-'+previous_subview+'-') >= 0){
-                                map.removeLayer(subLayers_cache[index]);
-                                printDebug('@@remove subview layer ' + index, true);
-                            }else{
-                                printDebug('@@DON\'T remove subview layer ' + index, true);
-                            }
-                        }
-                        */
+                var previous_subview = dep_subview;   
+                showSelectSubview();
+                printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
+                gestionCacheRemove('-'+previous_subview+'-');
+                gestionCacheRemove('-'+dep_subview+'-');
+                gestionCacheRemove('-'+currentViewType+'-');
+
+                if (dep_subview.substring(0,8)!="iris2000")
+                {          
+                        // load and display sub-layers
+                            var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
+                            printDebug("n:"+n,true);
+                            //if( ! subLayers_cache[n] ){
+                                
+                                    var subLayers = new L.GeoJSON.AJAX(
+                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                        {
+                                            onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                        }
+                                    ).addTo(map);
+                                subLayers_cache[n] = subLayers;
+                            //}else{
+                              //  subLayers_cache[n].addTo(map);
+                            //} 
+                }
+                else
+                {
+                        // load and display sub-layers
+                            var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
+                            printDebug("n:"+n,true);
+                            //if( ! subLayers_cache[n] ){
+                                var subLayers = new L.GeoJSON.AJAX(
+                                    'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                    {
+                                        onEachFeature: onEachFeatureIris
+                                    }
+                                ).addTo(map);
+                                subLayers_cache[n] = subLayers;
+                            //}else{
+                            //    subLayers_cache[n].addTo(map);
+                            //} 
+                }
+                displayInfos(currentDeptLayer.feature, currentViewType);
           }
       });
     });
@@ -673,7 +701,8 @@ function selectFeature(e, feature, layer, type){
          // load and display sub-layers
         var n = feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
         if (dep_subview.substring(0,8)!="iris2000")
-        {printDebug("je rentre dans type==dep de selectfeature",true);
+        {
+                    printDebug("je rentre dans type==dep de selectfeature",true);
                      // load and display sub-layers
                     if( ! subLayers_cache[n] ){
                         

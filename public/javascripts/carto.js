@@ -202,9 +202,10 @@ function listen() {
                             onEachFeature: onEachFeatureDep
                         }
                     ).addTo(map);
+                    printDebug("ajout cache n:"+n,true);
                     subLayers_cache[n] = subLayers;
                 }else{
-                    subLayers_cache[n].addTo(map);
+                    subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                 }
                  displayInfos(currentRegLayer.feature, currentViewType);
 
@@ -215,7 +216,6 @@ function listen() {
                 showSelectSubview();
                 printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
                 gestionCacheRemove('-'+previous_subview+'-');
-
                 if (dep_subview.substring(0,8)!="iris2000")
                 {          
                         // load and display sub-layers
@@ -228,9 +228,10 @@ function listen() {
                                             onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
                                         }
                                     ).addTo(map);
+                                printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
                             }else{
-                                subLayers_cache[n].addTo(map);
+                                subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                             } 
                 }
                 else
@@ -244,9 +245,10 @@ function listen() {
                                         onEachFeature: onEachFeatureIris
                                     }
                                 ).addTo(map);
+                                printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
                             }else{
-                                subLayers_cache[n].addTo(map);
+                                subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                             } 
                 }
                 displayInfos(currentDeptLayer.feature, currentViewType);
@@ -257,8 +259,8 @@ function listen() {
                 showSelectSubview();
                 printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
                 gestionCacheRemove('-'+previous_subview+'-');
-                gestionCacheRemove('-'+dep_subview+'-');
-                gestionCacheRemove('-'+currentViewType+'-');
+                //gestionCacheRemove('-'+dep_subview+'-');
+                //gestionCacheRemove('-'+currentViewType+'-');
 
                 if (dep_subview.substring(0,8)!="iris2000")
                 {          
@@ -273,9 +275,10 @@ function listen() {
                                             onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
                                         }
                                     ).addTo(map);
+                                printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
                             //}else{
-                              //  subLayers_cache[n].addTo(map);
+                              //  subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                             //} 
                 }
                 else
@@ -283,17 +286,18 @@ function listen() {
                         // load and display sub-layers
                             var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                             printDebug("n:"+n,true);
-                            //if( ! subLayers_cache[n] ){
+                            if( ! subLayers_cache[n] ){
                                 var subLayers = new L.GeoJSON.AJAX(
                                     'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                     {
                                         onEachFeature: onEachFeatureIris
                                     }
                                 ).addTo(map);
+                                printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
-                            //}else{
-                            //    subLayers_cache[n].addTo(map);
-                            //} 
+                            }else{
+                                subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
+                            } 
                 }
                 displayInfos(currentDeptLayer.feature, currentViewType);
           }
@@ -311,31 +315,24 @@ function listen_switch() {
         //if (dataResultatsDirectory!="insee")
     
           $("#select-subview input[type=radio]").on('change', function(){
-              if( $(this).prop('checked') ){
+              if( $(this).prop('checked') )
+              {
               
-              printDebug('change subview to display : from ' + dep_subview + ', to ' + $(this).val(), true);
-              gestionCacheRemove('-'+dep_subview+'-');
-            // remove current sublayer
-                
-
-/*if (currentViewType=="circo"||currentViewType=="com"||currentViewType=="iris")
-                {resetLayerStateTEST();}
-*/
-
-                //if (dep_subview=="communes_elections"||dep_subview=="circonscriptions_elections") {resetAllLayerState();}
-                  // change subview
+                printDebug('change subview to display : from ' + dep_subview + ', to ' + $(this).val(), true);
+                gestionCacheRemove('-'+dep_subview+'-');
                 dep_subview = $(this).val() ;
                     // load and display sub-layers
                     var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                     printDebug("currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory:"+n,true);
+                    
                     if (dep_subview.substring(0,8)!="iris2000")
-                            {printDebug("pass1",true);
+                            {
                                     // load and display sub-layers
                                     if( ! subLayers_cache[n] )
-                                    {printDebug("pass2",true);
+                                    {
                                         
                                             if (dep_subview.substring(0,8)=='communes')
-                                            {printDebug("pass3",true);
+                                            {
                                                         var subLayers = new L.GeoJSON.AJAX(
                                             'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
                                                 {
@@ -343,7 +340,7 @@ function listen_switch() {
                                                 }).addTo(map);
                                             }
                                             else if(dep_subview.substring(0,8)=='circonsc')
-                                            {printDebug("pass4",true);
+                                            {
                                                         var subLayers = new L.GeoJSON.AJAX(
                                             'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                                 {
@@ -351,10 +348,10 @@ function listen_switch() {
                                                 }).addTo(map);
                                             }
                                                 //onEachFeature: (dep_subview=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                        printDebug("ajout cache n:"+n,true);
                                         subLayers_cache[n] = subLayers;
                                     }else{
-                                        subLayers_cache[n].addTo(map);
-                                        printDebug("ADD:"+n,true);
+                                        subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                                     } 
                             }
                             else
@@ -367,9 +364,10 @@ function listen_switch() {
                                                 onEachFeature: onEachFeatureIris
                                             }
                                         ).addTo(map);
+                                        printDebug("ajout cache n:"+n,true);
                                       subLayers_cache[n] = subLayers;
                                     }else{
-                                        subLayers_cache[n].addTo(map);
+                                        subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                                     }  
                             }    
 
@@ -581,57 +579,6 @@ printDebug("resetAllLayerState",true);
     
 }
 
-function resetLayerStateTEST(){
-        printDebug("resetLayerStateTEST",true);
-        // retour à la selection précédente
-        printDebug("currentTEST"+currentCircoLayer+"/"+currentComLayer,true);
-        
-        // suppression des bv
-        gestionCacheRemove("-com-bv-");
-        
-        var currentParentLayer2;
-        if( currentCircoLayer != null ){
-            currentParentLayer2 = currentCircoLayer;
-        }else if ( currentComLayer != null ){
-            currentParentLayer2 = currentComLayer;
-        }else if ( currentIrisLayer != null ){
-            currentParentLayer2 = currentIrisLayer;
-        }
-        // suppression du layer com/circo selectionné
-
-        map.removeLayer(currentParentLayer2);
-        
-/*
-        // re init des layer communes/circo et suppression des bv
-        map.eachLayer(function(layer){
-            if( layer.quorums_type == 'com' ){
-                onEachFeatureCom(layer.feature, layer) 
-            }else if( layer.quorums_type == 'circo' ){
-                onEachFeatureCirco(layer.feature, layer) 
-            }else if( layer.quorums_type == 'iris' ){
-                onEachFeatureIris(layer.feature, layer) 
-            }
-        });
-        
-            
-        //currentParentLayer.setStyle(defaultStyle);
-        //currentParentLayer.setStyle({fillColor:currentParentLayer.bgcolor});
-        
-        printDebug('resetTEST(com|circo|iris) : currentViewType : ' + currentViewType + ' -> dep' , true);
-        currentViewType = 'dep';
-        
-        map.fitBounds(currentDeptLayer);
-        
-        displayInfos(currentDeptLayer.feature, currentViewType);
-     */   
-        //currentCircoLayer = null;
-        //currentComLayer = null;
-        //currentIrisLayer = null;
-
-        //showSelectSubview();
-    
-    
-}
 /* selection d'une zone cliquable */
 function selectFeature(e, feature, layer, type){
     
@@ -691,18 +638,19 @@ function selectFeature(e, feature, layer, type){
                     onEachFeature: onEachFeatureDep
                 }
             ).addTo(map);
+            printDebug("ajout cache n:"+n,true);
             subLayers_cache[n] = subLayers;
         }else{
-            subLayers_cache[n].addTo(map);
+            subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
         }
             
-    } else if( type == 'dep' ){
+    } else if( type == 'dep' )
+    {
         showSelectSubview();
          // load and display sub-layers
         var n = feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
         if (dep_subview.substring(0,8)!="iris2000")
         {
-                    printDebug("je rentre dans type==dep de selectfeature",true);
                      // load and display sub-layers
                     if( ! subLayers_cache[n] ){
                         
@@ -712,10 +660,10 @@ function selectFeature(e, feature, layer, type){
                                     onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
                                 }
                             ).addTo(map);
-                        
+                        printDebug("ajout cache n:"+n,true);
                         subLayers_cache[n] = subLayers;
                     }else{
-                        subLayers_cache[n].addTo(map);
+                        subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                     } 
         }else
         {
@@ -727,13 +675,14 @@ function selectFeature(e, feature, layer, type){
                                 onEachFeature: onEachFeatureIris
                             }
                         ).addTo(map);
+                        printDebug("ajout cache n:"+n,true);
                         subLayers_cache[n] = subLayers;
                     }else{
-                        subLayers_cache[n].addTo(map);
+                        subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                     } 
         }
     }
-    else if( type == 'com' && feature.properties.REF_INSEE == '33063')
+    else if( type == 'com' && feature.properties.REF_INSEE == '33063' && dataResultatsDirectory!="insee")
     {
         // load bv points
         var n = feature.properties.NUMERO + '-com-bv-' + dataResultatsDirectory;
@@ -745,10 +694,14 @@ function selectFeature(e, feature, layer, type){
                     onEachFeature : onEachFeatureBV
                 }
             ).addTo(map);
+            printDebug("ajout cache n:"+n,true);
             subLayers_cache[n] = subLayers;
         }else{
-            subLayers_cache[n].addTo(map);
+            subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
         }
+        hideSelectSubview();
+    }else
+    {
         hideSelectSubview();
     }
     currentViewType = type;
@@ -965,7 +918,6 @@ function displayInfos(feature, type){
     })
 }
 
-
 function onEachFeatureReg(feature, layer) {
 
     layer.setStyle(defaultStyle);
@@ -987,7 +939,8 @@ function onEachFeatureReg(feature, layer) {
         
     printDebug('ajax call(reg)...', true);
     
-    if( dataResultatsDirectory != 'insee' ){
+    if( dataResultatsDirectory != 'insee' )
+    {
         $.ajax({
             url: "data/resultats/"+dataResultatsDirectory+"/reg2015/" + feature.properties.NUMERO + ".json",
             dataType: "json"
@@ -1031,7 +984,7 @@ function onEachFeatureReg(feature, layer) {
             }
         });
     }else{
-        layer.bgcolor = '#ffff00';
+        layer.bgcolor = '#f9ffb3';
         layer.setStyle({fillColor:layer.bgcolor});
         layer.quorums_type = 'reg2015';
     }

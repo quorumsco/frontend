@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = true;
+var debug = false;
 
 
 /* styles par défaut des zones cliquables */
@@ -1047,7 +1047,7 @@ function onEachFeatureDep(feature, layer) {
             }
         });
     }else{
-        layer.bgcolor = '#ffff00';
+        layer.bgcolor = '#f9ffb3';
         layer.setStyle({fillColor:layer.bgcolor});
         layer.quorums_type = 'dep';
     }

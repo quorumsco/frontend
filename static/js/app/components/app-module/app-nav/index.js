@@ -15,6 +15,10 @@ module.exports = {
     },
     hide: function() {
       this.show_nav = false;
+    },
+    close: function(event) {
+      event.preventDefault();
+      this.$dispatch('overlay:onclick');
     }
   }
 };

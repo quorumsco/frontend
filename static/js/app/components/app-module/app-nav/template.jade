@@ -1,6 +1,6 @@
 app-nav(v-class="visible: show_nav")
   div
-    a.left(href="#" v-on="click: this.$dispatch('overlay:onclick');")
+    a.left(href="#" v-on="click: close($event)")
       i.fa.fa-fw.fa-arrow-left
     h1
       a(href="#") Quorum

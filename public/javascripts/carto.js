@@ -268,12 +268,14 @@ function showSelectSubview(){
         $('#select-subview').addClass('INSEE');
         $('#select-subview').removeClass('com-circo');
         $('#select-subview input.pauvrete').prop('checked', true);
-        dep_subview ='communes_pauvrete';
+        if (dep_subview=="communes_pauvrete"){} else if (dep_subview=="communes_chomage"){} else if (dep_subview=="iris2000"){}else {dep_subview=="communes_pauvrete";}
+        
     }else{
         $('#select-subview').addClass('com-circo');
         $('#select-subview').removeClass('INSEE');
         $('#select-subview input.circonscriptions').prop('checked', true);
-        dep_subview = 'circonscriptions_elections';
+        if (dep_subview=="circonscriptions_elections"){} else if (dep_subview=="communes_elections"){} else {dep_subview=="circonscriptions_elections";}
+        
     }
 
 }

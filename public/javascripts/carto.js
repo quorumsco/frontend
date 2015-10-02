@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = true;
+var debug = false;
 
 
 /* styles par défaut des zones cliquables */
@@ -105,6 +105,68 @@ var currentCircoLayer = null;
 var currentComLayer = null;
 var currentViewType = 'france';
 var currentIrisLayer = null;
+var currentLegend = null;
+// création des légendes de chaque source de données
+
+var legendTxPauvrete = L.control({position: 'bottomleft'});
+legendTxPauvrete.onAdd = function (map) 
+{
+    var div = L.DomUtil.create('div', 'info legend');
+
+    //seuils = [25, 22, 19, 16, 14,12,10,8,6,4],
+    seuils = [4,6,8,10,12,14,16,19,22,25],
+     //Definition des seuils
+    labels = [];
+
+    div.innerHTML +="tx de pauvreté<br>"; //Titre
+    // Boucle sur les seuils établis et création d'une etiquette et d'un carré de couleur.
+    for (var i = 0; i < seuils.length; i++) 
+    {
+        div.innerHTML +=
+        '<i style="background:' + getColorTxPauvreteChomage(seuils[i]+1) + '"></i> ' +
+        seuils[i] + (seuils[i + 1] ? ' à ' + seuils[i + 1] + ' %<br>' : ' + %');
+    }
+    return div;
+};
+
+var legendTxChomage = L.control({position: 'bottomleft'});
+legendTxChomage.onAdd = function (map) 
+{
+    var div = L.DomUtil.create('div', 'info legend');
+
+    seuils = [4,6,8,10,12,14,16,19,22,25], //Definition des seuils
+    labels = [];
+
+    div.innerHTML +="taux de chomage<br>"; //Titre
+    // Boucle sur les seuils établis et création d'une etiquette et d'un carré de couleur.
+    for (var i = 0; i < seuils.length; i++) 
+    {
+        div.innerHTML +=
+        '<i style="background:' + getColorTxPauvreteChomage(seuils[i]+1) + '"></i> ]' +
+        seuils[i] + (seuils[i + 1] ? ' &ndash; ' + seuils[i + 1] + '] %<br>' : ' + %');
+    }
+    return div;
+};
+
+var legendTxFamilles = L.control({position: 'bottomleft'});
+legendTxFamilles.onAdd = function (map) 
+{
+    var div = L.DomUtil.create('div', 'info legend');
+
+    seuils = [20, 35, 55, 65, 75,90], //Definition des seuils
+    labels = [];
+
+    div.innerHTML +="taux de familles en rapport du nb de ménages<br>"; //Titre
+    // Boucle sur les seuils établis et création d'une etiquette et d'un carré de couleur.
+    for (var i = 0; i < seuils.length; i++) 
+    {
+        div.innerHTML +=
+        '<i style="background:' + getColorTxFamilles(seuils[i]+1) + '"></i> ' +
+        seuils[i] + (seuils[i + 1] ? ' à ' + seuils[i + 1] + ' %<br>' : ' + %');
+    }
+    return div;
+};
+
 
 /* fonctions globales */
 function shadeColor2(color, percent) {   
@@ -115,6 +177,81 @@ function shadeColor2(color, percent) {
         G=f>>8&0x00FF,
         B=f&0x0000FF;
     return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+}
+
+function getColor(a){
+  return  a>8.5 ? '#006D2C':   
+          a>5   ? '#31A354':
+          a>2.8 ? '#74C476':
+          a>1.5 ? '#A1D99B':
+                  '#C7E9C0'; }
+
+function getColorTxPauvreteChomage(a){
+  return  a>25 ? '#3d3b0a':   
+          a>22 ? '#5b570f':
+          a>19 ? '#787313':
+          a>16 ? '#959018':
+          a>14 ? '#b2ac1d':   
+          a>12 ? '#d0c821':
+          a>10 ? '#ded734':
+          a>8 ? '#e3dd52':
+          a>6 ? '#e8e36f':
+          a>4 ? '#ede88c':
+                  '#f1eeaa'; }     
+
+function getColorTxFamilles(a){
+  return  a>90 ? '#3d3b0a':   
+          a>75 ? '#787313':
+          a>65 ? '#b2ac1d':   
+          a>55 ? '#ded734':
+          a>35 ? '#e3dd52':
+          a>20 ? '#e8e36f':
+                  '#ede88c'; }             
+
+
+
+
+function displayLegend()
+{
+    if (dataResultatsDirectory=="INSEE")
+    {   
+        if (currentLegend)
+        {
+            map.removeControl(currentLegend);
+        }
+        legendTxPauvrete.addTo(map);
+        currentLegend = legendTxPauvrete;
+    }             
+}
+
+function removeLegend()
+{
+    if (currentLegend)
+        {
+            map.removeControl(currentLegend);
+        }
+        currentLegend=null;
+}
+
+function switchLegend()
+{
+
+    //map.on('overlayadd', function () {
+        // Switch to the INSEE legend...
+        if (dep_subview == 'communes_pauvrete') {
+            map.removeControl(currentLegend);
+            legendTxPauvrete.addTo(map);
+            currentLegend = legendTxPauvrete;
+        } else if (dep_subview == 'communes_chomage') { // Or switch to the dept2015 Change legend...
+            map.removeControl(currentLegend);
+            legendTxChomage.addTo(map);
+            currentLegend = legendTxChomage;
+        } else if (dep_subview == 'iris2000') { // Or switch to the dept2015 Change legend...
+            map.removeControl(currentLegend);
+            legendTxFamilles.addTo(map);
+            currentLegend = legendTxFamilles;
+        }
+   // });
 }
 
 /* gestion du choix des donnes a affiche */
@@ -187,7 +324,8 @@ function listen() {
                     {
                         onEachFeature: onEachFeatureReg
                     }
-                    ).addTo(map);       
+                    ).addTo(map);      
+
           }
           else if( currentViewType == 'reg2015' )
           {
@@ -208,7 +346,6 @@ function listen() {
                     subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                 }
                  displayInfos(currentRegLayer.feature, currentViewType);
-
           }
           else if( currentViewType == 'dep')
           {
@@ -252,6 +389,7 @@ function listen() {
                             } 
                 }
                 displayInfos(currentDeptLayer.feature, currentViewType);
+
           }
           else if (currentViewType == 'circo'||currentViewType == 'com'||currentViewType == 'iris')
           { 
@@ -307,7 +445,14 @@ function listen() {
 
 /* gestion de la navigation departement */
 var dep_subview ='';
-if (dataResultatsDirectory!="INSEE"){dep_subview ='circonscriptions_elections';}else{dep_subview ='communes_pauvrete';} // communes | circonscriptions
+if (dataResultatsDirectory!="INSEE")
+{
+    dep_subview ='circonscriptions_elections';}
+else
+{
+    dep_subview ='communes_pauvrete';
+} // communes | circonscriptions
+
 
 function listen_switch() {
     $(function() {
@@ -324,7 +469,7 @@ function listen_switch() {
                     // load and display sub-layers
                     var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                     printDebug("currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory:"+n,true);
-                    
+                    switchLegend();
                     if (dep_subview.substring(0,8)!="iris2000")
                             {
                                     // load and display sub-layers
@@ -473,6 +618,7 @@ function resetHighlightOnFeature(e) {
 /* reset du style par défaut de toutes les zones cliquables */
 function resetAllLayerState(){
 printDebug("resetAllLayerState",true);
+removeLegend();
     // retour à la selection précédente
     // si region selectionnée, affiche la carte des régions
     if( currentViewType == 'reg2015'){
@@ -597,6 +743,7 @@ function selectFeature(e, feature, layer, type){
     }else if( type == 'dep' ){
         currentDeptLayer = layer; 
         map.removeLayer(layer);
+        if (dataResultatsDirectory=='INSEE'){displayLegend();}
     }else if( type == 'circo' ){
         currentCircoLayer = layer; 
         map.removeLayer(layer);
@@ -1193,27 +1340,28 @@ function onEachFeatureCom(feature, layer) {
                                 if( data.data[0].CODGEO){
                                         if(data.data[0].TxChomage){
                                                 var resul=data.data[0].TxChomage;
-                                                if (resul>=90)
+                                                if (resul>=25)
                                                     {layer.bgcolor = '#3d3b0a';}
-                                                else if (resul>=80)
+                                                else if (resul>=22)
                                                     {layer.bgcolor = '#5b570f';}
-                                                else if (resul>=75)
+                                                else if (resul>=19)
                                                     {layer.bgcolor = '#787313';}
-                                                else if (resul>=70)
+                                                else if (resul>=16)
                                                     {layer.bgcolor = '#959018';}
-                                                else if (resul>=65)
+                                                else if (resul>=14)
                                                     {layer.bgcolor = '#b2ac1d';}
-                                                else if (resul>=60)
+                                                else if (resul>=12)
                                                     {layer.bgcolor = '#d0c821';}
-                                                else if (resul>=55)
+                                                else if (resul>=10)
                                                     {layer.bgcolor = '#ded734';}
-                                                else if (resul>=45)
+                                                else if (resul>=8)
                                                     {layer.bgcolor = '#e3dd52';}
-                                                else if (resul>=35)
+                                                else if (resul>=6)
                                                     {layer.bgcolor = '#e8e36f';}
-                                                else if (resul>=20)
+                                                else if (resul>=4)
                                                     {layer.bgcolor = '#ede88c';}
                                                 else{layer.bgcolor = '#f1eeaa';}
+                                            
                                                 layer.setStyle({fillColor:layer.bgcolor});
                                                 layer.quorums_type = 'com';
                                                 return resul;
@@ -1484,6 +1632,7 @@ return {
                 onEachFeature: onEachFeatureReg
             }
         ).addTo(map);
+        displayLegend();
     }
 }
 // contour blanc sur zone taux de cuverture deja visitée + attention à la légende, rajouter fond gris

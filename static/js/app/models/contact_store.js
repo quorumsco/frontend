@@ -1,12 +1,14 @@
 var Emitter = require('events').EventEmitter,
   store = module.exports = new Emitter(),
   request = require('superagent'),
+  nocache = require('superagent-no-cache'),
   api = 'http://api.quorumapps.com';
   // api = 'http://localhost:8080';
 
 store.find = function(cb) {
   request
   .get(`${api}/contacts`)
+  .use(nocache)
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
@@ -21,6 +23,7 @@ store.find = function(cb) {
 store.first = function(id, cb) {
   request
   .get(`${api}/contacts/${id}`)
+  .use(nocache)
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
@@ -35,6 +38,7 @@ store.first = function(id, cb) {
 store.save = function(contact, cb) {
   request
   .post(`${api}/contacts`)
+  .use(nocache)
   .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
@@ -54,6 +58,7 @@ store.save = function(contact, cb) {
 store.update = function(contact, cb) {
   request
   .patch(`${api}/contacts/${contact.id}`)
+  .use(nocache)
   .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
@@ -73,6 +78,7 @@ store.update = function(contact, cb) {
 store.delete = function(id, cb) {
   request
   .del(`${api}/contacts/${id}`)
+  .use(nocache)
   .withCredentials()
   .end(function(err, res) {
     if (!err) {

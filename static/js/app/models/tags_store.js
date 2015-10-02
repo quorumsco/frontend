@@ -1,12 +1,14 @@
 var Emitter = require('events').EventEmitter,
   store = module.exports = new Emitter(),
   request = require('superagent'),
+  nocache = require('superagent-no-cache'),
   api = 'http://api.quorumapps.com';
   // api = 'http://localhost:8080';
 
 store.find = function(id, cb) {
   return request
   .get(`${api}/contacts/${id}/tags`)
+  .use(nocache)
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
@@ -21,6 +23,7 @@ store.find = function(id, cb) {
 store.save = function(id, tag, cb) {
   return request
   .post(`${api}/contacts/${id}/tags`)
+  .use(nocache)
   .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
@@ -40,6 +43,7 @@ store.save = function(id, tag, cb) {
 store.delete = function(id, tag, cb) {
   return request
   .del(`${api}/contacts/${id}/tags/${tag.id}`)
+  .use(nocache)
   .withCredentials()
   .end(function(err, res) {
     cb(res);

@@ -1,12 +1,14 @@
 var Emitter = require('events').EventEmitter,
   store = module.exports = new Emitter(),
   request = require('superagent'),
+  nocache = require('superagent-no-cache'),
   api = 'http://api.quorumapps.com';
   // api = 'http://localhost:8080';
 
 store.find = function(id, cb) {
   request
   .get(`${api}/contacts/${id}/notes`)
+  .use(nocache)
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
@@ -21,6 +23,7 @@ store.find = function(id, cb) {
 store.first = function(id, cb) {
   request
   .get(`${api}/contacts/${id}/notes/${note_id}`)
+  .use(nocache)
   .withCredentials()
   .set('Accept', 'application/json')
   .end(function(err, res) {
@@ -35,6 +38,7 @@ store.first = function(id, cb) {
 store.save = function(id, note, cb) {
   request
   .post(`${api}/contacts/${id}/notes`)
+  .use(nocache)
   .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
@@ -54,6 +58,7 @@ store.save = function(id, note, cb) {
 store.update = function(id, note, cb) {
   request
   .patch(`${api}/contacts/${id}/notes/${note.id}`)
+  .use(nocache)
   .withCredentials()
   .set('Content-Type', 'application/json')
   .send({
@@ -73,6 +78,7 @@ store.update = function(id, note, cb) {
 store.delete = function(id, note_id, cb) {
   request
   .del(`${api}/contacts/${id}/notes/${note_id}`)
+  .use(nocache)
   .withCredentials()
   .end(function(err, res) {
     if (err) {

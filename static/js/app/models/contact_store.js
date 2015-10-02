@@ -3,6 +3,7 @@ var Emitter = require('events').EventEmitter,
   request = require('superagent'),
   api = 'http://api.quorumapps.com';
   // api = 'http://localhost:8080';
+
 store.find = function(cb) {
   request
   .get(`${api}/contacts`)

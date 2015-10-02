@@ -5,7 +5,7 @@
     if(match){
         var index = _.findIndex(arr, key);
         arr.splice(index, 1, newval);
-    } else {
+    } else if (arr) {
         arr.push(newval);
     }
 };
@@ -42,6 +42,7 @@ module.exports = {
       };
       note_store.delete(this.contact.id, this.note.id, () => {
         remove(this.contact.notes, {id: this.note.id});
+        this.$dispatch("contacts:vueUpdate", this.contact);
         this.$root.$emit("contacts:hideNote", this.id);
         this.$root.navigate('contacts:showNotes', undefined, this.id);
       });

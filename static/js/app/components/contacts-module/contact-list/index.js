@@ -22,7 +22,6 @@ module.exports = {
     if (this.contacts.length == 0) {
       contact_store.find((res) => {
         this.$set("contacts", res);
-        console.log(this.contacts);
       });
     }
   },

@@ -7,13 +7,9 @@ var contact_store = require('../../models/contact_store.js'),
     if(match){
         var index = _.findIndex(arr, key);
         arr.splice(index, 1, newval);
-    } else {
-      // if (!arr) {
-      //   arr = [];
-      // }
+    } else if (arr) {
       arr.push(newval);
     }
-    return arr
   },
   addFunc = function() {
     this.$root.navigate("contacts:new");
@@ -77,6 +73,7 @@ module.exports = {
     },
     addTag: function(tag) {
       this.contact = this.findContact();
+      console.log(this.contact);
       tags_store.save(this.contact_id, tag, (res) => {
         upsert(this.contact.tags, {id: res.body.data.tag.id}, res.body.data.tag);
         upsert(this.contacts, {id: this.contact.id}, this.contact);
@@ -164,11 +161,14 @@ module.exports = {
       });
       return false;
     },
+    'contacts:vueUpdate': function(contact) {
+      upsert(this.contacts, {id: contact.id}, contact);
+      location.reload(true);
+      return false;
+    },
     'contacts:remove': function(id) {
       remove(this.contacts, {id: id});
-      this.$nextTick(() => {
-        console.log(this.contacts);
-      });
+      location.reload(true);
       return false;
     },
     'tabs:nb': function(nbNotes, nbTags) {

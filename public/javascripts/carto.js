@@ -122,19 +122,19 @@ var dataResultatsDirectory = 'dep_2015';
 
 function hideSelectSubview(){
     $('#select-subview').addClass('hide');
-    $('#select-subview').removeClass('com-circo insee');
+    $('#select-subview').removeClass('com-circo INSEE');
 }
 function showSelectSubview(){
     $('#select-subview').removeClass('hide');
     
-    if (dataResultatsDirectory == 'insee'){
-        $('#select-subview').addClass('insee');
+    if (dataResultatsDirectory == 'INSEE'){
+        $('#select-subview').addClass('INSEE');
         $('#select-subview').removeClass('com-circo');
         $('#select-subview input.pauvrete').prop('checked', true);
         dep_subview ='communes_pauvrete';
     }else{
         $('#select-subview').addClass('com-circo');
-        $('#select-subview').removeClass('insee');
+        $('#select-subview').removeClass('INSEE');
         $('#select-subview input.circonscriptions').prop('checked', true);
         dep_subview = 'circonscriptions_elections';
     }
@@ -307,12 +307,12 @@ function listen() {
 
 /* gestion de la navigation departement */
 var dep_subview ='';
-if (dataResultatsDirectory!="insee"){dep_subview ='circonscriptions_elections';}else{dep_subview ='communes_pauvrete';} // communes | circonscriptions
+if (dataResultatsDirectory!="INSEE"){dep_subview ='circonscriptions_elections';}else{dep_subview ='communes_pauvrete';} // communes | circonscriptions
 
 function listen_switch() {
     $(function() {
 
-        //if (dataResultatsDirectory!="insee")
+        //if (dataResultatsDirectory!="INSEE")
     
           $("#select-subview input[type=radio]").on('change', function(){
               if( $(this).prop('checked') )
@@ -682,7 +682,7 @@ function selectFeature(e, feature, layer, type){
                     } 
         }
     }
-    else if( type == 'com' && feature.properties.INSEE_COM == '33063' && dataResultatsDirectory!="insee")
+    else if( type == 'com' && feature.properties.INSEE_COM == '33063' && dataResultatsDirectory!="INSEE")
     {
         // load bv points
         var n = feature.properties.NUMERO + '-com-bv-' + dataResultatsDirectory;
@@ -813,7 +813,7 @@ function displayInfos(feature, type){
                             animateRotate : false, // default: true
                             //animateScale : true // default: false
                         });                
-            }else if (dataResultatsDirectory == 'insee' )
+            }else if (dataResultatsDirectory == 'INSEE' )
             {
                         if( data.data[0])
                         {
@@ -940,7 +940,7 @@ function onEachFeatureReg(feature, layer) {
         
     printDebug('ajax call(reg)...', true);
     
-    if( dataResultatsDirectory != 'insee' )
+    if( dataResultatsDirectory != 'INSEE' )
     {
         $.ajax({
             url: "data/resultats/"+dataResultatsDirectory+"/reg2015/" + feature.properties.NUMERO + ".json",
@@ -1010,7 +1010,7 @@ function onEachFeatureDep(feature, layer) {
 
     layer.setStyle({fillColor:layer.bgcolor});
     
-    if( dataResultatsDirectory != 'insee' ){
+    if( dataResultatsDirectory != 'INSEE' ){
         $.ajax({
             url: "data/resultats/"+dataResultatsDirectory+"/dep/" + feature.properties.NUMERO + ".json",
             dataType: "json"
@@ -1117,7 +1117,7 @@ function onEachFeatureCom(feature, layer) {
     layer.setStyle({fillColor:layer.bgcolor});
 
 
-  if (dataResultatsDirectory!="insee")
+  if (dataResultatsDirectory!="INSEE")
     {
     $.ajax({
         url: "data/resultats/"+dataResultatsDirectory+"/com/" + feature.properties.INSEE_COM.slice(0, 2) + "/" + feature.properties.INSEE_COM.slice(2)+ ".json",
@@ -1251,7 +1251,7 @@ function onEachFeatureIris(feature, layer) {
                     
             $.ajax({
                 //url: "data/resultats/INSEE/"+ feature.properties.COD_COM.slice(0, 2) +"/IRIS_CUB_chomeurs.json",
-                url: "data/resultats/insee/iris/"+ feature.properties.DEPCOM.slice(0, 2) +"/"+feature.properties.DCOMIRIS+".json",
+                url: "data/resultats/INSEE/iris/"+ feature.properties.DEPCOM.slice(0, 2) +"/"+feature.properties.DCOMIRIS+".json",
                 dataType: "json"
             })
             .done(function(data) 

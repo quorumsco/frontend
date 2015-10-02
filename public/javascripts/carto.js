@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = true;
+var debug = false;
 
 
 /* styles par défaut des zones cliquables */

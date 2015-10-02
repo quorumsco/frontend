@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = false;
+var debug = true;
 
 
 /* styles par défaut des zones cliquables */
@@ -682,13 +682,13 @@ function selectFeature(e, feature, layer, type){
                     } 
         }
     }
-    else if( type == 'com' && feature.properties.REF_INSEE == '33063' && dataResultatsDirectory!="insee")
+    else if( type == 'com' && feature.properties.INSEE_COM == '33063' && dataResultatsDirectory!="insee")
     {
         // load bv points
         var n = feature.properties.NUMERO + '-com-bv-' + dataResultatsDirectory;
         if( ! subLayers_cache[n] ){
             var subLayers = new L.GeoJSON.AJAX(
-                'data/contours/communes/'+feature.properties.REF_INSEE.slice(0, 2) + "/" + feature.properties.REF_INSEE.slice(2)+'/bureaux.geojson',
+                'data/contours/communes/'+feature.properties.INSEE_COM.slice(0, 2) + "/" + feature.properties.INSEE_COM.slice(2)+'/bureaux.geojson',
                 {
                     pointToLayer: pointToLayerBV,
                     onEachFeature : onEachFeatureBV
@@ -724,8 +724,9 @@ function displayInfos(feature, type){
     }else if( type == 'circo' ){
         resultats_key = feature.properties.num_dep + "/" + feature.properties.num_circo;
     }else if( type == 'com' ){
-        $('#infos').append("<h2>"+feature.properties.COMMUNE + "</h2>");
-        resultats_key = feature.properties.REF_INSEE;
+        $('#infos').append("<h2>"+feature.properties.NOM_COM + "</h2>");
+        $('#infos').append("<h2>"+feature.properties.POPULATION + "</h2>");
+        resultats_key = feature.properties.INSEE_COM;
         resultats_key = resultats_key.slice(0, 2) + "/" + resultats_key.slice(2);
     }else if( type == 'iris' ){
         $('#infos').append("<h2>"+feature.properties.NOM_IRIS +" ("+feature.properties.NOM_COM+")" + "</h2>");
@@ -1101,7 +1102,7 @@ function onEachFeatureCom(feature, layer) {
 //printDebug("enter oneachfeaturecom->dataResultatsDirectory:"+dataResultatsDirectory);
     layer.setStyle(defaultStyle);
     layer.on('mouseover', function(e){
-        displayPopup(e, feature.properties.COMMUNE);
+        displayPopup(e, feature.properties.NOM_COM);
         highlightFeature(e);
     });
     layer.on('mouseout', function(e){
@@ -1119,7 +1120,7 @@ function onEachFeatureCom(feature, layer) {
   if (dataResultatsDirectory!="insee")
     {
     $.ajax({
-        url: "data/resultats/"+dataResultatsDirectory+"/com/" + feature.properties.REF_INSEE.slice(0, 2) + "/" + feature.properties.REF_INSEE.slice(2)+ ".json",
+        url: "data/resultats/"+dataResultatsDirectory+"/com/" + feature.properties.INSEE_COM.slice(0, 2) + "/" + feature.properties.INSEE_COM.slice(2)+ ".json",
         dataType: "json"
     })
     .done(function(data) {
@@ -1144,7 +1145,7 @@ function onEachFeatureCom(feature, layer) {
             if (dep_subview=="communes_pauvrete")
                 {
                     $.ajax({
-                            url: "data/resultats/"+dataResultatsDirectory+"/txpauvrete/" + feature.properties.REF_INSEE.slice(0, 2) + "/" + feature.properties.REF_INSEE+ ".json",
+                            url: "data/resultats/"+dataResultatsDirectory+"/txpauvrete/" + feature.properties.INSEE_COM.slice(0, 2) + "/" + feature.properties.INSEE_COM+ ".json",
                             dataType: "json"
                         })
                         .done(function(data) {
@@ -1153,9 +1154,27 @@ function onEachFeatureCom(feature, layer) {
                                         if (data.data[0].TxPauvrete)
                                             {
                                                 var resul=data.data[0].TxPauvrete;
-                                                if (parseInt(resul)>=10)
-                                                {layer.bgcolor = '#15702e';}
-                                                else{layer.bgcolor = '#77c6a4';}
+                                                if (resul>=25)
+                                                    {layer.bgcolor = '#3d3b0a';}
+                                                else if (resul>=22)
+                                                    {layer.bgcolor = '#5b570f';}
+                                                else if (resul>=19)
+                                                    {layer.bgcolor = '#787313';}
+                                                else if (resul>=16)
+                                                    {layer.bgcolor = '#959018';}
+                                                else if (resul>=14)
+                                                    {layer.bgcolor = '#b2ac1d';}
+                                                else if (resul>=12)
+                                                    {layer.bgcolor = '#d0c821';}
+                                                else if (resul>=10)
+                                                    {layer.bgcolor = '#ded734';}
+                                                else if (resul>=8)
+                                                    {layer.bgcolor = '#e3dd52';}
+                                                else if (resul>=6)
+                                                    {layer.bgcolor = '#e8e36f';}
+                                                else if (resul>=4)
+                                                    {layer.bgcolor = '#ede88c';}
+                                                else{layer.bgcolor = '#f1eeaa';}
                                             }else{
                                                 layer.bgcolor = '#f2f1f0';
                                             }
@@ -1167,20 +1186,43 @@ function onEachFeatureCom(feature, layer) {
            } else
            {
                 $.ajax({
-                            url: "data/resultats/"+dataResultatsDirectory+"/txchomage/" + feature.properties.REF_INSEE.slice(0, 2) + "/" + feature.properties.REF_INSEE+ ".json",
+                            url: "data/resultats/"+dataResultatsDirectory+"/txchomage/" + feature.properties.INSEE_COM.slice(0, 2) + "/" + feature.properties.INSEE_COM+ ".json",
                             dataType: "json"
                         })
                         .done(function(data) {
                                 if( data.data[0].CODGEO){
-                                        if (data.data[0].TxChomage)
-                                            {
+                                        if(data.data[0].TxChomage){
                                                 var resul=data.data[0].TxChomage;
-                                                if (parseInt(resul)>=10)
-                                                {layer.bgcolor = '#60bc7a';}
-                                                else{layer.bgcolor = '#aff2d5';}
-                                            }else{
-                                                layer.bgcolor = '#f2f1f0';
-                                            }
+                                                if (resul>=90)
+                                                    {layer.bgcolor = '#3d3b0a';}
+                                                else if (resul>=80)
+                                                    {layer.bgcolor = '#5b570f';}
+                                                else if (resul>=75)
+                                                    {layer.bgcolor = '#787313';}
+                                                else if (resul>=70)
+                                                    {layer.bgcolor = '#959018';}
+                                                else if (resul>=65)
+                                                    {layer.bgcolor = '#b2ac1d';}
+                                                else if (resul>=60)
+                                                    {layer.bgcolor = '#d0c821';}
+                                                else if (resul>=55)
+                                                    {layer.bgcolor = '#ded734';}
+                                                else if (resul>=45)
+                                                    {layer.bgcolor = '#e3dd52';}
+                                                else if (resul>=35)
+                                                    {layer.bgcolor = '#e8e36f';}
+                                                else if (resul>=20)
+                                                    {layer.bgcolor = '#ede88c';}
+                                                else{layer.bgcolor = '#f1eeaa';}
+                                                layer.setStyle({fillColor:layer.bgcolor});
+                                                layer.quorums_type = 'com';
+                                                return resul;
+                                                }else{
+                                                    layer.bgcolor = '#f2f1f0';
+                                                    layer.setStyle({fillColor:layer.bgcolor});
+                                                    layer.quorums_type = 'com';
+                                                }
+                                        layer.bgcolor = '#f2f1f0';
                                         layer.setStyle({fillColor:layer.bgcolor});
                                         layer.quorums_type = 'com';
                                         return resul;
@@ -1214,30 +1256,30 @@ function onEachFeatureIris(feature, layer) {
             })
             .done(function(data) 
             {
-                    if(data.data){
+                    if(data.data[0].NbFamilles){
                         var resul=(parseInt(data.data[0].NbFamilles)/parseInt(data.data[0].NbMenages))*100;
-                        printDebug("@"+resul, true);
-                        if (parseInt(resul)>=90)
-                            {layer.bgcolor = '#17734b';}
-                        else if (parseInt(resul)>=80)
-                            {layer.bgcolor = '#1a8053';}
-                        else if (parseInt(resul)>=75)
-                            {layer.bgcolor = '#1d8c5c';}
-                        else if (parseInt(resul)>=70)
-                            {layer.bgcolor = '#1f9964';}
-                        else if (parseInt(resul)>=65)
-                            {layer.bgcolor = '#22a66c';}
-                        else if (parseInt(resul)>=60)
-                            {layer.bgcolor = '#24b375';}
-                        else if (parseInt(resul)>=55)
-                            {layer.bgcolor = '#27bf7d';}
-                        else if (parseInt(resul)>=45)
-                            {layer.bgcolor = '#2acc86';}
-                        else if (parseInt(resul)>=35)
-                            {layer.bgcolor = '#2cd98e';}
-                        else if (parseInt(resul)>=25)
-                            {layer.bgcolor = '#2fe696';}
-                        else{layer.bgcolor = '#31f29f';}
+                        //printDebug("@"+resul, true);
+                        if (resul>=90)
+                            {layer.bgcolor = '#3d3b0a';}
+                        //else if (resul>=80)
+                          //  {layer.bgcolor = '#5b570f';}
+                        else if (resul>=75)
+                            {layer.bgcolor = '#787313';}
+                        //else if (resul>=70)
+                          //  {layer.bgcolor = '#959018';}
+                        else if (resul>=65)
+                            {layer.bgcolor = '#b2ac1d';}
+                        //else if (resul>=60)
+                          //  {layer.bgcolor = '#d0c821';}
+                        else if (resul>=55)
+                            {layer.bgcolor = '#ded734';}
+                        //else if (resul>=45)
+                          //  {layer.bgcolor = '#e3dd52';}
+                        else if (resul>=35)
+                            {layer.bgcolor = '#e3dd52';}
+                        else if (resul>=20)
+                            {layer.bgcolor = '#e8e36f';}
+                        else{layer.bgcolor = '#ede88c';}
 
                         layer.setStyle({fillColor:layer.bgcolor});
                         layer.quorums_type = 'iris';

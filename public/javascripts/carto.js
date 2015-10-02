@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = false;
+var debug = true;
 
 
 /* styles par défaut des zones cliquables */
@@ -107,7 +107,7 @@ var currentViewType = 'france';
 var currentIrisLayer = null;
 var currentLegend = null;
 // création des légendes de chaque source de données
-
+/*
 var legendTxPauvrete = L.control({position: 'bottomleft'});
 legendTxPauvrete.onAdd = function (map) 
 {
@@ -166,7 +166,7 @@ legendTxFamilles.onAdd = function (map)
     }
     return div;
 };
-
+*/
 
 /* fonctions globales */
 function shadeColor2(color, percent) {   
@@ -210,7 +210,7 @@ function getColorTxFamilles(a){
 
 
 
-
+/*
 function displayLegend()
 {
     if (dataResultatsDirectory=="INSEE")
@@ -253,7 +253,7 @@ function switchLegend()
         }
    // });
 }
-
+*/
 /* gestion du choix des donnes a affiche */
 var dataResultatsDirectory = 'dep_2015';
 
@@ -267,15 +267,38 @@ function showSelectSubview(){
     if (dataResultatsDirectory == 'INSEE'){
         $('#select-subview').addClass('INSEE');
         $('#select-subview').removeClass('com-circo');
-        $('#select-subview input.pauvrete').prop('checked', true);
-        if (dep_subview=="communes_pauvrete"){} else if (dep_subview=="communes_chomage"){} else if (dep_subview=="iris2000"){}else {dep_subview=="communes_pauvrete";}
-        
-    }else{
+        //$('#select-subview input.pauvrete').prop('checked', true);
+        //dep_subview="communes_pauvrete";
+        if (dep_subview)
+        {   printDebug("1",true);
+            if (dep_subview=="communes_pauvrete")
+            {   printDebug("2",true);$('#select-subview input.pauvrete').prop('checked', true);} 
+                else if (dep_subview=="communes_chomage")
+                    {printDebug("3",true);$('#select-subview input.chomage').prop('checked', true);} 
+                else if (dep_subview=="iris2000")
+                    {printDebug("4",true);$('#select-subview input.iris').prop('checked', true);}
+                else 
+                    {dep_subview="communes_pauvrete";printDebug("5",true);$('#select-subview input.pauvrete').prop('checked', true);}
+            }
+            else
+            {   dep_subview="communes_pauvrete";printDebug("6",true);$('#select-subview input.pauvrete').prop('checked', true);
+            }
+    }else
+    {
         $('#select-subview').addClass('com-circo');
         $('#select-subview').removeClass('INSEE');
-        $('#select-subview input.circonscriptions').prop('checked', true);
-        if (dep_subview=="circonscriptions_elections"){} else if (dep_subview=="communes_elections"){} else {dep_subview=="circonscriptions_elections";}
-        
+        //$('#select-subview input.circonscriptions').prop('checked', true);
+        //dep_subview="circonscriptions_elections";printDebug("7",true);
+        if (dep_subview)
+        {   printDebug(7,true);
+            if (dep_subview=="circonscriptions_elections"){printDebug("8",true);$('#select-subview input.circonscriptions').prop('checked', true);} 
+            else if (dep_subview=="communes_elections"){printDebug("9",true);$('#select-subview input.communes').prop('checked', true);} 
+            else {dep_subview="circonscriptions_elections";printDebug("10",true);$('#select-subview input.circonscriptions').prop('checked', true);}
+        }
+        else
+        {
+            dep_subview="circonscriptions_elections";printDebug("11",true);
+        }
     }
 
 }
@@ -471,7 +494,7 @@ function listen_switch() {
                     // load and display sub-layers
                     var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                     printDebug("currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory:"+n,true);
-                    switchLegend();
+                    //switchLegend();
                     if (dep_subview.substring(0,8)!="iris2000")
                             {
                                     // load and display sub-layers
@@ -620,7 +643,7 @@ function resetHighlightOnFeature(e) {
 /* reset du style par défaut de toutes les zones cliquables */
 function resetAllLayerState(){
 printDebug("resetAllLayerState",true);
-removeLegend();
+//removeLegend();
     // retour à la selection précédente
     // si region selectionnée, affiche la carte des régions
     if( currentViewType == 'reg2015'){
@@ -745,7 +768,7 @@ function selectFeature(e, feature, layer, type){
     }else if( type == 'dep' ){
         currentDeptLayer = layer; 
         map.removeLayer(layer);
-        if (dataResultatsDirectory=='INSEE'){displayLegend();}
+        //if (dataResultatsDirectory=='INSEE'){displayLegend();}
     }else if( type == 'circo' ){
         currentCircoLayer = layer; 
         map.removeLayer(layer);
@@ -1375,7 +1398,7 @@ function onEachFeatureCom(feature, layer) {
                                         layer.bgcolor = '#f2f1f0';
                                         layer.setStyle({fillColor:layer.bgcolor});
                                         layer.quorums_type = 'com';
-                                        return resul;
+                                        //return resul;
                                         }
                         });
            }
@@ -1603,6 +1626,15 @@ return {
     createMap: function() {
         printDebug('init : currentRegLayer='+currentRegLayer+', currentDeptLayer='+currentDeptLayer+', currentCircoLayer='+currentCircoLayer+', currentComLayer='+currentComLayer+', currentViewType='+currentViewType+', currentIrisLayer='+currentIrisLayer+', dataResultatsDirectory='+dataResultatsDirectory+', dep_subview='+dep_subview, true);
         /* creation de la carte */
+        /* gestion de la navigation departement */
+var dep_subview ='';
+if (dataResultatsDirectory!="INSEE")
+{
+    dep_subview ='circonscriptions_elections';}
+else
+{
+    dep_subview ='communes_pauvrete';
+} // communes | circonscriptions
         listen();
         listen_switch();
         map = L.map('map', {zoomControl: false}).setView([46.49839, 2.76855]);
@@ -1634,7 +1666,7 @@ return {
                 onEachFeature: onEachFeatureReg
             }
         ).addTo(map);
-        displayLegend();
+        //displayLegend();
     }
 }
 // contour blanc sur zone taux de cuverture deja visitée + attention à la légende, rajouter fond gris

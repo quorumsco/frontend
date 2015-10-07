@@ -1,5 +1,6 @@
 var cartoQuorum = (function ($, L) {
 var debug = false;
+var resulGLOBAL=[];
 
 
 /* styles par défaut des zones cliquables */
@@ -107,7 +108,7 @@ var currentViewType = 'france';
 var currentIrisLayer = null;
 var currentLegend = null;
 // création des légendes de chaque source de données
-/*
+
 var legendTxPauvrete = L.control({position: 'bottomleft'});
 legendTxPauvrete.onAdd = function (map) 
 {
@@ -166,7 +167,7 @@ legendTxFamilles.onAdd = function (map)
     }
     return div;
 };
-*/
+
 
 /* fonctions globales */
 function shadeColor2(color, percent) {   
@@ -210,7 +211,7 @@ function getColorTxFamilles(a){
 
 
 
-/*
+
 function displayLegend()
 {
     if (dataResultatsDirectory=="INSEE")
@@ -219,8 +220,21 @@ function displayLegend()
         {
             map.removeControl(currentLegend);
         }
+        if (dep_subview == 'communes_pauvrete')
+        {
         legendTxPauvrete.addTo(map);
         currentLegend = legendTxPauvrete;
+        }
+        if (dep_subview == 'communes_chomage')
+        {
+        legendTxChomage.addTo(map);
+        currentLegend = legendTxChomage;
+        }
+        if (dep_subview == 'iris2000')
+        {
+        legendTxFamilles.addTo(map);
+        currentLegend = legendTxFamilles;
+        }
     }             
 }
 
@@ -235,8 +249,9 @@ function removeLegend()
 
 function switchLegend()
 {
-
-    //map.on('overlayadd', function () {
+    //if (dataResultatsDirectory=="INSEE")
+    //{
+    
         // Switch to the INSEE legend...
         if (dep_subview == 'communes_pauvrete') {
             map.removeControl(currentLegend);
@@ -251,9 +266,9 @@ function switchLegend()
             legendTxFamilles.addTo(map);
             currentLegend = legendTxFamilles;
         }
-   // });
+   //}else {removeLegend();}
 }
-*/
+
 /* gestion du choix des donnes a affiche */
 var dataResultatsDirectory = 'dep_2015';
 
@@ -339,7 +354,7 @@ function listen() {
           $("#select-data h1").html($(this).html());
           $("#select-data ul li a.selected").removeClass('selected');
           $(this).addClass('selected');
-
+            
           /* en vue region */
           if( currentViewType == 'france' ){
                   map.removeLayer(regionsLayer);
@@ -383,7 +398,7 @@ function listen() {
                         // load and display sub-layers
                             var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                             if( ! subLayers_cache[n] ){
-                                
+                                    if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
                                     var subLayers = new L.GeoJSON.AJAX(
                                         'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                         {
@@ -429,9 +444,9 @@ function listen() {
                 {          
                         // load and display sub-layers
                             var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
-                            printDebug("n:"+n,true);
+                            
                             //if( ! subLayers_cache[n] ){
-                                
+                                if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
                                     var subLayers = new L.GeoJSON.AJAX(
                                         'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                         {
@@ -466,6 +481,7 @@ function listen() {
           }
       });
     });
+
 }
 
 /* gestion de la navigation departement */
@@ -503,6 +519,7 @@ function listen_switch() {
                                         
                                             if (dep_subview.substring(0,8)=='communes')
                                             {
+                                                preOnEachFeatureCom();
                                                         var subLayers = new L.GeoJSON.AJAX(
                                             'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
                                                 {
@@ -722,6 +739,7 @@ printDebug("resetAllLayerState",true);
         // re init des layer communes/circo et suppression des bv
         map.eachLayer(function(layer){
             if( layer.quorums_type == 'com' ){
+                preOnEachFeatureCom();
                 onEachFeatureCom(layer.feature, layer) 
             }else if( layer.quorums_type == 'circo' ){
                 onEachFeatureCirco(layer.feature, layer) 
@@ -768,7 +786,6 @@ function selectFeature(e, feature, layer, type){
     }else if( type == 'dep' ){
         currentDeptLayer = layer; 
         map.removeLayer(layer);
-        //if (dataResultatsDirectory=='INSEE'){displayLegend();}
     }else if( type == 'circo' ){
         currentCircoLayer = layer; 
         map.removeLayer(layer);
@@ -825,7 +842,7 @@ function selectFeature(e, feature, layer, type){
         {
                      // load and display sub-layers
                     if( ! subLayers_cache[n] ){
-                        
+                        if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
                             var subLayers = new L.GeoJSON.AJAX(
                                 'data/contours/departements/'+feature.properties.NUMERO+'/'+(dep_subview.substring(0,8)=='communes' ? 'communes' : 'circonsc')+'.geojson',
                                 {
@@ -876,6 +893,7 @@ function selectFeature(e, feature, layer, type){
     {
         hideSelectSubview();
     }
+    //if (dataResultatsDirectory=='INSEE'){displayLegend();}
     currentViewType = type;
     printDebug( 'after selectFeature() : currentRegLayer='+currentRegLayer+', currentDeptLayer='+currentDeptLayer+', currentCircoLayer='+currentCircoLayer+', currentComLayer='+currentComLayer+', currentViewType='+currentViewType+', currentIrisLayer='+currentIrisLayer+', dataResultatsDirectory='+dataResultatsDirectory+', dep_subview='+dep_subview, true);
 }
@@ -1267,7 +1285,77 @@ function onEachFeatureCirco(feature, layer) {
     });
     
 }
+function preOnEachFeatureCom ()
+{
+//printDebug("preOnEachFeatureCom-> dataResultatsDirectory"+currentDeptLayer.feature.properties.NUMERO,true);
 
+if (dataResultatsDirectory!="INSEE")
+    { 
+    $.ajax({
+        url: "data/resultats/" + dataResultatsDirectory + "/com/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2))+ ".json",
+        dataType: "json"
+    })
+    .done(function(data) {
+        if( "success" == data.status ){
+            
+            if( data.data){
+                //var resultats = data.data.resultats;
+                //printDebug("yes",true);
+                printDebug("affection de resulGLOBAL par data.data",true);
+                resulGLOBAL = data.data;
+
+            }
+        }
+    });
+}else 
+{ // sinon résultats de type INSEE
+    // selection des datas selon le radio bouton INSEE sélectionné
+    //printDebug("dep_subview==pauvrete"+type,true);
+    //printDebug(dep_subview);
+            if (dep_subview=="communes_pauvrete")
+                {
+                    $.ajax({
+                            url: "data/resultats/"+dataResultatsDirectory+"/txpauvrete/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            dataType: "json"
+                        })
+                        .done(function(data) {
+
+                        if( "success" == data.status ){
+                                    
+                                    if( data.data){
+                                        //var resultats = data.data.resultats;
+                                        //printDebug("yes",true);
+                                        printDebug("affection de resulGLOBAL par data.data",true);
+                                        resulGLOBAL = data.data;
+
+                                    }
+                                }
+                        });
+           } else
+           {
+                $.ajax({
+                            url: "data/resultats/"+dataResultatsDirectory+"/txchomage/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            dataType: "json"
+                        })
+                        .done(function(data) {
+
+                                if( "success" == data.status )
+                                {
+                                    if( data.data){
+                                        //var resultats = data.data.resultats;
+                                        //printDebug("yes",true);
+                                        printDebug("affection de resulGLOBAL par data.data",true);
+                                        resulGLOBAL = data.data;
+                                    }
+                                }
+
+
+                        });
+           }
+}  
+
+
+}
 /* Communes */
 function onEachFeatureCom(feature, layer) {
 
@@ -1287,25 +1375,182 @@ function onEachFeatureCom(feature, layer) {
     });
 
     layer.setStyle({fillColor:layer.bgcolor});
-
+    printDebug("resulGLOBAL_length:"+resulGLOBAL.length,true);
+    printDebug("trois derniers numéros INSEE_COM:"+feature.properties.INSEE_COM.slice(2),true);
 
   if (dataResultatsDirectory!="INSEE")
     {
+  
+                for (i=0;i<resulGLOBAL.length;i++)
+                { 
+                    var resultats = resulGLOBAL[i].resultats;
+                    if(resultats)
+                    {
+                        if (parseInt(resulGLOBAL[i].code)==parseInt(feature.properties.INSEE_COM.slice(2)))
+                        {
+                            resultats.sort(function(a,b){
+                                return b.voix - a.voix;
+                            });
+                            var res = resultats[0];
+                            printDebug("oui:"+res.code_nuance,true);
+                            layer.bgcolor = colors[res.code_nuance];
+                            layer.setStyle({fillColor:layer.bgcolor});
+                            layer.quorums_type = 'com';
+                            break;
+                        }
+                    }
+                }
+    }
+    else 
+{ // sinon résultats de type INSEE
+    // selection des datas selon le radio bouton INSEE sélectionné
+    //printDebug("dep_subview==pauvrete"+type,true);
+    //printDebug(dep_subview);
+            if (dep_subview=="communes_pauvrete")
+                {
+                 for (i=0;i<resulGLOBAL.length;i++)
+                                { 
+                                    var donnee = resulGLOBAL[i];
+                                    if(donnee)
+                                    {
+                                        if (parseInt(donnee.CODGEO.slice(2))==parseInt(feature.properties.INSEE_COM.slice(2)))
+                                        {printDebug("TxPauvrete:"+donnee.TxPauvrete,true);
+
+                                                if( donnee.CODGEO&&donnee.TxPauvrete!="null"){
+                                                        var resul=donnee.TxPauvrete;
+                                                        if (resul>=25)
+                                                            {layer.bgcolor = '#3d3b0a';}
+                                                        else if (resul>=22)
+                                                            {layer.bgcolor = '#5b570f';}
+                                                        else if (resul>=19)
+                                                            {layer.bgcolor = '#787313';}
+                                                        else if (resul>=16)
+                                                            {layer.bgcolor = '#959018';}
+                                                        else if (resul>=14)
+                                                            {layer.bgcolor = '#b2ac1d';}
+                                                        else if (resul>=12)
+                                                            {layer.bgcolor = '#d0c821';}
+                                                        else if (resul>=10)
+                                                            {layer.bgcolor = '#ded734';}
+                                                        else if (resul>=8)
+                                                            {layer.bgcolor = '#e3dd52';}
+                                                        else if (resul>=6)
+                                                            {layer.bgcolor = '#e8e36f';}
+                                                        else if (resul>=4)
+                                                            {layer.bgcolor = '#ede88c';}
+                                                        else{layer.bgcolor = '#f1eeaa';}
+                                                    }else{
+                                                        layer.bgcolor = '#f2f1f0';
+                                                    }
+                                                layer.setStyle({fillColor:layer.bgcolor});
+                                                layer.quorums_type = 'com';
+                                                
+                                                break;
+                                        }
+                                    }
+                                }
+                        
+           } else
+           {
+                for (i=0;i<resulGLOBAL.length;i++)
+                { 
+                    var donnee = resulGLOBAL[i];
+                    if(donnee)
+                    {
+                        if (parseInt(donnee.CODGEO.slice(2))==parseInt(feature.properties.INSEE_COM.slice(2)))
+                        {
+                         
+                                        if(donnee.CODGEO&&donnee.TxChomage!="null"){
+                                        
+                                                var resul=donnee.TxChomage;
+                                                if (resul>=25)
+                                                    {layer.bgcolor = '#3d3b0a';}
+                                                else if (resul>=22)
+                                                    {layer.bgcolor = '#5b570f';}
+                                                else if (resul>=19)
+                                                    {layer.bgcolor = '#787313';}
+                                                else if (resul>=16)
+                                                    {layer.bgcolor = '#959018';}
+                                                else if (resul>=14)
+                                                    {layer.bgcolor = '#b2ac1d';}
+                                                else if (resul>=12)
+                                                    {layer.bgcolor = '#d0c821';}
+                                                else if (resul>=10)
+                                                    {layer.bgcolor = '#ded734';}
+                                                else if (resul>=8)
+                                                    {layer.bgcolor = '#e3dd52';}
+                                                else if (resul>=6)
+                                                    {layer.bgcolor = '#e8e36f';}
+                                                else if (resul>=4)
+                                                    {layer.bgcolor = '#ede88c';}
+                                                else{layer.bgcolor = '#f1eeaa';}
+                                            
+                                                layer.setStyle({fillColor:layer.bgcolor});
+                                                layer.quorums_type = 'com';
+                                                return resul;
+                                                }else{
+                                                    layer.bgcolor = '#f2f1f0';
+                                                    layer.setStyle({fillColor:layer.bgcolor});
+                                                    layer.quorums_type = 'com';
+                                                }
+                                        layer.bgcolor = '#f2f1f0';
+                                        layer.setStyle({fillColor:layer.bgcolor});
+                                        layer.quorums_type = 'com';
+                                        //return resul;
+                                        
+                                        break;   
+                        }     
+
+
+                    }
+                }
+
+
+
+           }
+}  
+
+
+
+
+
+/*
+  if (dataResultatsDirectory!="INSEE")
+    {
+        printDebug("data/resultats/" + dataResultatsDirectory + "/testcom/" + parseInt(feature.properties.INSEE_COM.slice(0, 2))+ ".json",true);
+        
     $.ajax({
-        url: "data/resultats/"+dataResultatsDirectory+"/com/" + feature.properties.INSEE_COM.slice(0, 2) + "/" + feature.properties.INSEE_COM.slice(2)+ ".json",
+        //url: "data/resultats/"+dataResultatsDirectory+"/com/" + feature.properties.INSEE_COM.slice(0, 2) + "/" + feature.properties.INSEE_COM.slice(2)+ ".json",
+        url: "data/resultats/" + dataResultatsDirectory + "/testcom/" + parseInt(feature.properties.INSEE_COM.slice(0, 2))+ ".json",
+        
         dataType: "json"
     })
     .done(function(data) {
         if( "success" == data.status ){
-            if( data.data.resultats ){
-                var resultats = data.data.resultats;
-                resultats.sort(function(a,b){
-                    return b.voix - a.voix;
-                });
-                var res = resultats[0];
-                layer.bgcolor = colors[res.code_nuance];
-                layer.setStyle({fillColor:layer.bgcolor});
-                layer.quorums_type = 'com';
+            
+            if( data.data){
+                //var resultats = data.data.resultats;
+                //printDebug("yes",true);
+                for (i=0;i<data.data.length;i++)
+                { 
+                    var resultats = data.data[i].resultats;
+                    if(resultats)
+                    {
+                        if (parseInt(data.data[i].code)==parseInt(feature.properties.INSEE_COM.slice(2)))
+                        {
+                            //printDebug("yes:"+data.data[i].code,true);
+                            resultats.sort(function(a,b){
+                                return b.voix - a.voix;
+                            });
+                            var res = resultats[0];
+                            printDebug("oui:"+res.code_nuance,true);
+                            layer.bgcolor = colors[res.code_nuance];
+                            layer.setStyle({fillColor:layer.bgcolor});
+                            layer.quorums_type = 'com';
+                            break;
+                        }
+                    }
+                }
             }
         }
     });
@@ -1402,7 +1647,7 @@ function onEachFeatureCom(feature, layer) {
                                         }
                         });
            }
-}   
+}   */
 }
 
 /* ---------------------------------- onEachFeatureIris ----------------------------------*/

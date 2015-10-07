@@ -4,4 +4,5 @@ build
 Desktop.ini
 node_modules
 static/vendor
-public/*
+public/fonts/
+public/images/

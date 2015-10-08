@@ -163,12 +163,12 @@ module.exports = {
     },
     'contacts:vueUpdate': function(contact) {
       upsert(this.contacts, {id: contact.id}, contact);
-      location.reload(true);
+      // location.reload(true);
       return false;
     },
     'contacts:remove': function(id) {
       remove(this.contacts, {id: id});
-      location.reload(true);
+      // location.reload(true);
       return false;
     },
     'tabs:nb': function(nbNotes, nbTags) {

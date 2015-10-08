@@ -40,7 +40,7 @@ module.exports = {
       if (res.adress == "" || res.adress === undefined) {res.adress = "not specified"};
       if (res.phone == "" || res.phone === undefined) {res.phone = "not specified"};
       this.$set("contact", res);
-      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
+      this.$dispatch('header:title', `${res.firstname} ${res.surname}`);
       note_store.find(this.id, (notes_res) => {
         this.contact.$set("notes", notes_res);
         tags_store.find(this.id, (tags_res) => {

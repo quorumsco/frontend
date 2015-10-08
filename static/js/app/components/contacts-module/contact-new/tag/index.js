@@ -3,11 +3,8 @@ var casual = require('chance');
 module.exports = {
   data: function() {
   	return {
-  		newTag: {
-  			name: null,
-  			color: null,
-  			id: null
-  		}
+  		newTag: this.baseTag(),
+      url: this.$root.path("contacts:showTags", this.$parent.contact_id)
   	}
   },
   methods: {
@@ -17,6 +14,10 @@ module.exports = {
       this.$parent.addTag(tag);
       this.newTag = this.baseTag();
   	},
+    back: function(e) {
+      e.preventDefault();
+      this.$root.navigate("contacts:showTags", undefined, this.$parent.contact_id);
+    },
   	baseTag: function() {
       return {
         name: null,

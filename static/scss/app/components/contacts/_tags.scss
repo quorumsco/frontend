@@ -1,8 +1,19 @@
+@import '../header';
 @include exports("tags-body") {
   tags-body {
-    width: 95%;
+    width: 92.5%;
     display: block;
-    margin: auto;
+    margin: 1% auto auto 5%;
+
+    a.back {
+      position: absolute;
+      left: 0;
+      top: 0;
+      text-align: center;
+      color: darken(#fff, 60%);
+      line-height: $header-height / 1.5;
+      width: 5%;
+    }
 
     tags-item {
       display: inline-block;

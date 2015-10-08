@@ -6,10 +6,14 @@ module.exports = {
   },
   template: require('./template.jade')(),
   methods: {
-    submit: function(contact, event) {
-      event.preventDefault();
+    submit: function(contact, e) {
+      e.preventDefault();
       this.$parent.addContact(contact);
       this.contact = this.baseContact();
+    },
+    back: function(e) {
+      e.preventDefault();
+      this.$root.navigate("contacts:list");
     },
     baseContact: function() {
       return {

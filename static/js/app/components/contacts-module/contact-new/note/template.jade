@@ -1,5 +1,7 @@
 details-notes
   notes-body
+    a.back(href="{{url}}" v-on="click: back($event)")
+      i.fa.fa-fw.fa-arrow-left
     notes-item
       textarea(v-model="newNote.content")
   button(v-on="click: createNote(newNote, $event)") Create

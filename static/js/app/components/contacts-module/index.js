@@ -17,7 +17,8 @@ var contact_store = require('../../models/contact_store.js'),
   remove = function (arr, key) {
     var match = _.find(arr, key);
     if (match) {
-      _.remove(arr, key);
+      var index = _.findIndex(arr, key);
+      arr.splice(index, 1);
     }
   };
 
@@ -73,11 +74,17 @@ module.exports = {
     },
     addTag: function(tag) {
       this.contact = this.findContact();
-      console.log(this.contact);
       tags_store.save(this.contact_id, tag, (res) => {
         upsert(this.contact.tags, {id: res.body.data.tag.id}, res.body.data.tag);
         upsert(this.contacts, {id: this.contact.id}, this.contact);
       });
+    },
+    setNew: function(view, title, id) {
+      this.view = view;
+      this.contact_id = id;
+      this.$dispatch('header:title', title);
+      this.$dispatch('header:hideAdd');
+      this.$dispatch('header:hidePrev');
     }
   },
   events: {
@@ -88,12 +95,7 @@ module.exports = {
       return false;
     },
     'contacts:new': function() {
-      this.view = 'new';
-      this.$dispatch('header:title', "New Contact");
-      var prevFunc = function() {
-        this.$root.navigate("contacts:list");
-      }
-      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), prevFunc);
+      this.setNew("new", "New Contact", 0);
       return false;
     },
     'contacts:showInfos': function(id) {
@@ -111,14 +113,7 @@ module.exports = {
       this.view = 'details';
     },
     'contacts:newNote': function(id) {
-      this.contact_id = id;
-      this.view = 'newNote';
-      var prevFunc = function() {
-        this.$root.navigate("contacts:showNotes", undefined, id);
-      }
-      this.$dispatch('header:setPrev', this.$root.path("contacts:showNotes", id), prevFunc);
-      this.$dispatch('header:title', "New Note");
-      this.$dispatch('header:hideAdd');
+      this.setNew("newNote", "New Note", id);
       return false;
     },
     'contacts:showNote': function(id, noteID) {
@@ -143,37 +138,28 @@ module.exports = {
       this.view = 'details';
     },
     'contacts:newTag': function(id) {
-      this.contact_id = id;
-      this.view = 'newTag';
-      var prevFunc = function() {
-        this.$root.navigate("contacts:showTags", undefined, id);
-      }
-      this.$dispatch('header:setPrev', this.$root.path("contacts:showTags", id), prevFunc);
-      this.$dispatch('header:title', "New Tag");
-      this.$dispatch('header:hideAdd');
+      this.setNew("newTag", "New Tag", id);
       return false;
     },
     'contacts:update': function(contact) {
+      tags = contact.tags;
+      notes = contact.notes;
       contact.tags = undefined;
       contact.notes = undefined;
       contact_store.update(contact, (res) => {
         upsert(this.contacts, {id: contact.id}, contact);
       });
-      return false;
-    },
-    'contacts:vueUpdate': function(contact) {
-      upsert(this.contacts, {id: contact.id}, contact);
-      // location.reload(true);
+      contact.tags = tags;
+      contact.notes = notes;
       return false;
     },
     'contacts:remove': function(id) {
       remove(this.contacts, {id: id});
-      // location.reload(true);
       return false;
     },
     'tabs:nb': function(nbNotes, nbTags) {
       this.$dispatch('tabs:nb', nbNotes, nbTags);
       return false;
     }
-  }
+  },
 };

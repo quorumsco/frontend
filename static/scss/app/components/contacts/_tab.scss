@@ -2,12 +2,18 @@
 $tab-width: 100% / 3;
 
 @include exports("tab-menu") {
+
+  button {
+    margin-right: 2.5%;
+  }
+
   tab-menu {
-    width: 100%;
+    width: 95%;
     height: $header-height / 2 + 10px;
     margin-bottom: $header-height / 2 - 10px;
+    margin-left: 5%;
     display: block;
-    border-bottom: 3px solid #2980B9;
+    border-bottom: 3px solid darken(#fff, 60%);
 
     a {
       line-height: $header-height / 1.5;
@@ -20,15 +26,18 @@ $tab-width: 100% / 3;
       &:hover {
         color: #2980B9;
       }
+/*      &:nth-child(2) {
+        margin-left: 5%;
+      }*/
+      &.back {
+        position: absolute;
+        left: 0;
+        width: 5%;
+      }
     }
 
     .selected {
       color: #2980B9;
-
-/*      -moz-box-shadow: 0 4px 2px -2px lighten(#2980B9, 20%);
-      -webkit-box-shadow: 0 4px 2px -2px lighten(#2980B9, 20%);
-      -o-box-shadow: 0 4px 2px -2px lighten(#2980B9, 20%);
-      box-shadow: 0 4px 2px -2px lighten(#2980B9, 20%);*/
       background: url("../images/active_menu.png") center bottom no-repeat;
       &:hover {
         color: #2980B9;

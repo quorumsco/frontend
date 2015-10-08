@@ -1,8 +1,10 @@
 contacts-new
   details-infos
-    br
+    a.back(href="{{url}}" v-on="click: back($event)")
+      i.fa.fa-fw.fa-arrow-left
     form
       each val in ["firstname", "surname", "mail", "phone", "adress"]
         info-field #{val} :
           input(id="#{val]" v-model="contact.#{val}" type="text" placeholder="#{val}")
       button(v-on="click: submit(contact, $event)") Ok
+      button(v-on="click: back($event)") Return

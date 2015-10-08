@@ -7,7 +7,7 @@ module.exports = {
   data: function() {
     return {
       view: null,
-      contact: {},
+      // contact: {},
       tab: 0,
       showTabs: true
     };
@@ -19,7 +19,8 @@ module.exports = {
     },
     contact: {
       type: Object,
-      required: true
+      required: true,
+      twoWay: true
     }
   },
   template: require('./template.jade')(),
@@ -34,6 +35,9 @@ module.exports = {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
     }
     contact_store.first(this.id, (res) => {
+      if (res == null) {
+        this.$root.navigate("contacts:list");
+      }
       if (res.surname == "" || res.surname === undefined) {res.surname = "not specified"};
       if (res.firstname == "" || res.firstname === undefined) {res.firstname = "not specified";};
       if (res.mail == "" || res.mail === undefined) {res.mail = "not specified"};
@@ -53,14 +57,6 @@ module.exports = {
   created: function() {
     this.$dispatch("details:created");
   },
-  // computed: {
-  //   notesCount: function() {
-  //     return this.contact.notes ? this.contact.notes.length : 0;
-  //   },
-  //   tagsCount: function() {
-  //     return this.contact.tags ? this.contact.tags.length : 0;
-  //   }
-  // },
   events: {
     'contacts:showInfos': function() {
       this.view = 'infos';

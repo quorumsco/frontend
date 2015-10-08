@@ -8,6 +8,8 @@ details-notes
         span.date {{date}}
         p {{content}}
   notes-body(v-if="focus")
+    a.back(href="{{url}}" v-on="click: prevFunc($event)")
+      i.fa.fa-fw.fa-arrow-left
     notes-item
       div.edit
         span.author {{note.author}} 

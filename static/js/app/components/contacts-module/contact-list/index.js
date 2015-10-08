@@ -7,10 +7,6 @@ module.exports = {
     contacts: {
       type: Array,
       required: true
-    },
-    contact: {
-      type: Object,
-      required: true
     }
   },
   data: function() {

@@ -1,14 +1,25 @@
+@import '../header';
 @include exports("notes-body") {
   details-notes {
     display: block;
-    margin: 1% auto auto auto;
-    width: 95%;
+    margin: 1% auto auto 5%;
+    width: 92.5%;
 
     button {
-      margin-right: 1%;
+      margin-right: 2.5%;
     }
 
     notes-body {
+      a.back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        text-align: center;
+        color: darken(#fff, 60%);
+        line-height: $header-height / 1.5;
+        width: 5%;
+      }
+
       notes-item {
         display: block;
         position: relative;

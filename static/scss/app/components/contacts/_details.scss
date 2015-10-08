@@ -1,10 +1,22 @@
+@import '../header';
 @include exports("details-infos") {
   details-infos {
+    margin-top: 1%;
     display: block;
 
+    a.back {
+      position: absolute;
+      left: 0;
+      top: 0;
+      text-align: center;
+      color: darken(#fff, 60%);
+      line-height: $header-height / 1.5;
+      width: 5%;
+    }
+
     info-field {
-      width : 95%;
-      margin: auto;
+      width : 92.5%;
+      margin: auto auto auto 5%;
       display: block;
       text-transform: capitalize;
 
@@ -14,7 +26,7 @@
     }
   
     button {
-      margin: 0 0 2.5% 2.5%;
+      margin: 0 0 0 5%;
     }
   }
 }

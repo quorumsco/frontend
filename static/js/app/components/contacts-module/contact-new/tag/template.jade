@@ -1,6 +1,6 @@
 details-tags
-  br
   tags-body
+    a.back(href="{{url}}" v-on="click: back($event)")
+      i.fa.fa-fw.fa-arrow-left
     input(v-model="newTag.name")
-    br
     button(v-on="click: createTag(newTag, $event)") Create

@@ -62,6 +62,7 @@ module.exports = {
       this.view = 'infos';
       this.tab = 1;
       this.$dispatch('header:hideAdd');
+      this.showTabs = true;
       return false;
     },
     'contacts:showNotes': function(id) {
@@ -71,6 +72,7 @@ module.exports = {
         this.$root.navigate("contacts:newNote", undefined, id);
       }
       this.$dispatch('header:setAdd', this.$root.path('contacts:newNote', id), addFunc);
+      this.showTabs = true;
       return false;
     },
     'contacts:hideNote': function() {
@@ -100,6 +102,7 @@ module.exports = {
         this.$root.navigate("contacts:newTag", undefined, id);
       }
       this.$dispatch('header:setAdd', this.$root.path('contacts:newTag', id), addFunc);
+      this.showTabs = true;
       return false;
     },
     'tabs:nb': function(nbNotes, nbTags) {

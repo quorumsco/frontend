@@ -5,7 +5,8 @@ module.exports = {
   props: {
     contact: {
       type: Object,
-      required: true
+      required: true,
+      twoWay: true
     },
     id: {
       type: Number,
@@ -19,12 +20,12 @@ module.exports = {
       var remove = function (arr, key) {
         var match = _.find(arr, key);
         if (match) {
-          arr.$remove(key);
+          var index = _.findIndex(arr, key);
+          arr.splice(index, 1);
         }
       };
       tags_store.delete(this.contact.id, tag, () => {
         remove(this.contact.tags, tag.$data);
-        this.$dispatch("contacts:vueUpdate", this.contact);
         this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
       });
     }

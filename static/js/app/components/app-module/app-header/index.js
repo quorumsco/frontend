@@ -3,10 +3,7 @@ module.exports = {
   data: function() {
     return {
       title: "",
-      prev: false,
-      prevFunc: undefined,
       dropdown: false,
-      prevUrl: null,
       addUrl: null,
       addFunc: undefined,
       add: null
@@ -26,10 +23,6 @@ module.exports = {
     hideDropdown: function() {
       this.dropdown = false;
     },
-    navOnClickOut: function(e) {
-      e.preventDefault();
-      this.prevFunc();
-    },
     navOnClickIn: function(e) {
       e.preventDefault();
       this.$dispatch('nav:show');
@@ -44,36 +37,6 @@ module.exports = {
     }
   },
   events: {
-    'contacts:list': function() {
-      this.prev = false;
-    },
-    'contacts:showInfos': function() {
-      this.prev = true;
-      this.prevUrl = this.$root.path("contacts:list");
-      this.prevFunc = function() {
-        this.$root.navigate("contacts:list");
-      }
-    },
-    'contacts:showNotes': function() {
-      this.prev = true;
-      this.prevUrl = this.$root.path("contacts:list");
-      this.prevFunc = function() {
-        this.$root.navigate("contacts:list");
-      }
-    },
-    'contacts:showTags': function() {
-      this.prev = true;
-      this.prevUrl = this.$root.path("contacts:list");
-      this.prevFunc = function() {
-        this.$root.navigate("contacts:list");
-      }
-    },
-    'header:setPrev': function(url, prevFunc) {
-      this.prev = true;
-      this.prevUrl = url;
-      this.prevFunc = prevFunc;
-      return false;
-    },
     'header:setAdd': function(url, addFunc) {
       this.add = true;
       this.addUrl = url;

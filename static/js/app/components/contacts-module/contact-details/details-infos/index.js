@@ -5,7 +5,8 @@ module.exports = {
   props: {
     contact: {
       type: Object,
-      required: true
+      required: true,
+      twoWay: true
     },
     id: {
       type: Number,

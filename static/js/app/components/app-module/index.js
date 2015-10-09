@@ -171,6 +171,10 @@ module.exports = {
       this.$.header.$emit('header:setPrev', url, prevFunc);
       return false
     },
+    'header:hidePrev': function() {
+      this.$.header.$emit('header:hidePrev');
+      return false
+    },
     'header:setAdd': function(url, addFunc) {
       this.$.header.$emit('header:setAdd', url, addFunc);
       return false

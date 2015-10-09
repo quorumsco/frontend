@@ -14,7 +14,8 @@ module.exports = {
   props: {
     contact: {
       type: Object,
-      required: true
+      required: true,
+      twoWay: true
     },
     id: {
       type: Number,
@@ -24,6 +25,7 @@ module.exports = {
   data: function() {
     return {
       focus: false,
+      url: this.$root.path("contacts:list"),
       note: {}
     }
   },
@@ -37,12 +39,12 @@ module.exports = {
       var remove = function (arr, key) {
         var match = _.find(arr, key);
         if (match) {
-          _.remove(arr, key);
+          var index = _.findIndex(arr, key);
+          arr.splice(index, 1);
         }
       };
       note_store.delete(this.contact.id, this.note.id, () => {
         remove(this.contact.notes, {id: this.note.id});
-        this.$dispatch("contacts:vueUpdate", this.contact);
         this.$root.$emit("contacts:hideNote", this.id);
         this.$root.navigate('contacts:showNotes', undefined, this.id);
       });
@@ -56,6 +58,11 @@ module.exports = {
       note_store.update(this.contact.id,  this.note, (res) => {
         upsert(this.contact.notes, {id: this.note.id}, this.note);
       });
+    },
+    prevFunc: function(e) {
+      e.preventDefault();
+      this.$dispatch("contacts:hideNote", this.id);
+      this.$root.navigate('contacts:showNotes', undefined, this.id);
     }
   },
   events: {
@@ -63,13 +70,9 @@ module.exports = {
       this.$set("focus", true);
       this.$set("note", _.cloneDeep(_.find(this.contact.notes, {id: noteID})));
       this.$dispatch("tabs:hide");
-      var prevFunc = function()  {
-        this.$dispatch("contacts:hideNote", id);
-        this.$root.navigate('contacts:showNotes', undefined, id);
-      }
-      this.$dispatch('header:setPrev', this.$root.path('contacts:showNotes', id), prevFunc);
       this.$dispatch('header:title', "Note");
       this.$dispatch('header:hideAdd');
+      this.id = id;
     },
     'contacts:hideNote': function(id) {
       this.$set("focus", false);

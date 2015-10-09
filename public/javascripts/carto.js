@@ -914,8 +914,7 @@ function displayInfos(feature, type){
     }else if( type == 'circo' ){
         resultats_key = feature.properties.num_dep + "/" + feature.properties.num_circo;
     }else if( type == 'com' ){
-        $('#infos').append("<h2>"+feature.properties.NOM_COM + "</h2>");
-        $('#infos').append("<h2>"+feature.properties.POPULATION + "</h2>");
+        $('#infos').append("<h2>"+feature.properties.NOM_COM + "<br>("+feature.properties.POPULATION + " habitants)</h2>");
         resultats_key = feature.properties.INSEE_COM;
         resultats_key = resultats_key.slice(0, 2) + "/" + resultats_key.slice(2);
     }else if( type == 'iris' ){

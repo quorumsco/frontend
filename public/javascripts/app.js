@@ -30565,9 +30565,8 @@ var Emitter = require('events').EventEmitter,
     store = module.exports = new Emitter(),
     request = require('superagent'),
     nocache = require('superagent-no-cache'),
-
-// api = 'http://api.quorumapps.com';
-api = 'http://localhost:8080';
+    api = 'http://api.quorumapps.com';
+// api = 'http://localhost:8080';
 
 store.find = function (cb) {
   request.get(api + '/contacts').use(nocache).withCredentials().set('Accept', 'application/json').end(function (err, res) {
@@ -30634,9 +30633,8 @@ var Emitter = require('events').EventEmitter,
     store = module.exports = new Emitter(),
     request = require('superagent'),
     nocache = require('superagent-no-cache'),
-
-// api = 'http://api.quorumapps.com';
-api = 'http://localhost:8080';
+    api = 'http://api.quorumapps.com';
+// api = 'http://localhost:8080';
 
 store.find = function (id, cb) {
   request.get(api + '/contacts/' + id + '/notes').use(nocache).withCredentials().set('Accept', 'application/json').end(function (err, res) {
@@ -30703,9 +30701,8 @@ var Emitter = require('events').EventEmitter,
     store = module.exports = new Emitter(),
     request = require('superagent'),
     nocache = require('superagent-no-cache'),
-
-// api = 'http://api.quorumapps.com';
-api = 'http://localhost:8080';
+    api = 'http://api.quorumapps.com';
+// api = 'http://localhost:8080';
 
 //Test session, si oui ok si non on go sur login
 
@@ -30742,9 +30739,8 @@ var Emitter = require('events').EventEmitter,
     store = module.exports = new Emitter(),
     request = require('superagent'),
     nocache = require('superagent-no-cache'),
-
-// api = 'http://api.quorumapps.com';
-api = 'http://localhost:8080';
+    api = 'http://api.quorumapps.com';
+// api = 'http://localhost:8080';
 
 store.find = function (id, cb) {
   return request.get(api + '/contacts/' + id + '/tags').use(nocache).withCredentials().set('Accept', 'application/json').end(function (err, res) {

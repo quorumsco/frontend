@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = false;
+var debug = true;
 var resulGLOBAL=[];
 
 
@@ -398,13 +398,25 @@ function listen() {
                         // load and display sub-layers
                             var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                             if( ! subLayers_cache[n] ){
-                                    if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
-                                    var subLayers = new L.GeoJSON.AJAX(
-                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                    if (dep_subview.substring(0,8)=='communes')
                                         {
-                                            onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                            preOnEachFeatureCom();
+                                            var subLayers = new L.GeoJSON.AJAX(
+                                                'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                                {
+                                                    onEachFeature: onEachFeatureCom
+                                                }   
+                                            ).addTo(map);
                                         }
-                                    ).addTo(map);
+                                        else if (dep_subview.substring(0,8)=='circonsc')
+                                        {
+                                            var subLayers = new L.GeoJSON.AJAX(
+                                                'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                                {
+                                                    onEachFeature: onEachFeatureCirco
+                                                }   
+                                            ).addTo(map);
+                                        }
                                 printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
                             }else{
@@ -446,13 +458,25 @@ function listen() {
                             var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                             
                             //if( ! subLayers_cache[n] ){
-                                if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
+                                if (dep_subview.substring(0,8)=='communes')
+                                {
+                                    preOnEachFeatureCom();
                                     var subLayers = new L.GeoJSON.AJAX(
                                         'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                         {
-                                            onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                            onEachFeature: onEachFeatureCom
                                         }
                                     ).addTo(map);
+                                }
+                                else if (dep_subview.substring(0,8)=='circonsc')
+                                {
+                                    var subLayers = new L.GeoJSON.AJAX(
+                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                        {
+                                            onEachFeature: onEachFeatureCirco
+                                        }
+                                    ).addTo(map);
+                                }
                                 printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
                             //}else{
@@ -516,11 +540,10 @@ function listen_switch() {
                                     // load and display sub-layers
                                     if( ! subLayers_cache[n] )
                                     {
-                                        
                                             if (dep_subview.substring(0,8)=='communes')
                                             {
                                                 preOnEachFeatureCom();
-                                                        var subLayers = new L.GeoJSON.AJAX(
+                                                var subLayers = new L.GeoJSON.AJAX(
                                             'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
                                                 {
                                                     onEachFeature:onEachFeatureCom
@@ -737,9 +760,11 @@ printDebug("resetAllLayerState",true);
         currentParentLayer.addTo(map);
 
         // re init des layer communes/circo et suppression des bv
+       if( layer.quorums_type == 'com' ){
+                preOnEachFeatureCom(); 
+            }
         map.eachLayer(function(layer){
             if( layer.quorums_type == 'com' ){
-                preOnEachFeatureCom();
                 onEachFeatureCom(layer.feature, layer) 
             }else if( layer.quorums_type == 'circo' ){
                 onEachFeatureCirco(layer.feature, layer) 
@@ -842,13 +867,25 @@ function selectFeature(e, feature, layer, type){
         {
                      // load and display sub-layers
                     if( ! subLayers_cache[n] ){
-                        if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
+                        if (dep_subview.substring(0,8)=='communes')
+                        {
+                            preOnEachFeatureCom();
                             var subLayers = new L.GeoJSON.AJAX(
                                 'data/contours/departements/'+feature.properties.NUMERO+'/'+(dep_subview.substring(0,8)=='communes' ? 'communes' : 'circonsc')+'.geojson',
                                 {
-                                    onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                    onEachFeature: onEachFeatureCom
                                 }
                             ).addTo(map);
+                        }
+                        else if (dep_subview.substring(0,8)=='circonsc')
+                        {
+                            var subLayers = new L.GeoJSON.AJAX(
+                                'data/contours/departements/'+feature.properties.NUMERO+'/'+(dep_subview.substring(0,8)=='communes' ? 'communes' : 'circonsc')+'.geojson',
+                                {
+                                    onEachFeature: onEachFeatureCirco
+                                }
+                            ).addTo(map);
+                        }
                         printDebug("ajout cache n:"+n,true);
                         subLayers_cache[n] = subLayers;
                     }else{
@@ -1383,6 +1420,7 @@ function onEachFeatureCom(feature, layer) {
                 for (i=0;i<resulGLOBAL.length;i++)
                 { 
                     var resultats = resulGLOBAL[i].resultats;
+
                     if(resultats)
                     {
                         if (parseInt(resulGLOBAL[i].code)==parseInt(feature.properties.INSEE_COM.slice(2)))

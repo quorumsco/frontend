@@ -7,4 +7,4 @@ contacts-new
         info-field #{val} :
           input(id="#{val]" v-model="contact.#{val}" type="text" placeholder="#{val}")
       button(v-on="click: submit(contact, $event)") Ok
-      button(v-on="click: back($event)") Return
+      button.second(v-on="click: back($event)") Return

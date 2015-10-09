@@ -6,3 +6,4 @@ node_modules
 static/vendor
 public/fonts/
 public/images/
+static/js/app/models/

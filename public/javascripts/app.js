@@ -30352,7 +30352,7 @@ buf.push("<info-field>" + (jade.escape((jade_interp = val) == null ? '' : jade_i
   }
 }).call(this);
 
-buf.push("<button v-on=\"click: submit(contact, $event)\">Ok</button><button v-on=\"click: back($event)\">Return</button></form></details-infos></contacts-new>");}.call(this,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
+buf.push("<button v-on=\"click: submit(contact, $event)\">Ok</button><button v-on=\"click: back($event)\" class=\"second\">Return</button></form></details-infos></contacts-new>");}.call(this,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 };
 },{"jade/runtime":9}],118:[function(require,module,exports){
 'use strict';
@@ -30634,8 +30634,9 @@ var Emitter = require('events').EventEmitter,
     store = module.exports = new Emitter(),
     request = require('superagent'),
     nocache = require('superagent-no-cache'),
-    api = 'http://api.quorumapps.com';
-// api = 'http://localhost:8080';
+
+// api = 'http://api.quorumapps.com';
+api = 'http://localhost:8080';
 
 store.find = function (id, cb) {
   request.get(api + '/contacts/' + id + '/notes').use(nocache).withCredentials().set('Accept', 'application/json').end(function (err, res) {
@@ -30702,8 +30703,9 @@ var Emitter = require('events').EventEmitter,
     store = module.exports = new Emitter(),
     request = require('superagent'),
     nocache = require('superagent-no-cache'),
-    api = 'http://api.quorumapps.com';
-// api = 'http://localhost:8080';
+
+// api = 'http://api.quorumapps.com';
+api = 'http://localhost:8080';
 
 //Test session, si oui ok si non on go sur login
 
@@ -30740,8 +30742,9 @@ var Emitter = require('events').EventEmitter,
     store = module.exports = new Emitter(),
     request = require('superagent'),
     nocache = require('superagent-no-cache'),
-    api = 'http://api.quorumapps.com';
-// api = 'http://localhost:8080';
+
+// api = 'http://api.quorumapps.com';
+api = 'http://localhost:8080';
 
 store.find = function (id, cb) {
   return request.get(api + '/contacts/' + id + '/tags').use(nocache).withCredentials().set('Accept', 'application/json').end(function (err, res) {

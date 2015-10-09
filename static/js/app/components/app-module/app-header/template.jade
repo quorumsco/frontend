@@ -3,8 +3,9 @@ div
     a.toggle-nav(href="#" v-on="click: navOnClickIn($event)")
       i.fa.fa-fw.fa-bars
         
-  h2 Quorum : 
-  h2.title {{title}}
+  span.title
+    h2 Quorum : 
+    h2.title {{title}}
 
   section.right
     a(href="{{addUrl}}" v-on="click: addOnClick($event)" v-if="add")

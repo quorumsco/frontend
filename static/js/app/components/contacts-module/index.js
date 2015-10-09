@@ -142,8 +142,8 @@ module.exports = {
       return false;
     },
     'contacts:update': function(contact) {
-      tags = contact.tags;
-      notes = contact.notes;
+      var tags = contact.tags;
+      var notes = contact.notes;
       contact.tags = undefined;
       contact.notes = undefined;
       contact_store.update(contact, (res) => {

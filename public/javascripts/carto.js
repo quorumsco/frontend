@@ -766,23 +766,18 @@ printDebug("resetAllLayerState",true);
         currentParentLayer.addTo(map);
 
         // re init des layer communes/circo et suppression des bv
-       if( layer.quorums_type == 'com' )
-            {
-                if (preOnEachFeatureCom())
-                {
-                    map.eachLayer(function(layer){onEachFeatureCom(layer.feature, layer)});
-                }
-            }
-            else
-            {
+       
                 map.eachLayer(function(layer){
-                if( layer.quorums_type == 'circo' ){
+                if( layer.quorums_type == 'com' ){
+                    preOnEachFeatureCom();
+                    onEachFeatureCom(layer.feature, layer) 
+                }else if( layer.quorums_type == 'circo' ){
                     onEachFeatureCirco(layer.feature, layer) 
                 }else if( layer.quorums_type == 'iris' ){
                     onEachFeatureIris(layer.feature, layer) 
                 }
                 });
-            }
+            
 
         
         

@@ -36,7 +36,7 @@ map-module{
     height: 52px;
     left: 0;
     position: absolute;
-    top: 80px;
+    top: 10px;
     width: 40%;
     z-index: 10;
     background-color: rgba(255,255,255,.8);
@@ -49,7 +49,7 @@ map-module{
     height: 52px;
     right: 365px;
     position: absolute;
-    top: 80px;
+    top: 10px;
     z-index: 10;
     background-color: rgba(255,255,255,.8);
     font-size: 0.8em;
@@ -58,17 +58,17 @@ map-module{
 
 #map{
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
     left: 0;
-    top: 70px;
+    top: 0;
     right: 300px;
 }
 
 #infos{
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
     right: 0;
-    top: 70px;
+    top: 0;
 	background: #fff;
 	width: 300px;
     overflow: auto;
@@ -121,6 +121,12 @@ map-module{
     padding: 5px 14px;
     color: #6a6a6b;
     text-decoration: none;
+}
+#select-data ul li span{
+    color: #e2e2e2;
+    display: block;
+    padding: 5px 14px;
+    font-style: italic;
 }
 
 #select-data ul li a:hover:before,
@@ -187,11 +193,11 @@ map-module{
 #infos h2{color:#7e7e7e}
 #infos h3{font-size: 1.4em}
 #infos h3.participation{
-    background: #fff url("images/votes.png") no-repeat scroll left top;
+    background: #fff url("../images/votes.png") no-repeat scroll left top;
     padding: 4px 5px 0 30px;
 }
 #infos h3.resultats{
-    background: url(images/stats40.png) no-repeat scroll left top;
+    background: url(../images/stats40.png) no-repeat scroll left top;
     padding: 4px 5px 0 30px;
 }
 
@@ -546,7 +552,7 @@ map-module{
 }
 
 
-.hide{visibility: hidden;}
+.hide{visibility: hidden;position:absolute;top:-5000px;}
 .center{text-align: center;}
 .quorum-layer-ctrl{clear: none}
 

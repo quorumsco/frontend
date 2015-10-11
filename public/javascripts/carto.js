@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = true;
+var debug = false;
 var resulGLOBAL=[];
 
 
@@ -801,6 +801,39 @@ printDebug("resetAllLayerState",true);
     
 }
 
+    function disableDatas(){
+        console.debug('disable IRIS result select');
+        var selector;
+        if( dataResultatsDirectory != 'INSEE' ){
+            selector = "#select-data ul li a[data-rel='INSEE']";
+        }else{
+            selector = "#select-data ul li a[data-rel!='INSEE']";
+        }
+        $(selector).each(function(){
+            var li = $(this).parent();
+            if( $('span', li).length ){
+                $('span', li).removeClass('hide');
+            }else{
+                li.append('<span></span>');
+                $('span', li).html($(this).html());
+            }
+            $(this).addClass('hide');
+        });
+    }
+    
+    function enableDatas(){
+        console.debug('enable IRIS result select');
+        var selector;
+        if( dataResultatsDirectory != 'INSEE' ){
+            selector = "#select-data ul li a[data-rel='INSEE']";
+        }else{
+            selector = "#select-data ul li a[data-rel!='INSEE']";
+        }
+        $(selector).each(function(){
+            $('span', $(this).parent()).addClass('hide');
+            $(this).removeClass('hide');
+        });
+    }
 /* selection d'une zone cliquable */
 function selectFeature(e, feature, layer, type){
     
@@ -812,7 +845,7 @@ function selectFeature(e, feature, layer, type){
     
     //printDebug('selectFeature() : changement currentViewType ' + currentViewType + ' -> ' + type, true);
     //alert('selectFeature('+type+'). currentLayer : '+layer._leaflet_id+', regionLayer : ' + (currentRegLayer!=null?currentRegLayer._leaflet_id:'null'));
-   
+    
     if( type == 'reg2015' ){
         currentRegLayer = layer;
         map.removeLayer(layer);
@@ -822,12 +855,15 @@ function selectFeature(e, feature, layer, type){
     }else if( type == 'circo' ){
         currentCircoLayer = layer; 
         map.removeLayer(layer);
+        disableDatas();
     }else if( type == 'com' ){
         currentComLayer = layer; 
         map.removeLayer(layer);
+        disableDatas();
     }else if( type == 'iris' ){
         currentIrisLayer = layer; 
         map.removeLayer(layer);
+        disableDatas();
     }
     
     // zoom sur la zone sélectionnée
@@ -1946,6 +1982,7 @@ else
 
         /* reset des styles et zoom par défaut si on clique hors de la carte */
         map.on('click', function(){
+            enableDatas();
             $("#select-data ul").hide();
             resetAllLayerState();
         });

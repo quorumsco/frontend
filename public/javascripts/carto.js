@@ -1,7 +1,8 @@
 var cartoQuorum = (function ($, L) {
 var debug = false;
 var resulGLOBAL=[];
-
+    
+var chartHeight = (window.innerWidth <= 640) ? 75 : 150;
 
 /* styles par défaut des zones cliquables */
 
@@ -1058,7 +1059,8 @@ function displayInfos(feature, type){
                         }
 
                         $('#infos').append('<h3 class="resultats">Niveau de participation</h3>');
-                        $('#infos').append('<div class="center"><canvas id="resultsPie1" width="280" height="150" /></div>');
+                
+                        $('#infos').append('<div class="center"><canvas id="resultsPie1" width="140" height="'+chartHeight+'" /></div>');
                         $('#infos').append(buildDetailsBars(pie1Data, 'électeurs'));
                         
                         
@@ -1073,7 +1075,7 @@ function displayInfos(feature, type){
                         });
                         
                         $('#infos').append('<h3 class="resultats">Niveau de soutien</h3>');
-                        $('#infos').append('<div class="center"><canvas id="resultsPie2" width="280" height="150" /></div>');
+                        $('#infos').append('<div class="center"><canvas id="resultsPie2" width="280" height="'+chartHeight+'" /></div>');
                         $('#infos').append(buildDetailsBars(pie2Data, 'électeurs'));
                         
                         // generate pie
@@ -1096,7 +1098,7 @@ function displayInfos(feature, type){
                             $('#infos').append('<h3 class="participation">Participation</h3>');
                             $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de familles sur '+data.data[0].NbMenages+' ménages<div class="bar"><span class="pourcent-fill pourcent-'+res+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+res+' %</span></div>');
                             $('#infos').append('<h3 class="resultats">Résultats</h3>');
-                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
+                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="'+chartHeight+'" /></div>');
 
 
                             
@@ -1139,8 +1141,9 @@ function displayInfos(feature, type){
                             $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de participation sur '+data.data.inscrits+' inscrits<div class="bar"><span class="pourcent-fill pourcent-'+parseInt(100-data.data.pourcent_abs_ins)+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+(100-data.data.pourcent_abs_ins)+' %</span></div>');
 
                             $('#infos').append('<h3 class="resultats">Résultats</h3>');
-                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
-
+                            
+                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="'+chartHeight+'" /></div>');
+                        
 
                             if( data.data.resultats ){
                                 var resultats = data.data.resultats;
@@ -1874,7 +1877,7 @@ function onEachFeatureBV(feature, layer) {
             
             $('#infos').append('<h3 class="resultats">Résultats</h3>');
 
-        $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
+        $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="'+chartHeight+'" /></div>');
         var resultats = feature.datas.resultats;
                 
         resultats.sort(function(a,b){

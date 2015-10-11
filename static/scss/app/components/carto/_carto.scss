@@ -625,18 +625,18 @@ map-module{
         top: 0;
     }
     #map{
-        bottom: 20%;
+        bottom: 25%;
         width: auto;
         left: 0;
         right: 0;
-        top: 50px;
+        top: 0;
     }
     
 	#infos{
         width: auto;
         left: 0;
         right: 0;
-        height: 20%;
+        height: 25%;
         bottom: 0;
         top: auto;
 	}
@@ -644,7 +644,7 @@ map-module{
     #select-data{
         width: auto; 
         right: 60px;
-        top: 60px;
+        top: 10px;
     }
     #select-data h1{
         font-size: 11px;
@@ -657,7 +657,7 @@ map-module{
         right: auto;
         left: 0;
         padding: 5px;
-        top: 120px;
+        top: 70px;
         height: 45px;
     }
     #select-subview label{
@@ -666,6 +666,10 @@ map-module{
     #select-subview label.iris, #select-subview label.pauvrete, #select-subview label.chomage{
         font-size: 10px;
         line-height: 1.1em;
+    }
+    
+    #infos h2, #infos h3, #infos dl{
+        margin: 7px 10px 5px;
     }
 }	
 

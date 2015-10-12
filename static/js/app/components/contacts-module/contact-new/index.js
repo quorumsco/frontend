@@ -21,7 +21,9 @@ module.exports = {
         surname: null,
         mail: null,
         phone: null,
-        adress: null
+        adress: null,
+        vote: "maybe",
+        support: "maybe"
       };
     }
   }

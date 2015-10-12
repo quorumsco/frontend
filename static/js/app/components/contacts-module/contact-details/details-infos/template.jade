@@ -1,13 +1,24 @@
 details-infos
   detail-body(v-if="!modifying")
-    each val in ["surname", "firstname", "mail", "phone", "adress"]
+    each val in ["firstname", "surname", "mail", "phone", "adress", "vote", "support"]
       info-field #[strong #{val} :]
         p {{contact.#{val}}}
     button(v-on="click: modifying = true") Modify
     button.second(v-on="click: deleteContact()") Delete
   detail-body(v-if="modifying")
-    each val in ["surname", "firstname", "mail", "phone", "adress"]
-      info-field #{val} :
+    each val in ["firstname", "surname", "mail", "phone", "adress"]
+      info-field #[strong #{val} :]
         input(v-model="contact.#{val}" type="text" placeholder="#{val}" value="{{contact.#{val}}}")
+    info-field #[strong Will vote :]
+      br
+      each val in ["yes", "maybe", "no"]
+        input(type="radio" name="vote" value="#{val}" v-model="contact.vote")
+        i.choice #{val}
+    info-field #[strong Supports me :]
+      br
+      each val in ["yes", "maybe", "no"]
+        input(type="radio" name="support" value="#{val}" v-model="contact.support")
+        i.choice #{val}
+    br
     button(v-on="click: updateContact()") OK
     button.second(v-on="click: cancelModify()") Cancel

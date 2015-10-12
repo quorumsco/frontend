@@ -15,7 +15,7 @@ module.exports = {
   },
   data: function() {
     return {
-      modifying: false
+      modifying: false,
     };
   },
   template: require('./template.jade')(),
@@ -33,10 +33,12 @@ module.exports = {
       });
     },
     deleteContact: function() {
-      contact_store.delete(this.contact.id, (res) => {
-        this.$dispatch('contacts:remove', this.contact.id);
-        this.$root.navigate("contacts:list");
-      });
+      if (confirm("Are you sure your want to delete this contact ?")) {
+        contact_store.delete(this.contact.id, (res) => {
+          this.$dispatch('contacts:remove', this.contact.id);
+          this.$root.navigate("contacts:list");
+        });
+      }
     }
   }
 };

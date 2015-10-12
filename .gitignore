@@ -4,9 +4,9 @@ build
 Desktop.ini
 node_modules
 static/vendor
-public/fonts/
+public/fonts
 public/stylesheets
-public/images/
+public/images
 public/javascripts/app.js
 public/index.html
-static/js/app/models/
+static/js/app/models

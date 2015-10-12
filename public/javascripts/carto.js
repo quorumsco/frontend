@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = true;
+var debug = false;
 var resulGLOBAL=[];
     
 var chartHeight = (window.innerWidth <= 640) ? 75 : 150;
@@ -401,15 +401,15 @@ function listen() {
                             if( ! subLayers_cache[n] ){
                                     if (dep_subview.substring(0,8)=='communes')
                                         {
-                                            if (preOnEachFeatureCom())
-                                            {
-                                                var subLayers = new L.GeoJSON.AJAX(
+                                            
+                                            preOnEachFeatureCom();
+                                            var subLayers = new L.GeoJSON.AJAX(
                                                     'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                                     {
                                                         onEachFeature: onEachFeatureCom
                                                     }   
                                                 ).addTo(map);
-                                            }
+                                            
                                         }
                                         else if (dep_subview.substring(0,8)=='circonsc')
                                         {
@@ -463,15 +463,15 @@ function listen() {
                             //if( ! subLayers_cache[n] ){
                                 if (dep_subview.substring(0,8)=='communes')
                                 {
-                                    if (preOnEachFeatureCom())
-                                    {
+                                    preOnEachFeatureCom();
+                                    
                                         var subLayers = new L.GeoJSON.AJAX(
                                             'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                             {
                                                 onEachFeature: onEachFeatureCom
                                             }
                                         ).addTo(map);
-                                    }
+                                    
                                 }
                                 else if (dep_subview.substring(0,8)=='circonsc')
                                 {
@@ -547,14 +547,14 @@ function listen_switch() {
                                     {
                                             if (dep_subview.substring(0,8)=='communes')
                                             {
-                                                if (preOnEachFeatureCom())
-                                                {
+                                                preOnEachFeatureCom();
+                                                
                                                     var subLayers = new L.GeoJSON.AJAX(
                                                 'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
                                                     {
                                                         onEachFeature:onEachFeatureCom
                                                     }).addTo(map);
-                                                }
+                                                
                                             }
                                             else if(dep_subview.substring(0,8)=='circonsc')
                                             {
@@ -767,10 +767,10 @@ printDebug("resetAllLayerState",true);
         currentParentLayer.addTo(map);
 
         // re init des layer communes/circo et suppression des bv
-       
+       if (currentViewType == 'com'){preResetOnEachFeatureCom();}
                 map.eachLayer(function(layer){
                 if( layer.quorums_type == 'com' ){
-                    preOnEachFeatureCom();
+                    //preResetOnEachFeatureCom();
                     onEachFeatureCom(layer.feature, layer) 
                 }else if( layer.quorums_type == 'circo' ){
                     onEachFeatureCirco(layer.feature, layer) 
@@ -914,15 +914,15 @@ function selectFeature(e, feature, layer, type){
                     if( ! subLayers_cache[n] ){
                         if (dep_subview.substring(0,8)=='communes')
                         {
-                            if (preOnEachFeatureCom())
-                            {
+                            preOnEachFeatureCom();
+                            
                                 var subLayers = new L.GeoJSON.AJAX(
                                     'data/contours/departements/'+feature.properties.NUMERO+'/'+(dep_subview.substring(0,8)=='communes' ? 'communes' : 'circonsc')+'.geojson',
                                     {
                                         onEachFeature: onEachFeatureCom
                                     }
                                 ).addTo(map);
-                            }
+                            
                         }
                         else if (dep_subview.substring(0,8)=='circonsc')
                         {
@@ -1402,6 +1402,76 @@ if (dataResultatsDirectory!="INSEE")
                 {
                     $.ajax({
                             url: "data/resultats/"+dataResultatsDirectory+"/txpauvrete/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            dataType: "json",
+                            async: false
+                        })
+                        .done(function(data) {
+
+                        if( "success" == data.status ){
+                                    
+                                    if( data.data){
+                                        //var resultats = data.data.resultats;
+                                        //printDebug("yes",true);
+                                        printDebug("affection de resulGLOBAL par data.data",true);
+                                        resulGLOBAL = data.data;
+
+                                    }
+                                }
+                        });
+           } else
+           {
+                $.ajax({
+                            url: "data/resultats/"+dataResultatsDirectory+"/txchomage/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            dataType: "json",
+                            async: false
+                        })
+                        .done(function(data) {
+
+                                if( "success" == data.status )
+                                {
+                                    if( data.data){
+                                        //var resultats = data.data.resultats;
+                                        //printDebug("yes",true);
+                                        printDebug("affection de resulGLOBAL par data.data",true);
+                                        resulGLOBAL = data.data;
+                                    }
+                                }
+                        });
+           }
+}  
+}
+
+function preResetOnEachFeatureCom ()
+{
+//printDebug("preOnEachFeatureCom-> dataResultatsDirectory"+currentDeptLayer.feature.properties.NUMERO,true);
+
+if (dataResultatsDirectory!="INSEE")
+    { 
+    $.ajax({
+        url: "data/resultats/" + dataResultatsDirectory + "/com/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2))+ ".json",
+        dataType: "json"
+    })
+    .done(function(data) {
+        if( "success" == data.status ){
+            
+            if( data.data){
+                //var resultats = data.data.resultats;
+                //printDebug("yes",true);
+                printDebug("affection de resulGLOBAL par data.data",true);
+                resulGLOBAL = data.data;
+
+            }
+        }
+    });
+}else 
+{ // sinon résultats de type INSEE
+    // selection des datas selon le radio bouton INSEE sélectionné
+    //printDebug("dep_subview==pauvrete"+type,true);
+    //printDebug(dep_subview);
+            if (dep_subview=="communes_pauvrete")
+                {
+                    $.ajax({
+                            url: "data/resultats/"+dataResultatsDirectory+"/txpauvrete/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
                             dataType: "json"
                         })
                         .done(function(data) {
@@ -1434,13 +1504,9 @@ if (dataResultatsDirectory!="INSEE")
                                         resulGLOBAL = data.data;
                                     }
                                 }
-
-
                         });
            }
 }  
-return true;
-
 }
 /* Communes */
 function onEachFeatureCom(feature, layer) {

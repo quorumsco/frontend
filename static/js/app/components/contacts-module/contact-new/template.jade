@@ -4,7 +4,18 @@ contacts-new
       i.fa.fa-fw.fa-arrow-left
     form
       each val in ["firstname", "surname", "mail", "phone", "adress"]
-        info-field #{val} :
+        info-field #[strong #{val} :]
           input(id="#{val]" v-model="contact.#{val}" type="text" placeholder="#{val}")
+      info-field #[strong Will vote :]
+        br
+        each val in ["yes", "maybe", "no"]
+          input(type="radio" name="vote" value="#{val}" v-model="contact.vote")
+          i.choice #{val}
+      info-field #[strong Supports me :]
+        br
+        each val in ["yes", "maybe", "no"]
+          input(type="radio" name="support" value="#{val}" v-model="contact.support")
+          i.choice #{val}
+      br
       button(v-on="click: submit(contact, $event)") Ok
       button.second(v-on="click: back($event)") Return

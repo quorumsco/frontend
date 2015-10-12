@@ -1,7 +1,8 @@
 var cartoQuorum = (function ($, L) {
 var debug = false;
 var resulGLOBAL=[];
-
+    
+var chartHeight = (window.innerWidth <= 640) ? 75 : 150;
 
 /* styles par défaut des zones cliquables */
 
@@ -398,13 +399,27 @@ function listen() {
                         // load and display sub-layers
                             var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                             if( ! subLayers_cache[n] ){
-                                    if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
-                                    var subLayers = new L.GeoJSON.AJAX(
-                                        'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                    if (dep_subview.substring(0,8)=='communes')
                                         {
-                                            onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                            if (preOnEachFeatureCom())
+                                            {
+                                                var subLayers = new L.GeoJSON.AJAX(
+                                                    'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                                    {
+                                                        onEachFeature: onEachFeatureCom
+                                                    }   
+                                                ).addTo(map);
+                                            }
                                         }
-                                    ).addTo(map);
+                                        else if (dep_subview.substring(0,8)=='circonsc')
+                                        {
+                                            var subLayers = new L.GeoJSON.AJAX(
+                                                'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                                {
+                                                    onEachFeature: onEachFeatureCirco
+                                                }   
+                                            ).addTo(map);
+                                        }
                                 printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
                             }else{
@@ -446,13 +461,27 @@ function listen() {
                             var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
                             
                             //if( ! subLayers_cache[n] ){
-                                if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
+                                if (dep_subview.substring(0,8)=='communes')
+                                {
+                                    if (preOnEachFeatureCom())
+                                    {
+                                        var subLayers = new L.GeoJSON.AJAX(
+                                            'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
+                                            {
+                                                onEachFeature: onEachFeatureCom
+                                            }
+                                        ).addTo(map);
+                                    }
+                                }
+                                else if (dep_subview.substring(0,8)=='circonsc')
+                                {
                                     var subLayers = new L.GeoJSON.AJAX(
                                         'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/'+dep_subview.substring(0,8)+'.geojson',
                                         {
-                                            onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                            onEachFeature: onEachFeatureCirco
                                         }
                                     ).addTo(map);
+                                }
                                 printDebug("ajout cache n:"+n,true);
                                 subLayers_cache[n] = subLayers;
                             //}else{
@@ -516,15 +545,16 @@ function listen_switch() {
                                     // load and display sub-layers
                                     if( ! subLayers_cache[n] )
                                     {
-                                        
                                             if (dep_subview.substring(0,8)=='communes')
                                             {
-                                                preOnEachFeatureCom();
-                                                        var subLayers = new L.GeoJSON.AJAX(
-                                            'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
+                                                if (preOnEachFeatureCom())
                                                 {
-                                                    onEachFeature:onEachFeatureCom
-                                                }).addTo(map);
+                                                    var subLayers = new L.GeoJSON.AJAX(
+                                                'data/contours/departements/'+currentDeptLayer.feature.properties.NUMERO+'/communes.geojson',
+                                                    {
+                                                        onEachFeature:onEachFeatureCom
+                                                    }).addTo(map);
+                                                }
                                             }
                                             else if(dep_subview.substring(0,8)=='circonsc')
                                             {
@@ -737,16 +767,20 @@ printDebug("resetAllLayerState",true);
         currentParentLayer.addTo(map);
 
         // re init des layer communes/circo et suppression des bv
-        map.eachLayer(function(layer){
-            if( layer.quorums_type == 'com' ){
-                preOnEachFeatureCom();
-                onEachFeatureCom(layer.feature, layer) 
-            }else if( layer.quorums_type == 'circo' ){
-                onEachFeatureCirco(layer.feature, layer) 
-            }else if( layer.quorums_type == 'iris' ){
-                onEachFeatureIris(layer.feature, layer) 
-            }
-        });
+       
+                map.eachLayer(function(layer){
+                if( layer.quorums_type == 'com' ){
+                    preOnEachFeatureCom();
+                    onEachFeatureCom(layer.feature, layer) 
+                }else if( layer.quorums_type == 'circo' ){
+                    onEachFeatureCirco(layer.feature, layer) 
+                }else if( layer.quorums_type == 'iris' ){
+                    onEachFeatureIris(layer.feature, layer) 
+                }
+                });
+            
+
+        
         
             
         //currentParentLayer.setStyle(defaultStyle);
@@ -768,6 +802,39 @@ printDebug("resetAllLayerState",true);
     
 }
 
+    function disableDatas(){
+        console.debug('disable IRIS result select');
+        var selector;
+        if( dataResultatsDirectory != 'INSEE' ){
+            selector = "#select-data ul li a[data-rel='INSEE']";
+        }else{
+            selector = "#select-data ul li a[data-rel!='INSEE']";
+        }
+        $(selector).each(function(){
+            var li = $(this).parent();
+            if( $('span', li).length ){
+                $('span', li).removeClass('hide');
+            }else{
+                li.append('<span></span>');
+                $('span', li).html($(this).html());
+            }
+            $(this).addClass('hide');
+        });
+    }
+    
+    function enableDatas(){
+        console.debug('enable IRIS result select');
+        var selector;
+        if( dataResultatsDirectory != 'INSEE' ){
+            selector = "#select-data ul li a[data-rel='INSEE']";
+        }else{
+            selector = "#select-data ul li a[data-rel!='INSEE']";
+        }
+        $(selector).each(function(){
+            $('span', $(this).parent()).addClass('hide');
+            $(this).removeClass('hide');
+        });
+    }
 /* selection d'une zone cliquable */
 function selectFeature(e, feature, layer, type){
     
@@ -779,7 +846,7 @@ function selectFeature(e, feature, layer, type){
     
     //printDebug('selectFeature() : changement currentViewType ' + currentViewType + ' -> ' + type, true);
     //alert('selectFeature('+type+'). currentLayer : '+layer._leaflet_id+', regionLayer : ' + (currentRegLayer!=null?currentRegLayer._leaflet_id:'null'));
-   
+    
     if( type == 'reg2015' ){
         currentRegLayer = layer;
         map.removeLayer(layer);
@@ -789,12 +856,15 @@ function selectFeature(e, feature, layer, type){
     }else if( type == 'circo' ){
         currentCircoLayer = layer; 
         map.removeLayer(layer);
+        disableDatas();
     }else if( type == 'com' ){
         currentComLayer = layer; 
         map.removeLayer(layer);
+        disableDatas();
     }else if( type == 'iris' ){
         currentIrisLayer = layer; 
         map.removeLayer(layer);
+        disableDatas();
     }
     
     // zoom sur la zone sélectionnée
@@ -842,13 +912,27 @@ function selectFeature(e, feature, layer, type){
         {
                      // load and display sub-layers
                     if( ! subLayers_cache[n] ){
-                        if (dep_subview.substring(0,8)=='communes'){preOnEachFeatureCom();}
+                        if (dep_subview.substring(0,8)=='communes')
+                        {
+                            if (preOnEachFeatureCom())
+                            {
+                                var subLayers = new L.GeoJSON.AJAX(
+                                    'data/contours/departements/'+feature.properties.NUMERO+'/'+(dep_subview.substring(0,8)=='communes' ? 'communes' : 'circonsc')+'.geojson',
+                                    {
+                                        onEachFeature: onEachFeatureCom
+                                    }
+                                ).addTo(map);
+                            }
+                        }
+                        else if (dep_subview.substring(0,8)=='circonsc')
+                        {
                             var subLayers = new L.GeoJSON.AJAX(
                                 'data/contours/departements/'+feature.properties.NUMERO+'/'+(dep_subview.substring(0,8)=='communes' ? 'communes' : 'circonsc')+'.geojson',
                                 {
-                                    onEachFeature: (dep_subview.substring(0,8)=='communes' ? onEachFeatureCom : onEachFeatureCirco)
+                                    onEachFeature: onEachFeatureCirco
                                 }
                             ).addTo(map);
+                        }
                         printDebug("ajout cache n:"+n,true);
                         subLayers_cache[n] = subLayers;
                     }else{
@@ -975,7 +1059,8 @@ function displayInfos(feature, type){
                         }
 
                         $('#infos').append('<h3 class="resultats">Niveau de participation</h3>');
-                        $('#infos').append('<div class="center"><canvas id="resultsPie1" width="280" height="150" /></div>');
+                
+                        $('#infos').append('<div class="center"><canvas id="resultsPie1" width="140" height="'+chartHeight+'" /></div>');
                         $('#infos').append(buildDetailsBars(pie1Data, 'électeurs'));
                         
                         
@@ -990,7 +1075,7 @@ function displayInfos(feature, type){
                         });
                         
                         $('#infos').append('<h3 class="resultats">Niveau de soutien</h3>');
-                        $('#infos').append('<div class="center"><canvas id="resultsPie2" width="280" height="150" /></div>');
+                        $('#infos').append('<div class="center"><canvas id="resultsPie2" width="280" height="'+chartHeight+'" /></div>');
                         $('#infos').append(buildDetailsBars(pie2Data, 'électeurs'));
                         
                         // generate pie
@@ -1013,7 +1098,7 @@ function displayInfos(feature, type){
                             $('#infos').append('<h3 class="participation">Participation</h3>');
                             $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de familles sur '+data.data[0].NbMenages+' ménages<div class="bar"><span class="pourcent-fill pourcent-'+res+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+res+' %</span></div>');
                             $('#infos').append('<h3 class="resultats">Résultats</h3>');
-                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
+                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="'+chartHeight+'" /></div>');
 
 
                             
@@ -1056,8 +1141,9 @@ function displayInfos(feature, type){
                             $('#infos').append('<div class="participation"><i class="fa fa-circle color-DEFAULT"></i> Taux de participation sur '+data.data.inscrits+' inscrits<div class="bar"><span class="pourcent-fill pourcent-'+parseInt(100-data.data.pourcent_abs_ins)+' bgcolor-DEFAULT"></span></div><span class="pourcent-value">'+(100-data.data.pourcent_abs_ins)+' %</span></div>');
 
                             $('#infos').append('<h3 class="resultats">Résultats</h3>');
-                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
-
+                            
+                            $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="'+chartHeight+'" /></div>');
+                        
 
                             if( data.data.resultats ){
                                 var resultats = data.data.resultats;
@@ -1352,7 +1438,7 @@ if (dataResultatsDirectory!="INSEE")
                         });
            }
 }  
-
+return true;
 
 }
 /* Communes */
@@ -1383,6 +1469,7 @@ function onEachFeatureCom(feature, layer) {
                 for (i=0;i<resulGLOBAL.length;i++)
                 { 
                     var resultats = resulGLOBAL[i].resultats;
+
                     if(resultats)
                     {
                         if (parseInt(resulGLOBAL[i].code)==parseInt(feature.properties.INSEE_COM.slice(2)))
@@ -1790,7 +1877,7 @@ function onEachFeatureBV(feature, layer) {
             
             $('#infos').append('<h3 class="resultats">Résultats</h3>');
 
-        $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="150" /></div>');
+        $('#infos').append('<div class="center"><canvas id="resultsPie" width="280" height="'+chartHeight+'" /></div>');
         var resultats = feature.datas.resultats;
                 
         resultats.sort(function(a,b){
@@ -1898,6 +1985,7 @@ else
 
         /* reset des styles et zoom par défaut si on clique hors de la carte */
         map.on('click', function(){
+            enableDatas();
             $("#select-data ul").hide();
             resetAllLayerState();
         });

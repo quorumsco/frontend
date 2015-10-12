@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = false;
+var debug = true;
 var resulGLOBAL=[];
     
 var chartHeight = (window.innerWidth <= 640) ? 75 : 150;
@@ -1378,7 +1378,8 @@ if (dataResultatsDirectory!="INSEE")
     { 
     $.ajax({
         url: "data/resultats/" + dataResultatsDirectory + "/com/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2))+ ".json",
-        dataType: "json"
+        dataType: "json",
+        async: false
     })
     .done(function(data) {
         if( "success" == data.status ){

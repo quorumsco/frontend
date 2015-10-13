@@ -252,7 +252,7 @@ function switchLegend()
 {
     //if (dataResultatsDirectory=="INSEE")
     //{
-    
+    printDebug("dep_subview:"+dep_subview+" & currentLegend:"+ currentLegend,true);
         // Switch to the INSEE legend...
         if (dep_subview == 'communes_pauvrete') {
             map.removeControl(currentLegend);
@@ -1567,7 +1567,7 @@ function onEachFeatureCom(feature, layer) {
                                     if(donnee)
                                     {
                                         if (parseInt(donnee.CODGEO.slice(2))==parseInt(feature.properties.INSEE_COM.slice(2)))
-                                        {printDebug("TxPauvrete:"+donnee.TxPauvrete,true);
+                                        {//printDebug("TxPauvrete:"+donnee.TxPauvrete,true);
 
                                                 if( donnee.CODGEO&&donnee.TxPauvrete!="null"){
                                                         var resul=donnee.TxPauvrete;

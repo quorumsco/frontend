@@ -8,3 +8,5 @@ WORKDIR /srv/http/front
 RUN gulp prod
 
 VOLUME ["/srv/http/front"]
+
+CMD ["/bin/true"]

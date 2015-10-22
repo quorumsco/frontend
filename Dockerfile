@@ -5,7 +5,7 @@ ADD . /srv/http/front
 
 WORKDIR /srv/http/front
 
-RUN gulp prod && ln -s /srv/data /srv/http/front
+RUN gulp prod
 
 VOLUME ["/srv/http/front"]
 

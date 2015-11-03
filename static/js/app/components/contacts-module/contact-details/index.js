@@ -62,6 +62,7 @@ module.exports = {
       this.view = 'infos';
       this.tab = 1;
       this.$dispatch('header:hideAdd');
+      this.$dispatch('header:setSearch', 0);
       this.showTabs = true;
       return false;
     },
@@ -72,28 +73,22 @@ module.exports = {
         this.$root.navigate("contacts:newNote", undefined, id);
       }
       this.$dispatch('header:setAdd', this.$root.path('contacts:newNote', id), addFunc);
+      this.$dispatch('header:setSearch', 0);
       this.showTabs = true;
       return false;
     },
     'contacts:hideNote': function() {
       this.view = 'notes';
       this.tab = 2;
-      var prevFunc = function() {
-        this.$root.navigate("contacts:list");
-      }
-      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), prevFunc);
     },
     'contacts:showNote': function(id, noteID) {
       this.view = 'notes';
       this.tab = 2;
-      var prevFunc = function() {
-        this.$root.navigate("contacts:list");
-      }
-      this.$dispatch('header:setPrev', this.$root.path("contacts:list"), prevFunc);
       var addFunc = function() {
         this.$root.navigate("contacts:newNote", undefined, id);
       }
       this.$dispatch('header:setAdd', this.$root.path('contacts:newNote', id), addFunc);
+      this.$dispatch('header:setSearch', 0);
     },
     'contacts:showTags': function(id) {
       this.view = 'tags';
@@ -102,6 +97,7 @@ module.exports = {
         this.$root.navigate("contacts:newTag", undefined, id);
       }
       this.$dispatch('header:setAdd', this.$root.path('contacts:newTag', id), addFunc);
+      this.$dispatch('header:setSearch', 0);
       this.showTabs = true;
       return false;
     },

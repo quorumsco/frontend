@@ -68,7 +68,6 @@ module.exports = {
       this.$set("me", res);
     }, error, this.$root);
 
-
     this.router('/contacts', () => {
       if (this.$.main) {
         this.$.main.map = false;
@@ -77,8 +76,8 @@ module.exports = {
       this.$broadcast('contacts:list');
     });
     this.router('/map', () => {
-        this.$.main.map = true;
-        this.$.main.contacts = false;
+      this.$.main.map = true;
+      this.$.main.contacts = false;
     });
     this.router('/contacts/new', () => {
       this.$.main.map = false;
@@ -149,6 +148,7 @@ module.exports = {
   },
   events: {
     navigate: function(name, ...args) {
+      console.log(name);
       this.router(this.path(name, ...args));
       return false;
     },
@@ -167,14 +167,6 @@ module.exports = {
       this.$.main.$broadcast('overlay:show', false);
       this.$.header.showDropdown();
     },
-    'header:setPrev': function(url, prevFunc) {
-      this.$.header.$emit('header:setPrev', url, prevFunc);
-      return false
-    },
-    'header:hidePrev': function() {
-      this.$.header.$emit('header:hidePrev');
-      return false
-    },
     'header:setAdd': function(url, addFunc) {
       this.$.header.$emit('header:setAdd', url, addFunc);
       return false
@@ -183,11 +175,18 @@ module.exports = {
       this.$.header.$emit('header:hideAdd');
       return false
     },
+    'header:setSearch': function(bool) {
+      this.$.header.$emit('header:setSearch', bool);
+      return false
+    },
     'header:title': function(title) {
       this.$.header.set(title);
     },
     'contacts:hideNote': function(id) {
       this.$broadcast("contacts:hideNote", id);
+    },
+    'contacts:search': function(query) {
+      this.$broadcast("contacts:search", query);
     }
   }
 };

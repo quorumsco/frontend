@@ -33,16 +33,6 @@ module.exports = {
       this.nbNotes = nbNotes;
       this.nbTags = nbTags;
       return false;
-    },
-    'tabs:setPrev': function(url, prevFunc) {
-      this.prev = true;
-      this.prevUrl = url;
-      this.prevFunc = prevFunc;
-      return false;
-    },
-    'tabs:hidePrev': function(url, prevFunc) {
-      this.prev = false;
-      return false;
     }
   }
 };

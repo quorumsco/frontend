@@ -1,6 +1,7 @@
 var contact_store = require('../../models/contact_store.js'),
   note_store = require('../../models/note_store.js'),
   tags_store = require('../../models/tags_store.js'),
+  search = require('../../models/search.js'),
   _ = require('lodash'),
   upsert = function (arr, key, newval) {
     var match = _.find(arr, key);
@@ -79,23 +80,32 @@ module.exports = {
         upsert(this.contacts, {id: this.contact.id}, this.contact);
       });
     },
-    setNew: function(view, title, id) {
+    setNew: function(view, title, id, bool) {
       this.view = view;
       this.contact_id = id;
       this.$dispatch('header:title', title);
       this.$dispatch('header:hideAdd');
       this.$dispatch('header:hidePrev');
+      this.$dispatch('header:setSearch', bool);
     }
   },
   events: {
+    'contacts:search': function(query) {
+      search.find(query, (res) => {
+        this.$set("contacts", res);
+      });
+      return false;
+    },
     'contacts:list': function() {
       this.view = 'list';
       this.$dispatch('header:title', "Contacts");
       this.$dispatch('header:setAdd', this.$root.path('contacts:new'), addFunc);
+      this.$dispatch('header:setSearch', 1);
+      console.log("prout")
       return false;
     },
     'contacts:new': function() {
-      this.setNew("new", "New Contact", 0);
+      this.setNew("new", "New Contact", 0, 0);
       return false;
     },
     'contacts:showInfos': function(id) {
@@ -113,7 +123,7 @@ module.exports = {
       this.view = 'details';
     },
     'contacts:newNote': function(id) {
-      this.setNew("newNote", "New Note", id);
+      this.setNew("newNote", "New Note", id, 0);
       return false;
     },
     'contacts:showNote': function(id, noteID) {
@@ -138,7 +148,7 @@ module.exports = {
       this.view = 'details';
     },
     'contacts:newTag': function(id) {
-      this.setNew("newTag", "New Tag", id);
+      this.setNew("newTag", "New Tag", id, 0);
       return false;
     },
     'contacts:update': function(contact) {

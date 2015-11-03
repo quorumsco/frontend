@@ -8,10 +8,9 @@ div
     h2.title {{title}}
 
   section.right
+    input.search(type="search" placeholder="Search" v-on="keyup: search($event)" v-model="query" v-if="display_search" required="")
     a(href="{{addUrl}}" v-on="click: addOnClick($event)" v-if="add")
       i.fa.fa-fw.fa-plus    
-    //- a(href="#" v-on="click: $event.preventDefault()")
-    //-   i.fa.fa-fw.fa-search
     a(href="#" v-on="click: dropdownOnClick($event)")
       i.fa.fa-fw.fa-ellipsis-v
     ul.dropdown(v-class="visible: dropdown")

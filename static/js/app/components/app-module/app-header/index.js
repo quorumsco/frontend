@@ -6,7 +6,9 @@ module.exports = {
       dropdown: false,
       addUrl: null,
       addFunc: undefined,
-      add: null
+      add: null,
+      display_search: null,
+      query: null
     };
   },
   template: require('./template.jade')(),
@@ -34,6 +36,12 @@ module.exports = {
     addOnClick: function(e) {
       e.preventDefault();
       this.addFunc();
+    },
+    search: function(e) {
+      if (e != undefined) {
+        e.preventDefault();
+      }
+      this.$dispatch('contacts:search', this.query);
     }
   },
   events: {
@@ -45,6 +53,16 @@ module.exports = {
     },
     'header:hideAdd': function(url, addFunc) {
       this.add = false;
+      return false;
+    },
+   'header:setSearch': function(bool) {
+      if (bool == 0) {
+        this.display_search = false;
+      } else if (bool == 1) {
+        this.display_search = true;
+        this.query = "";
+        this.search(undefined);
+      }
       return false;
     }
   }

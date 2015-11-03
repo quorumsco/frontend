@@ -16,6 +16,11 @@ $header-height: $relative-header-height * $base-line-height;
       color: inherit;
     }
 
+    section.right {
+      position: absolute;
+      right: 0;
+    }
+
     section.left > a {
       margin-right: 1em;
     }
@@ -27,14 +32,16 @@ $header-height: $relative-header-height * $base-line-height;
     div {
       @include position(absolute, 0);
       padding: 0 1em;
+      white-space: nowrap;
     }
 
     span.title {
-      width: 50%;
+      max-width: 50%;
       display: inline-block;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      float: left;
     }
 
     h2 {
@@ -77,5 +84,59 @@ $header-height: $relative-header-height * $base-line-height;
         color: inherit;
       }
     }
+  }
+
+  input[type=search] {
+    display: inline-block;
+    width: 15px;
+    color: transparent;
+    cursor: pointer;
+    background: url(../images/search.svg) no-repeat 9px center;
+    background-size: 18px 19px;
+    border: none;
+    padding: 9px 10px;
+    font-family: inherit;
+    font-size: 100%;
+    outline: none;
+
+    -webkit-transition: background-image 0.5s ease-in-out;
+    transition: background-image 0.5s ease-in-out;
+
+    -webkit-box-sizing: content-box;
+
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  input[type=search]:valid,
+  input[type=search]:focus {
+    width: 250px;
+    border: solid 1px #000;
+    padding-left: 32px;
+    color: #fff;
+    cursor: auto;
+    background-color: #549AC7;
+
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+
+  input:-moz-placeholder {
+    color: transparent;
+  }
+
+  input::-webkit-input-placeholder {
+    color: transparent;
+  }
+
+  input::-webkit-search-decoration,
+  input::-webkit-search-cancel-button {
+    display: none;
   }
 }

@@ -3,7 +3,7 @@ var Emitter = require('events').EventEmitter,
   request = require('superagent'),
   nocache = require('superagent-no-cache'),
   // api = "http://localhost:8080",
-  api = "https://api.quorumapps",
+  api = "https://api.quorumapps.com",
   contact_store = require('./contact_store.js');
 
 search.find = function(query, cb) {

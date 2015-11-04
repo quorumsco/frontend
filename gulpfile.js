@@ -14,6 +14,7 @@ var gulp        = require('gulp'),
     imagemin    = require('gulp-imagemin'),
     changed     = require('gulp-changed'),
     notify      = require('gulp-notify');
+    browserify = require("browserify");
 
 handleErrors = function() {
     var args = Array.prototype.slice.call(arguments);
@@ -56,7 +57,7 @@ cp = function() {
 gulp.task('js', function () {
     var brfy = bfy();
     return merge(brfy.pipe(streamify(modernizr())), brfy)
-        .pipe(streamify(concat('app.js')))
+	.pipe(streamify(concat('app.js')))
         .pipe(streamify(size({title: 'js'})))
         .pipe(gulp.dest('public/javascripts'))
         .pipe(browserSync.reload({stream: true}));

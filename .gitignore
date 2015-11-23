@@ -10,3 +10,5 @@ public/images
 public/javascripts/app.js
 public/index.html
 static/js/app/models
+static/js/app/models/
+static/js/app/models/*

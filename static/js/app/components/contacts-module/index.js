@@ -63,6 +63,7 @@ module.exports = {
       return _.find(this.contacts, {id: this.contact_id});
     },
     addContact: function(contact) {
+      contact.address.country = "France"
       contact_store.save(contact, (res) => {
         upsert(this.contacts, {id: res.body.data.contact.id}, res.body.data.contact);
       });

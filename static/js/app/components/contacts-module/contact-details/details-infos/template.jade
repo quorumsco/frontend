@@ -1,24 +1,41 @@
+mixin field(title, value)
+  info-field #[strong #{title} :]
+    p {{contact.#{value}}}
+mixin field-modif(title, value)
+  info-field #[strong #{title} :]
+    input(v-model="contact.#{value}" type="text" placeholder="#{value}" value="{{contact.#{value}}}")
+mixin button(title, model)
+  info-field #[strong #{title}]
+    br
+    each val in ["yes", "maybe", "no"]
+      input(type="radio" name="#{model}" value="#{val}" v-model="contact.#{model}")
+      i.choice #{val}
+
 details-infos
   detail-body(v-if="!modifying")
-    each val in ["firstname", "surname", "mail", "phone", "adress", "vote", "support"]
-      info-field #[strong #{val} :]
-        p {{contact.#{val}}}
+    +field("Prenom", "firstname")
+    +field("Nom de famille", "surname")
+    +field("Email", "mail")
+    +field("Télephone", "phone")
+    info-field #[strong adresse :]
+      p {{contact.address.housenumber}} {{contact.address.street}} {{contact.address.postalcode}} {{contact.address.city}}
+    +field("Va voter", "support")
+    +field("Me soutient", "vote")
     button(v-on="click: modifying = true") Modify
     button.second(v-on="click: deleteContact()") Delete
   detail-body(v-if="modifying")
-    each val in ["firstname", "surname", "mail", "phone", "adress"]
-      info-field #[strong #{val} :]
-        input(v-model="contact.#{val}" type="text" placeholder="#{val}" value="{{contact.#{val}}}")
-    info-field #[strong Will vote :]
+    +field-modif("Prenom", "firstname")
+    +field-modif("Nom de famille", "surname")
+    +field-modif("Email", "mail")
+    +field-modif("Télephone", "phone")
+    info-field #[strong adresse :]
       br
-      each val in ["yes", "maybe", "no"]
-        input(type="radio" name="vote" value="#{val}" v-model="contact.vote")
-        i.choice #{val}
-    info-field #[strong Supports me :]
-      br
-      each val in ["yes", "maybe", "no"]
-        input(type="radio" name="support" value="#{val}" v-model="contact.support")
-        i.choice #{val}
+      input.nbr(v-model="contact.address.housenumber" type="text" placeholder="9")
+      input.street(v-model="contact.address.street" type="text" placeholder="Rue de Condé")
+      input.code(v-model="contact.address.postalcode" type="text" placeholder="33000")
+      input.city(v-model="contact.address.city" type="text" placeholder="Bordeaux")
+    +button("Va voter", "vote")
+    +button("Me soutient", "support")
     br
     button(v-on="click: updateContact()") OK
     button.second(v-on="click: cancelModify()") Cancel

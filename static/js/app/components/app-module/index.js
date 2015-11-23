@@ -148,7 +148,6 @@ module.exports = {
   },
   events: {
     navigate: function(name, ...args) {
-      console.log(name);
       this.router(this.path(name, ...args));
       return false;
     },

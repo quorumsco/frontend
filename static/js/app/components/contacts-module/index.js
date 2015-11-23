@@ -48,6 +48,7 @@ module.exports = {
     if (this.view == 'list') {
       this.$dispatch('header:title', "Contacts");
       this.$dispatch('header:setAdd', this.$root.path('contacts:new'), addFunc);
+      this.$dispatch('header:setSearch', 1);
     }
   },
   components: {
@@ -101,7 +102,6 @@ module.exports = {
       this.$dispatch('header:title', "Contacts");
       this.$dispatch('header:setAdd', this.$root.path('contacts:new'), addFunc);
       this.$dispatch('header:setSearch', 1);
-      console.log("prout")
       return false;
     },
     'contacts:new': function() {

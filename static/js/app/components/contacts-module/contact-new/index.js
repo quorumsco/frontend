@@ -21,7 +21,7 @@ module.exports = {
         surname: null,
         mail: null,
         phone: null,
-        adress: null,
+        address: {housenumber: null, street: null, postalcode: null, city: null},
         vote: "maybe",
         support: "maybe"
       };

@@ -1,5 +1,6 @@
 @import '../header';
 @include exports("details-infos") {
+
   details-infos {
     margin-top: 1%;
     display: block;
@@ -19,10 +20,38 @@
       margin: auto auto auto 5%;
       display: block;
       text-transform: capitalize;
+      input {
+        box-sizing: border-box;
+
+        &:-moz-placeholder {
+          color: lightgray;
+          text-transform: capitalize;          
+        }
+
+        &::-moz-placeholder {
+          color: lightgray;
+          text-transform: capitalize;
+        }
+
+        &:-ms-input-placeholder {  
+          color: lightgray;
+          text-transform: capitalize;
+        }
+
+        &::-webkit-input-placeholder {
+          color: lightgray;
+          text-transform: capitalize;
+        }
+      }
 
       input:focus {
         background-color: lighten(#2980B9, 54%);
       }
+
+      .nbr {width: 10%; display: inline-block;}
+      .street {width: 36%; display: inline-block; margin-left: 3%;}
+      .code {width: 15%; display: inline-block; margin-left: 3%;}
+      .city {width: 30%; display: inline-block; margin-left: 3%;}
     }
   
     i.choice {
@@ -34,6 +63,14 @@
 
       &.second {
         margin: 0 0 0 2.5%;
+      }
+    }
+  }
+
+  @include susy-media($xlarge-screen) {
+    details-infos {
+      info-field {
+        width : 45%;
       }
     }
   }

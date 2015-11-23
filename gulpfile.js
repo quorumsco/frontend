@@ -14,7 +14,7 @@ var gulp        = require('gulp'),
     imagemin    = require('gulp-imagemin'),
     changed     = require('gulp-changed'),
     notify      = require('gulp-notify');
-    browserify = require("browserify");
+    browserify  = require('browserify');
 
 handleErrors = function() {
     var args = Array.prototype.slice.call(arguments);

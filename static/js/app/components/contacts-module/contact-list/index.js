@@ -16,7 +16,7 @@ module.exports = {
   },
   compiled: function() {
     if (this.contacts.length == 0) {
-      contact_store.find((res) => {
+      contact_store.find(this.$root, (res) => {
         var byName = res.slice(0);
         byName.sort(function(a,b) {
           var x = a.surname.toLowerCase();

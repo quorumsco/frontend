@@ -33,6 +33,7 @@ var API = {
     return `/map`;
   }
 };
+
 var session_store = require('../../models/session_store.js');
 var _ = require('lodash');
 
@@ -54,6 +55,7 @@ module.exports = {
   },
   ready: function() {
     //Test de connexion
+
     var error = function(root) {
       root.navigate('app:login');
     }

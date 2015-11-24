@@ -2,10 +2,10 @@ var Emitter = require('events').EventEmitter,
   store = module.exports = new Emitter(),
   request = require('superagent'),
   nocache = require('superagent-no-cache'),
-  api = 'https://api.quorumapps.com';
-  // api = 'http://localhost:8080';
+  common = require('./common.js'),
+  api = common.api;
 
-store.find = function(id, cb) {
+store.find = function(root, id, cb) {
   return request
   .get(`${api}/contacts/${id}/tags`)
   .use(nocache)
@@ -14,13 +14,15 @@ store.find = function(id, cb) {
   .end(function(err, res) {
     if (res.body.status === 'success') {
       cb(res.body.data.tags);
+    } else if (common.token(res)) {
+      common.cb(root);
     } else {
       console.log("error");
     }
   });
 };
 
-store.save = function(id, tag, cb) {
+store.save = function(root, id, tag, cb) {
   return request
   .post(`${api}/contacts/${id}/tags`)
   .use(nocache)
@@ -34,18 +36,24 @@ store.save = function(id, tag, cb) {
   .end(function(err, res) {
     if (res.body.status === 'success') {
       cb(res);
+    } else if (common.token(res)) {
+      common.cb(root);
     } else {
       console.log("error");
     }
   });
 };
 
-store.delete = function(id, tag, cb) {
+store.delete = function(root, id, tag, cb) {
   return request
   .del(`${api}/contacts/${id}/tags/${tag.id}`)
   .use(nocache)
   .withCredentials()
   .end(function(err, res) {
-    cb(res);
+    if (common.token(res)) {
+      common.cb(root);
+    } else {
+      cb(res);
+    }
   });
 };

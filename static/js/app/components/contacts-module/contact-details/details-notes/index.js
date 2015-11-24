@@ -43,7 +43,7 @@ module.exports = {
           arr.splice(index, 1);
         }
       };
-      note_store.delete(this.contact.id, this.note.id, () => {
+      note_store.delete(this.$root, this.contact.id, this.note.id, () => {
         remove(this.contact.notes, {id: this.note.id});
         this.$root.$emit("contacts:hideNote", this.id);
         this.$root.navigate('contacts:showNotes', undefined, this.id);
@@ -55,7 +55,7 @@ module.exports = {
     },
     updateNote: function(e) {
       e.preventDefault();
-      note_store.update(this.contact.id,  this.note, (res) => {
+      note_store.update(this.$root, this.contact.id,  this.note, (res) => {
         upsert(this.contact.notes, {id: this.note.id}, this.note);
       });
     },

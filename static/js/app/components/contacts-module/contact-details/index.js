@@ -34,7 +34,7 @@ module.exports = {
     if (!_.isEmpty(this.contact)) {
       this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
     }
-    contact_store.first(this.id, (res) => {
+    contact_store.first(this.$root, this.id, (res) => {
       if (res == null) {
         this.$root.navigate("contacts:list");
       }
@@ -44,14 +44,12 @@ module.exports = {
       if (res.address.city == "" || res.address.city === undefined) {res.address.city = "not specified"};
       if (res.phone == "" || res.phone === undefined) {res.phone = "not specified"};
       this.$set("contact", res);
-      console.log(this.contact.address.city)
       this.$dispatch('header:title', `${res.firstname} ${res.surname}`);
-      note_store.find(this.id, (notes_res) => {
+      note_store.find(this.$root, this.id, (notes_res) => {
         this.contact.$set("notes", notes_res);
-        tags_store.find(this.id, (tags_res) => {
+        tags_store.find(this.$root, this.id, (tags_res) => {
           this.contact.$set("tags", tags_res);
           this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
-          console.log(this.contact)
         });
       });
     });

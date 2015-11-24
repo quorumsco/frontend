@@ -64,20 +64,20 @@ module.exports = {
     },
     addContact: function(contact) {
       contact.address.country = "France"
-      contact_store.save(contact, (res) => {
+      contact_store.save(this.$root, contact, (res) => {
         upsert(this.contacts, {id: res.body.data.contact.id}, res.body.data.contact);
       });
     },
     addNote: function(note) {
       this.contact = this.findContact();
-      note_store.save(this.contact_id, note, (res) => {
+      note_store.save(this.$root, this.contact_id, note, (res) => {
         upsert(this.contact.notes, {id: res.body.data.note.id}, res.body.data.note);
         upsert(this.contacts, {id: this.contact.id}, this.contact);
       });
     },
     addTag: function(tag) {
       this.contact = this.findContact();
-      tags_store.save(this.contact_id, tag, (res) => {
+      tags_store.save(this.$root, this.contact_id, tag, (res) => {
         upsert(this.contact.tags, {id: res.body.data.tag.id}, res.body.data.tag);
         upsert(this.contacts, {id: this.contact.id}, this.contact);
       });
@@ -93,7 +93,7 @@ module.exports = {
   },
   events: {
     'contacts:search': function(query) {
-      search.find(query, (res) => {
+      search.find(this.$root, query, (res) => {
         this.$set("contacts", res);
       });
       return false;
@@ -157,7 +157,7 @@ module.exports = {
       var notes = contact.notes;
       contact.tags = undefined;
       contact.notes = undefined;
-      contact_store.update(contact, (res) => {
+      contact_store.update(this.$root, contact, (res) => {
         upsert(this.contacts, {id: contact.id}, contact);
       });
       contact.tags = tags;

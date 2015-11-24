@@ -24,7 +24,7 @@ module.exports = {
           arr.splice(index, 1);
         }
       };
-      tags_store.delete(this.contact.id, tag, () => {
+      tags_store.delete(this.$root, this.contact.id, tag, () => {
         remove(this.contact.tags, tag.$data);
         this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
       });

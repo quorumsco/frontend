@@ -2,11 +2,12 @@ var Emitter = require('events').EventEmitter,
   store = module.exports = new Emitter(),
   request = require('superagent'),
   nocache = require('superagent-no-cache'),
-  api = 'https://api.quorumapps.com';
-  // api = 'http://localhost:8080';
+  common = require('./common.js'),
+  api = common.api;
 
 //Test session, si oui ok si non on go sur login
 store.me = function(cb, cbError, root) {
+  console.log(api)
   request
   .get(`${api}/me`)
   .use(nocache)

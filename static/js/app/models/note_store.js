@@ -2,10 +2,10 @@ var Emitter = require('events').EventEmitter,
   store = module.exports = new Emitter(),
   request = require('superagent'),
   nocache = require('superagent-no-cache'),
-  api = 'https://api.quorumapps.com';
-  // api = 'http://localhost:8080';
+  common = require('./common.js'),
+  api = common.api;
 
-store.find = function(id, cb) {
+store.find = function(root, id, cb) {
   request
   .get(`${api}/contacts/${id}/notes`)
   .use(nocache)
@@ -14,13 +14,15 @@ store.find = function(id, cb) {
   .end(function(err, res) {
     if (res.body.status === 'success') {
       cb(res.body.data.notes);
+    } else if (common.token(res)) {
+      common.cb(root);
     } else {
       console.log("error");
     }
   });
 };
 
-store.first = function(id, cb) {
+store.first = function(root, id, cb) {
   request
   .get(`${api}/contacts/${id}/notes/${note_id}`)
   .use(nocache)
@@ -29,13 +31,15 @@ store.first = function(id, cb) {
   .end(function(err, res) {
     if (res.body.status === 'success') {
       cb(res.body.data.note);
+    } else if (common.token(res)) {
+      common.cb(root);
     } else {
       console.log("error");
     }
   });
 };
 
-store.save = function(id, note, cb) {
+store.save = function(root, id, note, cb) {
   request
   .post(`${api}/contacts/${id}/notes`)
   .use(nocache)
@@ -49,13 +53,15 @@ store.save = function(id, note, cb) {
   .end(function(err, res) {
     if (res.body.status === 'success') {
       cb(res);
+    } else if (common.token(res)) {
+      common.cb(root);
     } else {
       console.log("error");
     }
   });
 };
 
-store.update = function(id, note, cb) {
+store.update = function(root, id, note, cb) {
   request
   .patch(`${api}/contacts/${id}/notes/${note.id}`)
   .use(nocache)
@@ -69,13 +75,15 @@ store.update = function(id, note, cb) {
   .end(function(err, res) {
     if (res.body.status === 'success') {
       cb(res);
+    } else if (common.token(res)) {
+      common.cb(root);
     } else {
       console.log("error");
     }
   });
 };
 
-store.delete = function(id, note_id, cb) {
+store.delete = function(root, id, note_id, cb) {
   request
   .del(`${api}/contacts/${id}/notes/${note_id}`)
   .use(nocache)
@@ -83,8 +91,10 @@ store.delete = function(id, note_id, cb) {
   .end(function(err, res) {
     if (err) {
       console.log(err);
+    } else if (common.token(res)) {
+      common.cb(root);
     } else {
-      cb(res);
+      console.log("error");
     }
   });
 };

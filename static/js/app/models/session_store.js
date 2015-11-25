@@ -7,7 +7,6 @@ var Emitter = require('events').EventEmitter,
 
 //Test session, si oui ok si non on go sur login
 store.me = function(cb, cbError, root) {
-  console.log(api)
   request
   .get(`${api}/me`)
   .use(nocache)
@@ -41,7 +40,7 @@ store.getSession = function(data, cb, cbError, root) {
 
 store.delSession = function(app, cb) {
   request
-  .post(`${api}/deleteSession`)
+  .del(`${api}/session`)
   .use(nocache)
   .withCredentials()
   .set('Accept', 'application/json')

@@ -60,8 +60,6 @@ module.exports = {
         this.display_search = false;
       } else if (bool == 1) {
         this.display_search = true;
-        this.query = "";
-        this.search(undefined);
       }
       return false;
     }

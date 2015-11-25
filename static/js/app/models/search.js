@@ -9,7 +9,7 @@ var Emitter = require('events').EventEmitter,
 search.find = function(root, query, cb) {
   query = query.trim();
   if (query.length == 0) {
-    contact_store.find(cb);
+    contact_store.find(root, cb);
   } else {
     request
     .get(`${api}/search/${query}`)

@@ -38,13 +38,21 @@ module.exports = {
       if (res == null) {
         this.$root.navigate("contacts:list");
       }
-      if (res.surname == "" || res.surname === undefined) {res.surname = "not specified"};
-      if (res.firstname == "" || res.firstname === undefined) {res.firstname = "not specified";};
-      if (res.mail == "" || res.mail === undefined) {res.mail = "not specified"};
-      if (res.address.city == "" || res.address.city === undefined) {res.address.city = "not specified"};
-      if (res.phone == "" || res.phone === undefined) {res.phone = "not specified"};
+
+      var initialize = function(ref, value) {
+        return ref === undefined || ref == "" ? value : ref
+      }
+
+      res.surname = initialize(res.surname, "not specified");
+      res.firstname = initialize(res.firstname, "not specified");
+      res.mail = initialize(res.mail, "not specified");
+      res.phone = initialize(res.phone, "not specified");
+      res.address.city = initialize(res.address.city, "not specified");
+
       this.$set("contact", res);
       this.$dispatch('header:title', `${res.firstname} ${res.surname}`);
+
+
       note_store.find(this.$root, this.id, (notes_res) => {
         this.contact.$set("notes", notes_res);
         tags_store.find(this.$root, this.id, (tags_res) => {
@@ -52,6 +60,8 @@ module.exports = {
           this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
         });
       });
+
+
     });
   },
   created: function() {

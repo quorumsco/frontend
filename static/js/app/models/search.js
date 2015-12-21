@@ -6,16 +6,22 @@ var Emitter = require('events').EventEmitter,
   api = common.api,
   contact_store = require('./contact_store.js');
 
-search.find = function(root, query, cb) {
+search.find = function(root, query, cb, filter) {
   query = query.trim();
   if (query.length == 0) {
     contact_store.find(root, cb);
   } else {
     request
-    .get(`${api}/search/${query}`)
+    .post(`${api}/search`)
     .use(nocache)
     .withCredentials()
-    .set('Accept', 'application/json')
+    .set('Content-Type', 'application/json')
+  .send({
+    data: {
+      query: query,
+      fields: filter
+  }
+  })
     .end(function(err, res) {
       if (res.body.status === 'success') {
         cb(res.body.data.contacts);

@@ -5,7 +5,7 @@ var Emitter = require('events').EventEmitter,
 	status = "fail";
 
 common.api = 'https://api.quorumapps.com';
-// common.api = 'http://localhost:8080';
+//common.api = 'http://localhost:8080';
 
 common.token = function(res) {
 	if(res.body.data == data && res.body.status == status) {

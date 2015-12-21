@@ -187,6 +187,12 @@ module.exports = {
     },
     'contacts:search': function(query) {
       this.$broadcast("contacts:search", query);
+    },
+    'contacts:search_in_name': function(query) {
+      this.$broadcast("contacts:search_in_name", query);
+    },
+    'contacts:search_in_firstname': function(query) {
+      this.$broadcast("contacts:search_in_firstname", query);
     }
   }
 };

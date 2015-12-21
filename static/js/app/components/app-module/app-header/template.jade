@@ -15,7 +15,7 @@ div
       i.fa.fa-fw.fa-ellipsis-v
     ul.dropdown(v-class="visible: dropdown")
       li
-        a(href="#" v-on="click: $event.preventDefault()") Sort by
+        a(href="#" v-on="click: search_in_name($event)") Search in Name
       li
-        a(href="#" v-on="click: $event.preventDefault()") Settings
+        a(href="#" v-on="click: search_in_firstname($event)") Search in Firstname
   app-overlay

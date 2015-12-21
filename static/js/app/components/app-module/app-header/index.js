@@ -37,6 +37,18 @@ module.exports = {
       e.preventDefault();
       this.addFunc();
     },
+    search_in_name: function(e) {
+      if (e != undefined) {
+        e.preventDefault();
+      }
+      this.$dispatch('contacts:search_in_name', this.query);
+    },
+    search_in_firstname: function(e) {
+      if (e != undefined) {
+        e.preventDefault();
+      }
+      this.$dispatch('contacts:search_in_firstname', this.query);
+    },
     search: function(e) {
       if (e != undefined) {
         e.preventDefault();

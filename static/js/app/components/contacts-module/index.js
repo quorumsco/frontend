@@ -92,10 +92,21 @@ module.exports = {
     }
   },
   events: {
+    'contacts:search_in_firstname': function(query) {
+      search.find(this.$root, query, (res) => {
+        this.$set("contacts", res);
+      },new Array('firstname'));
+      return false;
+    },'contacts:search_in_name': function(query) {
+      search.find(this.$root, query, (res) => {
+        this.$set("contacts", res);
+      },new Array('name'));
+      return false;
+    },
     'contacts:search': function(query) {
       search.find(this.$root, query, (res) => {
         this.$set("contacts", res);
-      });
+      },new Array('all'));
       return false;
     },
     'contacts:list': function() {

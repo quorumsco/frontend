@@ -17,13 +17,13 @@ module.exports = {
   compiled: function() {
     if (this.contacts.length == 0) {
       contact_store.find(this.$root, (res) => {
-        var byName = res.slice(0);
-        byName.sort(function(a,b) {
-          var x = a.surname.toLowerCase();
-          var y = b.surname.toLowerCase();
-          return x < y ? -1 : x > y ? 1 : 0;
-        });
-        this.$set("contacts", byName);
+        // var byName = res.slice(0);
+        // byName.sort(function(a,b) {
+        //   var x = a.surname.toLowerCase();
+        //   var y = b.surname.toLowerCase();
+        //   return x < y ? -1 : x > y ? 1 : 0;
+        // });
+        this.$set("contacts", res.slice(0));
       });
     }
   },

@@ -284,8 +284,6 @@ function showSelectSubview(){
     if (dataResultatsDirectory == 'INSEE'){
         $('#select-subview').addClass('INSEE');
         $('#select-subview').removeClass('com-circo');
-        //$('#select-subview input.pauvrete').prop('checked', true);
-        //dep_subview="communes_pauvrete";
         if (dep_subview)
         {   
             if (dep_subview=="communes_pauvrete")
@@ -323,13 +321,21 @@ function showSelectSubview(){
     {
         $('#select-subview').addClass('com-circo');
         $('#select-subview').removeClass('INSEE');
-        //$('#select-subview input.circonscriptions').prop('checked', true);
-        //dep_subview="circonscriptions_elections";printDebug("7",true);
         if (dep_subview)
-        {   printDebug(7,true);
-            if (dep_subview=="circonscriptions_elections"){$('#select-subview input.circonscriptions').prop('checked', true);} 
-            else if (dep_subview=="communes_elections"){$('#select-subview input.communes').prop('checked', true);} 
-            else {dep_subview="circonscriptions_elections";$('#select-subview input.circonscriptions').prop('checked', true);}
+        {   
+            if (dep_subview=="circonscriptions_elections")
+            {
+                $('#select-subview input.circonscriptions').prop('checked', true);
+            } 
+            else if (dep_subview=="communes_elections")
+            {
+                $('#select-subview input.communes').prop('checked', true);
+            } 
+            else 
+            {
+                dep_subview="circonscriptions_elections";
+                $('#select-subview input.circonscriptions').prop('checked', true);
+            }
         }
         else
         {
@@ -586,10 +592,10 @@ function listen_switch() {
                                                 }).addTo(map);
                                             }
                                                 //onEachFeature: (dep_subview=='communes' ? onEachFeatureCom : onEachFeatureCirco)
-                                        //printDebug("ajout cache n:"+n,true);
+                                        printDebug("ajout cache n:"+n,true);
                                         subLayers_cache[n] = subLayers;
                                     }else{
-                                        subLayers_cache[n].addTo(map);//printDebug("utilisation cache n:"+n,true);
+                                        subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                                     } 
                             }
                             else
@@ -602,10 +608,10 @@ function listen_switch() {
                                                 onEachFeature: onEachFeatureIris
                                             }
                                         ).addTo(map);
-                                        //printDebug("ajout cache n:"+n,true);
+                                        printDebug("ajout cache n:"+n,true);
                                       subLayers_cache[n] = subLayers;
                                     }else{
-                                        subLayers_cache[n].addTo(map);//printDebug("utilisation cache n:"+n,true);
+                                        subLayers_cache[n].addTo(map);printDebug("utilisation cache n:"+n,true);
                                     }  
                             }    
 
@@ -1539,6 +1545,28 @@ if (dataResultatsDirectory!="INSEE")
                                 }
                         });
            }
+           else if (dep_subview=="communes_inversion")
+           {console.debug('communes_inversion pre');
+       console.debug("data/resultats/"+dataResultatsDirectory+"/inversion/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json");
+                $.ajax({
+                            url: "data/resultats/"+dataResultatsDirectory+"/inversion/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            dataType: "json",
+                            async: false
+                        })
+                        .done(function(data) {
+
+                                if( "success" == data.status )
+                                {
+                                    if( data.data){
+                                        console.debug('communes_inversion pre success');
+                                        //var resultats = data.data.resultats;
+                                        //printDebug("yes",true);
+                                        //printDebug("affection de resulGLOBAL par data.data",true);
+                                        resulGLOBAL = data.data;
+                                    }
+                                }
+                        });
+           }
 }  
 }
 
@@ -1665,6 +1693,23 @@ if (dataResultatsDirectory!="INSEE")
                                 if( "success" == data.status )
                                 {
                                     if( data.data){
+                                        resulGLOBAL = data.data;
+                                    }
+                                }
+                        });
+           }
+           else if (dep_subview=="communes_inversion")
+           {console.debug('communes_inversion prereset');
+                $.ajax({
+                            url: "data/resultats/"+dataResultatsDirectory+"/inversion/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            dataType: "json"
+                        })
+                        .done(function(data) {
+
+                                if( "success" == data.status )
+                                {
+                                    if( data.data){
+                                         console.debug('communes_inversion prereset success');
                                         resulGLOBAL = data.data;
                                     }
                                 }
@@ -1918,6 +1963,47 @@ function onEachFeatureCom(feature, layer) {
                                                 else if (resul>=12.5)
                                                     {layer.bgcolor = '#a7edbe';}
                                                 else{layer.bgcolor = '#d1f6dd';}
+                                            
+                                                layer.setStyle({fillColor:layer.bgcolor});
+                                                layer.quorums_type = 'com';
+                                                return resul;
+                                                }else{
+                                                    layer.bgcolor = '#f2f1f0';
+                                                    layer.setStyle({fillColor:layer.bgcolor});
+                                                    layer.quorums_type = 'com';
+                                                }
+                                        layer.bgcolor = '#f2f1f0';
+                                        layer.setStyle({fillColor:layer.bgcolor});
+                                        layer.quorums_type = 'com';
+                                        //return resul;
+                                        
+                                        break;   
+                        }     
+                    }
+                }
+           }else if (dep_subview=="communes_inversion")
+           {
+
+            layer.bgcolor = '#ffffff';
+            layer.setStyle({fillColor:layer.bgcolor});
+            layer.quorums_type = 'com';
+                for (i=0;i<resulGLOBAL.length;i++)
+                { 
+                    var donnee = resulGLOBAL[i];
+                    if(donnee)
+                    {
+                        if (parseInt(donnee.CODGEO.slice(2))==parseInt(feature.properties.INSEE_COM.slice(2)))
+                        {
+                         
+                                        if(donnee.CODGEO&&donnee.inversion!="null"){
+                                        
+                                                var resul=parseInt(donnee.inversion);
+                                                console.debug('result:'+donnee.inversion);
+                                                if (resul===0)
+                                                    {layer.bgcolor = '#2E64FE';}
+                                                else if (resul===1)
+                                                    {layer.bgcolor = '#FA58D0';}
+                                                else{layer.bgcolor = '#ffffff';}
                                             
                                                 layer.setStyle({fillColor:layer.bgcolor});
                                                 layer.quorums_type = 'com';

@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = true;
+var debug = false;
 var resulGLOBAL=[];
 var resulGLOBAL2=[];
     

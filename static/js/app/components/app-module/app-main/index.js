@@ -2,8 +2,8 @@ module.exports = {
   replace: false,
   data: function() {
     return {
-      contacts: true,
-      map: false
+      contacts: false,
+      map: true
     }
   },
   attached: function() {

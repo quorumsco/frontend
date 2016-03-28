@@ -22,7 +22,7 @@ module.exports = {
 		    session_store.me((res, root) => {
 		        root.login = false;
 		        root.$set("me", res);
-       			root.navigate("contacts:list");
+       			root.navigate("ciblage:show");
 	        }, error, root);	
   		}
   		var cbError = function(err) {

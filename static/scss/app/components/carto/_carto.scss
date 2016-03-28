@@ -46,7 +46,7 @@ map-module{
 
 #select-subview{
     display: block;
-    height: 86px;
+    height: 100px;
     right: 365px;
     position: absolute;
     top: 10px;
@@ -158,6 +158,7 @@ map-module{
 #select-subview label.pauvrete,
 #select-subview label.ouvrier,
 #select-subview label.prio_CSP,
+#select-subview label.inversion,
 #select-subview label.chomage{
     font-size: 11px;
     line-height: 1.2em;

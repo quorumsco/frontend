@@ -62,7 +62,7 @@ module.exports = {
       if (this.login == true) {
         this.login = false
         this.$on("main:created", (child) => {
-          root.navigate("contacts:list");
+          root.navigate("ciblage:show");
           this.$off("main:created");
         });
       }
@@ -127,7 +127,7 @@ module.exports = {
       });
     });
 
-    this.router('/', '/contacts');
+    this.router('/', '/map');
 
     this.router({
       hashbang: true

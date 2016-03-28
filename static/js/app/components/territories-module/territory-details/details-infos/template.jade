@@ -1,0 +1,17 @@
+mixin field(title, value)
+  info-field #[strong #{title} :]
+    p {{territory.#{value}}}
+mixin field-modif(title, value)
+  info-field #[strong #{title} :]
+    input(v-model="territory.#{value}" type="text" placeholder="#{value}" value="{{territory.#{value}}}")
+mixin button(title, model)
+  info-field #[strong #{title}]
+    br
+    each val in ["yes", "maybe", "no"]
+      input(type="radio" name="#{model}" value="#{val}" v-model="territory.#{model}")
+      i.choice #{val}
+
+details-infos
+  detail-body(v-if="!modifying")
+    +field("nom du territoire", "name")
+    +field("Id du territoire", "id")

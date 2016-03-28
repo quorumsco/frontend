@@ -2,8 +2,9 @@ module.exports = {
   replace: false,
   data: function() {
     return {
-      contacts: true,
-      map: false
+      contacts: false,
+      map: false,
+      territories: false,
     }
   },
   attached: function() {
@@ -13,7 +14,8 @@ module.exports = {
   components: {
     'app-overlay': require('../app-overlay/index.js'),
     'contacts-module': require('../../contacts-module/index.js'),
-    'map-module': require('../../map-module/index.js')
+    'map-module': require('../../map-module/index.js'),
+    'territories-module': require('../../territories-module/index.js')
   },
   events: {
     'overlay:show': function(darken) {

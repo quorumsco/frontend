@@ -1,0 +1,13 @@
+details-polygon
+  polygon-body(v-if="!focus")
+    div.carte(id="carte")
+  polygon-body(v-if="focus")
+    a.back(href="{{url}}" v-on="click: prevFunc($event)")
+      i.fa.fa-fw.fa-arrow-left
+    polygon-item
+      div.edit
+        span.longitude {{PointLocation.longitude}} 
+        span.date {{PointLocation.date}}
+        textarea(v-model="PointLocation.content") {{PointLocation.content}}
+  button(v-on="click: updatePointLocation($event)" v-if="focus") Update
+  button(v-on="click: deletePointLocation($event)" v-if="focus") Delete

@@ -1,0 +1,19 @@
+details-polygon
+  polygon-body(v-if="!focus")
+    polygon-item(v-repeat="territory.polygon")
+      a(href="{{$root.path('territories:showPointLocation', territory.id, id)}}" v-on="click: showPointLocation($event, this)")
+        span.link 
+      div.content
+        span.author {{longitude}} 
+        span.date {{date}}
+        p {{content}}
+  polygon-body(v-if="focus")
+    a.back(href="{{url}}" v-on="click: prevFunc($event)")
+      i.fa.fa-fw.fa-arrow-left
+    polygon-item
+      div.edit
+        span.author {{PointLocation.longitude}} 
+        span.date {{PointLocation.date}}
+        textarea(v-model="PointLocation.content") {{PointLocation.content}}
+  button(v-on="click: updatePointLocation($event)" v-if="focus") Update
+  button(v-on="click: deletePointLocation($event)" v-if="focus") Delete

@@ -1,0 +1,44 @@
+  var contact_store = require('../../../../models/territory_store.js'),
+  _ = require('lodash');
+
+module.exports = {
+  props: {
+    territory: {
+      type: Object,
+      required: true,
+      twoWay: true
+    },
+    id: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function() {
+    return {
+      modifying: false,
+    };
+  },
+  template: require('./template.jade')(),
+  methods: {
+    updateContact: function() {
+      this.$dispatch('contacts:update', this.contact);
+      this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
+      this.modifying = false;
+    },
+    cancelModify: function() {
+      contact_store.first(this.$root, this.id, (res) => {
+        this.contact = res;
+        this.$dispatch('header:title', `${this.contact.firstname} ${this.contact.surname}`);
+        this.modifying = false;
+      });
+    },
+    deleteContact: function() {
+      if (confirm("Are you sure your want to delete this contact ?")) {
+        contact_store.delete(this.$root, this.contact.id, (res) => {
+          this.$dispatch('contacts:remove', this.contact.id);
+          this.$root.navigate("contacts:list");
+        });
+      }
+    }
+  }
+};

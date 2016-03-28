@@ -1,0 +1,92 @@
+@import '../header';
+@include exports("polygon-body") {
+  details-polygon {
+    display: block;
+    margin: 1% auto auto 5%;
+    width: 92.5%;
+
+    button {
+      margin-right: 2.5%;
+    }
+
+    polygon-body {
+      a.back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        text-align: center;
+        color: darken(#fff, 60%);
+        line-height: $header-height / 1.5;
+        width: 5%;
+      }
+      div.carte {
+          width : 50%;
+          height: 350px;
+        }
+
+      polygon-item {
+        display: block;
+        position: relative;
+
+        div.carte,
+        div.edit,
+        div.content {
+          width: 100%;
+          word-wrap: break-word;
+          @include border-radius(0.2em);
+          margin-bottom: 1em;
+          padding: 0 0.5em 0 0.5em;
+          -moz-box-shadow: 0 0 2px 1px lighten(#000, 85%);
+          -webkit-box-shadow: 0 0 2px 1px lighten(#000, 85%);
+          -o-box-shadow: 0 0 2px 1px lighten(#000, 85%);
+          box-shadow: 0 0 2px 1px lighten(#000, 85%);
+          background-color: lighten(#000, 98%);
+
+          span.longitude {
+            font-weight: bold;
+          }
+
+          span.date {
+            color: grey;
+          }
+        }
+
+        div.edit {
+          position: relative;
+          top: 0;
+          bottom: 0;
+          display: block;
+        }
+
+        div.carte {
+          width : 50%;
+          height: 350px;
+        }
+
+        textarea {
+          background-color: lighten(#2980B9, 54%);
+          height: 300px;
+        }
+
+
+        .link {
+          position: absolute; 
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+        }
+
+        &:hover {
+          div.content {
+            -moz-box-shadow: 0 0 2px 1px lighten(#000, 70%);
+            -webkit-box-shadow: 0 0 2px 1px lighten(#000, 70%);
+            -o-box-shadow: 0 0 2px 1px lighten(#000, 70%);
+            box-shadow: 0 0 2px 1px lighten(#000, 70%);
+            background-color: lighten(#000, 95%);
+          }
+        }
+      }
+    }
+  }
+}

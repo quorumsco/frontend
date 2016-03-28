@@ -1,0 +1,51 @@
+@import '../header';
+$tab-width: 100% / 3;
+
+@include exports("tab-menu") {
+
+  button {
+    margin-right: 2.5%;
+  }
+
+  tab-menu {
+    width: 95%;
+    height: $header-height / 2 + 10px;
+    margin-bottom: $header-height / 2 - 10px;
+    margin-left: 5%;
+    display: block;
+    border-bottom: 3px solid darken(#fff, 60%);
+
+    a {
+      line-height: $header-height / 1.5;
+      width: $tab-width;
+      display: inline-block;
+      float: left;
+      text-align: center;
+      color: darken(#fff, 60%);
+      font-weight: bold;
+      &:hover {
+        color: #2980B9;
+      }
+/*      &:nth-child(2) {
+        margin-left: 5%;
+      }*/
+      &.back {
+        position: absolute;
+        left: 0;
+        width: 5%;
+      }
+    }
+
+    .selected {
+      color: #2980B9;
+      background: url("../images/active_menu.png") center bottom no-repeat;
+      &:hover {
+        color: #2980B9;
+      }
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+}

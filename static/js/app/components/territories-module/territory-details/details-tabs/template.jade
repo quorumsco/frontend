@@ -1,0 +1,4 @@
+a.back(href="{{url}}" v-on="click: prevFunc($event)")
+  i.fa.fa-fw.fa-arrow-left
+a(href="{{$root.path('territories:showDetails', id)}}" v-on="click: onClick($event, 'territories:showDetails')" v-class="selected: tab == 1") Infos
+a(href="{{$root.path('territories:showPolygon', id)}}" v-on="click: onClick($event, 'territories:showPolygon')" v-class="selected: tab == 2") Polygon ({{nbPolygon}} points)

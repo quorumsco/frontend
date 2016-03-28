@@ -14,6 +14,10 @@ app-nav(v-class="visible: show_nav")
           span
             i.fa.fa-fw.fa-user
       nav-item
+        a(href="{{$root.path('territories:list')}}" v-on="click: this.$dispatch('overlay:onclick'); $root.navigate('territories:list', $event)") Territories
+          span
+            i.fa.fa-fw.fa-user
+      nav-item
         a(href="{{$root.path('contacts:list')}}" v-on="click: this.$dispatch('overlay:onclick'); $root.navigate('contacts:list', $event)") Settings
           span
             i.fa.fa-fw.fa-cogs

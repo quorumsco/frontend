@@ -1,5 +1,5 @@
 var cartoQuorum = (function ($, L) {
-var debug = false;
+var debug = true;
 var resulGLOBAL=[];
 var resulGLOBAL2=[];
     
@@ -253,7 +253,7 @@ function switchLegend()
 {
     //if (dataResultatsDirectory=="INSEE")
     //{
-    printDebug("dep_subview:"+dep_subview+" & currentLegend:"+ currentLegend,true);
+    //printDebug("dep_subview:"+dep_subview+" & currentLegend:"+ currentLegend,true);
         // Switch to the INSEE legend...
         if (dep_subview == 'communes_pauvrete') {
             map.removeControl(currentLegend);
@@ -419,7 +419,7 @@ function listen() {
           {
                 var previous_subview = dep_subview;   
                 showSelectSubview();
-                printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
+                //printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
                 gestionCacheRemove('-'+previous_subview+'-');
                 if (dep_subview.substring(0,8)!="iris2000")
                 {          
@@ -477,7 +477,7 @@ function listen() {
           { 
                 var previous_subview = dep_subview;   
                 showSelectSubview();
-                printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
+                //printDebug('previous subview layer ' + previous_subview  +', new on ' + dep_subview +" ->currentViewType:"+currentViewType, true);
                 gestionCacheRemove('-'+previous_subview+'-');
                 //gestionCacheRemove('-'+dep_subview+'-');
                 //gestionCacheRemove('-'+currentViewType+'-');
@@ -560,12 +560,12 @@ function listen_switch() {
               if( $(this).prop('checked') )
               {
               
-                printDebug('change subview to display : from ' + dep_subview + ', to ' + $(this).val(), true);
+                //printDebug('change subview to display : from ' + dep_subview + ', to ' + $(this).val(), true);
                 gestionCacheRemove('-'+dep_subview+'-');
                 dep_subview = $(this).val() ;
                     // load and display sub-layers
                     var n = currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory;
-                    printDebug("currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory:"+n,true);
+                    //printDebug("currentDeptLayer.feature.properties.NUMERO + '-'+dep_subview+'-' + dataResultatsDirectory:"+n,true);
                     //switchLegend();
                     if (dep_subview.substring(0,8)!="iris2000")
                             {
@@ -1467,10 +1467,10 @@ if (dataResultatsDirectory!="INSEE")
            }else if (dep_subview=="communes_prio_CSP")
            {
 
-
+            printDebug("communes_prio_CSP->preOnEachFeatureCom",true);
 
                 $.ajax({
-                            url: "data/resultats/"+dataResultatsDirectory+"/CSP/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            url: "data/resultats/"+dataResultatsDirectory+"/prio/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
                             dataType: "json",
                             async: false
                         })
@@ -1481,49 +1481,14 @@ if (dataResultatsDirectory!="INSEE")
                                     if( data.data){
                                         for (i=0;i<data.data.length;i++)
                                         {
-                                            //printDebug("CSP CODGEO:"+data.data[i].CODGEO,true);
-                                            resulGLOBAL[data.data[i].CODGEO] = data.data[i];
+                                            printDebug("preOnEachFeatureCom->CSP CODGEO:"+data.data[i].CODGEO+" - "+data.data[i].TxCS6,true);
+                                            resulGLOBAL[data.data[i].CODGEO] = data.data[i].TxCS6;
                                         }
                                     }
                                 }
                         });
 
-                        $.ajax({
-                            url: "data/resultats/dep_2015/com/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2))+ ".json",
-                            dataType: "json",
-                            async: false
-                        })
-                        .done(function(data) {
-                            if( "success" == data.status ){
-                                
-                                if( data.data){
-                                    resulGLOBAL2=[];
-                                    for (i=0;i<data.data.length;i++)
-                                        { 
-                                            if (resulGLOBAL2[data.data[i].code]!=undefined)
-                                            {
-                                                //printDebug("doublon code:"+resulGLOBAL2[data.data[i].code].code,true);
-                                                
-                                                if (resulGLOBAL2[data.data[i].code].resultats[0].code_nuance=="BC-UG"||resulGLOBAL2[data.data[i].code].resultats[0].code_nuance=="BC-SOC"||resulGLOBAL2[data.data[i].code].resultats[0].code_nuance=="BC-DVG")
-                                                {
-                                                    
-                                                    resulGLOBAL2[data.data[i].code].exprimes=parseInt(resulGLOBAL2[data.data[i].code].exprimes)+parseInt(data.data[i].exprimes);
-                                                    resulGLOBAL2[data.data[i].code].resultats[0].voix=parseInt(resulGLOBAL2[data.data[i].code].resultats[0].voix)+parseInt(data.data[i].resultats[0].voix);
-                                                }
-                                                else if (resulGLOBAL2[data.data[i].code].resultats[1].code_nuance=="BC-UG"||resulGLOBAL2[data.data[i].code].resultats[1].code_nuance=="BC-SOC"||resulGLOBAL2[data.data[i].code].resultats[1].code_nuance=="BC-DVG")
-                                                {
-                                                    resulGLOBAL2[data.data[i].code].exprimes=parseInt(resulGLOBAL2[data.data[i].code].exprimes)+parseInt(data.data[i].exprimes);
-                                                    resulGLOBAL2[data.data[i].code].resultats[1].voix=parseInt(resulGLOBAL2[data.data[i].code].resultats[1].voix)+parseInt(data.data[i].resultats[1].voix);
-                                                }
-                                            }else
-                                            {
-                                                resulGLOBAL2[data.data[i].code] = data.data[i];
-                                            }
-                                        }
-
-                                }
-                            }
-                        });
+                      
            }
            else if (dep_subview=="communes_ouvrier")
            {
@@ -1628,8 +1593,9 @@ if (dataResultatsDirectory!="INSEE")
            }
            else if (dep_subview=="communes_prio_CSP")
            {
+            console.debug("communes_prio_CSP prereset");
                 $.ajax({
-                            url: "data/resultats/"+dataResultatsDirectory+"/CSP/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
+                            url: "data/resultats/"+dataResultatsDirectory+"/prio/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2)) + ".json",
                             dataType: "json"
                         })
                         .done(function(data) {
@@ -1641,45 +1607,12 @@ if (dataResultatsDirectory!="INSEE")
                                         for (i=0;i<data.data.length;i++)
                                         {
                                             resulGLOBAL[data.data[i].CODGEO] = data.data[i];
+                                            console.debug("prereset/CODGEO!!->"+data.data[i].CODGEO);
                                         }
                                     }
                                 }
                         });
-                $.ajax({
-                            url: "data/resultats/dep_2015/com/" + parseInt(currentDeptLayer.feature.properties.NUMERO.slice(0, 2))+ ".json",
-                            dataType: "json"
-                        })
-                        .done(function(dataElec) {
-                            if( "success" == dataElec.status ){
-                                
-                                if( dataElec.data){
-                                    resulGLOBAL2=[];
-                                    for (i=0;i<data.data.length;i++)
-                                        {
-                                            if (resulGLOBAL2[data.data[i].code]!=undefined)
-                                            {
-                                                //printDebug("doublon code:"+resulGLOBAL2[data.data[i].code].code,true);
-                                                
-                                                if (resulGLOBAL2[data.data[i].code].resultats[0].code_nuance=="BC-UG"||resulGLOBAL2[data.data[i].code].resultats[0].code_nuance=="BC-SOC"||resulGLOBAL2[data.data[i].code].resultats[0].code_nuance=="BC-DVG")
-                                                {
-                                                    
-                                                    resulGLOBAL2[data.data[i].code].exprimes=parseInt(resulGLOBAL2[data.data[i].code].exprimes)+parseInt(data.data[i].exprimes);
-                                                    resulGLOBAL2[data.data[i].code].resultats[0].voix=parseInt(resulGLOBAL2[data.data[i].code].resultats[0].voix)+parseInt(data.data[i].resultats[0].voix);
-                                                }
-                                                else if (resulGLOBAL2[data.data[i].code].resultats[1].code_nuance=="BC-UG"|resulGLOBAL2[data.data[i].code].resultats[1].code_nuance=="BC-SOC"||resulGLOBAL2[data.data[i].code].resultats[0].code_nuance=="BC-DVG")
-                                                {
-                                                    resulGLOBAL2[data.data[i].code].exprimes=parseInt(resulGLOBAL2[data.data[i].code].exprimes)+parseInt(data.data[i].exprimes);
-                                                    resulGLOBAL2[data.data[i].code].resultats[1].voix=parseInt(resulGLOBAL2[data.data[i].code].resultats[1].voix)+parseInt(data.data[i].resultats[1].voix);
-                                                }
-                                            }else
-                                            {
-                                                resulGLOBAL2[data.data[i].code] = data.data[i];
-                                            }
-                                        }
 
-                                }
-                            }
-                        });
 
            }
            else if (dep_subview=="communes_ouvrier")
@@ -1866,69 +1799,49 @@ function onEachFeatureCom(feature, layer) {
 
            } else if (dep_subview=="communes_prio_CSP")
            {
-
+                    printDebug("resulGLOBAL[feature.properties.INSEE_COM]:"+resulGLOBAL[feature.properties.INSEE_COM],true);
                     var donneeCSP = resulGLOBAL[feature.properties.INSEE_COM];         
-                    var donneeELEC = resulGLOBAL2[parseInt(feature.properties.INSEE_COM.slice(2))];
-
                     //score elections
                     var resulELEC;
                     var scoreElec;
                     var scoreCSP; 
-                    if (donneeELEC)
+                    if (donneeCSP)
                     {
-                        if (donneeELEC.resultats[0].code_nuance=="BC-UG"|donneeELEC.resultats[0].code_nuance=="BC-SOC")
-                        {
-                            //resulELEC=donneeELEC.resultats[0].pourcent_voix_exp;
-                            resulELEC=(parseInt(donneeELEC.resultats[0].voix)/parseInt(donneeELEC.exprimes))*100;
-                        }
-                        else if (donneeELEC.resultats[1].code_nuance=="BC-UG"|donneeELEC.resultats[0].code_nuance=="BC-SOC")
-                        {
-                            //resulELEC=donneeELEC.resultats[1].pourcent_voix_exp;
-                            resulELEC=(parseInt(donneeELEC.resultats[1].voix)/parseInt(donneeELEC.exprimes))*100;
-                        }
-                        else {resulELEC=0;}
 
-                                                if (resulELEC>=51.2075)
-                                                    {scoreElec = 16;}
-                                                else if (resulELEC>=42.05)
-                                                    {scoreElec = 8;}
-                                                else if (resulELEC>=33.5975)
-                                                    {scoreElec = 4;}
-                                                else{scoreElec = 0;}  
-
-                                                if (parseInt(feature.properties.INSEE_COM.slice(2))==63)
-                                                {
-                                                    printDebug("bordeaux elec:"+scoreElec,true);
-                                                }
-                    //score CSP ouvrier
-                             
-                                                if (donneeCSP>=20.4379562)
+                                                if (donneeCSP>=112)
                                                     {scoreCSP = 6;}
-                                                else if (donneeCSP>=16.2697135)
+                                                else if (donneeCSP>=99)
                                                     {scoreCSP = 4;}
-                                                else if (donneeCSP>=12.5)
+                                                else if (donneeCSP>=86)
                                                     {scoreCSP = 2;}
                                                 else{scoreCSP = 0;} 
 
-                                                if (parseInt(feature.properties.INSEE_COM)==33063)
-                                                {
-                                                    printDebug("bordeaux csp:"+scoreCSP,true);
-                                                }
+                                                
 
-                                        var scoreTotal = scoreCSP+scoreElec;
+                                        var scoreTotal = scoreCSP;
 
                                         //if(donneeCSP.CODGEO&&donneeCSP.TxCS6!="null"){
-                                        
-                                                if (scoreTotal>=16)
+                                        /*
+                                                if (scoreTotal>=6)
                                                     {layer.bgcolor = '#28c25a';}
-                                                else if (scoreTotal>=10)
-                                                    {layer.bgcolor = '#6fe194';}
-                                                else if (scoreTotal>=6)
-                                                    {layer.bgcolor = '#a7edbe';}
                                                 else if (scoreTotal>=4)
+                                                    {layer.bgcolor = '#6fe194';}
+                                                else if (scoreTotal>=2)
+                                                    {layer.bgcolor = '#a7edbe';}
+                                                else if (scoreTotal>=0)
                                                     {layer.bgcolor = '#d1f6dd';}
                                                 else{layer.bgcolor = '#edfbf2';}
-                                           
+                                           */
+
+                                                if (scoreTotal>=6)
+                                                    {layer.bgcolor = '#E63600';}
+                                                else if (scoreTotal>=4)
+                                                    {layer.bgcolor = '#E68200';}
+                                                else if (scoreTotal>=2)
+                                                    {layer.bgcolor = '#F4EF4B';}
+                                                else if (scoreTotal>=0)
+                                                    {layer.bgcolor = '#F6F4BB';}
+                                                else{layer.bgcolor = '#edfbf2';}
                                                 layer.setStyle({fillColor:layer.bgcolor});
                                                 layer.quorums_type = 'com';
                                                 return scoreTotal;

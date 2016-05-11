@@ -49,6 +49,18 @@ module.exports = {
       }
       this.$dispatch('contacts:search_in_firstname', this.query);
     },
+    search_in_fullname: function(e) {
+      if (e != undefined) {
+        e.preventDefault();
+      }
+      this.$dispatch('contacts:search_in_fullname', this.query);
+    },
+    search_in_address: function(e) {
+      if (e != undefined) {
+        e.preventDefault();
+      }
+      this.$dispatch('contacts:search_in_address', this.query);
+    },
     search: function(e) {
       if (e != undefined) {
         e.preventDefault();

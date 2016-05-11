@@ -97,10 +97,23 @@ module.exports = {
         this.$set("contacts", res);
       },new Array('firstname'));
       return false;
-    },'contacts:search_in_name': function(query) {
+    },
+    'contacts:search_in_name': function(query) {
       search.find(this.$root, query, (res) => {
         this.$set("contacts", res);
       },new Array('name'));
+      return false;
+    },
+    'contacts:search_in_fullname': function(query) {
+      search.find(this.$root, query, (res) => {
+        this.$set("contacts", res);
+      },new Array('fullname'));
+      return false;
+    },
+    'contacts:search_in_address': function(query) {
+      search.find(this.$root, query, (res) => {
+        this.$set("contacts", res);
+      },new Array('address'));
       return false;
     },
     'contacts:search': function(query) {
@@ -109,6 +122,7 @@ module.exports = {
       },new Array('all'));
       return false;
     },
+
     'contacts:list': function() {
       this.view = 'list';
       this.$dispatch('header:title', "Contacts");

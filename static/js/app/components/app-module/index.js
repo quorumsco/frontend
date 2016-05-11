@@ -193,6 +193,12 @@ module.exports = {
     },
     'contacts:search_in_firstname': function(query) {
       this.$broadcast("contacts:search_in_firstname", query);
+    },
+    'contacts:search_in_fullname': function(query) {
+      this.$broadcast("contacts:search_in_fullname", query);
+    },
+    'contacts:search_in_address': function(query) {
+      this.$broadcast("contacts:search_in_address", query);
     }
   }
 };

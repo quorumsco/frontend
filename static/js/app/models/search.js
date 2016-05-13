@@ -7,6 +7,7 @@ var Emitter = require('events').EventEmitter,
   contact_store = require('./contact_store.js');
 
 search.find = function(root, query, cb, filter) {
+  console.debug("dans search.find"+query);
   query = query.trim();
   if (query.length == 0) {
     contact_store.find(root, cb);

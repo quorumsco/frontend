@@ -114,6 +114,8 @@ module.exports = {
       search.find(this.$root, query, (res) => {
         this.$set("contacts", res);
       },new Array('address'));
+      setTimeout(function(){ console.debug(); }, 3000);
+      
       return false;
     },
     'contacts:search': function(query) {

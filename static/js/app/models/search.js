@@ -6,7 +6,7 @@ var Emitter = require('events').EventEmitter,
   api = common.api,
   contact_store = require('./contact_store.js');
 
-search.find = function(root, query, cb, filter) {
+search.find = function(root, query, cbA, filter) {
   console.debug("dans search.find"+query);
   query = query.trim();
   if (query.length == 0) {
@@ -25,7 +25,8 @@ search.find = function(root, query, cb, filter) {
   })
     .end(function(err, res) {
       if (res.body.status === 'success') {
-        cb(res.body.data.contacts);
+        console.debug("success!");
+        cbA(res.body.data.contacts);
       } else if (common.token(res)) {
         common.cb(root);
       } else {

@@ -61,6 +61,12 @@ module.exports = {
       }
       this.$dispatch('contacts:search_in_address', this.query);
     },
+    search_geoloc: function(e) {
+      if (e != undefined) {
+        e.preventDefault();
+      }
+      this.$dispatch('contacts:search_geoloc', this.query);
+    },
     search: function(e) {
       if (e != undefined) {
         e.preventDefault();

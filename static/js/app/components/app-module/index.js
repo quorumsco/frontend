@@ -199,6 +199,9 @@ module.exports = {
     },
     'contacts:search_in_address': function(query) {
       this.$broadcast("contacts:search_in_address", query);
+    },
+    'contacts:search_geoloc': function(query) {
+      this.$broadcast("contacts:search_geoloc", query);
     }
   }
 };

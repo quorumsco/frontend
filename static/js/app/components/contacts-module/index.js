@@ -28,6 +28,7 @@ module.exports = {
   data: function() {
     return {
       contacts: [],
+      addressAggs: [],
       view: "list",
       contact_id: null,
       contact: {},
@@ -111,11 +112,15 @@ module.exports = {
       return false;
     },
     'contacts:search_in_address': function(query) {
+      search.findAddressAggs(this.$root, query, (res) => {
+        this.$set("addressAggs", res);
+      },new Array('address'));
+      return false;
+    },
+    'contacts:search_geoloc': function(query) {
       search.find(this.$root, query, (res) => {
         this.$set("contacts", res);
-      },new Array('address'));
-      setTimeout(function(){ console.debug(); }, 3000);
-      
+      },new Array('geoloc'));
       return false;
     },
     'contacts:search': function(query) {
@@ -124,7 +129,6 @@ module.exports = {
       },new Array('all'));
       return false;
     },
-
     'contacts:list': function() {
       this.view = 'list';
       this.$dispatch('header:title', "Contacts");

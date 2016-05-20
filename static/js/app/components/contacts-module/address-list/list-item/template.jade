@@ -1,0 +1,3 @@
+div(v-class="selected: selected")
+  a(href="{{$root.path('addresses:list', id)}}" v-on="click: onClick($event)")
+    span.name {{address.housenumber}},{{address.street}} {{address.city}} - {{address.NbCitoyens}}

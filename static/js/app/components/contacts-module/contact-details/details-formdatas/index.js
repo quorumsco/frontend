@@ -1,4 +1,4 @@
-  var note_store = require('../../../../models/note_store.js'),
+  var formdata_store = require('../../../../models/formdata_store.js'),
   _ = require('lodash'),
   upsert = function (arr, key, newval) {
     var match = _.find(arr, key);
@@ -26,7 +26,7 @@ module.exports = {
     return {
       focus: false,
       url: this.$root.path("contacts:list"),
-      note: {}
+      formdata: {}
     }
   },
   created: function() {
@@ -34,7 +34,7 @@ module.exports = {
   },
   template: require('./template.jade')(),
   methods: {
-    deleteNote: function(e) {
+    deleteFormdata: function(e) {
       e.preventDefault();
       var remove = function (arr, key) {
         var match = _.find(arr, key);
@@ -43,39 +43,38 @@ module.exports = {
           arr.splice(index, 1);
         }
       };
-      note_store.delete(this.$root, this.contact.id, this.note.id, () => {
-        remove(this.contact.notes, {id: this.note.id});
-        this.$root.$emit("contacts:hideNote", this.id);
-        this.$root.navigate('contacts:showNotes', undefined, this.id);
+      formdata_store.delete(this.$root, this.contact.id, this.formdata.id, () => {
+        remove(this.contact.formdatas, {id: this.formdata.id});
+        this.$root.$emit("contacts:hideFormdata", this.id);
+        this.$root.navigate('contacts:showFormdatas', undefined, this.id);
       });
     },
-    showNote: function(e, note) {
+    showFormdata: function(e, formdata) {
       e.preventDefault();
-      this.$root.navigate('contacts:showNote', e, this.id, note.id);
+      this.$root.navigate('contacts:showFormdata', e, this.id, formdata.id);
     },
-    updateNote: function(e) {
+    updateFormdata: function(e) {
       e.preventDefault();
-      note_store.update(this.$root, this.contact.id,  this.note, (res) => {
-        upsert(this.contact.notes, {id: this.note.id}, this.note);
+      formdata_store.update(this.$root, this.contact.id,  this.formdata, (res) => {
+        upsert(this.contact.formdatas, {id: this.formdata.id}, this.formdata);
       });
     },
     prevFunc: function(e) {
       e.preventDefault();
-      this.$dispatch("contacts:hideNote", this.id);
-      this.$root.navigate('contacts:showNotes', undefined, this.id);
+      this.$dispatch("contacts:hideFormdata", this.id);
+      this.$root.navigate('contacts:showFormdatas', undefined, this.id);
     }
   },
   events: {
-    'contacts:showNote': function(id, noteID) {
+    'contacts:showFormdata': function(id, formdataID) {
       this.$set("focus", true);
-      this.$set("note", _.cloneDeep(_.find(this.contact.notes, {id: noteID})));
+      this.$set("formdata", _.cloneDeep(_.find(this.contact.formdatas, {id: formdataID})));
       this.$dispatch("tabs:hide");
-      this.$dispatch('header:title', "Note");
+      this.$dispatch('header:title', "Formdata");
       this.$dispatch('header:hideAdd');
       this.id = id;
     },
-    'contacts:hideNote': function(id) {
-
+    'contacts:hideFormdata': function(id) {
       this.$set("focus", false);
       this.$dispatch("tabs:show");
       this.$dispatch('tabs:nb', this.contact.notes ? this.contact.notes.length : 0,this.contact.formdatas ? this.contact.formdatas.length : 0, this.contact.tags ? this.contact.tags.length : 0);

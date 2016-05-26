@@ -1,5 +1,6 @@
 var contact_store = require('../../models/contact_store.js'),
   note_store = require('../../models/note_store.js'),
+  formdata_store = require('../../models/formdata_store.js'),
   tags_store = require('../../models/tags_store.js'),
   search = require('../../models/search.js'),
   _ = require('lodash'),
@@ -57,6 +58,7 @@ module.exports = {
     'details': require('./contact-details/index.js'),
     'new': require('./contact-new/index.js'),
     'newNote': require('./contact-new/note/index.js'),
+    'newFormdata': require('./contact-new/formdata/index.js'),
     'newTag': require('./contact-new/tag/index.js')
   },
   methods: {
@@ -73,6 +75,13 @@ module.exports = {
       this.contact = this.findContact();
       note_store.save(this.$root, this.contact_id, note, (res) => {
         upsert(this.contact.notes, {id: res.body.data.note.id}, res.body.data.note);
+        upsert(this.contacts, {id: this.contact.id}, this.contact);
+      });
+    },
+    addFormdata: function(formdata) {
+      this.contact = this.findContact();
+      formdata_store.save(this.$root, this.contact_id, formdata, (res) => {
+        upsert(this.contact.formdatas, {id: res.body.data.formdata.id}, res.body.data.formdata);
         upsert(this.contacts, {id: this.contact.id}, this.contact);
       });
     },
@@ -118,8 +127,8 @@ module.exports = {
       return false;
     },
     'contacts:search_geoloc': function(query) {
-      search.find(this.$root, query, (res) => {
-        this.$set("contacts", res);
+      search.findAddressAggs(this.$root, query, (res) => {
+        this.$set("addressAggs", res);
       },new Array('geoloc'));
       return false;
     },
@@ -172,6 +181,31 @@ module.exports = {
        }
       this.view = 'details';
     },
+    'contacts:showFormdatas': function(id) {
+      this.contact_id = id;
+      this.details_event = function() {
+        this.$broadcast("contacts:showFormdatas", id);
+       }
+      this.view = 'details';
+    },
+    'contacts:newFormdata': function(id) {
+      this.setNew("newFormdata", "New Formdata", id, 0);
+      return false;
+    },
+    'contacts:showFormdata': function(id, formdataID) {
+      this.contact_id = id;
+      this.details_event = function() {
+        this.$broadcast("contacts:showFormdata", id, formdataID);
+       }
+      this.view = 'details';
+    },
+    'contacts:hideFormdata': function(id) {
+      this.contact_id = id;
+      this.details_event = function() {
+        this.$broadcast("contacts:hideFormdata", id);
+       }
+      this.view = 'details';
+    },
     'contacts:showTags': function(id) {
       this.contact_id = id;
       this.details_event = function() {
@@ -186,21 +220,24 @@ module.exports = {
     'contacts:update': function(contact) {
       var tags = contact.tags;
       var notes = contact.notes;
+      var formdatas = contact.formdatas;
       contact.tags = undefined;
       contact.notes = undefined;
+      contact.formdatas = undefined;
       contact_store.update(this.$root, contact, (res) => {
         upsert(this.contacts, {id: contact.id}, contact);
       });
       contact.tags = tags;
       contact.notes = notes;
+      contact.formdatas = formdatas;
       return false;
     },
     'contacts:remove': function(id) {
       remove(this.contacts, {id: id});
       return false;
     },
-    'tabs:nb': function(nbNotes, nbTags) {
-      this.$dispatch('tabs:nb', nbNotes, nbTags);
+    'tabs:nb': function(nbNotes,nbFormdatas, nbTags) {
+      this.$dispatch('tabs:nb', nbNotes,nbFormdatas, nbTags);
       return false;
     }
   },

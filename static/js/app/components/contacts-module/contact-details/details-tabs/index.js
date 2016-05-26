@@ -14,6 +14,7 @@ module.exports = {
     return {
       url: this.$root.path("contacts:list"),
       nbNotes: 0,
+      nbFormdatas: 0,
       nbTags: 0
     }
   },
@@ -29,8 +30,9 @@ module.exports = {
     }
   },
   events: {
-    'tabs:nb': function(nbNotes, nbTags) {
+    'tabs:nb': function(nbNotes, nbFormdatas, nbTags) {
       this.nbNotes = nbNotes;
+      this.nbFormdatas = nbFormdatas;
       this.nbTags = nbTags;
       return false;
     }

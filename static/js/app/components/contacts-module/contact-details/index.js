@@ -1,5 +1,6 @@
 var contact_store = require('../../../models/contact_store.js'),
   note_store = require('../../../models/note_store.js'),
+  formdata_store = require('../../../models/formdata_store.js'),
   tags_store = require('../../../models/tags_store.js'),
   _ = require('lodash');
 
@@ -28,6 +29,7 @@ module.exports = {
     'tab-menu': require('./details-tabs/index.js'),
     'infos': require('./details-infos/index.js'),
     'notes': require('./details-notes/index.js'),
+    'formdatas': require('./details-formdatas/index.js'),
     'tags': require('./details-tags/index.js')
   },
   attached: function () {
@@ -55,11 +57,14 @@ module.exports = {
 
       note_store.find(this.$root, this.id, (notes_res) => {
         this.contact.$set("notes", notes_res);
-        tags_store.find(this.$root, this.id, (tags_res) => {
-          this.contact.$set("tags", tags_res);
-          this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.tags ? this.contact.tags.length : 0);
-        });
-      });
+        formdata_store.find(this.$root, this.id, (formdatas_res) => {
+                this.contact.$set("formdatas", formdatas_res);
+                tags_store.find(this.$root, this.id, (tags_res) => {
+                  this.contact.$set("tags", tags_res);
+                  this.$broadcast('tabs:nb', this.contact.notes ? this.contact.notes.length : 0, this.contact.formdatas ? this.contact.formdatas.length : 0, this.contact.tags ? this.contact.tags.length : 0);
+                });
+              });
+       });
 
 
     });
@@ -100,9 +105,33 @@ module.exports = {
       this.$dispatch('header:setAdd', this.$root.path('contacts:newNote', id), addFunc);
       this.$dispatch('header:setSearch', 0);
     },
+    'contacts:showFormdatas': function(id) {
+      this.view = 'formdatas';
+      this.tab = 3;
+      var addFunc = function() {
+        this.$root.navigate("contacts:newFormdata", undefined, id);
+      }
+      this.$dispatch('header:setAdd', this.$root.path('contacts:newFormdata', id), addFunc);
+      this.$dispatch('header:setSearch', 0);
+      this.showTabs = true;
+      return false;
+    },
+    'contacts:hideFormdata': function() {
+      this.view = 'formdatas';
+      this.tab = 3;
+    },
+    'contacts:showFormdata': function(id, formdataID) {
+      this.view = 'formdatas';
+      this.tab = 3;
+      var addFunc = function() {
+        this.$root.navigate("contacts:newFormdata", undefined, id);
+      }
+      this.$dispatch('header:setAdd', this.$root.path('contacts:newFormdata', id), addFunc);
+      this.$dispatch('header:setSearch', 0);
+    },
     'contacts:showTags': function(id) {
       this.view = 'tags';
-      this.tab = 3;
+      this.tab = 4;
       var addFunc = function() {
         this.$root.navigate("contacts:newTag", undefined, id);
       }
@@ -111,8 +140,8 @@ module.exports = {
       this.showTabs = true;
       return false;
     },
-    'tabs:nb': function(nbNotes, nbTags) {
-      this.$broadcast('tabs:nb', nbNotes, nbTags);
+    'tabs:nb': function(nbNotes, nbFormdatas, nbTags) {
+      this.$broadcast('tabs:nb', nbNotes, nbFormdatas, nbTags);
       return false;
     },
     'tabs:hide': function() {

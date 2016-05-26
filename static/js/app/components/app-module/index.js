@@ -14,6 +14,9 @@ var API = {
   'contacts:newNote': function(id) {
     return `/contacts/${id}/notes/new`;
   },
+  'contacts:newFormdata': function(id) {
+    return `/contacts/${id}/formdatas/new`;
+  },
   'contacts:newTag': function(id) {
     return `/contacts/${id}/tags/new`;
   },
@@ -25,6 +28,12 @@ var API = {
   },
   'contacts:showNotes': function(id) {
     return `/contacts/${id}/notes`;
+  },
+  'contacts:showFormdata': function(id, formdataID) {
+    return `/contacts/${id}/formdatas/${formdataID}`;
+  },
+  'contacts:showFormdatas': function(id) {
+    return `/contacts/${id}/formdatas`;
   },
   'contacts:showTags': function(id) {
     return `/contacts/${id}/tags`;
@@ -118,6 +127,21 @@ module.exports = {
       this.$.main.contacts = true;
       this.$broadcast('contacts:showNote', parseInt(ctx.params.id), parseInt(ctx.params.noteID));
     });
+        this.router('/contacts/:id/formdatas', (ctx) => {
+      this.$.main.map = false;
+      this.$.main.contacts = true;
+      this.$broadcast('contacts:showFormdatas', parseInt(ctx.params.id));
+    });
+    this.router('/contacts/:id/formdatas/new', (ctx) => {
+      this.$.main.map = false;
+      this.$.main.contacts = true;
+      this.$broadcast('contacts:newFormdata', parseInt(ctx.params.id));
+    });
+    this.router('/contacts/:id/formdatas/:formdataID', (ctx) => {
+      this.$.main.map = false;
+      this.$.main.contacts = true;
+      this.$broadcast('contacts:showFormdata', parseInt(ctx.params.id), parseInt(ctx.params.formdataID));
+    });
     this.router('/login', (ctx) => {
       this.login = true;
     });
@@ -184,6 +208,9 @@ module.exports = {
     },
     'contacts:hideNote': function(id) {
       this.$broadcast("contacts:hideNote", id);
+    },
+    'contacts:hideFormdata': function(id) {
+      this.$broadcast("contacts:hideFormdata", id);
     },
     'contacts:search': function(query) {
       this.$broadcast("contacts:search", query);

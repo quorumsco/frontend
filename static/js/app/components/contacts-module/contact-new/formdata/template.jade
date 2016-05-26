@@ -1,0 +1,7 @@
+details-formdatas
+  formdatas-body
+    a.back(href="{{url}}" v-on="click: back($event)")
+      i.fa.fa-fw.fa-arrow-left
+    formdatas-item
+      textarea(v-model="newFormdata.data")
+  button(v-on="click: createFormdata(newFormdata, $event)") Create

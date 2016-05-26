@@ -1,0 +1,17 @@
+details-formdatas
+  formdatas-body(v-if="!focus")
+    formdatas-item(v-repeat="contact.formdatas")
+      a(href="{{$root.path('contacts:showFormdata', contact.id, id)}}" v-on="click: showFormdata($event, this)")
+        span.link
+      div.data
+        span.date {{date}}
+        p {{data}}
+  formdatas-body(v-if="focus")
+    a.back(href="{{url}}" v-on="click: prevFunc($event)")
+      i.fa.fa-fw.fa-arrow-left
+    formdatas-item
+      div.edit
+        span.date {{formdata.date}}
+        textarea(v-model="formdata.data") {{formdata.data}}
+  button(v-on="click: updateFormdata($event)" v-if="focus") Update
+  button(v-on="click: deleteFormdata($event)" v-if="focus") Delete
